@@ -1,25 +1,38 @@
-[build-system]
-requires = ["setuptools>=68.0", "wheel"]
-build-backend = "setuptools.build_meta"
-
 [project]
-name = "openwa-sdk"
+name = "jeishanulwa-sdk"
 version = "0.0.1"
-description = "Official Python SDK for OpenWA WhatsApp API Gateway"
+description = "Official Python SDK for JeishanulWa WhatsApp API Gateway"
 readme = "README.md"
-license = { text = "MIT" }
-requires-python = ">=3.9"
 authors = [
-    { name = "OpenWA Contributors" }
+    { name = "MD. Jeishanul Haque Shishir" }
 ]
-keywords = ["whatsapp", "api", "sdk", "openwa", "gateway"]
-
+license = { text = "MIT" }
+requires-python = ">=3.8"
+keywords = ["whatsapp", "api", "sdk", "jeishanulwa", "gateway"]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+]
 dependencies = [
-    "httpx>=0.25.0",
+    "httpx>=0.24.0",
+    "pydantic>=2.0.0",
 ]
 
-[project.optional-dependencies]
-dev = [
-    "pytest>=7.0",
-    "pytest-asyncio>=0.23",
-]
+[project.urls]
+Homepage = "https://github.com/JeishanulWa/jeishanulwa"
+Documentation = "https://github.com/JeishanulWa/jeishanulwa/docs"
+Repository = "https://github.com/JeishanulWa/jeishanulwa"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["jeishanulwa"]

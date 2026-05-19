@@ -128,7 +128,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### 🎉 Initial Release
 
-OpenWA v0.1.0 is the first stable release featuring a complete WhatsApp API Gateway with all core functionality.
+JeishanulWa v0.1.0 is the first stable release featuring a complete WhatsApp API Gateway with all core functionality.
 
 ### Core Features
 

@@ -1,13 +1,13 @@
 """
-OpenWA Python SDK
+JeishanulWa Python SDK
 
-Official client library for the OpenWA WhatsApp API Gateway.
+Official client library for the JeishanulWa WhatsApp API Gateway.
 
 Example usage::
 
-    from openwa import OpenWAClient
+    from jeishanulwa import JeishanulWaClient
 
-    client = OpenWAClient(
+    client = JeishanulWaClient(
         base_url="http://localhost:2785",
         api_key="your-api-key",
     )
@@ -15,7 +15,7 @@ Example usage::
     # Send a text message
     result = client.messages.send_text("session-1", {
         "chatId": "628123456789@c.us",
-        "text": "Hello from OpenWA Python SDK!",
+        "text": "Hello from JeishanulWa Python SDK!",
     })
 """
 
@@ -26,8 +26,8 @@ from typing import Any
 
 
 @dataclass
-class OpenWAClientConfig:
-    """Configuration for the OpenWA client."""
+class JeishanulWaClientConfig:
+    """Configuration for the JeishanulWa client."""
 
     base_url: str
     api_key: str
@@ -42,14 +42,14 @@ class MessageResponse:
     timestamp: int
 
 
-class OpenWAClient:
-    """OpenWA API client.
+class JeishanulWaClient:
+    """JeishanulWa API client.
 
     This is a scaffold — methods will be auto-generated from the OpenAPI spec.
     """
 
     def __init__(self, base_url: str, api_key: str, timeout: float = 30.0) -> None:
-        self.config = OpenWAClientConfig(
+        self.config = JeishanulWaClientConfig(
             base_url=base_url.rstrip("/"),
             api_key=api_key,
             timeout=timeout,
@@ -70,8 +70,8 @@ class OpenWAClient:
             import httpx
         except ImportError:
             raise ImportError(
-                "httpx is required for the OpenWA SDK. "
-                "Install it with: pip install openwa-sdk"
+                "httpx is required for the JeishanulWa SDK. "
+                "Install it with: pip install jeishanulwa-sdk"
             )
 
         with httpx.Client(timeout=self.config.timeout) as client:
@@ -93,7 +93,7 @@ class OpenWAClient:
 
 
 class _SessionsResource:
-    def __init__(self, client: OpenWAClient) -> None:
+    def __init__(self, client: JeishanulWaClient) -> None:
         self._client = client
 
     def list(self) -> list[dict]:
@@ -116,7 +116,7 @@ class _SessionsResource:
 
 
 class _MessagesResource:
-    def __init__(self, client: OpenWAClient) -> None:
+    def __init__(self, client: JeishanulWaClient) -> None:
         self._client = client
 
     def send_text(

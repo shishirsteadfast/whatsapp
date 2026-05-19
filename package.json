@@ -1,8 +1,8 @@
 {
-  "name": "openwa",
+  "name": "jeishanulwa",
   "version": "0.1.6",
   "description": "Open Source WhatsApp API Gateway - Free, Self-Hosted HTTP API for WhatsApp",
-  "author": "Yudhi Armyndharis & OpenWA Contributors",
+  "author": "MD. Jeishanul Haque Shishir",
   "private": true,
   "license": "MIT",
   "scripts": {
@@ -46,6 +46,7 @@
     "@nestjs/core": "^11.1.21",
     "@nestjs/platform-express": "^11.1.21",
     "@nestjs/platform-socket.io": "^11.1.21",
+    "@nestjs/websockets": "^11.1.21",
     "@nestjs/swagger": "^11.4.3",
     "@nestjs/throttler": "^6.5.0",
     "@nestjs/typeorm": "^11.0.1",
@@ -53,19 +54,27 @@
     "bullmq": "^5.76.7",
     "class-transformer": "^0.5.1",
     "class-validator": "^0.15.1",
+    "cookie": "^0.7.2",
     "dockerode": "^4.0.9",
     "helmet": "^8.0.0",
     "ioredis": "^5.9.3",
+    "js-yaml": "^4.1.0",
+    "lodash": "^4.17.21",
+    "multer": "^2.0.1",
     "pg": "^8.18.0",
     "qrcode": "^1.5.4",
+    "qs": "^6.14.2",
     "reflect-metadata": "^0.2.2",
     "rxjs": "^7.8.1",
+    "send": "^0.19.0",
+    "serve-static": "^1.16.0",
     "socket.io": "^4.8.3",
     "sqlite3": "^5.1.7",
     "tar-stream": "^3.2.0",
     "typeorm": "^0.3.6",
     "uuid": "^11.0.5",
-    "whatsapp-web.js": "^1.26.1-alpha.3"
+    "whatsapp-web.js": "^1.26.1-alpha.3",
+    "ws": "^8.20.0"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3.2.0",
@@ -97,6 +106,20 @@
     "tsconfig-paths": "^4.2.0",
     "typescript": "^5.7.3",
     "typescript-eslint": "^8.59.2"
+  },
+  "overrides": {
+    "@tootallnate/once": "^3.0.1",
+    "cacache": "^18.0.4",
+    "cookie": "^0.7.2",
+    "js-yaml": "^4.1.0",
+    "lodash": "^4.17.21",
+    "make-fetch-happen": "^14.0.0",
+    "multer": "^2.0.1",
+    "qs": "^6.14.2",
+    "send": "^0.19.0",
+    "serve-static": "^1.16.0",
+    "tar": "^7.5.11",
+    "ws": "^8.20.0"
   },
   "jest": {
     "moduleFileExtensions": [

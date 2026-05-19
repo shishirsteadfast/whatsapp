@@ -1,13 +1,13 @@
 /**
- * OpenWA JavaScript/TypeScript SDK
+ * JeishanulWa JavaScript/TypeScript SDK
  *
- * Official client library for the OpenWA WhatsApp API Gateway.
+ * Official client library for the JeishanulWa WhatsApp API Gateway.
  *
  * @example
  * ```typescript
- * import { OpenWAClient } from '@openwa/sdk';
+ * import { JeishanulWaClient } from '@jeishanulwa/sdk';
  *
- * const client = new OpenWAClient({
+ * const client = new JeishanulWaClient({
  *   baseUrl: 'http://localhost:2785',
  *   apiKey: 'your-api-key',
  * });
@@ -15,7 +15,7 @@
  * // Send a text message
  * const result = await client.messages.sendText('session-1', {
  *   chatId: '628123456789@c.us',
- *   text: 'Hello from OpenWA SDK!',
+ *   text: 'Hello from JeishanulWa SDK!',
  * });
  * ```
  *
@@ -24,8 +24,8 @@
 
 // ── Client Configuration ──────────────────────────────────────────
 
-export interface OpenWAClientConfig {
-  /** Base URL of the OpenWA API (e.g., 'http://localhost:2785') */
+export interface JeishanulWaClientConfig {
+  /** Base URL of the JeishanulWa API (e.g., 'http://localhost:2785') */
   baseUrl: string;
 
   /** API key for authentication */
@@ -52,10 +52,10 @@ export interface Session {
 
 // ── Client Class ──────────────────────────────────────────────────
 
-export class OpenWAClient {
-  private readonly config: Required<OpenWAClientConfig>;
+export class JeishanulWaClient {
+  private readonly config: Required<JeishanulWaClientConfig>;
 
-  constructor(config: OpenWAClientConfig) {
+  constructor(config: JeishanulWaClientConfig) {
     this.config = {
       timeout: 30000,
       ...config,
@@ -97,7 +97,7 @@ export class OpenWAClient {
 
     if (!response.ok) {
       const error = await response.json().catch(() => ({ message: response.statusText }));
-      throw new Error(`OpenWA API Error (${response.status}): ${(error as { message: string }).message}`);
+      throw new Error(`JeishanulWa API Error (${response.status}): ${(error as { message: string }).message}`);
     }
 
     // Handle empty responses (204 No Content)
@@ -109,4 +109,4 @@ export class OpenWAClient {
   }
 }
 
-export default OpenWAClient;
+export default JeishanulWaClient;
