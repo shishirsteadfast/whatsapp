@@ -1,0 +1,345 @@
+/* =============================================
+   AuthHeader Component Styles
+   Top header bar with notifications & profile
+   ============================================= */
+
+.auth-header {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  height: 64px;
+  padding: 0 1.5rem;
+  background: var(--bg-white);
+  border-bottom: 1px solid var(--border);
+  gap: 0.75rem;
+  flex-shrink: 0;
+}
+
+.auth-header__left {
+  flex: 1;
+}
+
+.auth-header__right {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+/* ==================== Icon Wrapper ==================== */
+.auth-header__icon-wrapper {
+  position: relative;
+}
+
+/* ==================== Icon Buttons ==================== */
+.auth-header__icon-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 1px solid var(--border);
+  background: var(--bg-white);
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: all 0.2s;
+  position: relative;
+  padding: 0;
+}
+
+.auth-header__icon-btn:hover {
+  background: var(--bg-light);
+  color: var(--text-primary);
+  border-color: var(--primary);
+}
+
+.auth-header__icon-btn:active {
+  background: var(--bg-light);
+  color: var(--primary);
+  border-color: var(--primary);
+  transform: scale(0.93);
+}
+
+.auth-header__icon-btn:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(37, 211, 102, 0.3);
+  border-color: var(--primary);
+}
+
+.auth-header__icon-btn.active {
+  background: rgba(37, 211, 102, 0.1);
+  color: var(--primary);
+  border-color: var(--primary);
+}
+
+/* ==================== Blinking Dot ==================== */
+.auth-header__dot {
+  position: absolute;
+  top: 6px;
+  right: 6px;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #ef4444;
+  border: 2px solid var(--bg-white);
+  animation: blink-dot 1.4s ease-in-out infinite;
+}
+
+@keyframes blink-dot {
+  0%, 100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.4;
+    transform: scale(0.75);
+  }
+}
+
+/* ==================== Avatar Button ==================== */
+.auth-header__avatar-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 2px solid var(--border);
+  background: var(--bg-light);
+  cursor: pointer;
+  transition: all 0.2s;
+  padding: 0;
+}
+
+.auth-header__avatar-btn:hover {
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px rgba(37, 211, 102, 0.15);
+}
+
+.auth-header__avatar-btn:active {
+  border-color: var(--primary);
+  transform: scale(0.93);
+}
+
+.auth-header__avatar-btn:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(37, 211, 102, 0.3);
+  border-color: var(--primary);
+}
+
+.auth-header__avatar-btn.active {
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px rgba(37, 211, 102, 0.15);
+}
+
+.auth-header__avatar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--primary), var(--primary-hover));
+  color: white;
+}
+
+.auth-header__avatar--lg {
+  width: 44px;
+  height: 44px;
+  flex-shrink: 0;
+}
+
+.auth-header__avatar svg {
+  stroke: white;
+}
+
+/* ==================== Dropdown ==================== */
+.auth-header__dropdown {
+  position: absolute;
+  top: calc(100% + 8px);
+  right: 0;
+  background: var(--bg-white);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  box-shadow: var(--shadow-lg);
+  min-width: 280px;
+  z-index: 200;
+  animation: dropdown-appear 0.15s ease;
+  overflow: hidden;
+}
+
+@keyframes dropdown-appear {
+  from {
+    opacity: 0;
+    transform: translateY(-6px) scale(0.97);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.auth-header__dropdown--notif {
+  min-width: 300px;
+}
+
+.auth-header__dropdown--profile {
+  min-width: 240px;
+}
+
+/* ==================== Dropdown Header ==================== */
+.auth-header__dropdown-header {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 1rem 1.25rem;
+  border-bottom: 1px solid var(--border);
+}
+
+.auth-header__dropdown-title {
+  font-size: 0.9375rem;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+/* ==================== User Info in Profile Header ==================== */
+.auth-header__user-info {
+  display: flex;
+  flex-direction: column;
+  gap: 0.125rem;
+}
+
+.auth-header__user-name {
+  font-size: 0.9375rem;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.auth-header__user-role {
+  font-size: 0.8125rem;
+  font-weight: 500;
+  color: var(--text-muted);
+}
+
+/* ==================== Notifications List ==================== */
+.auth-header__notif-list {
+  max-height: 280px;
+  overflow-y: auto;
+}
+
+.auth-header__notif-empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 2rem 1.25rem;
+  color: var(--text-muted);
+  font-size: 0.875rem;
+}
+
+.auth-header__notif-empty-icon {
+  stroke: var(--text-muted);
+  opacity: 0.5;
+}
+
+/* ==================== Profile Menu ==================== */
+.auth-header__menu {
+  padding: 0.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.125rem;
+}
+
+.auth-header__menu-item {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  width: 100%;
+  padding: 0.625rem 0.75rem;
+  border: none;
+  background: transparent;
+  color: var(--text-secondary);
+  border-radius: 8px;
+  font-size: 0.875rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.15s;
+  text-align: left;
+}
+
+.auth-header__menu-item:hover {
+  background: var(--bg-light);
+  color: var(--text-primary);
+}
+
+.auth-header__menu-item svg {
+  flex-shrink: 0;
+}
+
+.auth-header__menu-item--danger {
+  color: var(--error);
+}
+
+.auth-header__menu-item--danger:hover {
+  background: #fef2f2;
+  color: #dc2626;
+}
+
+/* ==================== Divider ==================== */
+.auth-header__divider {
+  height: 1px;
+  background: var(--border);
+  margin: 0.25rem 0;
+}
+
+/* RTL Support */
+[dir="rtl"] .auth-header {
+  justify-content: flex-start;
+}
+
+[dir="rtl"] .auth-header__right {
+  flex-direction: row-reverse;
+}
+
+[dir="rtl"] .auth-header__dropdown {
+  right: auto;
+  left: 0;
+}
+
+[dir="rtl"] .auth-header__menu-item {
+  text-align: right;
+}
+
+/* Dark mode overrides for danger hover */
+[data-theme='dark'] .auth-header__menu-item--danger:hover {
+  background: rgba(239, 68, 68, 0.12);
+  color: #f87171;
+}
+
+[data-theme='dark'] .auth-header__dot {
+  border-color: var(--bg-white);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .auth-header {
+    height: 56px;
+    padding: 0 1rem;
+  }
+
+  .auth-header__dropdown--notif {
+    min-width: 260px;
+    right: -8px;
+  }
+
+  .auth-header__dropdown--profile {
+    min-width: 220px;
+    right: 0;
+  }
+
+  [dir="rtl"] .auth-header__dropdown--notif,
+  [dir="rtl"] .auth-header__dropdown--profile {
+    right: auto;
+    left: 0;
+  }
+}

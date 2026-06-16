@@ -229,6 +229,12 @@
   transition:
     margin-left 0.3s ease,
     width 0.3s ease;
+  display: flex;
+  flex-direction: column;
+}
+
+.main-content__inner {
+  flex: 1;
 }
 
 .main-content.expanded {

@@ -79,7 +79,7 @@ import { QueueModule } from './modules/queue/queue.module';
     StorageModule,
     AuditModule,
     EventsModule,
-    QueueModule,
+    QueueModule.register(process.env.REDIS_ENABLED === 'true'),
     AuthModule,
     EngineModule,
     SessionModule,

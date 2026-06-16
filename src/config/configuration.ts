@@ -5,6 +5,7 @@ export default () => ({
   jwtExpiresIn: process.env.JWT_EXPIRES_IN || '24h',
 
   redis: {
+    enabled: process.env.REDIS_ENABLED === 'true',
     host: process.env.REDIS_HOST || 'localhost',
     port: parseInt(process.env.REDIS_PORT || '6379', 10),
     password: process.env.REDIS_PASSWORD,

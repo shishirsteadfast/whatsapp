@@ -22,6 +22,7 @@ import {
 import { useTheme } from '../hooks/useTheme';
 import { type UserRole } from '../hooks/useRole';
 import { supportedLanguages, type SupportedLanguage } from '../i18n';
+import { AuthHeader } from './AuthHeader';
 import './Layout.css';
 
 interface LayoutProps {
@@ -174,7 +175,10 @@ export function Layout({ onLogout, userRole }: LayoutProps) {
       </aside>
 
       <main className={`main-content ${isCollapsed ? 'expanded' : ''} ${isMobile ? 'mobile' : ''}`}>
-        <Outlet />
+        <AuthHeader onLogout={onLogout} />
+        <div className="main-content__inner">
+          <Outlet />
+        </div>
       </main>
     </div>
   );
