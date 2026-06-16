@@ -25,8 +25,6 @@ interface WebSocketEvents {
   onMessage?: (event: MessageEvent) => void;
 }
 
-// Use current origin for WebSocket (goes through nginx proxy in Docker)
-// Falls back to env var or localhost for development
 const SOCKET_URL = import.meta.env.VITE_WS_URL || window.location.origin;
 
 export function useWebSocket(events: WebSocketEvents = {}) {
@@ -36,11 +34,9 @@ export function useWebSocket(events: WebSocketEvents = {}) {
   const connect = useCallback(() => {
     if (socketRef.current?.connected) return;
 
-    // Get API key from sessionStorage (same as api.ts)
-    const apiKey = sessionStorage.getItem('openwa_api_key');
-
-    if (!apiKey) {
-      console.warn('[WebSocket] No API key found, skipping connection');
+    const token = localStorage.getItem('openwa_token');
+    if (!token) {
+      console.warn('[WebSocket] No token found, skipping connection');
       return;
     }
 
@@ -49,24 +45,16 @@ export function useWebSocket(events: WebSocketEvents = {}) {
       reconnection: true,
       reconnectionAttempts: 5,
       reconnectionDelay: 1000,
-      auth: {
-        apiKey,
-      },
-      extraHeaders: {
-        'X-API-Key': apiKey,
-      },
-      query: {
-        apiKey,
-      },
+      auth: { token },
+      extraHeaders: { Authorization: `Bearer ${token}` },
+      query: { token },
     });
 
     socketRef.current.on('connect', () => {
-      console.log('[WebSocket] Connected');
       setIsConnected(true);
     });
 
     socketRef.current.on('disconnect', () => {
-      console.log('[WebSocket] Disconnected');
       setIsConnected(false);
     });
 
@@ -77,7 +65,6 @@ export function useWebSocket(events: WebSocketEvents = {}) {
 
   useEffect(() => {
     connect();
-
     return () => {
       if (socketRef.current) {
         socketRef.current.disconnect();
@@ -89,20 +76,11 @@ export function useWebSocket(events: WebSocketEvents = {}) {
   // Register event handlers
   useEffect(() => {
     if (!socketRef.current) return;
-
     const socket = socketRef.current;
 
-    if (events.onSessionStatus) {
-      socket.on('session:status', events.onSessionStatus);
-    }
-
-    if (events.onQRCode) {
-      socket.on('session:qr', events.onQRCode);
-    }
-
-    if (events.onMessage) {
-      socket.on('session:message', events.onMessage);
-    }
+    if (events.onSessionStatus) socket.on('session:status', events.onSessionStatus);
+    if (events.onQRCode) socket.on('session:qr', events.onQRCode);
+    if (events.onMessage) socket.on('session:message', events.onMessage);
 
     return () => {
       socket.off('session:status');
