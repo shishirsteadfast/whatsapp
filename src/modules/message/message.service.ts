@@ -16,7 +16,7 @@ export interface GetMessagesOptions {
 @Injectable()
 export class MessageService {
   constructor(
-    @InjectRepository(Message, 'data')
+    @InjectRepository(Message)
     private readonly messageRepository: Repository<Message>,
     private readonly sessionService: SessionService,
     private readonly hookManager: HookManager,

@@ -1,6 +1,4 @@
 // API Service Layer for OpenWA Dashboard
-// Centralized API client with TypeScript types
-
 const API_BASE_URL = '/api';
 
 // =============================================================================
@@ -38,27 +36,12 @@ export interface Webhook {
   updatedAt: string;
 }
 
-export interface ApiKey {
-  id: string;
-  name: string;
-  keyPrefix: string;
-  role: 'admin' | 'user' | 'readonly';
-  allowedIps?: string[];
-  allowedSessions?: string[];
-  isActive: boolean;
-  expiresAt?: string;
-  lastUsedAt?: string;
-  usageCount: number;
-  createdAt: string;
-  apiKey?: string; // Only returned on creation
-}
-
 export interface AuditLog {
   id: string;
   action: string;
   severity: 'info' | 'warn' | 'error';
-  apiKeyId?: string;
-  apiKeyName?: string;
+  userId?: string;
+  userName?: string;
   sessionId?: string;
   sessionName?: string;
   ipAddress?: string;
@@ -85,54 +68,16 @@ export interface HealthStatus {
 }
 
 export interface InfraStatus {
-  database: { connected: boolean; type: string; host: string };
+  database: { connected: boolean; type: string };
   redis: { connected: boolean; host: string; port: number };
   queue: {
     enabled: boolean;
-    messages: { pending: number; completed: number; failed: number };
+    messageSend: { pending: number; completed: number; failed: number };
+    messageBulk: { pending: number; completed: number; failed: number };
     webhooks: { pending: number; completed: number; failed: number };
   };
-  storage: { type: 'local' | 's3'; path?: string; bucket?: string };
+  storage: { type: 'local'; path: string };
   engine: { type: string; headless: boolean };
-}
-
-export interface SaveConfigPayload {
-  database?: {
-    type: 'sqlite' | 'postgres';
-    builtIn?: boolean;
-    host?: string;
-    port?: string;
-    username?: string;
-    password?: string;
-    database?: string;
-    poolSize?: number;
-    sslEnabled?: boolean;
-  };
-  redis?: {
-    enabled?: boolean;
-    builtIn?: boolean;
-    host?: string;
-    port?: string;
-    password?: string;
-  };
-  queue?: {
-    enabled?: boolean;
-  };
-  storage?: {
-    type: 'local' | 's3';
-    builtIn?: boolean;
-    localPath?: string;
-    s3Bucket?: string;
-    s3Region?: string;
-    s3AccessKey?: string;
-    s3SecretKey?: string;
-    s3Endpoint?: string;
-  };
-  engine?: {
-    headless?: boolean;
-    sessionDataPath?: string;
-    browserArgs?: string;
-  };
 }
 
 export interface Settings {
@@ -147,27 +92,28 @@ export interface Settings {
 
 async function request<T>(endpoint: string, options: RequestInit = {}): Promise<T> {
   const url = `${API_BASE_URL}${endpoint}`;
-
-  // Get API key from sessionStorage for authentication
-  const apiKey = sessionStorage.getItem('openwa_api_key');
+  const token = sessionStorage.getItem('openwa_token');
 
   const headers: HeadersInit = {
     'Content-Type': 'application/json',
-    ...(apiKey ? { 'X-API-Key': apiKey } : {}),
+    ...(token ? { Authorization: `Bearer ${token}` } : {}),
     ...options.headers,
   };
 
   const response = await fetch(url, { ...options, headers });
 
+  if (response.status === 401) {
+    sessionStorage.removeItem('openwa_token');
+    window.location.reload();
+    throw new Error('Session expired');
+  }
+
   if (!response.ok) {
-    const error = await response.json().catch(() => ({ message: response.statusText }));
+    const error = await response.json().catch(() => ({ message: response.statusText })) as { message?: string };
     throw new Error(error.message || `HTTP ${response.status}`);
   }
 
-  if (response.status === 204) {
-    return undefined as T;
-  }
-
+  if (response.status === 204) return undefined as T;
   return response.json();
 }
 
@@ -178,11 +124,7 @@ async function request<T>(endpoint: string, options: RequestInit = {}): Promise<
 export const sessionApi = {
   list: () => request<Session[]>('/sessions'),
   get: (id: string) => request<Session>(`/sessions/${id}`),
-  create: (name: string) =>
-    request<Session>('/sessions', {
-      method: 'POST',
-      body: JSON.stringify({ name }),
-    }),
+  create: (name: string) => request<Session>('/sessions', { method: 'POST', body: JSON.stringify({ name }) }),
   delete: (id: string) => request<void>(`/sessions/${id}`, { method: 'DELETE' }),
   start: (id: string) => request<Session>(`/sessions/${id}/start`, { method: 'POST' }),
   stop: (id: string) => request<Session>(`/sessions/${id}/stop`, { method: 'POST' }),
@@ -200,48 +142,16 @@ export const webhookApi = {
   listAll: () => request<Webhook[]>('/webhooks'),
   get: (sessionId: string, id: string) => request<Webhook>(`/sessions/${sessionId}/webhooks/${id}`),
   create: (sessionId: string, data: { url: string; events: string[] }) =>
-    request<Webhook>(`/sessions/${sessionId}/webhooks`, {
-      method: 'POST',
-      body: JSON.stringify(data),
-    }),
+    request<Webhook>(`/sessions/${sessionId}/webhooks`, { method: 'POST', body: JSON.stringify(data) }),
   update: (sessionId: string, id: string, data: Partial<Webhook>) =>
-    request<Webhook>(`/sessions/${sessionId}/webhooks/${id}`, {
-      method: 'PUT',
-      body: JSON.stringify(data),
-    }),
+    request<Webhook>(`/sessions/${sessionId}/webhooks/${id}`, { method: 'PUT', body: JSON.stringify(data) }),
   delete: (sessionId: string, id: string) =>
     request<void>(`/sessions/${sessionId}/webhooks/${id}`, { method: 'DELETE' }),
   test: (sessionId: string, id: string) =>
-    request<{ success: boolean; statusCode?: number; error?: string }>(`/sessions/${sessionId}/webhooks/${id}/test`, {
-      method: 'POST',
-    }),
-};
-
-// =============================================================================
-// API Key API
-// =============================================================================
-
-export const apiKeyApi = {
-  list: () => request<ApiKey[]>('/auth/api-keys'),
-  get: (id: string) => request<ApiKey>(`/auth/api-keys/${id}`),
-  create: (data: {
-    name: string;
-    role: string;
-    allowedIps?: string[];
-    allowedSessions?: string[];
-    expiresAt?: string;
-  }) =>
-    request<ApiKey>('/auth/api-keys', {
-      method: 'POST',
-      body: JSON.stringify(data),
-    }),
-  update: (id: string, data: Partial<ApiKey>) =>
-    request<ApiKey>(`/auth/api-keys/${id}`, {
-      method: 'PUT',
-      body: JSON.stringify(data),
-    }),
-  delete: (id: string) => request<void>(`/auth/api-keys/${id}`, { method: 'DELETE' }),
-  revoke: (id: string) => request<ApiKey>(`/auth/api-keys/${id}/revoke`, { method: 'POST' }),
+    request<{ success: boolean; statusCode?: number; error?: string }>(
+      `/sessions/${sessionId}/webhooks/${id}/test`,
+      { method: 'POST' },
+    ),
 };
 
 // =============================================================================
@@ -249,10 +159,11 @@ export const apiKeyApi = {
 // =============================================================================
 
 export const auditApi = {
-  list: (params?: { action?: string; severity?: string; limit?: number; offset?: number }) => {
+  list: (params?: { action?: string; severity?: string; userId?: string; limit?: number; offset?: number }) => {
     const query = new URLSearchParams();
     if (params?.action) query.set('action', params.action);
     if (params?.severity) query.set('severity', params.severity);
+    if (params?.userId) query.set('userId', params.userId);
     if (params?.limit) query.set('limit', String(params.limit));
     if (params?.offset) query.set('offset', String(params.offset));
     const queryStr = query.toString();
@@ -303,27 +214,13 @@ export const healthApi = {
 
 export const infraApi = {
   getStatus: () => request<InfraStatus>('/infra/status'),
-  updateConfig: (config: Partial<InfraStatus>) =>
-    request<InfraStatus>('/infra/config', {
+  saveConfig: (config: Record<string, unknown>) =>
+    request<{ message: string; saved: boolean }>('/infra/config', {
       method: 'PUT',
       body: JSON.stringify(config),
     }),
-  saveConfig: (config: SaveConfigPayload) =>
-    request<{ message: string; saved: boolean; envPath: string; profiles: string[] }>('/infra/config', {
-      method: 'PUT',
-      body: JSON.stringify(config),
-    }),
-  restart: (profiles?: string[], profilesToRemove?: string[]) =>
-    request<{
-      message: string;
-      restarting: boolean;
-      profiles: string[];
-      profilesToRemove: string[];
-      estimatedTime: number;
-    }>('/infra/restart', {
-      method: 'POST',
-      body: JSON.stringify({ profiles: profiles || [], profilesToRemove: profilesToRemove || [] }),
-    }),
+  restart: () =>
+    request<{ message: string; restarting: boolean }>('/infra/restart', { method: 'POST' }),
   healthCheck: () => request<{ status: string; timestamp: string }>('/infra/health'),
 };
 
@@ -334,10 +231,7 @@ export const infraApi = {
 export const settingsApi = {
   get: () => request<Settings>('/settings'),
   update: (settings: Partial<Settings>) =>
-    request<Settings>('/settings', {
-      method: 'PUT',
-      body: JSON.stringify(settings),
-    }),
+    request<Settings>('/settings', { method: 'PUT', body: JSON.stringify(settings) }),
 };
 
 // =============================================================================
@@ -367,21 +261,11 @@ export interface Engine {
   features: string[];
 }
 
-// =============================================================================
-// Plugins API
-// =============================================================================
-
 export const pluginsApi = {
   list: () => request<Plugin[]>('/plugins'),
   get: (id: string) => request<Plugin>(`/plugins/${id}`),
-  enable: (id: string) =>
-    request<{ success: boolean; message: string }>(`/plugins/${id}/enable`, {
-      method: 'POST',
-    }),
-  disable: (id: string) =>
-    request<{ success: boolean; message: string }>(`/plugins/${id}/disable`, {
-      method: 'POST',
-    }),
+  enable: (id: string) => request<{ success: boolean; message: string }>(`/plugins/${id}/enable`, { method: 'POST' }),
+  disable: (id: string) => request<{ success: boolean; message: string }>(`/plugins/${id}/disable`, { method: 'POST' }),
   updateConfig: (id: string, config: Record<string, unknown>) =>
     request<{ success: boolean; message: string }>(`/plugins/${id}/config`, {
       method: 'PUT',

@@ -1,12 +1,10 @@
 import { Entity, Column, PrimaryGeneratedColumn, CreateDateColumn, Index } from 'typeorm';
 
 export enum AuditAction {
-  // API Key events
-  API_KEY_CREATED = 'api_key_created',
-  API_KEY_USED = 'api_key_used',
-  API_KEY_REVOKED = 'api_key_revoked',
-  API_KEY_DELETED = 'api_key_deleted',
-  API_KEY_AUTH_FAILED = 'api_key_auth_failed',
+  // User auth events
+  USER_LOGIN = 'user_login',
+  USER_LOGIN_FAILED = 'user_login_failed',
+  USER_LOGOUT = 'user_logout',
 
   // Session events
   SESSION_CREATED = 'session_created',
@@ -48,10 +46,10 @@ export class AuditLog {
 
   @Index()
   @Column({ type: 'varchar', length: 36, nullable: true })
-  apiKeyId: string | null;
+  userId: string | null;
 
   @Column({ type: 'varchar', length: 100, nullable: true })
-  apiKeyName: string | null;
+  userName: string | null;
 
   @Index()
   @Column({ type: 'varchar', length: 36, nullable: true })
@@ -75,8 +73,6 @@ export class AuditLog {
   @Column({ type: 'int', nullable: true })
   statusCode: number | null;
 
-  // The "main" database connection is always SQLite (boot config),
-  // so we use simple-json regardless of the user's data DB choice.
   @Column({ type: 'simple-json', nullable: true })
   metadata: Record<string, unknown> | null;
 

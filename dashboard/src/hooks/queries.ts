@@ -2,7 +2,6 @@ import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import {
   sessionApi,
   webhookApi,
-  apiKeyApi,
   auditApi,
   infraApi,
   pluginsApi,
@@ -16,7 +15,6 @@ export const queryKeys = {
   sessionStats: ['sessions', 'stats'] as const,
   sessionGroups: (sessionId: string) => ['sessions', sessionId, 'groups'] as const,
   webhooks: ['webhooks'] as const,
-  apiKeys: ['apiKeys'] as const,
   logs: (params: { severity?: string; page: number; limit: number }) =>
     ['logs', params] as const,
   infraStatus: ['infra', 'status'] as const,
@@ -133,47 +131,6 @@ export function useDeleteWebhookMutation() {
       webhookApi.delete(params.sessionId, params.id),
     onSuccess: () => {
       void queryClient.invalidateQueries({ queryKey: queryKeys.webhooks });
-    },
-  });
-}
-
-// ── API Key Queries ───────────────────────────────────────────────────
-
-export function useApiKeysQuery() {
-  return useQuery({
-    queryKey: queryKeys.apiKeys,
-    queryFn: apiKeyApi.list,
-    staleTime: 30_000,
-  });
-}
-
-export function useCreateApiKeyMutation() {
-  const queryClient = useQueryClient();
-  return useMutation({
-    mutationFn: (data: { name: string; role: string; allowedIps?: string[]; allowedSessions?: string[]; expiresAt?: string }) =>
-      apiKeyApi.create(data),
-    onSuccess: () => {
-      void queryClient.invalidateQueries({ queryKey: queryKeys.apiKeys });
-    },
-  });
-}
-
-export function useDeleteApiKeyMutation() {
-  const queryClient = useQueryClient();
-  return useMutation({
-    mutationFn: (id: string) => apiKeyApi.delete(id),
-    onSuccess: () => {
-      void queryClient.invalidateQueries({ queryKey: queryKeys.apiKeys });
-    },
-  });
-}
-
-export function useRevokeApiKeyMutation() {
-  const queryClient = useQueryClient();
-  return useMutation({
-    mutationFn: (id: string) => apiKeyApi.revoke(id),
-    onSuccess: () => {
-      void queryClient.invalidateQueries({ queryKey: queryKeys.apiKeys });
     },
   });
 }

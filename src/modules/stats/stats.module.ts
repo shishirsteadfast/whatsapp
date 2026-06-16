@@ -6,7 +6,7 @@ import { Session } from '../session/entities/session.entity';
 import { Message } from '../message/entities/message.entity';
 
 @Module({
-  imports: [TypeOrmModule.forFeature([Session, Message], 'data')],
+  imports: [TypeOrmModule.forFeature([Session, Message])],
   controllers: [StatsController],
   providers: [StatsService],
   exports: [StatsService],

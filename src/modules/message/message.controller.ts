@@ -5,7 +5,7 @@ import { BulkMessageService } from './bulk-message.service';
 import { SendTextMessageDto, SendMediaMessageDto, MessageResponseDto } from './dto';
 import { SendBulkMessageDto, BulkMessageResponseDto } from './dto/bulk-message.dto';
 import { RequireRole } from '../auth/decorators/auth.decorators';
-import { ApiKeyRole } from '../auth/entities/api-key.entity';
+import { UserRole } from '../auth/entities/user.entity';
 
 @ApiTags('messages')
 @Controller('sessions/:sessionId/messages')
@@ -39,7 +39,7 @@ export class MessageController {
   }
 
   @Post('send-text')
-  @RequireRole(ApiKeyRole.OPERATOR)
+  @RequireRole(UserRole.OPERATOR)
   @ApiOperation({ summary: 'Send a text message' })
   @ApiParam({ name: 'sessionId', description: 'Session ID' })
   @ApiResponse({
@@ -57,7 +57,7 @@ export class MessageController {
   }
 
   @Post('send-image')
-  @RequireRole(ApiKeyRole.OPERATOR)
+  @RequireRole(UserRole.OPERATOR)
   @ApiOperation({ summary: 'Send an image message' })
   @ApiParam({ name: 'sessionId', description: 'Session ID' })
   @ApiResponse({
@@ -77,7 +77,7 @@ export class MessageController {
   }
 
   @Post('send-video')
-  @RequireRole(ApiKeyRole.OPERATOR)
+  @RequireRole(UserRole.OPERATOR)
   @ApiOperation({ summary: 'Send a video message' })
   @ApiParam({ name: 'sessionId', description: 'Session ID' })
   @ApiResponse({
@@ -97,7 +97,7 @@ export class MessageController {
   }
 
   @Post('send-audio')
-  @RequireRole(ApiKeyRole.OPERATOR)
+  @RequireRole(UserRole.OPERATOR)
   @ApiOperation({ summary: 'Send an audio/voice message' })
   @ApiParam({ name: 'sessionId', description: 'Session ID' })
   @ApiResponse({
@@ -117,7 +117,7 @@ export class MessageController {
   }
 
   @Post('send-document')
-  @RequireRole(ApiKeyRole.OPERATOR)
+  @RequireRole(UserRole.OPERATOR)
   @ApiOperation({ summary: 'Send a document/file' })
   @ApiParam({ name: 'sessionId', description: 'Session ID' })
   @ApiResponse({
@@ -139,7 +139,7 @@ export class MessageController {
   // ========== Phase 3: Extended Messaging ==========
 
   @Post('send-location')
-  @RequireRole(ApiKeyRole.OPERATOR)
+  @RequireRole(UserRole.OPERATOR)
   @ApiOperation({ summary: 'Send a location message' })
   @ApiParam({ name: 'sessionId', description: 'Session ID' })
   @ApiResponse({
@@ -155,7 +155,7 @@ export class MessageController {
   }
 
   @Post('send-contact')
-  @RequireRole(ApiKeyRole.OPERATOR)
+  @RequireRole(UserRole.OPERATOR)
   @ApiOperation({ summary: 'Send a contact card message' })
   @ApiParam({ name: 'sessionId', description: 'Session ID' })
   @ApiResponse({
@@ -171,7 +171,7 @@ export class MessageController {
   }
 
   @Post('send-sticker')
-  @RequireRole(ApiKeyRole.OPERATOR)
+  @RequireRole(UserRole.OPERATOR)
   @ApiOperation({ summary: 'Send a sticker message' })
   @ApiParam({ name: 'sessionId', description: 'Session ID' })
   @ApiResponse({
@@ -187,7 +187,7 @@ export class MessageController {
   }
 
   @Post('reply')
-  @RequireRole(ApiKeyRole.OPERATOR)
+  @RequireRole(UserRole.OPERATOR)
   @ApiOperation({ summary: 'Reply to a message' })
   @ApiParam({ name: 'sessionId', description: 'Session ID' })
   @ApiResponse({
@@ -203,7 +203,7 @@ export class MessageController {
   }
 
   @Post('forward')
-  @RequireRole(ApiKeyRole.OPERATOR)
+  @RequireRole(UserRole.OPERATOR)
   @ApiOperation({ summary: 'Forward a message to another chat' })
   @ApiParam({ name: 'sessionId', description: 'Session ID' })
   @ApiResponse({
@@ -221,7 +221,7 @@ export class MessageController {
   // ========== Phase 3: Reactions ==========
 
   @Post('react')
-  @RequireRole(ApiKeyRole.OPERATOR)
+  @RequireRole(UserRole.OPERATOR)
   @ApiOperation({ summary: 'Add or remove a reaction to a message' })
   @ApiParam({ name: 'sessionId', description: 'Session ID' })
   @ApiResponse({
@@ -260,7 +260,7 @@ export class MessageController {
   // ========== Delete Message ==========
 
   @Post('delete')
-  @RequireRole(ApiKeyRole.OPERATOR)
+  @RequireRole(UserRole.OPERATOR)
   @ApiOperation({ summary: 'Delete a message' })
   @ApiParam({ name: 'sessionId', description: 'Session ID' })
   @ApiResponse({
@@ -282,7 +282,7 @@ export class MessageController {
   // ========== Bulk Messaging ==========
 
   @Post('send-bulk')
-  @RequireRole(ApiKeyRole.OPERATOR)
+  @RequireRole(UserRole.OPERATOR)
   @HttpCode(HttpStatus.ACCEPTED)
   @ApiOperation({ summary: 'Send messages to multiple recipients (async batch processing)' })
   @ApiParam({ name: 'sessionId', description: 'Session ID' })
@@ -336,7 +336,7 @@ export class MessageController {
   }
 
   @Post('batch/:batchId/cancel')
-  @RequireRole(ApiKeyRole.OPERATOR)
+  @RequireRole(UserRole.OPERATOR)
   @HttpCode(HttpStatus.OK)
   @ApiOperation({ summary: 'Cancel a running batch' })
   @ApiParam({ name: 'sessionId', description: 'Session ID' })
