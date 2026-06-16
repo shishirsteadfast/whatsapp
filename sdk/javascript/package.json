@@ -1,7 +1,7 @@
 {
-    "name": "@openwa/sdk",
+    "name": "@jeishanulwa/sdk",
     "version": "0.0.1",
-    "description": "Official JavaScript/TypeScript SDK for OpenWA WhatsApp API Gateway",
+    "description": "Official JavaScript/TypeScript SDK for JeishanulWa WhatsApp API Gateway",
     "main": "dist/index.js",
     "types": "dist/index.d.ts",
     "scripts": {
@@ -14,14 +14,14 @@
         "whatsapp",
         "api",
         "sdk",
-        "openwa",
+        "jeishanulwa",
         "gateway"
     ],
-    "author": "OpenWA Contributors",
+    "author": "MD. Jeishanul Haque Shishir",
     "license": "MIT",
     "repository": {
         "type": "git",
-        "url": "https://github.com/openwa/openwa",
+        "url": "https://github.com/JeishanulWa/jeishanulwa",
         "directory": "sdk/javascript"
     },
     "engines": {
