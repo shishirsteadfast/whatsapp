@@ -5,7 +5,6 @@ import type { AuditLog } from '../services/api';
 import { useDocumentTitle } from '../hooks/useDocumentTitle';
 import { useLogsQuery } from '../hooks/queries';
 import { PageHeader } from '../components/PageHeader';
-import './Logs.css';
 
 export function Logs() {
   const { t } = useTranslation();
@@ -33,17 +32,20 @@ export function Logs() {
 
   if (loading && logs.length === 0) {
     return (
-      <div
-        className="logs-page"
-        style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', minHeight: '400px' }}
-      >
+      <div className="flex min-h-[400px] w-full items-center justify-center p-8">
         <Loader2 className="animate-spin" size={32} />
       </div>
     );
   }
 
+  const severityStyles: Record<string, string> = {
+    info: 'bg-blue-100 text-blue-700',
+    warn: 'bg-amber-100 text-amber-600',
+    error: 'bg-red-100 text-red-600',
+  };
+
   return (
-    <div className="logs-page">
+    <div className="w-full p-8 max-sm:p-3">
       <PageHeader
         title={t('logs.title')}
         subtitle={t('logs.subtitle')}
@@ -55,20 +57,22 @@ export function Logs() {
         }
       />
 
-      <div className="filters-bar">
-        <div className="search-input">
-          <Search size={18} />
+      <div className="mb-6 flex gap-4 max-sm:flex-col max-sm:gap-3">
+        <div className="flex max-w-[400px] flex-1 items-center gap-3 rounded-(--radius) border border-border bg-surface px-4 py-3 max-sm:max-w-none">
+          <Search size={18} className="shrink-0 text-ink-muted" />
           <input
             type="text"
+            className="flex-1 border-none bg-transparent text-[0.9375rem] text-ink focus:outline-none"
             placeholder={t('logs.searchPlaceholder')}
             value={searchQuery}
             onChange={e => setSearchQuery(e.target.value)}
           />
         </div>
 
-        <div className="filter-group">
-          <Filter size={16} />
+        <div className="flex items-center gap-2 rounded-(--radius) border border-border bg-surface px-4">
+          <Filter size={16} className="shrink-0 text-ink-muted" />
           <select
+            className="cursor-pointer border-none bg-transparent py-3 text-[0.9375rem] text-ink focus:outline-none"
             value={severityFilter}
             onChange={e => {
               setSeverityFilter(e.target.value);
@@ -83,9 +87,10 @@ export function Logs() {
         </div>
       </div>
 
-      <div className="logs-table-container">
-        <div className="logs-table">
-          <div className="table-row header">
+      <div className="overflow-x-auto rounded-xl border border-border bg-surface shadow-xs max-sm:border-none max-sm:bg-transparent max-sm:shadow-none">
+        <div className="flex flex-col text-sm max-sm:block">
+          {/* Header row */}
+          <div className="grid grid-cols-[180px_200px_150px_150px_150px_1fr_120px] gap-4 border-b border-border bg-muted px-6 py-4 text-[0.7rem] font-bold uppercase tracking-[0.05em] text-ink-secondary max-sm:hidden">
             <span>{t('logs.columns.timestamp')}</span>
             <span>{t('logs.columns.action')}</span>
             <span>{t('logs.columns.session')}</span>
@@ -94,21 +99,26 @@ export function Logs() {
             <span>{t('logs.columns.severity')}</span>
           </div>
           {filteredLogs.length === 0 ? (
-            <div className="empty-table-state">
-              <FileText size={48} strokeWidth={1} />
-              <h3>{t('logs.empty.title')}</h3>
-              <p>{t('logs.empty.description')}</p>
+            <div className="flex flex-col items-center justify-center px-8 py-16 text-center text-ink-muted">
+              <FileText size={48} strokeWidth={1} className="mb-4 text-ink-muted opacity-40" />
+              <h3 className="m-0 mb-2 text-lg font-semibold text-ink-secondary">{t('logs.empty.title')}</h3>
+              <p className="m-0 max-w-[300px] text-sm">{t('logs.empty.description')}</p>
             </div>
           ) : (
             filteredLogs.map(log => (
-              <div key={log.id} className="table-row">
-                <span className="timestamp">{formatTimestamp(log.createdAt)}</span>
-                <span className="action">{log.action}</span>
-                <span>{log.sessionName || log.sessionId || '—'}</span>
-                <span className="api-key">{log.apiKeyName || '—'}</span>
-                <span className="ip">{log.ipAddress || '—'}</span>
-                <span>
-                  <span className={`severity-badge ${log.severity}`}>{log.severity.toUpperCase()}</span>
+              <div
+                key={log.id}
+                className="grid grid-cols-[180px_200px_150px_150px_150px_1fr_120px] gap-4 border-b border-border px-6 py-4 items-center hover:bg-primary/5 max-sm:flex max-sm:flex-col max-sm:gap-2 max-sm:rounded-xl max-sm:border max-sm:border-border max-sm:bg-surface max-sm:px-4 max-sm:py-4 max-sm:shadow-xs max-sm:mb-3 max-sm:hover:bg-surface"
+              >
+                <span className="font-mono text-[0.8125rem] text-ink-muted whitespace-nowrap max-sm:order-2 max-sm:text-xs">{formatTimestamp(log.createdAt)}</span>
+                <span className="text-[0.8125rem] font-semibold text-ink whitespace-nowrap max-sm:order-1 max-sm:mb-1 max-sm:text-[0.9375rem]">{log.action}</span>
+                <span className="text-sm text-ink-secondary max-sm:hidden">{log.sessionName || log.sessionId || '—'}</span>
+                <span className="font-mono text-[0.8125rem] whitespace-nowrap max-sm:hidden">{log.apiKeyName || '—'}</span>
+                <span className="font-mono text-[0.8125rem] whitespace-nowrap max-sm:hidden">{log.ipAddress || '—'}</span>
+                <span className="max-sm:order-3 max-sm:self-start">
+                  <span className={`inline-block whitespace-nowrap rounded-md px-[0.625rem] py-1 text-[0.6875rem] font-bold uppercase tracking-[0.025em] ${severityStyles[log.severity] || 'bg-gray-100 text-gray-600'}`}>
+                    {log.severity}
+                  </span>
                 </span>
               </div>
             ))
@@ -117,18 +127,34 @@ export function Logs() {
       </div>
 
       {totalPages > 1 && (
-        <div className="pagination">
-          <button disabled={page === 1} onClick={() => setPage(p => p - 1)}>
+        <div className="mt-6 flex items-center justify-center gap-2 max-sm:flex-wrap max-sm:gap-2">
+          <button
+            className="cursor-pointer rounded-md border border-border bg-surface px-4 py-2 text-sm text-ink-secondary transition-all hover:bg-muted disabled:cursor-not-allowed disabled:opacity-50"
+            disabled={page === 1}
+            onClick={() => setPage(p => p - 1)}
+          >
             {t('common.previous')}
           </button>
-          <span className="page-numbers">
+          <div className="flex gap-1">
             {Array.from({ length: Math.min(totalPages, 5) }, (_, i) => i + 1).map(p => (
-              <button key={p} className={p === page ? 'active' : ''} onClick={() => setPage(p)}>
+              <button
+                key={p}
+                className={`min-w-[36px] cursor-pointer rounded-md border px-2 py-2 text-sm transition-all max-sm:min-w-[32px] ${
+                  p === page
+                    ? 'border-primary bg-primary text-white'
+                    : 'border-border bg-surface text-ink-secondary hover:bg-muted'
+                }`}
+                onClick={() => setPage(p)}
+              >
                 {p}
               </button>
             ))}
-          </span>
-          <button disabled={page >= totalPages} onClick={() => setPage(p => p + 1)}>
+          </div>
+          <button
+            className="cursor-pointer rounded-md border border-border bg-surface px-4 py-2 text-sm text-ink-secondary transition-all hover:bg-muted disabled:cursor-not-allowed disabled:opacity-50"
+            disabled={page >= totalPages}
+            onClick={() => setPage(p => p + 1)}
+          >
             {t('common.next')}
           </button>
         </div>

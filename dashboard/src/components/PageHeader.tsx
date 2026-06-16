@@ -1,5 +1,4 @@
 import type { ReactNode } from 'react';
-import './PageHeader.css';
 
 interface PageHeaderProps {
   title: string;
@@ -8,33 +7,17 @@ interface PageHeaderProps {
   actions?: ReactNode;
 }
 
-/**
- * Shared page header component for consistent styling across all pages.
- *
- * @example
- * // Simple usage
- * <PageHeader title="Settings" subtitle="Configure application preferences" />
- *
- * @example
- * // With badge and actions
- * <PageHeader
- *   title="Dashboard"
- *   badge={<StatusBadge status="connected" />}
- *   subtitle="Overview of your WhatsApp sessions"
- *   actions={<button>Create New</button>}
- * />
- */
 export function PageHeader({ title, subtitle, badge, actions }: PageHeaderProps) {
   return (
-    <header className="page-header">
-      <div className="page-header__top">
-        <div className="page-header__title-group">
-          <h1>{title}</h1>
-          {badge && <span className="page-header__badge">{badge}</span>}
+    <header className="mb-6 w-full">
+      <div className="flex flex-wrap items-center justify-between gap-4 max-sm:flex-col max-sm:items-start">
+        <div className="flex items-center gap-3">
+          <h1 className="m-0 text-[1.875rem] font-bold tracking-tight text-ink max-sm:text-2xl">{title}</h1>
+          {badge && <span className="inline-flex">{badge}</span>}
         </div>
-        {actions && <div className="page-header__actions">{actions}</div>}
+        {actions && <div className="flex shrink-0 items-center gap-3 max-sm:w-full max-sm:[&>:is(button,.btn-primary,.btn-secondary)]:w-full max-sm:[&>:is(button,.btn-primary,.btn-secondary)]:justify-center">{actions}</div>}
       </div>
-      {subtitle && <p className="page-header__subtitle">{subtitle}</p>}
+      {subtitle && <p className="mt-2 text-[0.9375rem] leading-1.5 text-ink-muted max-sm:text-sm">{subtitle}</p>}
     </header>
   );
 }
