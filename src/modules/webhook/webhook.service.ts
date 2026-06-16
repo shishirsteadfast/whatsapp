@@ -38,7 +38,7 @@ export class WebhookService {
   private readonly queueEnabled: boolean;
 
   constructor(
-    @InjectRepository(Webhook, 'data')
+    @InjectRepository(Webhook)
     private readonly webhookRepository: Repository<Webhook>,
     private readonly configService: ConfigService,
     private readonly hookManager: HookManager,

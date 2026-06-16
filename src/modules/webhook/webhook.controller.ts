@@ -4,7 +4,7 @@ import { WebhookService } from './webhook.service';
 import { CreateWebhookDto, UpdateWebhookDto, WebhookResponseDto } from './dto';
 import { Webhook } from './entities/webhook.entity';
 import { RequireRole } from '../auth/decorators/auth.decorators';
-import { ApiKeyRole } from '../auth/entities/api-key.entity';
+import { UserRole } from '../auth/entities/user.entity';
 
 @ApiTags('webhooks')
 @Controller('sessions/:sessionId/webhooks')
@@ -12,7 +12,7 @@ export class WebhookController {
   constructor(private readonly webhookService: WebhookService) {}
 
   @Post()
-  @RequireRole(ApiKeyRole.OPERATOR)
+  @RequireRole(UserRole.OPERATOR)
   @ApiOperation({ summary: 'Create a webhook for the session' })
   @ApiParam({ name: 'sessionId', description: 'Session ID' })
   @ApiResponse({
@@ -51,7 +51,7 @@ export class WebhookController {
   }
 
   @Put(':id')
-  @RequireRole(ApiKeyRole.OPERATOR)
+  @RequireRole(UserRole.OPERATOR)
   @ApiOperation({ summary: 'Update a webhook' })
   @ApiParam({ name: 'sessionId', description: 'Session ID' })
   @ApiParam({ name: 'id', description: 'Webhook ID' })
@@ -66,7 +66,7 @@ export class WebhookController {
   }
 
   @Post(':id/test')
-  @RequireRole(ApiKeyRole.OPERATOR)
+  @RequireRole(UserRole.OPERATOR)
   @ApiOperation({ summary: 'Test a webhook by sending a test payload' })
   @ApiParam({ name: 'sessionId', description: 'Session ID' })
   @ApiParam({ name: 'id', description: 'Webhook ID' })
@@ -80,7 +80,7 @@ export class WebhookController {
   }
 
   @Delete(':id')
-  @RequireRole(ApiKeyRole.OPERATOR)
+  @RequireRole(UserRole.OPERATOR)
   @HttpCode(HttpStatus.NO_CONTENT)
   @ApiOperation({ summary: 'Delete a webhook' })
   @ApiParam({ name: 'sessionId', description: 'Session ID' })

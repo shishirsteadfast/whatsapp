@@ -29,7 +29,7 @@ export class BulkMessageService {
   private readonly processingBatches = new Map<string, boolean>(); // Track active batches for cancellation
 
   constructor(
-    @InjectRepository(MessageBatch, 'data')
+    @InjectRepository(MessageBatch)
     private readonly batchRepository: Repository<MessageBatch>,
     private readonly sessionService: SessionService,
   ) {}

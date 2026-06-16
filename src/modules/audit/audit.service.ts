@@ -2,10 +2,10 @@ import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository, Between, LessThan } from 'typeorm';
 import { AuditLog, AuditAction, AuditSeverity } from './entities/audit-log.entity';
-import { ApiKey } from '../auth/entities/api-key.entity';
+import { User } from '../auth/entities/user.entity';
 
 interface AuditContext {
-  apiKey?: ApiKey;
+  user?: User;
   sessionId?: string;
   sessionName?: string;
   ipAddress?: string;
@@ -19,7 +19,7 @@ interface AuditContext {
 
 export interface AuditQueryOptions {
   action?: AuditAction;
-  apiKeyId?: string;
+  userId?: string;
   sessionId?: string;
   severity?: AuditSeverity;
   startDate?: Date;
@@ -31,20 +31,16 @@ export interface AuditQueryOptions {
 @Injectable()
 export class AuditService {
   constructor(
-    @InjectRepository(AuditLog, 'main')
+    @InjectRepository(AuditLog)
     private readonly auditRepository: Repository<AuditLog>,
   ) {}
 
-  async log(
-    action: AuditAction,
-    context: AuditContext = {},
-    severity: AuditSeverity = AuditSeverity.INFO,
-  ): Promise<AuditLog> {
+  async log(action: AuditAction, context: AuditContext = {}, severity: AuditSeverity = AuditSeverity.INFO): Promise<AuditLog> {
     const auditLog = this.auditRepository.create({
       action,
       severity,
-      apiKeyId: context.apiKey?.id || null,
-      apiKeyName: context.apiKey?.name || null,
+      userId: context.user?.id || null,
+      userName: context.user?.name || null,
       sessionId: context.sessionId || null,
       sessionName: context.sessionName || null,
       ipAddress: context.ipAddress || null,
@@ -55,7 +51,6 @@ export class AuditService {
       metadata: context.metadata || null,
       errorMessage: context.errorMessage || null,
     });
-
     return this.auditRepository.save(auditLog);
   }
 
@@ -71,17 +66,12 @@ export class AuditService {
     return this.log(action, context, AuditSeverity.ERROR);
   }
 
-  async findAll(options: AuditQueryOptions = {}): Promise<{
-    data: AuditLog[];
-    total: number;
-  }> {
+  async findAll(options: AuditQueryOptions = {}): Promise<{ data: AuditLog[]; total: number }> {
     const where: Record<string, unknown> = {};
-
     if (options.action) where.action = options.action;
-    if (options.apiKeyId) where.apiKeyId = options.apiKeyId;
+    if (options.userId) where.userId = options.userId;
     if (options.sessionId) where.sessionId = options.sessionId;
     if (options.severity) where.severity = options.severity;
-
     if (options.startDate && options.endDate) {
       where.createdAt = Between(options.startDate, options.endDate);
     }
@@ -92,13 +82,12 @@ export class AuditService {
       take: options.limit || 50,
       skip: options.offset || 0,
     });
-
     return { data, total };
   }
 
-  async getRecentByApiKey(apiKeyId: string, limit = 10): Promise<AuditLog[]> {
+  async getRecentByUser(userId: string, limit = 10): Promise<AuditLog[]> {
     return this.auditRepository.find({
-      where: { apiKeyId },
+      where: { userId },
       order: { createdAt: 'DESC' },
       take: limit,
     });
@@ -115,11 +104,7 @@ export class AuditService {
   async cleanup(olderThanDays = 30): Promise<number> {
     const cutoffDate = new Date();
     cutoffDate.setDate(cutoffDate.getDate() - olderThanDays);
-
-    const result = await this.auditRepository.delete({
-      createdAt: LessThan(cutoffDate),
-    });
-
+    const result = await this.auditRepository.delete({ createdAt: LessThan(cutoffDate) });
     return result.affected || 0;
   }
 }

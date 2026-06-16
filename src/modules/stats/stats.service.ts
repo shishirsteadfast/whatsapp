@@ -42,9 +42,9 @@ export interface SessionStats {
 @Injectable()
 export class StatsService {
   constructor(
-    @InjectRepository(Session, 'data')
+    @InjectRepository(Session)
     private readonly sessionRepo: Repository<Session>,
-    @InjectRepository(Message, 'data')
+    @InjectRepository(Message)
     private readonly messageRepo: Repository<Message>,
     private readonly cacheService: CacheService,
   ) {}

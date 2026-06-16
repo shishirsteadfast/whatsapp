@@ -8,7 +8,7 @@ import { Message } from './entities/message.entity';
 import { MessageBatch } from './entities/message-batch.entity';
 
 @Module({
-  imports: [TypeOrmModule.forFeature([Message, MessageBatch], 'data'), SessionModule],
+  imports: [TypeOrmModule.forFeature([Message, MessageBatch]), SessionModule],
   controllers: [MessageController],
   providers: [MessageService, BulkMessageService],
   exports: [MessageService, BulkMessageService],

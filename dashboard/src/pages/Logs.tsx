@@ -105,7 +105,7 @@ export function Logs() {
                 <span className="timestamp">{formatTimestamp(log.createdAt)}</span>
                 <span className="action">{log.action}</span>
                 <span>{log.sessionName || log.sessionId || '—'}</span>
-                <span className="api-key">{log.apiKeyName || '—'}</span>
+                <span className="api-key">{log.userName || '—'}</span>
                 <span className="ip">{log.ipAddress || '—'}</span>
                 <span>
                   <span className={`severity-badge ${log.severity}`}>{log.severity.toUpperCase()}</span>

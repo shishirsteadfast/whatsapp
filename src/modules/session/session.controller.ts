@@ -6,7 +6,7 @@ import { Session } from './entities/session.entity';
 import { AuditService } from '../audit/audit.service';
 import { AuditAction } from '../audit/entities/audit-log.entity';
 import { RequireRole } from '../auth/decorators/auth.decorators';
-import { ApiKeyRole } from '../auth/entities/api-key.entity';
+import { UserRole } from '../auth/entities/user.entity';
 
 @ApiTags('sessions')
 @Controller('sessions')
@@ -32,7 +32,7 @@ export class SessionController {
   }
 
   @Post()
-  @RequireRole(ApiKeyRole.OPERATOR)
+  @RequireRole(UserRole.OPERATOR)
   @ApiOperation({ summary: 'Create a new WhatsApp session' })
   @ApiResponse({
     status: 201,
@@ -76,7 +76,7 @@ export class SessionController {
   }
 
   @Delete(':id')
-  @RequireRole(ApiKeyRole.OPERATOR)
+  @RequireRole(UserRole.OPERATOR)
   @HttpCode(HttpStatus.NO_CONTENT)
   @ApiOperation({ summary: 'Delete a session' })
   @ApiParam({ name: 'id', description: 'Session ID' })
@@ -92,7 +92,7 @@ export class SessionController {
   }
 
   @Post(':id/start')
-  @RequireRole(ApiKeyRole.OPERATOR)
+  @RequireRole(UserRole.OPERATOR)
   @ApiOperation({
     summary: 'Start a session and initialize WhatsApp connection',
   })
@@ -114,7 +114,7 @@ export class SessionController {
   }
 
   @Post(':id/stop')
-  @RequireRole(ApiKeyRole.OPERATOR)
+  @RequireRole(UserRole.OPERATOR)
   @ApiOperation({ summary: 'Stop a session and disconnect WhatsApp' })
   @ApiParam({ name: 'id', description: 'Session ID' })
   @ApiResponse({

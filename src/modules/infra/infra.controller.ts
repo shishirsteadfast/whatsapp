@@ -15,14 +15,15 @@ import * as path from 'path';
 
 interface InfraStatus {
   database: { connected: boolean; type: string; host: string };
-  redis: { enabled: boolean; connected: boolean; host: string; port: number };
+  redis: { connected: boolean; host: string; port: number };
   queue: {
     enabled: boolean;
-    messages: { pending: number; completed: number; failed: number };
+    messageSend: { pending: number; completed: number; failed: number };
+    messageBulk: { pending: number; completed: number; failed: number };
     webhooks: { pending: number; completed: number; failed: number };
   };
-  storage: { type: 'local' | 's3'; path?: string; bucket?: string };
-  engine: { type: string; headless: boolean; sessionDataPath: string; browserArgs: string };
+  storage: { type: 'local'; path: string };
+  engine: { type: string; headless: boolean; sessionDataPath: string };
 }
 
 interface SaveConfigDto {
@@ -138,10 +139,8 @@ export class InfraController {
 
   constructor(
     private readonly configService: ConfigService,
-    @InjectDataSource('main')
-    private readonly mainDataSource: DataSource,
-    @InjectDataSource('data')
-    private readonly dataDataSource: DataSource,
+    @InjectDataSource()
+    private readonly dataSource: DataSource,
     private readonly engineFactory: EngineFactory,
     private readonly dockerService: DockerService,
     private readonly cacheService: CacheService,
@@ -153,39 +152,25 @@ export class InfraController {
   @ApiOperation({ summary: 'Get infrastructure status' })
   @ApiResponse({ status: 200, description: 'Infrastructure status' })
   async getStatus(): Promise<InfraStatus> {
-    // Check both database connections
-    const mainDbConnected = this.mainDataSource.isInitialized;
-    const dataDbConnected = this.dataDataSource.isInitialized;
-    const dbConnected = mainDbConnected && dataDbConnected;
-    const dbType = this.configService.get<string>('dataDatabase.type', 'sqlite');
-    const dbHost = this.configService.get<string>('dataDatabase.host', 'localhost');
-
-    const redisHost = process.env.REDIS_HOST || this.configService.get<string>('redis.host', 'localhost');
-    const redisPort = parseInt(process.env.REDIS_PORT || '', 10) || this.configService.get<number>('redis.port', 6379);
-    const redisEnabled = process.env.REDIS_ENABLED === 'true';
-    const queueEnabled = this.configService.get<boolean>('queue.enabled', false);
-
-    // Check actual Redis connectivity via CacheService
-    const redisConnected = await this.cacheService.isAvailable();
-
-    const storageType = this.configService.get<'local' | 's3'>('storage.type', 'local');
-    const storagePath = this.configService.get<string>('storage.path', './uploads');
-
+    const dbConnected = this.dataSource.isInitialized;
+    const redisHost = this.configService.get<string>('redis.host', 'localhost');
+    const redisPort = this.configService.get<number>('redis.port', 6379);
+    const storagePath = this.configService.get<string>('storage.localPath', './data/media');
     const engineType = this.configService.get<string>('engine.type', 'whatsapp-web.js');
-    const engineHeadless = this.configService.get<boolean>('engine.headless', true);
+    const engineHeadless = this.configService.get<boolean>('engine.puppeteer.headless', true);
     const sessionDataPath = this.configService.get<string>('engine.sessionDataPath', './data/sessions');
-    const browserArgs = this.configService.get<string>('engine.browserArgs', '--no-sandbox --disable-gpu');
 
     return {
-      database: { connected: dbConnected, type: dbType, host: dbHost },
-      redis: { enabled: redisEnabled, connected: redisConnected, host: redisHost, port: redisPort },
+      database: { connected: dbConnected, type: 'sqlite', host: 'local' },
+      redis: { connected: dbConnected, host: redisHost, port: redisPort },
       queue: {
-        enabled: queueEnabled,
-        messages: { pending: 0, completed: 0, failed: 0 },
+        enabled: true,
+        messageSend: { pending: 0, completed: 0, failed: 0 },
+        messageBulk: { pending: 0, completed: 0, failed: 0 },
         webhooks: { pending: 0, completed: 0, failed: 0 },
       },
-      storage: { type: storageType, path: storagePath },
-      engine: { type: engineType, headless: engineHeadless, sessionDataPath, browserArgs },
+      storage: { type: 'local' as const, path: storagePath },
+      engine: { type: engineType, headless: engineHeadless, sessionDataPath },
     };
   }
 
@@ -218,85 +203,28 @@ export class InfraController {
       envLines.push(`# Generated at ${new Date().toISOString()}`);
       envLines.push('');
 
-      // Database
-      if (config.database) {
-        envLines.push('# Database');
-        envLines.push(`DATABASE_TYPE=${config.database.type || 'sqlite'}`);
-        envLines.push(`POSTGRES_BUILTIN=${config.database.builtIn ? 'true' : 'false'}`);
-        if (config.database.type === 'postgres') {
-          if (config.database.builtIn) {
-            // Built-in PostgreSQL - use container name as host
-            envLines.push('DATABASE_HOST=postgres');
-            envLines.push('DATABASE_PORT=5432');
-            envLines.push('DATABASE_USERNAME=openwa');
-            envLines.push('DATABASE_PASSWORD=openwa');
-            envLines.push('DATABASE_NAME=openwa');
-            profiles.push('postgres');
-          } else {
-            // External PostgreSQL
-            envLines.push(`DATABASE_HOST=${config.database.host || 'localhost'}`);
-            envLines.push(`DATABASE_PORT=${config.database.port || '5432'}`);
-            envLines.push(`DATABASE_USERNAME=${config.database.username || 'postgres'}`);
-            envLines.push(`DATABASE_PASSWORD=${config.database.password || ''}`);
-            envLines.push(`DATABASE_NAME=${config.database.database || 'openwa'}`);
-          }
-          envLines.push(`DATABASE_POOL_SIZE=${config.database.poolSize || 10}`);
-          envLines.push(`DATABASE_SSL=${config.database.sslEnabled ? 'true' : 'false'}`);
-        }
-        envLines.push('');
-      }
+      // Database (SQLite only)
+      envLines.push('# Database (SQLite)');
+      envLines.push('DATABASE_NAME=./data/openwa.sqlite');
+      envLines.push('');
 
-      // Redis / Queue
-      envLines.push('# Redis / Queue System');
-      envLines.push(`REDIS_ENABLED=${config.redis?.enabled ? 'true' : 'false'}`);
-      envLines.push(`REDIS_BUILTIN=${config.redis?.builtIn ? 'true' : 'false'}`);
-      envLines.push(`QUEUE_ENABLED=${config.queue?.enabled ? 'true' : 'false'}`);
-      if (config.redis?.enabled) {
-        if (config.redis.builtIn) {
-          // Built-in Redis - use container name as host
-          envLines.push('REDIS_HOST=redis');
-          envLines.push('REDIS_PORT=6379');
-          profiles.push('redis');
-        } else {
-          // External Redis
-          envLines.push(`REDIS_HOST=${config.redis.host || 'localhost'}`);
-          envLines.push(`REDIS_PORT=${config.redis.port || '6379'}`);
-          if (config.redis.password) {
-            envLines.push(`REDIS_PASSWORD=${config.redis.password}`);
-          }
-        }
+      // Redis (required)
+      envLines.push('# Redis');
+      if (config.redis?.builtIn) {
+        envLines.push('REDIS_HOST=redis');
+        envLines.push('REDIS_PORT=6379');
+        profiles.push('redis');
+      } else {
+        envLines.push(`REDIS_HOST=${config.redis?.host || 'localhost'}`);
+        envLines.push(`REDIS_PORT=${config.redis?.port || '6379'}`);
+        if (config.redis?.password) envLines.push(`REDIS_PASSWORD=${config.redis.password}`);
       }
       envLines.push('');
 
-      // Storage
-      if (config.storage) {
-        envLines.push('# Storage');
-        envLines.push(`STORAGE_TYPE=${config.storage.type || 'local'}`);
-        envLines.push(`MINIO_BUILTIN=${config.storage.builtIn ? 'true' : 'false'}`);
-        if (config.storage.type === 'local') {
-          envLines.push(`STORAGE_PATH=${config.storage.localPath || './uploads'}`);
-        } else if (config.storage.type === 's3') {
-          if (config.storage.builtIn) {
-            // Built-in MinIO - use container name as endpoint
-            envLines.push('S3_ENDPOINT=http://minio:9000');
-            envLines.push('S3_ACCESS_KEY=minioadmin');
-            envLines.push('S3_SECRET_KEY=minioadmin');
-            envLines.push('S3_BUCKET=openwa');
-            envLines.push('S3_REGION=us-east-1');
-            profiles.push('minio');
-          } else {
-            // External S3/MinIO
-            envLines.push(`S3_BUCKET=${config.storage.s3Bucket || ''}`);
-            envLines.push(`S3_REGION=${config.storage.s3Region || 'ap-southeast-1'}`);
-            envLines.push(`S3_ACCESS_KEY=${config.storage.s3AccessKey || ''}`);
-            envLines.push(`S3_SECRET_KEY=${config.storage.s3SecretKey || ''}`);
-            if (config.storage.s3Endpoint) {
-              envLines.push(`S3_ENDPOINT=${config.storage.s3Endpoint}`);
-            }
-          }
-        }
-        envLines.push('');
-      }
+      // Storage (local only)
+      envLines.push('# Storage (local)');
+      envLines.push(`STORAGE_LOCAL_PATH=${config.storage?.localPath || './data/media'}`);
+      envLines.push('');
 
       // Engine
       if (config.engine) {
@@ -445,28 +373,28 @@ export class InfraController {
     counts: { sessions: number; webhooks: number; messages: number; messageBatches: number };
   }> {
     // Get all entities from Data DB
-    const sessions = await this.dataDataSource.query<SessionRow[]>('SELECT * FROM sessions');
-    const webhooks = await this.dataDataSource.query<WebhookRow[]>('SELECT * FROM webhooks');
+    const sessions = await this.dataSource.query<SessionRow[]>('SELECT * FROM sessions');
+    const webhooks = await this.dataSource.query<WebhookRow[]>('SELECT * FROM webhooks');
 
     // Messages table may not exist yet or be empty
     let messages: MessageRow[] = [];
     let messageBatches: MessageBatchRow[] = [];
 
     try {
-      messages = await this.dataDataSource.query<MessageRow[]>('SELECT * FROM messages');
+      messages = await this.dataSource.query<MessageRow[]>('SELECT * FROM messages');
     } catch (error) {
       this.logger.debug('Messages table not available for export', { error: String(error) });
     }
 
     try {
-      messageBatches = await this.dataDataSource.query<MessageBatchRow[]>('SELECT * FROM message_batches');
+      messageBatches = await this.dataSource.query<MessageBatchRow[]>('SELECT * FROM message_batches');
     } catch (error) {
       this.logger.debug('Message batches table not available for export', { error: String(error) });
     }
 
     return {
       exportedAt: new Date().toISOString(),
-      dataDbType: this.configService.get<string>('dataDatabase.type', 'sqlite'),
+      dataDbType: 'sqlite',
       tables: {
         sessions,
         webhooks,
@@ -513,7 +441,7 @@ export class InfraController {
     warnings: string[];
   }> {
     const warnings: string[] = [];
-    const queryRunner = this.dataDataSource.createQueryRunner();
+    const queryRunner = this.dataSource.createQueryRunner();
     await queryRunner.connect();
     await queryRunner.startTransaction();
 

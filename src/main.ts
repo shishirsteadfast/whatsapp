@@ -36,27 +36,23 @@ if (fs.existsSync(generatedEnvPath)) {
   dotenv.config({ path: generatedEnvPath, override: false });
 } else {
   console.log('[Bootstrap] First run detected, creating default configuration...');
-  // Create minimal .env.generated with sensible defaults
-  const minimalConfig = `# JeishanulWa Configuration
+  const minimalConfig = `# OpenWA Configuration
 # Generated automatically on first run
-# Edit via Dashboard > Infrastructure or modify this file directly.
-# Note: values in process env or project .env take precedence over this file.
 
-# Database (SQLite - no external service required)
-DATABASE_TYPE=sqlite
-POSTGRES_BUILTIN=false
+# Single SQLite database
+DATABASE_NAME=./data/openwa.sqlite
 
-# Redis & Queue (disabled by default)
-REDIS_ENABLED=false
-REDIS_BUILTIN=false
-QUEUE_ENABLED=false
+# Redis (required for cache and queue)
+REDIS_HOST=localhost
+REDIS_PORT=6379
+# REDIS_PASSWORD=
 
-# Storage (Local filesystem)
-STORAGE_TYPE=local
-MINIO_BUILTIN=false
-STORAGE_PATH=./data/media
+# JWT
+# JWT_SECRET=change-this-in-production
+JWT_EXPIRES_IN=24h
 
-# Docker Profiles: none (minimal setup)
+# Storage (local filesystem only)
+STORAGE_LOCAL_PATH=./data/media
 `;
   fs.writeFileSync(generatedEnvPath, minimalConfig);
   console.log('[Bootstrap] Created default configuration at:', generatedEnvPath);
@@ -118,7 +114,7 @@ async function bootstrap() {
     },
     credentials: true,
     methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS'],
-    allowedHeaders: ['Content-Type', 'X-API-Key', 'Authorization', 'X-Request-ID'],
+    allowedHeaders: ['Content-Type', 'Authorization', 'X-Request-ID'],
     exposedHeaders: ['X-RateLimit-Limit', 'X-RateLimit-Remaining', 'X-RateLimit-Reset'],
     maxAge: 86400, // 24 hours
   });

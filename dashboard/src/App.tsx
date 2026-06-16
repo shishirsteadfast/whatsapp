@@ -1,4 +1,4 @@
-import { useState, useEffect, lazy, Suspense } from 'react';
+import { useState, useEffect, useRef, lazy, Suspense } from 'react';
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { Loader2 } from 'lucide-react';
@@ -13,10 +13,11 @@ const Dashboard = lazy(() => import('./pages/Dashboard').then(m => ({ default: m
 const Sessions = lazy(() => import('./pages/Sessions').then(m => ({ default: m.Sessions })));
 const Webhooks = lazy(() => import('./pages/Webhooks').then(m => ({ default: m.Webhooks })));
 const Logs = lazy(() => import('./pages/Logs').then(m => ({ default: m.Logs })));
-const ApiKeys = lazy(() => import('./pages/ApiKeys').then(m => ({ default: m.ApiKeys })));
 const MessageTester = lazy(() => import('./pages/MessageTester').then(m => ({ default: m.MessageTester })));
 const Infrastructure = lazy(() => import('./pages/Infrastructure').then(m => ({ default: m.Infrastructure })));
 const Plugins = lazy(() => import('./pages/Plugins'));
+
+const TOKEN_KEY = 'openwa_token';
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -28,60 +29,120 @@ const queryClient = new QueryClient({
   },
 });
 
+function getTokenExpiry(token: string): number | null {
+  try {
+    const payload = JSON.parse(atob(token.split('.')[1]));
+    return typeof payload.exp === 'number' ? payload.exp : null;
+  } catch {
+    return null;
+  }
+}
+
+function isTokenValid(token: string): boolean {
+  const exp = getTokenExpiry(token);
+  if (exp === null) return false;
+  return exp * 1000 > Date.now();
+}
+
 function AppContent() {
-  // Initialize from sessionStorage to avoid setState in effect
-  const savedKey = sessionStorage.getItem('openwa_api_key');
-  const [isAuthenticated, setIsAuthenticated] = useState(!!savedKey);
-  const [, setApiKey] = useState(savedKey || '');
+  const savedToken = localStorage.getItem(TOKEN_KEY);
+  const initiallyValid = savedToken ? isTokenValid(savedToken) : false;
+
+  const [isAuthenticated, setIsAuthenticated] = useState(initiallyValid);
   const { setRole, role } = useRole();
+  const logoutTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
-  const handleLogin = async (key: string) => {
-    setApiKey(key);
-    sessionStorage.setItem('openwa_api_key', key);
-
-    // Fetch the role from API
-    try {
-      const response = await fetch('/api/auth/validate', {
-        method: 'POST',
-        headers: { 'X-API-Key': key },
-      });
-      if (response.ok) {
-        const data = await response.json();
-        setRole(data.role as UserRole);
-      }
-    } catch {
-      // Default to viewer if we can't fetch role
-      setRole('viewer');
+  const clearTimer = () => {
+    if (logoutTimerRef.current !== null) {
+      clearTimeout(logoutTimerRef.current);
+      logoutTimerRef.current = null;
     }
-
-    setIsAuthenticated(true);
   };
 
-  const handleLogout = () => {
-    setApiKey('');
+  const scheduleLogout = (token: string) => {
+    clearTimer();
+    const exp = getTokenExpiry(token);
+    if (exp === null) return;
+    const remainingMs = exp * 1000 - Date.now();
+    if (remainingMs <= 0) {
+      performLogout();
+      return;
+    }
+    logoutTimerRef.current = setTimeout(() => performLogout(), remainingMs);
+  };
+
+  const performLogout = () => {
+    clearTimer();
+    localStorage.removeItem(TOKEN_KEY);
     setIsAuthenticated(false);
     setRole(null);
-    sessionStorage.removeItem('openwa_api_key');
+    queryClient.clear();
   };
 
-  // Re-validate and get role on mount if already authenticated
-  useEffect(() => {
-    if (!savedKey) return;
+  const handleLogin = (token: string, userRole: string) => {
+    localStorage.setItem(TOKEN_KEY, token);
+    setRole(userRole as UserRole);
+    setIsAuthenticated(true);
+    scheduleLogout(token);
+  };
 
-    fetch('/api/auth/validate', {
-      method: 'POST',
-      headers: { 'X-API-Key': savedKey },
-    })
-      .then(res => res.json())
-      .then(data => {
-        if (data.valid && data.role) {
-          setRole(data.role as UserRole);
-        }
+  // On mount: set timer for existing valid token, verify with server
+  useEffect(() => {
+    const token = localStorage.getItem(TOKEN_KEY);
+
+    if (!token || !isTokenValid(token)) {
+      if (token) localStorage.removeItem(TOKEN_KEY);
+      setIsAuthenticated(false);
+      return;
+    }
+
+    scheduleLogout(token);
+
+    fetch('/api/auth/me', { headers: { Authorization: `Bearer ${token}` } })
+      .then(res => {
+        if (!res.ok) { performLogout(); return null; }
+        return res.json();
       })
-      .catch(() => {
-        // Keep existing role from localStorage if validation fails
-      });
-  }, [savedKey, setRole]);
+      .then((data: { role?: string } | null) => {
+        if (data?.role) setRole(data.role as UserRole);
+      })
+      .catch(() => { /* keep existing state on network error */ });
+
+    return () => clearTimer();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  // Cross-tab sync: logout or re-login in another tab propagates here
+  useEffect(() => {
+    const onStorage = (e: StorageEvent) => {
+      if (e.key !== TOKEN_KEY) return;
+
+      if (!e.newValue) {
+        // Another tab logged out
+        clearTimer();
+        setIsAuthenticated(false);
+        setRole(null);
+        queryClient.clear();
+      } else if (isTokenValid(e.newValue)) {
+        // Another tab logged in with a new token — adopt it and reset timer
+        setIsAuthenticated(true);
+        scheduleLogout(e.newValue);
+        const exp = getTokenExpiry(e.newValue);
+        if (exp !== null) {
+          fetch('/api/auth/me', { headers: { Authorization: `Bearer ${e.newValue}` } })
+            .then(res => res.ok ? res.json() : null)
+            .then((data: { role?: string } | null) => {
+              if (data?.role) setRole(data.role as UserRole);
+            })
+            .catch(() => {});
+        }
+      }
+    };
+
+    window.addEventListener('storage', onStorage);
+    return () => window.removeEventListener('storage', onStorage);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const loadingFallback = (
     <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', minHeight: '100vh' }}>
@@ -97,19 +158,18 @@ function AppContent() {
     <ToastProvider>
       <BrowserRouter>
         <Suspense fallback={loadingFallback}>
-        <Routes>
-          <Route path="/" element={<Layout onLogout={handleLogout} userRole={role} />}>
-            <Route index element={<Dashboard />} />
-            <Route path="sessions" element={<Sessions />} />
-            <Route path="webhooks" element={<Webhooks />} />
-            {role === 'admin' && <Route path="api-keys" element={<ApiKeys />} />}
-            <Route path="logs" element={<Logs />} />
-            <Route path="message-tester" element={<MessageTester />} />
-            <Route path="infrastructure" element={<Infrastructure />} />
-            {role === 'admin' && <Route path="plugins" element={<Plugins />} />}
-            <Route path="*" element={<Navigate to="/" replace />} />
-          </Route>
-        </Routes>
+          <Routes>
+            <Route path="/" element={<Layout onLogout={performLogout} userRole={role} />}>
+              <Route index element={<Dashboard />} />
+              <Route path="sessions" element={<Sessions />} />
+              <Route path="webhooks" element={<Webhooks />} />
+              <Route path="logs" element={<Logs />} />
+              <Route path="message-tester" element={<MessageTester />} />
+              <Route path="infrastructure" element={<Infrastructure />} />
+              {role === 'admin' && <Route path="plugins" element={<Plugins />} />}
+              <Route path="*" element={<Navigate to="/" replace />} />
+            </Route>
+          </Routes>
         </Suspense>
       </BrowserRouter>
     </ToastProvider>

@@ -20,7 +20,7 @@ export class WebhookProcessor extends WorkerHost {
   private readonly logger = createLogger('WebhookProcessor');
 
   constructor(
-    @InjectRepository(Webhook, 'data')
+    @InjectRepository(Webhook)
     private readonly webhookRepository: Repository<Webhook>,
     private readonly hookManager: HookManager,
   ) {

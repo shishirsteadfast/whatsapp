@@ -42,28 +42,28 @@ export class EventsGateway implements OnGatewayInit, OnGatewayConnection, OnGate
   }
 
   async handleConnection(client: Socket) {
-    // Extract API key from header or query param
-    const apiKey = (client.handshake.headers['x-api-key'] as string) || (client.handshake.query.apiKey as string);
+    // Extract Bearer token from header or query param
+    const authHeader = client.handshake.headers['authorization'] as string;
+    const token = authHeader?.startsWith('Bearer ') ? authHeader.substring(7) : (client.handshake.query.token as string);
 
-    if (!apiKey) {
-      this.logger.warn(`Client ${client.id} rejected: No API key provided`);
-      client.emit('message', this.createError('UNAUTHORIZED', 'API key required'));
+    if (!token) {
+      this.logger.warn(`Client ${client.id} rejected: No token provided`);
+      client.emit('message', this.createError('UNAUTHORIZED', 'Bearer token required'));
       client.disconnect();
       return;
     }
 
     try {
-      const validKey = await this.authService.validateApiKey(apiKey);
-      if (!validKey) {
-        this.logger.warn(`Client ${client.id} rejected: Invalid API key`);
-        client.emit('message', this.createError('UNAUTHORIZED', 'Invalid API key'));
+      const user = await this.authService.validateToken(token);
+      if (!user) {
+        this.logger.warn(`Client ${client.id} rejected: Invalid token`);
+        client.emit('message', this.createError('UNAUTHORIZED', 'Invalid token'));
         client.disconnect();
         return;
       }
 
-      // Store API key info on socket for later use
-      (client.data as { apiKey: unknown }).apiKey = validKey;
-      this.logger.log(`Client connected: ${client.id} (key: ${validKey.name})`);
+      (client.data as { user: unknown }).user = user;
+      this.logger.log(`Client connected: ${client.id} (user: ${user.name})`);
     } catch (error) {
       this.logger.warn(`Client ${client.id} rejected: Auth error`, {
         error: error instanceof Error ? error.message : String(error),
