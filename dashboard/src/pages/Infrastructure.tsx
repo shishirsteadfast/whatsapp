@@ -179,7 +179,7 @@ export function Infrastructure() {
 
     setQueueEnabled(infraStatus.queue.enabled);
     setQueueStats({
-      messages: infraStatus.queue.messages,
+      messages: infraStatus.queue.messageSend,
       webhooks: infraStatus.queue.webhooks,
     });
   }, [infraStatus]);
@@ -196,6 +196,63 @@ export function Infrastructure() {
     setWebhookConfig(prev => ({ ...prev, [key]: value }));
   const updateRateLimitConfig = (key: keyof RateLimitConfig, value: number) =>
     setRateLimitConfig(prev => ({ ...prev, [key]: value }));
+
+  const handleSaveConfig = async () => {
+    setSaving(true);
+    try {
+      await infraApi.saveConfig({
+        database: dbConfig,
+        redis: { ...redisConfig, enabled: redisEnabled },
+        storage: storageConfig,
+        server: serverConfig,
+        webhook: webhookConfig,
+        rateLimit: rateLimitConfig,
+        queue: { enabled: queueEnabled },
+      });
+      toast.success(t('infrastructure.toasts.saveSuccess'), '');
+      setShowRestartModal(true);
+    } catch (err) {
+      toast.error(t('infrastructure.toasts.saveError'), err instanceof Error ? err.message : '');
+    } finally {
+      setSaving(false);
+    }
+  };
+
+  const handleRestart = async () => {
+    setRestartStatus('restarting');
+    setRestartCountdown(30);
+    try {
+      await infraApi.restart();
+      const tick = setInterval(() => {
+        setRestartCountdown(prev => {
+          if (prev <= 1) {
+            clearInterval(tick);
+            setRestartStatus('waiting');
+          }
+          return prev - 1;
+        });
+      }, 1000);
+      setTimeout(async () => {
+        clearInterval(tick);
+        let attempts = 0;
+        const poll = setInterval(async () => {
+          attempts++;
+          try {
+            await infraApi.healthCheck();
+            clearInterval(poll);
+            setRestartStatus('success');
+          } catch {
+            if (attempts >= 20) {
+              clearInterval(poll);
+              setRestartStatus('error');
+            }
+          }
+        }, 1500);
+      }, 30_000);
+    } catch {
+      setRestartStatus('error');
+    }
+  };
 
   const SectionCard = ({ children, icon: Icon, title, status }: { children: React.ReactNode; icon: React.ElementType; title: string; status?: React.ReactNode }) => (
     <section className="w-full rounded-xl border border-border bg-surface p-6 shadow-xs">

@@ -232,9 +232,9 @@ export default function Plugins() {
                       plugin.status === 'disabled' ? 'bg-amber-500' :
                       plugin.status === 'error' ? 'bg-red-500' : 'bg-ink-muted'
                     }`} />
-                    <span className="text-sm capitalize text-ink">{plugin.status}</span>
+                    <span className="text-sm text-ink">{t(`pluginStatus.${plugin.status}`, { defaultValue: plugin.status })}</span>
                   </div>
-                  <span className="text-[0.625rem] uppercase tracking-[0.05em] text-ink-muted">{plugin.type}</span>
+                  <span className="text-[0.625rem] uppercase tracking-[0.05em] text-ink-muted">{t(`pluginType.${plugin.type}`, { defaultValue: plugin.type })}</span>
                 </div>
 
                 {plugin.error && (

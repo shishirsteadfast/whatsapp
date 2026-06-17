@@ -9,15 +9,25 @@ interface PageHeaderProps {
 
 export function PageHeader({ title, subtitle, badge, actions }: PageHeaderProps) {
   return (
-    <header className="mb-6 w-full">
-      <div className="flex flex-wrap items-center justify-between gap-4 max-sm:flex-col max-sm:items-start">
-        <div className="flex items-center gap-3">
-          <h1 className="m-0 text-[1.875rem] font-bold tracking-tight text-ink max-sm:text-2xl">{title}</h1>
-          {badge && <span className="inline-flex">{badge}</span>}
+    <div className="mb-7 flex flex-wrap items-start justify-between gap-4 max-sm:flex-col">
+      <div>
+        <div className="flex items-center gap-2.5">
+          <h1 className="m-0 text-[1.625rem] font-bold tracking-tight text-[var(--color-ink)] max-sm:text-[1.375rem]">
+            {title}
+          </h1>
+          {badge}
         </div>
-        {actions && <div className="flex shrink-0 items-center gap-3 max-sm:w-full max-sm:[&>:is(button,.btn-primary,.btn-secondary)]:w-full max-sm:[&>:is(button,.btn-primary,.btn-secondary)]:justify-center">{actions}</div>}
+        {subtitle && (
+          <p className="mt-1 m-0 text-[0.875rem] text-[var(--color-ink-muted)] leading-snug">
+            {subtitle}
+          </p>
+        )}
       </div>
-      {subtitle && <p className="mt-2 text-[0.9375rem] leading-1.5 text-ink-muted max-sm:text-sm">{subtitle}</p>}
-    </header>
+      {actions && (
+        <div className="flex shrink-0 items-center gap-2.5 max-sm:w-full max-sm:[&>button]:flex-1 max-sm:[&>button]:justify-center">
+          {actions}
+        </div>
+      )}
+    </div>
   );
 }
