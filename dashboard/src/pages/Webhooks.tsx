@@ -312,7 +312,7 @@ export function Webhooks() {
                   checked={editWebhook.active}
                   onChange={e => setEditWebhook({ ...editWebhook, active: e.target.checked })}
                 />
-                <span className="absolute inset-0 rounded-[26px] bg-slate-300 transition-all peer-checked:bg-primary" />
+                <span className="absolute inset-0 rounded-[26px] bg-ink-muted transition-all peer-checked:bg-primary" />
                 <span className="absolute bottom-[3px] left-[3px] h-5 w-5 rounded-full bg-white shadow-md transition-all peer-checked:translate-x-[22px]" />
               </label>
               <span className={`text-sm font-medium ${editWebhook.active ? 'text-primary' : 'text-ink-muted'}`}>
@@ -391,7 +391,7 @@ export function Webhooks() {
                   </span>
                   <span>
                     <span className={`inline-block whitespace-nowrap rounded-full px-3 py-1 text-xs font-medium ${
-                      webhook.active ? 'bg-primary/10 text-primary' : 'bg-gray-100 text-ink-muted'
+                      webhook.active ? 'bg-primary/10 text-primary' : 'bg-muted text-ink-muted'
                     }`}>
                       {webhook.active ? t('common.active') : t('common.inactive')}
                     </span>

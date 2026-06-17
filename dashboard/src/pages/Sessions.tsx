@@ -152,7 +152,7 @@ export function Sessions() {
     if (status === 'connecting' || status === 'initializing') return 'bg-amber-100 text-amber-600';
     if (status === 'qr_ready') return 'bg-blue-100 text-blue-600';
     if (status === 'disconnected') return 'bg-red-100 text-red-600';
-    return 'bg-gray-100 text-gray-600';
+    return 'bg-muted text-ink-muted';
   };
 
   if (loading) {

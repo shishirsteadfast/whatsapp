@@ -248,11 +248,11 @@ export function Infrastructure() {
     <div className="flex items-center justify-between gap-4 py-3">
       <div className="min-w-0 flex-1">
         <span className="text-[0.9375rem] font-medium text-ink">{label}</span>
-        <small className="block text-xs text-slate-500/85">{description}</small>
+        <small className="block text-xs text-ink-muted/85">{description}</small>
       </div>
       <label className="relative shrink-0 h-[26px] w-[48px] cursor-pointer">
         <input type="checkbox" className="peer sr-only" checked={checked} onChange={e => onChange(e.target.checked)} />
-        <span className="absolute inset-0 rounded-[26px] bg-gray-300 transition-all peer-checked:bg-primary" />
+        <span className="absolute inset-0 rounded-[26px] bg-ink-muted transition-all peer-checked:bg-primary" />
         <span className="absolute bottom-[3px] left-[3px] h-5 w-5 rounded-full bg-white shadow-md transition-all peer-checked:translate-x-[22px]" />
       </label>
     </div>
@@ -323,7 +323,7 @@ export function Infrastructure() {
         {/* Webhook & Rate Limiting */}
         <SectionCard icon={Webhook} title={t('infrastructure.webhook.title')}>
           <div className="flex flex-col gap-4">
-            <h3 className="m-0 mb-4 text-[0.9375rem] font-semibold text-slate-600">
+            <h3 className="m-0 mb-4 text-[0.9375rem] font-semibold text-ink-secondary">
               <Webhook size={16} className="me-2 align-middle" />
               {t('infrastructure.webhook.settings')}
             </h3>
@@ -340,7 +340,7 @@ export function Infrastructure() {
             </div>
 
             <div className="border-t border-border pt-6 mt-6">
-              <h3 className="m-0 mb-4 text-[0.9375rem] font-semibold text-slate-600">
+              <h3 className="m-0 mb-4 text-[0.9375rem] font-semibold text-ink-secondary">
                 <Gauge size={16} className="me-2 align-middle" />
                 {t('infrastructure.webhook.rateLimit')}
               </h3>
@@ -389,14 +389,14 @@ export function Infrastructure() {
             </>
           )}
 
-          <div className="mt-4 rounded-xl border border-dashed border-slate-200 bg-slate-50 p-10 text-center">
+          <div className="mt-4 rounded-xl border border-dashed border-border bg-muted p-10 text-center">
             <Database size={32} className="mx-auto mb-4 text-primary opacity-70" />
-            <p className="m-0 text-[0.9375rem] font-medium text-slate-600">{t('infrastructure.database.migrationsTitle')}</p>
+            <p className="m-0 text-[0.9375rem] font-medium text-ink-secondary">{t('infrastructure.database.migrationsTitle')}</p>
             <p className="mt-3 flex items-center justify-center gap-1 text-sm font-medium text-primary">
               <CheckCircle size={16} />
               {t('infrastructure.database.migrationsStatus')}
             </p>
-            <p className="mt-2 text-xs leading-relaxed text-slate-500">{t('infrastructure.database.migrationsHint')}</p>
+            <p className="mt-2 text-xs leading-relaxed text-ink-muted">{t('infrastructure.database.migrationsHint')}</p>
           </div>
         </SectionCard>
 
@@ -477,10 +477,10 @@ export function Infrastructure() {
               )}
             </>
           ) : (
-            <div className="mt-4 rounded-xl border border-dashed border-slate-200 bg-slate-50 p-10 text-center">
+            <div className="mt-4 rounded-xl border border-dashed border-border bg-muted p-10 text-center">
               <Server size={32} className="mx-auto mb-4 text-slate-400 opacity-50" />
-              <p className="m-0 text-[0.9375rem] font-medium text-slate-600">{t('infrastructure.redis.disabledTitle')}</p>
-              <p className="mt-2 text-xs leading-relaxed text-slate-500">{t('infrastructure.redis.disabledDesc')}</p>
+              <p className="m-0 text-[0.9375rem] font-medium text-ink-secondary">{t('infrastructure.redis.disabledTitle')}</p>
+              <p className="mt-2 text-xs leading-relaxed text-ink-muted">{t('infrastructure.redis.disabledDesc')}</p>
             </div>
           )}
         </SectionCard>
@@ -548,7 +548,7 @@ export function Infrastructure() {
             <div className="px-8 py-8">
               {restartStatus === 'idle' && (
                 <>
-                  <p className="mb-6 text-base text-slate-600">
+                  <p className="mb-6 text-base text-ink-secondary">
                     <Trans i18nKey="infrastructure.restart.idleDesc" components={{ code: <code />, br: <br /> }} />
                   </p>
                   <div className="flex justify-center gap-4">
@@ -562,7 +562,7 @@ export function Infrastructure() {
                 <>
                   <div className="mb-6">
                     <Loader2 className="mx-auto mb-4 animate-spin text-primary" size={48} />
-                    <p className="text-lg font-medium text-slate-800">
+                    <p className="text-lg font-medium text-ink">
                       {restartCountdown > 0
                         ? t('infrastructure.restart.restartingMsg', { count: restartCountdown })
                         : t('infrastructure.restart.checking')}
@@ -574,14 +574,14 @@ export function Infrastructure() {
                       style={{ width: restartCountdown > 0 ? `${((30 - restartCountdown) / 30) * 100}%` : '100%' }}
                     />
                   </div>
-                  <p className="mt-4 text-sm text-slate-500">{t('infrastructure.restart.dontClose')}</p>
+                  <p className="mt-4 text-sm text-ink-muted">{t('infrastructure.restart.dontClose')}</p>
                 </>
               )}
 
               {restartStatus === 'success' && (
                 <>
                   <CheckCircle size={48} className="mx-auto mb-4 text-primary" />
-                  <p className="text-base text-slate-600">{t('infrastructure.restart.successMsg')}</p>
+                  <p className="text-base text-ink-secondary">{t('infrastructure.restart.successMsg')}</p>
                 </>
               )}
 

@@ -35,7 +35,7 @@ export class ErrorBoundary extends Component<Props, State> {
         <div className="flex min-h-screen flex-col items-center justify-center p-8" style={{ fontFamily: 'system-ui, sans-serif', color: '#374151' }}>
           <AlertCircle size={48} className="mb-4 text-red-600" />
           <h1 className="mb-2 text-2xl font-bold">{i18n.t('errorBoundary.title')}</h1>
-          <p className="mb-6 text-center text-gray-500">
+          <p className="mb-6 text-center text-ink-muted">
             {i18n.t('errorBoundary.description')}
           </p>
           <button

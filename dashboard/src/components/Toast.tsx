@@ -118,15 +118,15 @@ function ToastContainer({ toasts, removeToast }: ToastContainerProps) {
         return (
           <div
             key={toast.id}
-            className={`flex items-start gap-3 rounded-xl border-l-4 bg-white p-4 shadow-[0_10px_40px_rgba(0,0,0,0.12),0_4px_12px_rgba(0,0,0,0.08)] animate-[slideIn_0.3s_ease-out] ${colorStyles[toast.type]}`}
+            className={`flex items-start gap-3 rounded-xl border-l-4 bg-surface p-4 shadow-[0_10px_40px_rgba(0,0,0,0.12),0_4px_12px_rgba(0,0,0,0.08)] animate-[slideIn_0.3s_ease-out] ${colorStyles[toast.type]}`}
           >
             <Icon size={20} className="mt-0.5 shrink-0" />
             <div className="min-w-0 flex-1">
-              <div className="text-[0.9375rem] font-semibold leading-1.4 text-slate-800">{toast.title}</div>
-              {toast.message && <div className="mt-1 text-[0.8125rem] leading-1.5 text-slate-500">{toast.message}</div>}
+              <div className="text-[0.9375rem] font-semibold leading-1.4 text-ink">{toast.title}</div>
+              {toast.message && <div className="mt-1 text-[0.8125rem] leading-1.5 text-ink-muted">{toast.message}</div>}
             </div>
             <button
-              className="flex h-6 w-6 shrink-0 cursor-pointer items-center justify-center rounded-md border-none bg-transparent text-slate-400 transition-all duration-150 ease-in-out hover:bg-slate-100 hover:text-slate-600"
+              className="flex h-6 w-6 shrink-0 cursor-pointer items-center justify-center rounded-md border-none bg-transparent text-ink-muted transition-all duration-150 ease-in-out hover:bg-muted hover:text-ink-secondary"
               onClick={() => removeToast(toast.id)}
             >
               <X size={16} />

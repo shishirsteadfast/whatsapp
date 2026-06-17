@@ -74,7 +74,7 @@ export function Dashboard() {
   const statusColor = (status: string) => {
     if (status === 'ready') return 'bg-primary/10 text-primary';
     if (status === 'connecting' || status === 'initializing' || status === 'qr_ready') return 'bg-amber-100 text-amber-600';
-    return 'bg-gray-100 text-ink-muted';
+    return 'bg-muted text-ink-muted';
   };
 
   return (
@@ -84,7 +84,7 @@ export function Dashboard() {
         subtitle={t('dashboard.subtitle')}
         badge={
           <span className={`rounded-full px-3 py-1.5 text-xs font-bold uppercase tracking-wide ${
-            stats && stats.ready > 0 ? 'bg-primary/10 text-primary' : 'bg-gray-100 text-ink-muted'
+            stats && stats.ready > 0 ? 'bg-primary/10 text-primary' : 'bg-muted text-ink-muted'
           }`}>
             {stats && stats.ready > 0 ? t('common.connected') : t('common.disconnected')}
           </span>

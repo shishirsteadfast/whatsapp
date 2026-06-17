@@ -116,7 +116,7 @@ export function Logs() {
                 <span className="font-mono text-[0.8125rem] whitespace-nowrap max-sm:hidden">{log.apiKeyName || '—'}</span>
                 <span className="font-mono text-[0.8125rem] whitespace-nowrap max-sm:hidden">{log.ipAddress || '—'}</span>
                 <span className="max-sm:order-3 max-sm:self-start">
-                  <span className={`inline-block whitespace-nowrap rounded-md px-[0.625rem] py-1 text-[0.6875rem] font-bold uppercase tracking-[0.025em] ${severityStyles[log.severity] || 'bg-gray-100 text-gray-600'}`}>
+                  <span className={`inline-block whitespace-nowrap rounded-md px-[0.625rem] py-1 text-[0.6875rem] font-bold uppercase tracking-[0.025em] ${    severityStyles[log.severity] || 'bg-muted text-ink-muted'}`}>
                     {log.severity}
                   </span>
                 </span>
