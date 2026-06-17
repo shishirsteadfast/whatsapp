@@ -92,7 +92,7 @@ export interface Settings {
 
 async function request<T>(endpoint: string, options: RequestInit = {}): Promise<T> {
   const url = `${API_BASE_URL}${endpoint}`;
-  const token = sessionStorage.getItem('openwa_token');
+  const token = localStorage.getItem('openwa_token');
 
   const headers: HeadersInit = {
     'Content-Type': 'application/json',
@@ -103,8 +103,8 @@ async function request<T>(endpoint: string, options: RequestInit = {}): Promise<
   const response = await fetch(url, { ...options, headers });
 
   if (response.status === 401) {
-    sessionStorage.removeItem('openwa_token');
-    window.location.reload();
+    localStorage.removeItem('openwa_token');
+    window.location.href = window.location.origin;
     throw new Error('Session expired');
   }
 
