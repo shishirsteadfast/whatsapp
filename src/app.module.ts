@@ -27,6 +27,7 @@ import { HooksModule } from './core/hooks';
 import { PluginsModule } from './core/plugins';
 import { PluginsApiModule } from './modules/plugins/plugins.module';
 import { QueueModule } from './modules/queue/queue.module';
+import { AddressBookModule } from './modules/address-book/address-book.module';
 
 @Module({
   imports: [
@@ -89,6 +90,7 @@ import { QueueModule } from './modules/queue/queue.module';
     SettingsModule,
     InfraModule,
     ContactModule,
+    AddressBookModule,
     GroupModule,
     LabelModule,
     ChannelModule,

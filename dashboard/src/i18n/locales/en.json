@@ -66,6 +66,7 @@
     "sessions": "Sessions",
     "webhooks": "Webhooks",
     "apiKeys": "API Keys",
+    "contacts": "Contacts",
     "messageTester": "Message Tester",
     "infrastructure": "Infrastructure",
     "plugins": "Plugins",
@@ -543,6 +544,106 @@
       "savedTitle": "Configuration Saved",
       "savedDesc": "Server restart required to apply changes.",
       "saveFailed": "Save Failed"
+    }
+  },
+  "contacts": {
+    "title": "Contacts",
+    "subtitle": "Manage your WhatsApp contacts",
+    "newContact": "New Contact",
+    "searchPlaceholder": "Search by name or phone...",
+    "selected": "{{count}} selected",
+    "bulkDelete": "Delete Selected",
+    "importBtn": "Import CSV",
+    "downloadTemplate": "Download sample CSV",
+    "empty": {
+      "title": "No contacts yet",
+      "description": "Add your first contact or import from a CSV file"
+    },
+    "columns": {
+      "name": "Name",
+      "phone": "Phone",
+      "country": "Country",
+      "city": "City",
+      "note": "Note",
+      "actions": "Actions"
+    },
+    "form": {
+      "createTitle": "New Contact",
+      "editTitle": "Edit Contact",
+      "fullName": "Full Name",
+      "fullNamePlaceholder": "e.g. John Doe",
+      "countryCode": "Country Code",
+      "phone": "WhatsApp Phone",
+      "phonePlaceholder": "e.g. 1234567890",
+      "phoneHint": "Enter number without country code — it will be added automatically",
+      "country": "Country",
+      "countryPlaceholder": "e.g. Malaysia",
+      "state": "State / Province",
+      "statePlaceholder": "e.g. Selangor",
+      "city": "City",
+      "cityPlaceholder": "e.g. Kuala Lumpur",
+      "address": "Address",
+      "addressPlaceholder": "e.g. 123 Jalan Ampang",
+      "note": "Note",
+      "notePlaceholder": "Any additional notes...",
+      "phoneRequired": "Phone number is required",
+      "phoneDuplicate": "This phone number already exists",
+      "phoneInvalid": "Phone number must contain only digits"
+    },
+    "delete": {
+      "title": "Delete Contact",
+      "message": "Are you sure you want to delete <strong>{{name}}</strong>? This cannot be undone.",
+      "messagePhone": "Are you sure you want to delete contact <strong>{{phone}}</strong>? This cannot be undone.",
+      "successTitle": "Contact Deleted",
+      "successDesc": "Contact has been deleted"
+    },
+    "bulkDeleteModal": {
+      "title": "Delete {{count}} Contacts",
+      "message": "Are you sure you want to delete {{count}} selected contacts? This cannot be undone.",
+      "successTitle": "Contacts Deleted",
+      "successDesc": "{{count}} contacts have been deleted"
+    },
+    "import": {
+      "title": "Import Contacts",
+      "step1Title": "Upload CSV File",
+      "step1Desc": "Upload a CSV file with your contacts. The phone column must include the country code (e.g. +601234567890).",
+      "step2Title": "Preview & Validate",
+      "step2Desc": "Review your contacts before importing. Invalid rows will be highlighted.",
+      "step3Title": "Import Complete",
+      "dropzone": "Drop your CSV file here, or click to browse",
+      "dropzoneHint": "Supported format: .csv",
+      "validRows": "{{count}} valid",
+      "invalidRows": "{{count}} invalid",
+      "importValid": "Import Valid Only",
+      "importAll": "Import All",
+      "importBtn": "Import {{count}} Contacts",
+      "importing": "Importing...",
+      "successTitle": "Import Successful",
+      "successDesc": "{{created}} contacts imported, {{skipped}} skipped",
+      "errorPhone": "Phone number is empty",
+      "errorNoCountryCode": "Phone must include country code (e.g. +601234567890)",
+      "errorDuplicate": "Duplicate phone in file",
+      "previewColumns": {
+        "row": "#",
+        "status": "Status",
+        "name": "Full Name",
+        "phone": "Phone",
+        "country": "Country",
+        "city": "City",
+        "error": "Issue"
+      }
+    },
+    "toasts": {
+      "createSuccess": "Contact created",
+      "createError": "Failed to create contact",
+      "updateSuccess": "Contact updated",
+      "updateError": "Failed to update contact",
+      "deleteSuccess": "Contact deleted",
+      "deleteError": "Failed to delete contact",
+      "bulkDeleteSuccess": "{{count}} contacts deleted",
+      "bulkDeleteError": "Failed to delete contacts",
+      "importSuccess": "{{created}} contacts imported",
+      "importError": "Import failed"
     }
   }
 }

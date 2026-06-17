@@ -15,6 +15,7 @@ const Logs = lazy(() => import('./pages/Logs').then(m => ({ default: m.Logs })))
 const MessageTester = lazy(() => import('./pages/MessageTester').then(m => ({ default: m.MessageTester })));
 const Infrastructure = lazy(() => import('./pages/Infrastructure').then(m => ({ default: m.Infrastructure })));
 const Plugins = lazy(() => import('./pages/Plugins'));
+const Contacts = lazy(() => import('./pages/Contacts').then(m => ({ default: m.Contacts })));
 
 const TOKEN_KEY = 'openwa_token';
 
@@ -165,6 +166,7 @@ function AppContent() {
               <Route path="logs" element={<Logs />} />
               <Route path="message-tester" element={<MessageTester />} />
               <Route path="infrastructure" element={<Infrastructure />} />
+              <Route path="contacts" element={<Contacts />} />
               {role === 'admin' && <Route path="plugins" element={<Plugins />} />}
               <Route path="*" element={<Navigate to="/" replace />} />
             </Route>

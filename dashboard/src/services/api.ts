@@ -263,6 +263,49 @@ export interface Engine {
   features: string[];
 }
 
+// =============================================================================
+// Contact Types & API
+// =============================================================================
+
+export interface Contact {
+  id: string;
+  fullName?: string;
+  phone: string;
+  countryCode: string;
+  country?: string;
+  state?: string;
+  city?: string;
+  address?: string;
+  note?: string;
+  createdAt: string;
+  updatedAt: string;
+}
+
+export interface ContactPayload {
+  fullName?: string;
+  phone: string;
+  countryCode: string;
+  country?: string;
+  state?: string;
+  city?: string;
+  address?: string;
+  note?: string;
+}
+
+export const contactApi = {
+  list: () => request<Contact[]>('/contacts'),
+  create: (data: ContactPayload) =>
+    request<Contact>('/contacts', { method: 'POST', body: JSON.stringify(data) }),
+  update: (id: string, data: Partial<ContactPayload>) =>
+    request<Contact>(`/contacts/${id}`, { method: 'PUT', body: JSON.stringify(data) }),
+  delete: (id: string) =>
+    request<void>(`/contacts/${id}`, { method: 'DELETE' }),
+  bulkDelete: (ids: string[]) =>
+    request<{ deleted: number }>('/contacts/bulk-delete', { method: 'POST', body: JSON.stringify({ ids }) }),
+  bulkCreate: (contacts: ContactPayload[]) =>
+    request<{ created: number; skipped: number }>('/contacts/bulk', { method: 'POST', body: JSON.stringify({ contacts }) }),
+};
+
 export const pluginsApi = {
   list: () => request<Plugin[]>('/plugins'),
   get: (id: string) => request<Plugin>(`/plugins/${id}`),
