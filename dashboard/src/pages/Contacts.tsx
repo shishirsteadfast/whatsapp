@@ -1,5 +1,6 @@
 import { useState, useRef, useMemo, useEffect, useCallback } from 'react';
 import { createPortal } from 'react-dom';
+import { useQueryClient } from '@tanstack/react-query';
 import { Trans, useTranslation } from 'react-i18next';
 import {
   Plus, Trash2, Edit, Upload, Download, Search,
@@ -11,6 +12,7 @@ import { useToast } from '../components/Toast';
 import { PageHeader } from '../components/PageHeader';
 import { useRole } from '../hooks/useRole';
 import {
+  queryKeys,
   useContactsQuery,
   useCreateContactMutation,
   useUpdateContactMutation,
@@ -726,6 +728,7 @@ export function Contacts() {
   const toast = useToast();
   const { canWrite } = useRole();
 
+  const queryClient = useQueryClient();
   const { data: contacts = [], isLoading } = useContactsQuery();
   const createMutation      = useCreateContactMutation();
   const updateMutation      = useUpdateContactMutation();
@@ -773,6 +776,7 @@ export function Contacts() {
   const handleCreate = async (payload: ContactPayload) => {
     try {
       await createMutation.mutateAsync(payload);
+      void queryClient.invalidateQueries({ queryKey: queryKeys.contacts });
       toast.success(t('contacts.toasts.createSuccess'));
     } catch (err) {
       toast.error(t('contacts.toasts.createError'), err instanceof Error ? err.message : '');
@@ -784,6 +788,7 @@ export function Contacts() {
     if (!editTarget) return;
     try {
       await updateMutation.mutateAsync({ id: editTarget.id, data: payload });
+      void queryClient.invalidateQueries({ queryKey: queryKeys.contacts });
       toast.success(t('contacts.toasts.updateSuccess'));
     } catch (err) {
       toast.error(t('contacts.toasts.updateError'), err instanceof Error ? err.message : '');
@@ -795,6 +800,7 @@ export function Contacts() {
     if (!deleteTarget) return;
     try {
       await deleteMutation.mutateAsync(deleteTarget.id);
+      void queryClient.invalidateQueries({ queryKey: queryKeys.contacts });
       toast.success(t('contacts.toasts.deleteSuccess'));
       setDeleteTarget(null);
     } catch (err) {
@@ -806,6 +812,7 @@ export function Contacts() {
     try {
       const ids = [...selected];
       await bulkDeleteMutation.mutateAsync(ids);
+      void queryClient.invalidateQueries({ queryKey: queryKeys.contacts });
       toast.success(t('contacts.toasts.bulkDeleteSuccess', { count: ids.length }));
       setSelected(new Set());
       setShowBulkDeleteModal(false);
@@ -827,6 +834,7 @@ export function Contacts() {
     }));
     try {
       await bulkCreateMutation.mutateAsync(payloads);
+      void queryClient.invalidateQueries({ queryKey: queryKeys.contacts });
       toast.success(t('contacts.toasts.importSuccess', { created: payloads.length }));
     } catch (err) {
       toast.error(t('contacts.toasts.importError'), err instanceof Error ? err.message : '');

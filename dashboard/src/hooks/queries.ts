@@ -200,42 +200,32 @@ export function useContactsQuery() {
 }
 
 export function useCreateContactMutation() {
-  const queryClient = useQueryClient();
   return useMutation({
     mutationFn: (data: ContactPayload) => contactApi.create(data),
-    onSuccess: () => { void queryClient.invalidateQueries({ queryKey: queryKeys.contacts }); },
   });
 }
 
 export function useUpdateContactMutation() {
-  const queryClient = useQueryClient();
   return useMutation({
     mutationFn: ({ id, data }: { id: string; data: Partial<ContactPayload> }) =>
       contactApi.update(id, data),
-    onSuccess: () => { void queryClient.invalidateQueries({ queryKey: queryKeys.contacts }); },
   });
 }
 
 export function useDeleteContactMutation() {
-  const queryClient = useQueryClient();
   return useMutation({
     mutationFn: (id: string) => contactApi.delete(id),
-    onSuccess: () => { void queryClient.invalidateQueries({ queryKey: queryKeys.contacts }); },
   });
 }
 
 export function useBulkDeleteContactsMutation() {
-  const queryClient = useQueryClient();
   return useMutation({
     mutationFn: (ids: string[]) => contactApi.bulkDelete(ids),
-    onSuccess: () => { void queryClient.invalidateQueries({ queryKey: queryKeys.contacts }); },
   });
 }
 
 export function useBulkCreateContactsMutation() {
-  const queryClient = useQueryClient();
   return useMutation({
     mutationFn: (contacts: ContactPayload[]) => contactApi.bulkCreate(contacts),
-    onSuccess: () => { void queryClient.invalidateQueries({ queryKey: queryKeys.contacts }); },
   });
 }

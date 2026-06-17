@@ -7,7 +7,7 @@ import {
   Index,
 } from 'typeorm';
 
-@Entity('address_book')
+@Entity('contacts')
 export class AddressBookContact {
   @PrimaryGeneratedColumn('uuid')
   id: string;
