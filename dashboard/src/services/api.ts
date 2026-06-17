@@ -104,7 +104,9 @@ async function request<T>(endpoint: string, options: RequestInit = {}): Promise<
 
   if (response.status === 401) {
     localStorage.removeItem('openwa_token');
-    window.location.href = window.location.origin;
+    // Dispatch a storage event so App.tsx cross-tab listener handles the logout
+    // without triggering a reload loop
+    window.dispatchEvent(new StorageEvent('storage', { key: 'openwa_token', newValue: null }));
     throw new Error('Session expired');
   }
 
