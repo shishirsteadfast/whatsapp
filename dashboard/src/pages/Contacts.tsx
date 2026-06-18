@@ -510,7 +510,7 @@ function ImportModal({
     if (file?.name.endsWith('.csv')) handleFile(file);
   };
 
-  const rowsToImport = importValidOnly ? rows.filter(r => r.valid) : rows.filter(r => r.valid);
+  const rowsToImport = importValidOnly ? rows.filter(r => r.valid) : rows;
 
   const handleImport = async () => {
     setImporting(true);
@@ -620,14 +620,15 @@ function ImportModal({
                   </span>
                 )}
                 <label className="ml-auto flex cursor-pointer items-center gap-2 text-[0.8125rem] font-medium text-[var(--color-ink-secondary)]">
-                  <input
-                    type="checkbox"
-                    checked={importValidOnly}
-                    onChange={e => setImportValidOnly(e.target.checked)}
-                    className="sr-only peer"
-                  />
-                  <span className="relative inline-block h-[18px] w-[32px] rounded-full bg-[var(--color-border-strong)] transition-all peer-checked:bg-[var(--color-primary)]">
-                    <span className="absolute bottom-[2px] left-[2px] h-[14px] w-[14px] rounded-full bg-white shadow-sm transition-all peer-checked:translate-x-[14px]" />
+                  <span className="relative inline-flex h-[18px] w-[32px] items-center">
+                    <input
+                      type="checkbox"
+                      checked={importValidOnly}
+                      onChange={e => setImportValidOnly(e.target.checked)}
+                      className="peer sr-only"
+                    />
+                    <span className="absolute inset-0 rounded-full bg-[var(--color-border-strong)] transition-all peer-checked:bg-[var(--color-primary)]" />
+                    <span className="absolute left-[2px] top-[2px] h-[14px] w-[14px] rounded-full bg-white shadow-sm transition-all peer-checked:translate-x-[14px]" />
                   </span>
                   {t('contacts.import.importValid')}
                 </label>
