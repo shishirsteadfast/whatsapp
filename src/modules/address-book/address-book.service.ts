@@ -22,11 +22,17 @@ export class AddressBookService {
   ) {}
 
   findAll(): Promise<AddressBookContact[]> {
-    return this.repo.find({ order: { createdAt: 'DESC' } });
+    return this.repo.find({
+      order: { createdAt: 'DESC' },
+      relations: ['country', 'state', 'city'],
+    });
   }
 
   async findOne(id: string): Promise<AddressBookContact> {
-    const contact = await this.repo.findOne({ where: { id } });
+    const contact = await this.repo.findOne({
+      where: { id },
+      relations: ['country', 'state', 'city'],
+    });
     if (!contact) throw new NotFoundException(`Contact ${id} not found`);
     return contact;
   }
@@ -40,13 +46,14 @@ export class AddressBookService {
       fullName:    dto.fullName    ?? null,
       phone:       dto.phone,
       countryCode: dto.countryCode,
-      country:     dto.country     ?? null,
-      state:       dto.state       ?? null,
-      city:        dto.city        ?? null,
+      countryId:   dto.countryId   ?? null,
+      stateId:     dto.stateId     ?? null,
+      cityId:      dto.cityId      ?? null,
       address:     dto.address     ?? null,
       note:        dto.note        ?? null,
     });
-    return this.repo.save(contact);
+    const saved = await this.repo.save(contact);
+    return this.findOne(saved.id);
   }
 
   async update(id: string, dto: UpdateAddressBookContactDto): Promise<AddressBookContact> {
@@ -63,14 +70,15 @@ export class AddressBookService {
       ...(dto.fullName    !== undefined && { fullName:    dto.fullName    ?? null }),
       ...(dto.phone       !== undefined && { phone:       dto.phone }),
       ...(dto.countryCode !== undefined && { countryCode: dto.countryCode }),
-      ...(dto.country     !== undefined && { country:     dto.country     ?? null }),
-      ...(dto.state       !== undefined && { state:       dto.state       ?? null }),
-      ...(dto.city        !== undefined && { city:        dto.city        ?? null }),
+      ...(dto.countryId   !== undefined && { countryId:   dto.countryId   ?? null }),
+      ...(dto.stateId     !== undefined && { stateId:     dto.stateId     ?? null }),
+      ...(dto.cityId      !== undefined && { cityId:      dto.cityId      ?? null }),
       ...(dto.address     !== undefined && { address:     dto.address     ?? null }),
       ...(dto.note        !== undefined && { note:        dto.note        ?? null }),
     });
 
-    return this.repo.save(contact);
+    const saved = await this.repo.save(contact);
+    return this.findOne(saved.id);
   }
 
   async delete(id: string): Promise<void> {
@@ -97,9 +105,9 @@ export class AddressBookService {
         fullName:    dto.fullName    ?? null,
         phone:       dto.phone,
         countryCode: dto.countryCode,
-        country:     dto.country     ?? null,
-        state:       dto.state       ?? null,
-        city:        dto.city        ?? null,
+        countryId:   dto.countryId   ?? null,
+        stateId:     dto.stateId     ?? null,
+        cityId:      dto.cityId      ?? null,
         address:     dto.address     ?? null,
         note:        dto.note        ?? null,
       });
@@ -130,7 +138,10 @@ export class AddressBookService {
   }
 
   async findAllWithMessageCounts(): Promise<Array<AddressBookContact & { totalSentMessages: number }>> {
-    const contacts = await this.repo.find({ order: { createdAt: 'DESC' } });
+    const contacts = await this.repo.find({
+      order: { createdAt: 'DESC' },
+      relations: ['country', 'state', 'city'],
+    });
 
     if (contacts.length === 0) return [];
 

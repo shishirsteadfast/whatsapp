@@ -28,6 +28,7 @@ import { PluginsModule } from './core/plugins';
 import { PluginsApiModule } from './modules/plugins/plugins.module';
 import { QueueModule } from './modules/queue/queue.module';
 import { AddressBookModule } from './modules/address-book/address-book.module';
+import { LocationsModule } from './modules/locations/locations.module';
 
 @Module({
   imports: [
@@ -91,6 +92,7 @@ import { AddressBookModule } from './modules/address-book/address-book.module';
     InfraModule,
     ContactModule,
     AddressBookModule,
+    LocationsModule,
     GroupModule,
     LabelModule,
     ChannelModule,

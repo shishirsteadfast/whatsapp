@@ -1,10 +1,9 @@
-import { useState, useRef, useMemo, useEffect, useCallback } from 'react';
-import { createPortal } from 'react-dom';
+import { useState, useRef, useMemo, useEffect } from 'react';
 import { useQueryClient } from '@tanstack/react-query';
 import { Trans, useTranslation } from 'react-i18next';
 import {
   Plus, Trash2, Edit, Upload, Download, Search,
-  X, ChevronDown, ChevronLeft, ChevronRight, Check, AlertTriangle, Loader2,
+  X, ChevronLeft, ChevronRight, Check, AlertTriangle, Loader2,
   Users, CheckSquare, Square, FileText, MessageSquare, FileDown,
 } from 'lucide-react';
 import { useDocumentTitle } from '../hooks/useDocumentTitle';
@@ -23,191 +22,50 @@ import {
 import { contactApi } from '../services/api';
 import type { Contact, ContactPayload } from '../services/api';
 import { ContactDetailModal } from '../components/ContactDetailModal';
-import { COUNTRY_CODES, type CountryCode } from '../data/countryCodes';
+import { CountryCodePicker } from '../components/CountryCodePicker';
+import { StateSelect } from '../components/StateSelect';
+import { CitySelect } from '../components/CitySelect';
 
 // ─── helpers ────────────────────────────────────────────────────────────────
 
 const DEFAULT_DIAL = '+60';
 
-function dialToCountry(dial: string): CountryCode | undefined {
-  return COUNTRY_CODES.find(c => c.dial === dial);
-}
-
 function formatPhone(countryCode: string, phone: string): string {
   return `${countryCode}${phone}`;
 }
 
+// Known dial codes sorted longest-first to avoid partial matches (e.g. +1 vs +1268)
+const KNOWN_DIAL_CODES = [
+  '+1268','+1242','+1246','+1809','+1876','+1869','+1758','+1784','+1868','+1649',
+  '+977','+971','+973','+974','+968','+966','+965','+962','+961','+960',
+  '+964','+963','+959','+955','+950','+947','+942','+937','+934','+931',
+  '+925','+922','+921','+920','+919','+918','+917','+916','+915','+914',
+  '+913','+912','+911','+910','+909','+908','+907','+906','+905','+904',
+  '+903','+902','+901','+900','+886','+880','+856','+855','+853','+852',
+  '+851','+850','+84','+83','+82','+81','+80','+79','+78','+77',
+  '+76','+75','+74','+73','+72','+71','+70','+69','+68','+67',
+  '+66','+65','+64','+63','+62','+61','+60','+59','+58','+57',
+  '+56','+55','+54','+53','+52','+51','+50','+49','+48','+47',
+  '+46','+45','+44','+43','+42','+41','+40','+39','+38','+37',
+  '+36','+35','+34','+33','+32','+31','+30','+29','+28','+27',
+  '+26','+25','+24','+23','+22','+21','+20','+18','+17','+16',
+  '+15','+14','+13','+12','+11','+10','+9','+8','+7','+6',
+  '+5','+4','+3','+2','+1',
+];
+
 function parseImportPhone(raw: string): { countryCode: string; phone: string } | null {
   const cleaned = raw.replace(/[\s\-().]/g, '');
-  const match = COUNTRY_CODES
-    .slice()
-    .sort((a, b) => b.dial.length - a.dial.length)
-    .find(c => cleaned.startsWith(c.dial));
-  if (!match) return null;
-  const local = cleaned.slice(match.dial.length);
-  if (!local || !/^\d+$/.test(local)) return null;
-  return { countryCode: match.dial, phone: local };
-}
-
-// ─── Country Code Picker ─────────────────────────────────────────────────────
-// Opens a full overlay modal via portal — no position math, no overflow/z-index
-// issues, works at every screen size and in any stacking context.
-
-function CountryCodePicker({
-  value,
-  onChange,
-}: {
-  value: string;
-  onChange: (dial: string) => void;
-}) {
-  const [open, setOpen]     = useState(false);
-  const [search, setSearch] = useState('');
-  const searchRef           = useRef<HTMLInputElement>(null);
-
-  const selected = useMemo(() => COUNTRY_CODES.find(c => c.dial === value), [value]);
-
-  const filtered = useMemo(() => {
-    const q = search.toLowerCase().trim();
-    if (!q) return COUNTRY_CODES;
-    return COUNTRY_CODES.filter(
-      c =>
-        c.name.toLowerCase().includes(q) ||
-        c.dial.includes(q) ||
-        c.code.toLowerCase().includes(q),
-    );
-  }, [search]);
-
-  // Focus search input when panel opens
-  useEffect(() => {
-    if (open) {
-      const t = setTimeout(() => searchRef.current?.focus(), 60);
-      return () => clearTimeout(t);
+  if (!cleaned.startsWith('+')) return null;
+  // Try longest dial codes first to avoid partial matches
+  for (const code of KNOWN_DIAL_CODES) {
+    if (cleaned.startsWith(code)) {
+      const local = cleaned.slice(code.length);
+      if (local && /^\d+$/.test(local)) {
+        return { countryCode: code, phone: local };
+      }
     }
-  }, [open]);
-
-  // Close on Escape
-  useEffect(() => {
-    if (!open) return;
-    const handler = (e: KeyboardEvent) => { if (e.key === 'Escape') setOpen(false); };
-    document.addEventListener('keydown', handler);
-    return () => document.removeEventListener('keydown', handler);
-  }, [open]);
-
-  const handleSelect = useCallback((dial: string) => {
-    onChange(dial);
-    setOpen(false);
-    setSearch('');
-  }, [onChange]);
-
-  return (
-    <>
-      {/* ── Trigger ── */}
-      <button
-        type="button"
-        onClick={() => { setSearch(''); setOpen(true); }}
-        className="flex cursor-pointer items-center gap-1.5 self-stretch rounded-l-[var(--radius)] border border-r-0 border-[var(--color-border)] bg-[var(--color-muted)] px-3 text-[var(--color-ink)] transition-colors hover:bg-[var(--color-muted-deep)] active:scale-[0.97]"
-        title={selected ? `${selected.name} (${value})` : 'Select country code'}
-      >
-        <span className="text-[1.375rem] leading-none">{selected?.flag ?? '🌐'}</span>
-        <ChevronDown size={12} className="shrink-0 text-[var(--color-ink-muted)]" />
-      </button>
-
-      {/* ── Picker overlay (portal) ── */}
-      {open && createPortal(
-        /* Backdrop */
-        <div
-          style={{ position: 'fixed', inset: 0, zIndex: 10000 }}
-          className="flex items-center justify-center bg-black/50 backdrop-blur-sm animate-[fadeIn_0.15s_ease]"
-          onClick={() => { setOpen(false); setSearch(''); }}
-        >
-          {/* Panel */}
-          <div
-            style={{ width: 'min(420px, 92vw)', maxHeight: '85vh' }}
-            className="flex flex-col overflow-hidden rounded-[var(--radius-xl)] border border-[var(--color-border)] bg-[var(--color-surface)] shadow-[var(--shadow-xl)] animate-[slideUp_0.2s_ease]"
-            onClick={e => e.stopPropagation()}
-          >
-            {/* Header */}
-            <div className="flex items-center justify-between border-b border-[var(--color-border)] px-4 py-3.5">
-              <span className="text-[0.9375rem] font-bold text-[var(--color-ink)]">Select Country Code</span>
-              <button
-                type="button"
-                onClick={() => { setOpen(false); setSearch(''); }}
-                className="icon-btn border-none"
-              >
-                <X size={17} />
-              </button>
-            </div>
-
-            {/* Search */}
-            <div className="border-b border-[var(--color-border)] p-3">
-              <div className="flex items-center gap-2 rounded-[var(--radius)] border border-[var(--color-border)] bg-[var(--color-muted)] px-3 transition-colors focus-within:border-[var(--color-primary)] focus-within:bg-[var(--color-surface)]">
-                <Search size={15} className="shrink-0 text-[var(--color-ink-muted)]" />
-                <input
-                  ref={searchRef}
-                  value={search}
-                  onChange={e => setSearch(e.target.value)}
-                  placeholder="Search country name or dial code..."
-                  className="flex-1 border-none bg-transparent py-2 text-[0.875rem] text-[var(--color-ink)] outline-none placeholder:text-[var(--color-ink-muted)]"
-                />
-                {search && (
-                  <button
-                    type="button"
-                    onClick={() => setSearch('')}
-                    className="flex cursor-pointer items-center justify-center border-none bg-transparent p-0.5 text-[var(--color-ink-muted)] hover:text-[var(--color-ink)]"
-                  >
-                    <X size={14} />
-                  </button>
-                )}
-              </div>
-            </div>
-
-            {/* Country list */}
-            <ul className="flex-1 overflow-y-auto py-1.5">
-              {filtered.length === 0 ? (
-                <li className="px-4 py-8 text-center text-[0.875rem] text-[var(--color-ink-muted)]">
-                  No countries found for &ldquo;{search}&rdquo;
-                </li>
-              ) : (
-                filtered.map(c => {
-                  const isActive = value === c.dial;
-                  return (
-                    <li key={c.code}>
-                      <button
-                        type="button"
-                        onClick={() => handleSelect(c.dial)}
-                        className={`flex w-full cursor-pointer items-center gap-3 px-4 py-2.5 text-[0.875rem] transition-colors ${
-                          isActive
-                            ? 'bg-[var(--color-primary-dim)] text-[var(--color-primary)]'
-                            : 'text-[var(--color-ink)] hover:bg-[var(--color-muted)]'
-                        }`}
-                      >
-                        <span className="w-7 text-center text-[1.25rem] leading-none">{c.flag}</span>
-                        <span className="min-w-0 flex-1 truncate font-medium">{c.name}</span>
-                        <span className={`shrink-0 font-mono text-[0.8125rem] ${isActive ? 'font-bold text-[var(--color-primary)]' : 'text-[var(--color-ink-muted)]'}`}>
-                          {c.dial}
-                        </span>
-                        {isActive && (
-                          <Check size={15} className="shrink-0 text-[var(--color-primary)]" />
-                        )}
-                      </button>
-                    </li>
-                  );
-                })
-              )}
-            </ul>
-
-            {/* Footer count */}
-            <div className="border-t border-[var(--color-border)] px-4 py-2.5 text-[0.75rem] text-[var(--color-ink-muted)]">
-              {filtered.length === COUNTRY_CODES.length
-                ? `${COUNTRY_CODES.length} countries`
-                : `${filtered.length} of ${COUNTRY_CODES.length} countries`}
-            </div>
-          </div>
-        </div>,
-        document.body,
-      )}
-    </>
-  );
+  }
+  return null;
 }
 
 // ─── Shared form primitives (MUST live outside ContactFormModal so React sees
@@ -233,16 +91,17 @@ interface FormState {
   fullName: string;
   countryCode: string;
   phone: string;
-  country: string;
-  state: string;
-  city: string;
+  countryId: number | null;
+  stateId: number | null;
+  cityId: number | null;
   address: string;
   note: string;
 }
 
 const EMPTY_FORM: FormState = {
   fullName: '', countryCode: DEFAULT_DIAL, phone: '',
-  country: '', state: '', city: '', address: '', note: '',
+  countryId: null, stateId: null, cityId: null,
+  address: '', note: '',
 };
 
 function contactToForm(c: Contact): FormState {
@@ -250,9 +109,9 @@ function contactToForm(c: Contact): FormState {
     fullName:    c.fullName    ?? '',
     countryCode: c.countryCode ?? DEFAULT_DIAL,
     phone:       c.phone       ?? '',
-    country:     c.country     ?? '',
-    state:       c.state       ?? '',
-    city:        c.city        ?? '',
+    countryId:   c.countryId   ?? null,
+    stateId:     c.stateId     ?? null,
+    cityId:      c.cityId      ?? null,
     address:     c.address     ?? '',
     note:        c.note        ?? '',
   };
@@ -273,7 +132,7 @@ function ContactFormModal({ mode, initial, existingPhones, editId, onClose, onSu
   const [errors, setErrors] = useState<Partial<Record<keyof FormState, string>>>({});
   const [saving, setSaving] = useState(false);
 
-  const set = (key: keyof FormState, val: string) => {
+  const set = <K extends keyof FormState>(key: K, val: FormState[K]) => {
     setForm(prev => ({ ...prev, [key]: val }));
     setErrors(prev => ({ ...prev, [key]: undefined }));
   };
@@ -301,11 +160,11 @@ function ContactFormModal({ mode, initial, existingPhones, editId, onClose, onSu
         fullName:    form.fullName    || undefined,
         countryCode: form.countryCode,
         phone:       form.phone.replace(/\s/g, ''),
-        country:     form.country    || undefined,
-        state:       form.state      || undefined,
-        city:        form.city       || undefined,
-        address:     form.address    || undefined,
-        note:        form.note       || undefined,
+        countryId:   form.countryId   ?? undefined,
+        stateId:     form.stateId     ?? undefined,
+        cityId:      form.cityId      ?? undefined,
+        address:     form.address     || undefined,
+        note:        form.note        || undefined,
       });
       onClose();
     } finally {
@@ -337,7 +196,15 @@ function ContactFormModal({ mode, initial, existingPhones, editId, onClose, onSu
             {/* Phone */}
             <Field label={`${t('contacts.form.phone')} *`} error={errors.phone}>
               <div className="flex items-stretch">
-                <CountryCodePicker value={form.countryCode} onChange={v => set('countryCode', v)} />
+                <CountryCodePicker
+                  value={form.countryId}
+                  onChange={(countryId, dial) => {
+                    set('countryId', countryId);
+                    set('countryCode', dial);
+                    set('stateId', null);
+                    set('cityId', null);
+                  }}
+                />
                 <FormInput
                   type="tel"
                   value={form.phone}
@@ -349,19 +216,27 @@ function ContactFormModal({ mode, initial, existingPhones, editId, onClose, onSu
               <p className="m-0 text-[0.7375rem] text-[var(--color-ink-muted)]">{t('contacts.form.phoneHint')}</p>
             </Field>
 
-            {/* Country + State */}
-            <div className="grid grid-cols-2 gap-3">
-              <Field label={t('contacts.form.country')}>
-                <FormInput value={form.country} onChange={e => set('country', e.target.value)} placeholder={t('contacts.form.countryPlaceholder')} />
-              </Field>
-              <Field label={t('contacts.form.state')}>
-                <FormInput value={form.state} onChange={e => set('state', e.target.value)} placeholder={t('contacts.form.statePlaceholder')} />
-              </Field>
-            </div>
+            {/* State */}
+            <Field label={t('contacts.form.state')}>
+              <StateSelect
+                countryId={form.countryId}
+                value={form.stateId}
+                onChange={(stateId) => {
+                  set('stateId', stateId);
+                  set('cityId', null);
+                }}
+                disabled={!form.countryId}
+              />
+            </Field>
 
             {/* City */}
             <Field label={t('contacts.form.city')}>
-              <FormInput value={form.city} onChange={e => set('city', e.target.value)} placeholder={t('contacts.form.cityPlaceholder')} />
+              <CitySelect
+                stateId={form.stateId}
+                value={form.cityId}
+                onChange={(cityId) => set('cityId', cityId)}
+                disabled={!form.stateId}
+              />
             </Field>
 
             {/* Address */}
@@ -859,13 +734,11 @@ export function Contacts() {
   };
 
   const handleImport = async (rows: ImportRow[]) => {
+    // CSV import still uses text-based country/state/city since we can't easily match FKs
     const payloads: ContactPayload[] = rows.map(r => ({
       fullName:    r.fullName    || undefined,
       countryCode: r.countryCode!,
       phone:       r.phone!,
-      country:     r.country    || undefined,
-      state:       r.state      || undefined,
-      city:        r.city       || undefined,
       address:     r.address    || undefined,
       note:        r.note       || undefined,
     }));
@@ -887,9 +760,9 @@ export function Contacts() {
       const rows = data.map(c => [
         c.fullName ?? '',
         `${c.countryCode}${c.phone}`,
-        c.country ?? '',
-        c.state ?? '',
-        c.city ?? '',
+        c.country?.name ?? '',
+        c.state?.name ?? '',
+        c.city?.name ?? '',
         c.address ?? '',
         c.note ?? '',
         String(c.totalSentMessages),
@@ -1021,7 +894,6 @@ export function Contacts() {
               {/* Rows */}
               {paginated.map(contact => {
                 const isChecked = selected.has(contact.id);
-                const country = dialToCountry(contact.countryCode);
                 return (
                   <div
                     key={contact.id}
@@ -1052,14 +924,14 @@ export function Contacts() {
 
                     {/* Phone */}
                     <span className="font-mono text-[0.8125rem] text-[var(--color-ink)]">
-                      {country?.flag} {contact.countryCode}{contact.phone}
+                      {contact.country?.flag} {contact.countryCode}{contact.phone}
                     </span>
 
                     {/* Country */}
-                    <span className="text-[0.875rem] text-[var(--color-ink-secondary)]">{contact.country || '—'}</span>
+                    <span className="text-[0.875rem] text-[var(--color-ink-secondary)]">{contact.country?.name || '—'}</span>
 
                     {/* City */}
-                    <span className="text-[0.875rem] text-[var(--color-ink-secondary)]">{contact.city || '—'}</span>
+                    <span className="text-[0.875rem] text-[var(--color-ink-secondary)]">{contact.city?.name || '—'}</span>
 
                     {/* Note */}
                     <span className="truncate text-[0.8125rem] text-[var(--color-ink-muted)]" title={contact.note}>

@@ -92,7 +92,7 @@ export function ContactDetailModal({ contact, onClose }: ContactDetailModalProps
   const incomingCount = messages.filter(m => m.direction === 'incoming').length;
 
   const avatarLetter = (contact.fullName?.[0] ?? contact.phone[0] ?? '?').toUpperCase();
-  const locationParts = [contact.city, contact.state, contact.country].filter(Boolean);
+  const locationParts = [contact.city?.name, contact.state?.name, contact.country?.name].filter(Boolean);
   const location = locationParts.join(', ');
 
   return (

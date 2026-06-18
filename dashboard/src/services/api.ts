@@ -264,6 +264,42 @@ export interface Engine {
 }
 
 // =============================================================================
+// Location Types & API
+// =============================================================================
+
+export interface CountryLocation {
+  id: number;
+  name: string;
+  code: string;
+  dialCode: string;
+  flag: string;
+  iso3: string;
+  capital: string;
+  currency: string;
+  region: string;
+  subregion: string;
+}
+
+export interface StateLocation {
+  id: number;
+  name: string;
+  stateCode: string;
+  countryId: number;
+}
+
+export interface CityLocation {
+  id: number;
+  name: string;
+  stateId: number;
+}
+
+export const locationApi = {
+  listCountries: () => request<CountryLocation[]>('/locations/countries'),
+  listStates: (countryId: number) => request<StateLocation[]>(`/locations/countries/${countryId}/states`),
+  listCities: (stateId: number) => request<CityLocation[]>(`/locations/states/${stateId}/cities`),
+};
+
+// =============================================================================
 // Contact Types & API
 // =============================================================================
 
@@ -272,9 +308,12 @@ export interface Contact {
   fullName?: string;
   phone: string;
   countryCode: string;
-  country?: string;
-  state?: string;
-  city?: string;
+  countryId?: number;
+  stateId?: number;
+  cityId?: number;
+  country?: CountryLocation;
+  state?: StateLocation;
+  city?: CityLocation;
   address?: string;
   note?: string;
   createdAt: string;
@@ -285,9 +324,9 @@ export interface ContactPayload {
   fullName?: string;
   phone: string;
   countryCode: string;
-  country?: string;
-  state?: string;
-  city?: string;
+  countryId?: number;
+  stateId?: number;
+  cityId?: number;
   address?: string;
   note?: string;
 }

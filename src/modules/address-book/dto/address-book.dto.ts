@@ -6,6 +6,7 @@ import {
   Matches,
   IsArray,
   IsUUID,
+  IsNumber,
   ArrayNotEmpty,
 } from 'class-validator';
 import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
@@ -30,23 +31,20 @@ export class CreateAddressBookContactDto {
   @Matches(/^\+\d{1,4}$/, { message: 'countryCode must be a valid dial code (e.g. +60)' })
   countryCode: string;
 
-  @ApiPropertyOptional({ example: 'Malaysia' })
+  @ApiPropertyOptional({ example: 112 })
   @IsOptional()
-  @IsString()
-  @MaxLength(100)
-  country?: string;
+  @IsNumber()
+  countryId?: number;
 
-  @ApiPropertyOptional({ example: 'Selangor' })
+  @ApiPropertyOptional({ example: 1234 })
   @IsOptional()
-  @IsString()
-  @MaxLength(100)
-  state?: string;
+  @IsNumber()
+  stateId?: number;
 
-  @ApiPropertyOptional({ example: 'Kuala Lumpur' })
+  @ApiPropertyOptional({ example: 5678 })
   @IsOptional()
-  @IsString()
-  @MaxLength(100)
-  city?: string;
+  @IsNumber()
+  cityId?: number;
 
   @ApiPropertyOptional({ example: '123 Jalan Ampang' })
   @IsOptional()
@@ -82,21 +80,18 @@ export class UpdateAddressBookContactDto {
 
   @ApiPropertyOptional()
   @IsOptional()
-  @IsString()
-  @MaxLength(100)
-  country?: string;
+  @IsNumber()
+  countryId?: number | null;
 
   @ApiPropertyOptional()
   @IsOptional()
-  @IsString()
-  @MaxLength(100)
-  state?: string;
+  @IsNumber()
+  stateId?: number | null;
 
   @ApiPropertyOptional()
   @IsOptional()
-  @IsString()
-  @MaxLength(100)
-  city?: string;
+  @IsNumber()
+  cityId?: number | null;
 
   @ApiPropertyOptional()
   @IsOptional()
