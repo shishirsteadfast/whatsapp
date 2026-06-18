@@ -6,6 +6,7 @@ import {
   Delete,
   Body,
   Param,
+  Query,
   HttpCode,
   HttpStatus,
   ParseUUIDPipe,
@@ -35,6 +36,13 @@ export class AddressBookController {
   @ApiResponse({ status: 200, description: 'Contact list' })
   findAll() {
     return this.service.findAll();
+  }
+
+  @Get('export')
+  @ApiOperation({ summary: 'Export all contacts with message counts' })
+  @ApiResponse({ status: 200, description: 'Contact export data' })
+  exportAll() {
+    return this.service.findAllWithMessageCounts();
   }
 
   @Get(':id')
@@ -87,5 +95,20 @@ export class AddressBookController {
   @ApiResponse({ status: 201 })
   bulkCreate(@Body() dto: BulkCreateDto) {
     return this.service.bulkCreate(dto.contacts);
+  }
+
+  @Get(':id/messages')
+  @ApiOperation({ summary: 'Get message history for a contact' })
+  @ApiResponse({ status: 200, description: 'Message history' })
+  @ApiResponse({ status: 404, description: 'Contact not found' })
+  getContactMessages(
+    @Param('id', ParseUUIDPipe) id: string,
+    @Query('limit') limit?: string,
+    @Query('offset') offset?: string,
+  ) {
+    return this.service.getContactMessages(id, {
+      limit: limit ? parseInt(limit, 10) : undefined,
+      offset: offset ? parseInt(offset, 10) : undefined,
+    });
   }
 }

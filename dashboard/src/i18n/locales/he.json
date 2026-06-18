@@ -554,6 +554,7 @@
     "selected": "{{count}} נבחרו",
     "bulkDelete": "מחיקת נבחרים",
     "importBtn": "ייבוא CSV",
+    "exportBtn": "ייצוא CSV",
     "downloadTemplate": "הורדת דוגמת CSV",
     "empty": {
       "title": "אין אנשי קשר עדיין",
@@ -630,8 +631,36 @@
         "phone": "טלפון",
         "country": "מדינה",
         "city": "עיר",
+        "note": "הערה",
         "error": "בעיה"
       }
+    },
+    "detail": {
+      "title": "פרטי איש קשר",
+      "phone": "טלפון",
+      "country": "מדינה",
+      "state": "מחוז",
+      "city": "עיר",
+      "address": "כתובת",
+      "note": "הערה",
+      "created": "נוצר בתאריך",
+      "messages": "היסטוריית הודעות",
+      "noMessages": "לא נמצאו הודעות עבור איש קשר זה.",
+      "incoming": "נכנסת",
+      "outgoing": "יוצאת",
+      "loadMore": "טען עוד",
+      "loadingMessages": "טוען הודעות...",
+      "totalMessages": "{{count}} הודעות בסך הכל",
+      "session": "Session",
+      "type": "סוג",
+      "direction": "כיוון",
+      "messageBody": "הודעה",
+      "timestamp": "תאריך",
+      "status": "סטטוס"
+    },
+    "pagination": {
+      "showing": "מציג {{from}} עד {{to}} מתוך {{total}} רשומות",
+      "perPage": "לעמוד"
     },
     "toasts": {
       "createSuccess": "איש הקשר נוצר",
@@ -643,7 +672,9 @@
       "bulkDeleteSuccess": "{{count}} אנשי קשר נמחקו",
       "bulkDeleteError": "מחיקת אנשי הקשר נכשלה",
       "importSuccess": "{{created}} אנשי קשר יובאו",
-      "importError": "הייבוא נכשל"
+      "importError": "הייבוא נכשל",
+      "exportSuccess": "{{count}} אנשי קשר יוצאו",
+      "exportError": "הייצוא נכשל"
     }
   }
 }

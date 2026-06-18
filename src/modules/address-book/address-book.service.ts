@@ -6,6 +6,7 @@ import {
 import { InjectRepository } from '@nestjs/typeorm';
 import { In, Repository } from 'typeorm';
 import { AddressBookContact } from './address-book.entity';
+import { Message } from '../message/entities/message.entity';
 import {
   CreateAddressBookContactDto,
   UpdateAddressBookContactDto,
@@ -16,6 +17,8 @@ export class AddressBookService {
   constructor(
     @InjectRepository(AddressBookContact)
     private readonly repo: Repository<AddressBookContact>,
+    @InjectRepository(Message)
+    private readonly messageRepo: Repository<Message>,
   ) {}
 
   findAll(): Promise<AddressBookContact[]> {
@@ -105,5 +108,60 @@ export class AddressBookService {
     }
 
     return { created, skipped };
+  }
+
+  async getContactMessages(
+    id: string,
+    options: { limit?: number; offset?: number } = {},
+  ): Promise<{ messages: Message[]; total: number }> {
+    const contact = await this.findOne(id);
+    const chatId = `${contact.countryCode.replace('+', '')}${contact.phone}@c.us`;
+    const { limit = 50, offset = 0 } = options;
+
+    const [messages, total] = await this.messageRepo
+      .createQueryBuilder('message')
+      .where('message.chatId = :chatId', { chatId })
+      .orderBy('message.createdAt', 'DESC')
+      .skip(offset)
+      .take(limit)
+      .getManyAndCount();
+
+    return { messages, total };
+  }
+
+  async findAllWithMessageCounts(): Promise<Array<AddressBookContact & { totalSentMessages: number }>> {
+    const contacts = await this.repo.find({ order: { createdAt: 'DESC' } });
+
+    if (contacts.length === 0) return [];
+
+    // Build chatId list for all contacts
+    const chatIdMap = new Map<string, string>();
+    for (const c of contacts) {
+      const chatId = `${c.countryCode.replace('+', '')}${c.phone}@c.us`;
+      chatIdMap.set(chatId, c.id);
+    }
+
+    // Count outgoing messages per chatId in a single query
+    const results = await this.messageRepo
+      .createQueryBuilder('message')
+      .select('message.chatId', 'chatId')
+      .addSelect('COUNT(*)', 'count')
+      .where('message.chatId IN (:...chatIds)', { chatIds: [...chatIdMap.keys()] })
+      .andWhere('message.direction = :direction', { direction: 'outgoing' })
+      .groupBy('message.chatId')
+      .getRawMany<{ chatId: string; count: string }>();
+
+    const countMap = new Map<string, number>();
+    for (const r of results) {
+      countMap.set(r.chatId, parseInt(r.count, 10));
+    }
+
+    return contacts.map(c => {
+      const chatId = `${c.countryCode.replace('+', '')}${c.phone}@c.us`;
+      return {
+        ...c,
+        totalSentMessages: countMap.get(chatId) ?? 0,
+      };
+    });
   }
 }

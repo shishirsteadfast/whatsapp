@@ -4,8 +4,8 @@ import { useQueryClient } from '@tanstack/react-query';
 import { Trans, useTranslation } from 'react-i18next';
 import {
   Plus, Trash2, Edit, Upload, Download, Search,
-  X, ChevronDown, Check, AlertTriangle, Loader2,
-  Users, CheckSquare, Square, FileText,
+  X, ChevronDown, ChevronLeft, ChevronRight, Check, AlertTriangle, Loader2,
+  Users, CheckSquare, Square, FileText, MessageSquare, FileDown,
 } from 'lucide-react';
 import { useDocumentTitle } from '../hooks/useDocumentTitle';
 import { useToast } from '../components/Toast';
@@ -20,7 +20,9 @@ import {
   useBulkDeleteContactsMutation,
   useBulkCreateContactsMutation,
 } from '../hooks/queries';
+import { contactApi } from '../services/api';
 import type { Contact, ContactPayload } from '../services/api';
+import { ContactDetailModal } from '../components/ContactDetailModal';
 import { COUNTRY_CODES, type CountryCode } from '../data/countryCodes';
 
 // ─── helpers ────────────────────────────────────────────────────────────────
@@ -636,10 +638,10 @@ function ImportModal({
 
               {/* Preview table */}
               <div className="overflow-x-auto rounded-[var(--radius-lg)] border border-[var(--color-border)]">
-                <table className="w-full min-w-[560px] text-[0.8125rem]">
+                <table className="w-full min-w-[680px] text-[0.8125rem]">
                   <thead>
                     <tr className="border-b border-[var(--color-border)] bg-[var(--color-muted)]">
-                      {['row','status','name','phone','country','city','error'].map(col => (
+                      {['row','status','name','phone','country','city','note','error'].map(col => (
                         <th key={col} className="px-3 py-2.5 text-left text-[0.675rem] font-bold uppercase tracking-wider text-[var(--color-ink-muted)]">
                           {t(`contacts.import.previewColumns.${col}`)}
                         </th>
@@ -665,9 +667,21 @@ function ImportModal({
                         </td>
                         <td className="px-3 py-2 text-[var(--color-ink-secondary)]">{row.country || '—'}</td>
                         <td className="px-3 py-2 text-[var(--color-ink-secondary)]">{row.city || '—'}</td>
+                        <td className="px-3 py-2 max-w-[160px]">
+                          <span className="block truncate text-[0.8125rem] text-[var(--color-ink-muted)]" title={row.note}>
+                            {row.note || '—'}
+                          </span>
+                        </td>
                         <td className="px-3 py-2">
                           {row.errors.length > 0 && (
-                            <span className="text-[0.7375rem] font-medium text-red-500">{row.errors.join(', ')}</span>
+                            <div className="flex flex-col gap-1">
+                              {row.errors.map((err, i) => (
+                                <span key={i} className="inline-flex items-start gap-1 text-[0.7375rem] font-medium text-red-500">
+                                  <AlertTriangle size={11} className="mt-px shrink-0" />
+                                  <span>{err}</span>
+                                </span>
+                              ))}
+                            </div>
                           )}
                         </td>
                       </tr>
@@ -742,11 +756,17 @@ export function Contacts() {
   const [formMode,   setFormMode]   = useState<'create' | 'edit' | null>(null);
   const [editTarget, setEditTarget] = useState<Contact | null>(null);
   const [deleteTarget, setDeleteTarget] = useState<Contact | null>(null);
+  const [detailTarget, setDetailTarget] = useState<Contact | null>(null);
   const [showBulkDeleteModal, setShowBulkDeleteModal] = useState(false);
   const [showImport, setShowImport] = useState(false);
+  const [exporting, setExporting] = useState(false);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [perPage, setPerPage] = useState(10);
 
-  // Reset selection when contacts reload
-  useEffect(() => { setSelected(new Set()); }, [contacts]);
+  // Reset selection and page when contacts reload
+  useEffect(() => { setSelected(new Set()); setCurrentPage(1); }, [contacts]);
+  // Reset page when search changes
+  useEffect(() => { setCurrentPage(1); }, [search]);
 
   const filtered = useMemo(() => {
     const q = search.toLowerCase();
@@ -761,11 +781,27 @@ export function Contacts() {
     [contacts],
   );
 
+  // ── Pagination ──
+  const totalPages  = Math.max(1, Math.ceil(filtered.length / perPage));
+  const safePage    = Math.min(currentPage, totalPages);
+  const startIdx    = (safePage - 1) * perPage;
+  const paginated   = filtered.slice(startIdx, startIdx + perPage);
+  const showingFrom = filtered.length === 0 ? 0 : startIdx + 1;
+  const showingTo   = Math.min(startIdx + perPage, filtered.length);
+
   // ── Selection helpers ──
-  const allSelected = filtered.length > 0 && filtered.every(c => selected.has(c.id));
+  const allSelected = paginated.length > 0 && paginated.every(c => selected.has(c.id));
   const toggleAll   = () => {
-    if (allSelected) setSelected(new Set());
-    else setSelected(new Set(filtered.map(c => c.id)));
+    if (allSelected) setSelected(prev => {
+      const next = new Set(prev);
+      paginated.forEach(c => next.delete(c.id));
+      return next;
+    });
+    else setSelected(prev => {
+      const next = new Set(prev);
+      paginated.forEach(c => next.add(c.id));
+      return next;
+    });
   };
   const toggleOne = (id: string) => setSelected(prev => {
     const next = new Set(prev);
@@ -843,6 +879,40 @@ export function Contacts() {
     }
   };
 
+  const handleExport = async () => {
+    setExporting(true);
+    try {
+      const data = await contactApi.exportAll();
+      const headers = ['Full Name', 'Phone', 'Country', 'State', 'City', 'Address', 'Note', 'Total Sent Messages'];
+      const rows = data.map(c => [
+        c.fullName ?? '',
+        `${c.countryCode}${c.phone}`,
+        c.country ?? '',
+        c.state ?? '',
+        c.city ?? '',
+        c.address ?? '',
+        c.note ?? '',
+        String(c.totalSentMessages),
+      ]);
+      const csvContent = [
+        headers.join(','),
+        ...rows.map(r => r.map(v => `"${v.replace(/"/g, '""')}"`).join(',')),
+      ].join('\n');
+      const blob = new Blob(['\uFEFF' + csvContent], { type: 'text/csv;charset=utf-8;' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = `contacts_export_${new Date().toISOString().slice(0, 10)}.csv`;
+      a.click();
+      URL.revokeObjectURL(url);
+      toast.success(t('contacts.toasts.exportSuccess', { count: data.length }));
+    } catch (err) {
+      toast.error(t('contacts.toasts.exportError'), err instanceof Error ? err.message : '');
+    } finally {
+      setExporting(false);
+    }
+  };
+
   if (isLoading) {
     return (
       <div className="flex min-h-[50vh] items-center justify-center">
@@ -859,6 +929,12 @@ export function Contacts() {
         actions={
           canWrite && (
             <div className="flex items-center gap-2">
+              <button className="btn-secondary" onClick={handleExport} disabled={exporting}>
+                {exporting
+                  ? <Loader2 size={15} className="animate-spin" />
+                  : <FileDown size={15} />
+                }{t('contacts.exportBtn')}
+              </button>
               <button className="btn-secondary" onClick={() => setShowImport(true)}>
                 <Upload size={15} />{t('contacts.importBtn')}
               </button>
@@ -906,14 +982,18 @@ export function Contacts() {
             </div>
             <h3>{contacts.length === 0 ? t('contacts.empty.title') : t('logs.empty.title')}</h3>
             <p>{contacts.length === 0 ? t('contacts.empty.description') : ''}</p>
-            {contacts.length === 0 && canWrite && (
+            {contacts.length === 0 && (
               <div className="mt-4 flex gap-2">
-                <button className="btn-secondary" onClick={() => setShowImport(true)}>
-                  <Upload size={14} />{t('contacts.importBtn')}
-                </button>
-                <button className="btn-primary" onClick={() => { setEditTarget(null); setFormMode('create'); }}>
-                  <Plus size={14} />{t('contacts.newContact')}
-                </button>
+                {canWrite && (
+                  <>
+                    <button className="btn-secondary" onClick={() => setShowImport(true)}>
+                      <Upload size={14} />{t('contacts.importBtn')}
+                    </button>
+                    <button className="btn-primary" onClick={() => { setEditTarget(null); setFormMode('create'); }}>
+                      <Plus size={14} />{t('contacts.newContact')}
+                    </button>
+                  </>
+                )}
               </div>
             )}
           </div>
@@ -939,7 +1019,7 @@ export function Contacts() {
               </div>
 
               {/* Rows */}
-              {filtered.map(contact => {
+              {paginated.map(contact => {
                 const isChecked = selected.has(contact.id);
                 const country = dialToCountry(contact.countryCode);
                 return (
@@ -988,6 +1068,13 @@ export function Contacts() {
 
                     {/* Actions */}
                     <div className="flex justify-end gap-1.5">
+                      <button
+                        className="icon-btn"
+                        title={t('common.view', 'View')}
+                        onClick={() => setDetailTarget(contact)}
+                      >
+                        <MessageSquare size={14} />
+                      </button>
                       {canWrite && (
                         <>
                           <button
@@ -1015,12 +1102,82 @@ export function Contacts() {
         )}
       </div>
 
-      {/* Total count */}
+      {/* ── Pagination ── */}
       {filtered.length > 0 && (
-        <p className="mt-3 text-[0.8rem] text-[var(--color-ink-muted)]">
-          {filtered.length} {filtered.length === 1 ? 'contact' : 'contacts'}
-          {search ? ` matching "${search}"` : ''}
-        </p>
+        <div className="mt-4 flex flex-wrap items-center justify-between gap-3">
+          {/* Left: info + per-page */}
+          <div className="flex flex-wrap items-center gap-3 text-[0.8125rem] text-[var(--color-ink-muted)]">
+            <span>
+              {t('contacts.pagination.showing', { from: showingFrom, to: showingTo, total: filtered.length })}
+            </span>
+            <div className="flex items-center gap-1.5">
+              <select
+                value={perPage}
+                onChange={e => { setPerPage(Number(e.target.value)); setCurrentPage(1); }}
+                className="cursor-pointer rounded-[var(--radius)] border border-[var(--color-border)] bg-[var(--color-surface)] px-2.5 py-1.5 text-[0.8125rem] text-[var(--color-ink-secondary)] outline-none transition-colors hover:border-[var(--color-border-strong)] focus:border-[var(--color-primary)] focus:shadow-[0_0_0_3px_var(--color-primary-dim)]"
+              >
+                {[10, 25, 50, 100].map(n => (
+                  <option key={n} value={n}>{n}</option>
+                ))}
+              </select>
+              <span className="whitespace-nowrap text-[0.8125rem] text-[var(--color-ink-muted)]">{t('contacts.pagination.perPage')}</span>
+            </div>
+          </div>
+
+          {/* Right: page buttons */}
+          {totalPages > 1 && (
+            <div className="flex items-center gap-1.5">
+              <button
+                className="flex h-8 w-8 cursor-pointer items-center justify-center rounded-[var(--radius)] border border-[var(--color-border)] bg-[var(--color-surface)] text-[var(--color-ink-secondary)] transition-all hover:border-[var(--color-border-strong)] hover:bg-[var(--color-muted)] disabled:cursor-not-allowed disabled:opacity-40"
+                disabled={safePage <= 1}
+                onClick={() => setCurrentPage(p => p - 1)}
+              >
+                <ChevronLeft size={15} />
+              </button>
+
+              {/* Page number buttons with ellipsis */}
+              {(() => {
+                const pages: (number | '...')[] = [];
+                if (totalPages <= 7) {
+                  for (let i = 1; i <= totalPages; i++) pages.push(i);
+                } else {
+                  pages.push(1);
+                  if (safePage > 3) pages.push('...');
+                  const rangeStart = Math.max(2, safePage - 1);
+                  const rangeEnd   = Math.min(totalPages - 1, safePage + 1);
+                  for (let i = rangeStart; i <= rangeEnd; i++) pages.push(i);
+                  if (safePage < totalPages - 2) pages.push('...');
+                  pages.push(totalPages);
+                }
+                return pages.map((p, idx) =>
+                  p === '...' ? (
+                    <span key={`e${idx}`} className="flex h-8 w-8 items-center justify-center text-[0.8125rem] text-[var(--color-ink-muted)]">…</span>
+                  ) : (
+                    <button
+                      key={p}
+                      onClick={() => setCurrentPage(p)}
+                      className={`flex h-8 w-8 cursor-pointer items-center justify-center rounded-[var(--radius)] border text-[0.8125rem] font-medium transition-all ${
+                        p === safePage
+                          ? 'border-[var(--color-primary)] bg-[var(--color-primary)] text-white shadow-[0_2px_8px_rgba(37,211,102,0.3)]'
+                          : 'border-[var(--color-border)] bg-[var(--color-surface)] text-[var(--color-ink-secondary)] hover:border-[var(--color-border-strong)] hover:bg-[var(--color-muted)]'
+                      }`}
+                    >
+                      {p}
+                    </button>
+                  )
+                );
+              })()}
+
+              <button
+                className="flex h-8 w-8 cursor-pointer items-center justify-center rounded-[var(--radius)] border border-[var(--color-border)] bg-[var(--color-surface)] text-[var(--color-ink-secondary)] transition-all hover:border-[var(--color-border-strong)] hover:bg-[var(--color-muted)] disabled:cursor-not-allowed disabled:opacity-40"
+                disabled={safePage >= totalPages}
+                onClick={() => setCurrentPage(p => p + 1)}
+              >
+                <ChevronRight size={15} />
+              </button>
+            </div>
+          )}
+        </div>
       )}
 
       {/* ── Create / Edit Modal ── */}
@@ -1098,6 +1255,14 @@ export function Contacts() {
           existingPhones={existingPhones}
           onClose={() => setShowImport(false)}
           onImport={handleImport}
+        />
+      )}
+
+      {/* ── Contact Detail Modal ── */}
+      {detailTarget && (
+        <ContactDetailModal
+          contact={detailTarget}
+          onClose={() => setDetailTarget(null)}
         />
       )}
     </div>
