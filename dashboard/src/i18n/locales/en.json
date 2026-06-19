@@ -52,7 +52,8 @@
     "errorGeneric": "An error occurred",
     "unknownError": "Unknown error",
     "lightMode": "Light mode",
-    "darkMode": "Dark mode"
+    "darkMode": "Dark mode",
+    "viewAll": "View All"
   },
   "theme": {
     "light": "Light",
@@ -86,7 +87,17 @@
     "help": "Need help?",
     "viewDocs": "View Documentation",
     "footer": "Made with ❤️ by Yudhi Armyndharis and the OpenWA Community",
-    "version": "v{{version}} · {{date}}"
+    "version": "v{{version}} · {{date}}",
+    "title": "Sign in",
+    "subtitle": "Enter your credentials to access the dashboard.",
+    "phoneLabel": "Phone Number",
+    "phonePlaceholder": "e.g. 01712345678",
+    "passwordLabel": "Password",
+    "passwordPlaceholder": "Enter password",
+    "signIn": "Sign In",
+    "phoneRequired": "Phone number is required",
+    "passwordRequired": "Password is required",
+    "invalidCredentials": "Invalid phone or password"
   },
   "dashboard": {
     "title": "Dashboard",
@@ -110,7 +121,9 @@
     "view": "View",
     "disconnect": "Disconnect",
     "errorPrefix": "Error: {{message}}",
-    "loadError": "Failed to load data"
+    "loadError": "Failed to load data",
+    "statActive": "{{count}} active",
+    "statNoData": "No data yet"
   },
   "sessionStatus": {
     "created": "New",
@@ -315,13 +328,16 @@
       "action": "Action",
       "session": "Session",
       "apiKey": "API Key",
+      "user": "User",
       "ip": "IP Address",
       "severity": "Severity"
     },
+    "pagination": "Page {{page}} of {{total}} ({{count}} total)",
     "empty": {
       "title": "No logs found",
       "description": "Audit logs will appear here as actions are performed"
-    }
+    },
+    "pagination": "Page {{page}} of {{total}} · {{count}} entries"
   },
   "messageTester": {
     "title": "Message Tester",
@@ -470,8 +486,23 @@
       "reload": "Reload Page"
     },
     "toasts": {
-      "saveFailed": "Save Failed"
+      "saveFailed": "Save Failed",
+      "saveSuccess": "Configuration saved successfully",
+      "saveError": "Failed to save configuration"
     }
+  },
+  "pluginStatus": {
+    "installed": "Installed",
+    "enabled": "Enabled",
+    "disabled": "Disabled",
+    "error": "Error"
+  },
+  "pluginType": {
+    "engine": "Engine",
+    "storage": "Storage",
+    "queue": "Queue",
+    "auth": "Auth",
+    "extension": "Extension"
   },
   "plugins": {
     "title": "Plugins",

@@ -230,11 +230,11 @@ export default function Plugins() {
                     <span className={`h-2 w-2 rounded-full ${
                       plugin.status === 'enabled' ? 'bg-primary' :
                       plugin.status === 'disabled' ? 'bg-amber-500' :
-                      plugin.status === 'error' ? 'bg-red-500' : 'bg-slate-500'
+                      plugin.status === 'error' ? 'bg-red-500' : 'bg-ink-muted'
                     }`} />
-                    <span className="text-sm capitalize text-ink">{plugin.status}</span>
+                    <span className="text-sm text-ink">{t(`pluginStatus.${plugin.status}`, { defaultValue: plugin.status })}</span>
                   </div>
-                  <span className="text-[0.625rem] uppercase tracking-[0.05em] text-ink-muted">{plugin.type}</span>
+                  <span className="text-[0.625rem] uppercase tracking-[0.05em] text-ink-muted">{t(`pluginType.${plugin.type}`, { defaultValue: plugin.type })}</span>
                 </div>
 
                 {plugin.error && (
@@ -378,7 +378,7 @@ export default function Plugins() {
                           checked={engineConfig.headless}
                           onChange={e => setEngineConfig({ ...engineConfig, headless: e.target.checked })}
                         />
-                        <span className="absolute inset-0 rounded-[26px] bg-slate-300 transition-all peer-checked:bg-primary" />
+                        <span className="absolute inset-0 rounded-[26px] bg-ink-muted transition-all peer-checked:bg-primary" />
                         <span className="absolute bottom-[3px] left-[3px] h-5 w-5 rounded-full bg-white shadow-md transition-all peer-checked:translate-x-[22px]" />
                       </label>
                     </div>

@@ -6,22 +6,16 @@ import {
   Smartphone,
   Webhook,
   FileText,
-  LogOut,
   Send,
   Server,
   Puzzle,
-  Sun,
-  Moon,
-  Monitor,
   Menu,
   X,
   ChevronLeft,
   ChevronRight,
-  Languages,
 } from 'lucide-react';
-import { useTheme } from '../hooks/useTheme';
 import { type UserRole } from '../hooks/useRole';
-import { supportedLanguages, type SupportedLanguage } from '../i18n';
+import { type SupportedLanguage } from '../i18n';
 import { AuthHeader } from './AuthHeader';
 
 interface LayoutProps {
@@ -30,28 +24,23 @@ interface LayoutProps {
 }
 
 const allNavItems = [
-  { to: '/', icon: LayoutDashboard, key: 'dashboard' as const, adminOnly: false },
-  { to: '/sessions', icon: Smartphone, key: 'sessions' as const, adminOnly: false },
-  { to: '/webhooks', icon: Webhook, key: 'webhooks' as const, adminOnly: false },
-  { to: '/message-tester', icon: Send, key: 'messageTester' as const, adminOnly: false },
-  { to: '/infrastructure', icon: Server, key: 'infrastructure' as const, adminOnly: false },
-  { to: '/plugins', icon: Puzzle, key: 'plugins' as const, adminOnly: true },
-  { to: '/logs', icon: FileText, key: 'logs' as const, adminOnly: false },
+  { to: '/',               icon: LayoutDashboard, key: 'dashboard'      as const, adminOnly: false },
+  { to: '/sessions',       icon: Smartphone,      key: 'sessions'       as const, adminOnly: false },
+  { to: '/webhooks',       icon: Webhook,         key: 'webhooks'       as const, adminOnly: false },
+  { to: '/message-tester', icon: Send,            key: 'messageTester'  as const, adminOnly: false },
+  { to: '/infrastructure', icon: Server,          key: 'infrastructure' as const, adminOnly: false },
+  { to: '/plugins',        icon: Puzzle,          key: 'plugins'        as const, adminOnly: true  },
+  { to: '/logs',           icon: FileText,        key: 'logs'           as const, adminOnly: false },
 ];
-
-const themeIcons = { light: Sun, dark: Moon, system: Monitor };
 
 export function Layout({ onLogout, userRole }: LayoutProps) {
   const { t, i18n } = useTranslation();
-  const { theme, toggleTheme } = useTheme();
-  const ThemeIcon = themeIcons[theme];
-  const themeLabel = t(`theme.${theme}`);
 
   const navItems = allNavItems.filter(item => !item.adminOnly || userRole === 'admin');
 
-  const [isCollapsed, setIsCollapsed] = useState(false);
-  const [isMobileOpen, setIsMobileOpen] = useState(false);
-  const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
+  const [isCollapsed,   setIsCollapsed]   = useState(false);
+  const [isMobileOpen,  setIsMobileOpen]  = useState(false);
+  const [isMobile,      setIsMobile]      = useState(window.innerWidth < 768);
 
   useEffect(() => {
     const handleResize = () => {
@@ -63,159 +52,143 @@ export function Layout({ onLogout, userRole }: LayoutProps) {
     return () => window.removeEventListener('resize', handleResize);
   }, []);
 
-  const handleNavClick = () => {
-    if (isMobile) setIsMobileOpen(false);
-  };
-
   useEffect(() => {
     document.body.style.overflow = isMobileOpen ? 'hidden' : '';
-    return () => {
-      document.body.style.overflow = '';
-    };
+    return () => { document.body.style.overflow = ''; };
   }, [isMobileOpen]);
 
-  const toggleCollapse = () => setIsCollapsed(!isCollapsed);
-  const toggleMobile = () => setIsMobileOpen(!isMobileOpen);
+  const handleNavClick = () => { if (isMobile) setIsMobileOpen(false); };
 
   const currentLang = (i18n.resolvedLanguage || i18n.language || 'en').split('-')[0] as SupportedLanguage;
-  const cycleLanguage = () => {
-    const idx = supportedLanguages.indexOf(currentLang);
-    const next = supportedLanguages[(idx + 1) % supportedLanguages.length];
-    void i18n.changeLanguage(next);
-  };
-  const languageLabel = currentLang === 'he' ? 'עברית' : 'EN';
   const isRtl = currentLang === 'he';
+
+  const sidebarW = isCollapsed ? 64 : 236;
 
   return (
     <div className="flex min-h-screen">
-      {/* Mobile header */}
+
+      {/* ── Mobile top bar ── */}
       {isMobile && (
-        <header className="fixed left-0 right-0 top-0 z-90 flex h-14 items-center justify-between border-b border-border bg-surface px-4">
+        <header className="fixed left-0 right-0 top-0 z-[90] flex h-14 items-center justify-between border-b border-[var(--color-border)] bg-[var(--color-surface)] px-4">
           <button
-            className="flex h-10 w-10 cursor-pointer items-center justify-center rounded-[var(--radius)] border-none bg-transparent p-0 text-ink transition-colors duration-200 hover:bg-muted"
-            onClick={toggleMobile}
+            onClick={() => setIsMobileOpen(v => !v)}
+            className="flex h-8 w-8 cursor-pointer items-center justify-center rounded-[var(--radius)] border-none bg-transparent text-[var(--color-ink-secondary)] transition-colors hover:bg-[var(--color-muted)] hover:text-[var(--color-ink)]"
             aria-label={t('common.expand')}
           >
-            {isMobileOpen ? <X size={24} /> : <Menu size={24} />}
+            {isMobileOpen ? <X size={19} /> : <Menu size={19} />}
           </button>
+
           <div className="flex items-center gap-2">
-            <img src="/openwa_logo.webp" alt="OpenWA" className="h-6 w-6 shrink-0 object-contain" />
-            <span className="text-base font-extrabold tracking-tight text-ink">{t('common.appName')}</span>
+            <div className="flex h-6 w-6 items-center justify-center rounded-[6px] bg-[var(--color-primary)]">
+              <img src="/openwa_logo.webp" alt="OpenWA" className="h-4 w-4 object-contain brightness-0 invert" />
+            </div>
+            <span className="text-[0.9rem] font-bold tracking-tight text-[var(--color-ink)]">{t('common.appName')}</span>
           </div>
-          <div style={{ width: 40 }} />
+
+          <div className="w-8" />
         </header>
       )}
 
-      {/* Mobile overlay */}
+      {/* ── Mobile overlay ── */}
       {isMobile && isMobileOpen && (
         <div
-          className="fixed inset-0 z-95 animate-[fadeIn_0.2s_ease] bg-black/50"
+          className="fixed inset-0 z-[95] bg-black/40 backdrop-blur-sm animate-[fadeIn_0.18s_ease]"
           onClick={() => setIsMobileOpen(false)}
         />
       )}
 
-      {/* Sidebar */}
+      {/* ── Sidebar ── */}
       <aside
-        className={`fixed flex h-screen flex-col border-r border-border bg-surface transition-all duration-300 ease-in-out z-100
-          ${isMobile
-            ? `w-[280px] translate-x-[-100%] shadow-[2px_0_20px_rgba(0,0,0,0.1)] ${isMobileOpen ? 'translate-x-0' : ''}`
-            : `${isCollapsed ? 'w-[72px]' : 'w-[260px]'}`
-          }
-          rtl:border-l rtl:border-r-0`}
+        style={{ width: isMobile ? 236 : sidebarW }}
+        className={[
+          'fixed flex h-screen flex-col border-r border-[var(--color-border)] bg-[var(--color-surface)] z-[100]',
+          'transition-[width] duration-200 ease-in-out',
+          isMobile
+            ? `-translate-x-full shadow-[var(--shadow-lg)] ${isMobileOpen ? '!translate-x-0' : ''}`
+            : '',
+          isRtl ? 'right-0 border-l border-r-0' : 'left-0',
+        ].join(' ')}
       >
-        {/* Sidebar header */}
-        <div className={`flex min-h-[72px] items-center gap-3 border-b border-border px-6 ${isCollapsed ? 'justify-center px-4' : ''}`}>
-          <img src="/openwa_logo.webp" alt="OpenWA" className="h-7 w-7 shrink-0 object-contain" />
-          {!isCollapsed && (
-            <div className="flex flex-col overflow-hidden whitespace-nowrap">
-              <span className="text-lg font-extrabold tracking-tight text-ink">{t('common.appName')}</span>
-              <span className="text-[0.7rem] font-medium uppercase tracking-wider text-ink-muted">{t('common.appSubtitle')}</span>
+        {/* Brand */}
+        <div className={`flex h-14 shrink-0 items-center border-b border-[var(--color-border)] ${isCollapsed && !isMobile ? 'justify-center px-3' : 'gap-2.5 px-4'}`}>
+          <div className="flex h-7 w-7 shrink-0 items-center justify-center rounded-[7px] bg-[var(--color-primary)]">
+            <img src="/openwa_logo.webp" alt="OpenWA" className="h-4 w-4 object-contain brightness-0 invert" />
+          </div>
+          {(!isCollapsed || isMobile) && (
+            <div className="flex flex-col leading-tight overflow-hidden">
+              <span className="text-[0.9rem] font-bold tracking-tight text-[var(--color-ink)]">{t('common.appName')}</span>
+              <span className="text-[0.6rem] font-semibold uppercase tracking-[0.1em] text-[var(--color-ink-muted)]">{t('common.appSubtitle')}</span>
             </div>
           )}
         </div>
 
-        {/* Collapse toggle button */}
+        {/* Collapse toggle — desktop only */}
         {!isMobile && (
           <button
-            className={`absolute top-9 z-101 flex h-7 w-7 cursor-pointer items-center justify-center rounded-full border border-border bg-surface p-0 text-ink-secondary shadow-[0_2px_8px_rgba(0,0,0,0.1)] transition-all duration-200 hover:border-primary hover:bg-primary hover:text-white hover:shadow-[0_4px_12px_rgba(37,211,102,0.3)]
-              ${isCollapsed ? 'right-[-14px]' : 'right-[-14px]'}
-              rtl:left-[-14px] rtl:right-auto`}
-            onClick={toggleCollapse}
+            onClick={() => setIsCollapsed(v => !v)}
             title={isCollapsed ? t('common.expand') : t('common.collapse')}
-            aria-label={isCollapsed ? t('common.expand') : t('common.collapse')}
+            className={`absolute top-[1.3125rem] z-[101] flex h-5 w-5 cursor-pointer items-center justify-center rounded-full border border-[var(--color-border)] bg-[var(--color-surface)] p-0 text-[var(--color-ink-muted)] shadow-[var(--shadow-sm)] transition-all hover:border-[var(--color-primary)] hover:bg-[var(--color-primary)] hover:text-white ${isRtl ? 'left-[-10px]' : 'right-[-10px]'}`}
           >
             {isCollapsed
-              ? (isRtl ? <ChevronLeft size={16} className="rtl:scale-x-[-1]" /> : <ChevronRight size={16} className="rtl:scale-x-[-1]" />)
-              : (isRtl ? <ChevronRight size={16} className="rtl:scale-x-[-1]" /> : <ChevronLeft size={16} className="rtl:scale-x-[-1]" />)}
+              ? (isRtl ? <ChevronLeft size={11} /> : <ChevronRight size={11} />)
+              : (isRtl ? <ChevronRight size={11} /> : <ChevronLeft size={11} />)}
           </button>
         )}
 
-        {/* Navigation */}
-        <nav className={`flex flex-1 flex-col gap-1 overflow-y-auto ${isCollapsed ? 'px-2 py-4' : 'px-3 py-4'}`}>
+        {/* Nav */}
+        <nav className="flex flex-1 flex-col gap-px overflow-y-auto px-2 py-3">
           {navItems.map(({ to, icon: Icon, key }) => {
             const label = t(`nav.${key}`);
             return (
               <NavLink
                 key={to}
                 to={to}
-                className={({ isActive }) =>
-                  `flex items-center gap-3 rounded-[var(--radius)] text-sm font-medium whitespace-nowrap overflow-hidden no-underline transition-all duration-200
-                  ${isCollapsed ? 'justify-center p-[0.7rem]' : 'px-4 py-[0.7rem]'}
-                  ${isActive
-                    ? 'bg-primary/10 text-primary [&>svg]:text-primary'
-                    : 'text-ink-secondary hover:bg-muted hover:text-ink hover:no-underline'
-                  }`
-                }
                 end={to === '/'}
                 onClick={handleNavClick}
-                title={isCollapsed ? label : undefined}
+                title={isCollapsed && !isMobile ? label : undefined}
+                className={({ isActive }) =>
+                  [
+                    'relative flex items-center rounded-[8px] text-[0.8375rem] font-medium no-underline whitespace-nowrap overflow-hidden transition-all duration-150',
+                    isCollapsed && !isMobile ? 'justify-center p-2.5' : 'gap-3 px-3 py-2.5',
+                    isActive
+                      ? 'bg-[var(--color-primary-dim)] text-[var(--color-primary)] font-semibold'
+                      : 'text-[var(--color-ink)] hover:bg-[var(--color-muted)] hover:text-[var(--color-ink)]',
+                  ].join(' ')
+                }
               >
-                <Icon size={20} />
-                {!isCollapsed && <span>{label}</span>}
+                {({ isActive }) => (
+                  <>
+                    {/* Active left-bar indicator */}
+                    {isActive && (
+                      <span
+                        className={`absolute ${isRtl ? 'right-0' : 'left-0'} top-1/2 -translate-y-1/2 h-[60%] w-[3px] rounded-r-full bg-[var(--color-primary)]`}
+                        style={isRtl ? { borderRadius: '4px 0 0 4px' } : undefined}
+                      />
+                    )}
+                    <Icon
+                      size={17}
+                      className={isActive ? 'text-[var(--color-primary)]' : 'text-[var(--color-ink)]'}
+                    />
+                    {(!isCollapsed || isMobile) && <span>{label}</span>}
+                  </>
+                )}
               </NavLink>
             );
           })}
         </nav>
 
-        {/* Sidebar footer */}
-        <div className={`flex flex-col gap-2 border-t border-border ${isCollapsed ? 'px-2 py-3' : 'p-3'}`}>
-          <button
-            className={`flex items-center gap-3 cursor-pointer rounded-[var(--radius)] border border-border bg-transparent text-sm font-medium text-ink-secondary whitespace-nowrap overflow-hidden transition-all duration-200 hover:bg-muted hover:text-ink ${isCollapsed ? 'justify-center p-[0.6rem]' : 'px-[0.9rem] py-[0.6rem]'}`}
-            onClick={cycleLanguage}
-            title={t('common.language')}
-            aria-label={t('common.language')}
-          >
-            <Languages size={18} />
-            {!isCollapsed && <span>{languageLabel}</span>}
-          </button>
-          <button
-            className={`flex items-center gap-3 cursor-pointer rounded-[var(--radius)] border border-border bg-transparent text-sm font-medium text-ink-secondary whitespace-nowrap overflow-hidden transition-all duration-200 hover:bg-muted hover:text-ink ${isCollapsed ? 'justify-center p-[0.6rem]' : 'px-[0.9rem] py-[0.6rem]'}`}
-            onClick={toggleTheme}
-            title={t('theme.label', { value: themeLabel })}
-          >
-            <ThemeIcon size={18} />
-            {!isCollapsed && <span>{themeLabel}</span>}
-          </button>
-          <button
-            className={`flex items-center gap-3 cursor-pointer rounded-[var(--radius)] border border-border bg-transparent text-sm font-medium whitespace-nowrap overflow-hidden transition-all duration-200 hover:border-red-200 hover:bg-red-50 hover:text-red-600 ${isCollapsed ? 'justify-center p-[0.6rem] text-ink-secondary' : 'px-[0.9rem] py-[0.6rem] text-ink-secondary'}`}
-            onClick={onLogout}
-            title={isCollapsed ? t('common.logout') : undefined}
-          >
-            <LogOut size={20} />
-            {!isCollapsed && <span>{t('common.logout')}</span>}
-          </button>
-        </div>
+        {/* No footer — language is in header, theme & logout are in the header profile menu */}
       </aside>
 
-      {/* Main content */}
+      {/* ── Main content ── */}
       <main
-        className={`flex min-h-screen flex-1 flex-col overflow-x-hidden bg-muted transition-all duration-300 ease-in-out
-          ${isMobile
-            ? 'ml-0 w-full pt-14'
-            : `${isCollapsed ? 'ml-[72px] w-[calc(100%-72px)]' : 'ml-[260px] w-[calc(100%-260px)]'}`
-          }
-          rtl:ml-0 rtl:mr-[260px] rtl:transition-[margin-right,width] rtl:duration-300 rtl:ease-in-out
-          rtl:[&.expanded]:mr-[72px]`}
+        style={{
+          marginLeft:  isMobile ? 0 : (isRtl ? 0        : sidebarW),
+          marginRight: isMobile ? 0 : (isRtl ? sidebarW : 0),
+          width:       isMobile ? '100%' : `calc(100% - ${sidebarW}px)`,
+          paddingTop:  isMobile ? 56 : 0,
+        }}
+        className="flex min-h-screen flex-1 flex-col bg-[var(--color-muted)] transition-[margin,width] duration-200 ease-in-out overflow-x-hidden"
       >
         <AuthHeader onLogout={onLogout} />
         <div className="flex-1">

@@ -52,7 +52,8 @@
     "errorGeneric": "אירעה שגיאה",
     "unknownError": "שגיאה לא ידועה",
     "lightMode": "מצב בהיר",
-    "darkMode": "מצב כהה"
+    "darkMode": "מצב כהה",
+    "viewAll": "הצג הכל"
   },
   "theme": {
     "light": "בהיר",
@@ -86,7 +87,17 @@
     "help": "צריך עזרה?",
     "viewDocs": "לצפייה בתיעוד",
     "footer": "נבנה באהבה על ידי Yudhi Armyndharis וקהילת OpenWA",
-    "version": "v{{version}} · {{date}}"
+    "version": "v{{version}} · {{date}}",
+    "title": "כניסה למערכת",
+    "subtitle": "יש להזין פרטי התחברות כדי לגשת לדאשבורד.",
+    "phoneLabel": "מספר טלפון",
+    "phonePlaceholder": "לדוגמה: 01712345678",
+    "passwordLabel": "סיסמה",
+    "passwordPlaceholder": "יש להזין סיסמה",
+    "signIn": "כניסה",
+    "phoneRequired": "חובה להזין מספר טלפון",
+    "passwordRequired": "חובה להזין סיסמה",
+    "invalidCredentials": "מספר טלפון או סיסמה שגויים"
   },
   "dashboard": {
     "title": "דאשבורד",
@@ -110,7 +121,9 @@
     "view": "צפייה",
     "disconnect": "ניתוק",
     "errorPrefix": "שגיאה: {{message}}",
-    "loadError": "טעינת הנתונים נכשלה"
+    "loadError": "טעינת הנתונים נכשלה",
+    "statActive": "{{count}} פעילים",
+    "statNoData": "אין נתונים"
   },
   "sessionStatus": {
     "created": "חדש",
@@ -315,13 +328,15 @@
       "action": "פעולה",
       "session": "Session",
       "apiKey": "מפתח API",
+      "user": "משתמש",
       "ip": "כתובת IP",
       "severity": "חומרה"
     },
     "empty": {
       "title": "לא נמצאו לוגים",
       "description": "הלוגים יופיעו כאן ככל שיבוצעו פעולות"
-    }
+    },
+    "pagination": "עמוד {{page}} מתוך {{total}} · {{count}} רשומות"
   },
   "messageTester": {
     "title": "בדיקת הודעות",
@@ -470,8 +485,23 @@
       "reload": "טעינת הדף מחדש"
     },
     "toasts": {
-      "saveFailed": "השמירה נכשלה"
+      "saveFailed": "השמירה נכשלה",
+      "saveSuccess": "התצורה נשמרה בהצלחה",
+      "saveError": "שמירת התצורה נכשלה"
     }
+  },
+  "pluginStatus": {
+    "installed": "מותקן",
+    "enabled": "מופעל",
+    "disabled": "מושבת",
+    "error": "שגיאה"
+  },
+  "pluginType": {
+    "engine": "מנוע",
+    "storage": "אחסון",
+    "queue": "תור",
+    "auth": "אימות",
+    "extension": "הרחבה"
   },
   "plugins": {
     "title": "תוספים",
