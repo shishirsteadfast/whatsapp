@@ -44,8 +44,15 @@
     "collapse": "כיווץ",
     "logout": "יציאה",
     "refresh": "רענון",
+    "notifications": "התראות",
+    "noNotifications": "אין התראות חדשות",
+    "profile": "פרופיל",
+    "changePassword": "שינוי סיסמה",
+    "settings": "הגדרות",
     "errorGeneric": "אירעה שגיאה",
-    "unknownError": "שגיאה לא ידועה"
+    "unknownError": "שגיאה לא ידועה",
+    "lightMode": "מצב בהיר",
+    "darkMode": "מצב כהה"
   },
   "theme": {
     "light": "בהיר",

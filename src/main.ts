@@ -42,7 +42,8 @@ if (fs.existsSync(generatedEnvPath)) {
 # Single SQLite database
 DATABASE_NAME=./data/openwa.sqlite
 
-# Redis (required for cache and queue)
+# Redis (disabled by default — set REDIS_ENABLED=true to enable queue & cache)
+REDIS_ENABLED=false
 REDIS_HOST=localhost
 REDIS_PORT=6379
 # REDIS_PASSWORD=

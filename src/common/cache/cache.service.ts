@@ -39,6 +39,13 @@ export class CacheService implements OnModuleInit, OnModuleDestroy {
   constructor(private readonly configService: ConfigService) {}
 
   async onModuleInit(): Promise<void> {
+    const enabled = this.configService.get<boolean>('redis.enabled', false);
+
+    if (!enabled) {
+      this.logger.log('Redis cache is disabled (REDIS_ENABLED=false). Skipping connection.');
+      return;
+    }
+
     const host = this.configService.get<string>('redis.host', 'localhost');
     const port = this.configService.get<number>('redis.port', 6379);
     const password = this.configService.get<string>('redis.password');

@@ -32,24 +32,15 @@ export class ErrorBoundary extends Component<Props, State> {
   render() {
     if (this.state.hasError) {
       return (
-        <div style={{
-          display: 'flex', flexDirection: 'column', alignItems: 'center',
-          justifyContent: 'center', minHeight: '100vh', padding: '2rem',
-          fontFamily: 'system-ui, sans-serif', color: '#374151',
-        }}>
-          <AlertCircle size={48} style={{ color: '#DC2626', marginBottom: '1rem' }} />
-          <h1 style={{ fontSize: '1.5rem', marginBottom: '0.5rem' }}>{i18n.t('errorBoundary.title')}</h1>
-          <p style={{ color: '#6B7280', marginBottom: '1.5rem', textAlign: 'center' }}>
+        <div className="flex min-h-screen flex-col items-center justify-center p-8" style={{ fontFamily: 'system-ui, sans-serif', color: '#374151' }}>
+          <AlertCircle size={48} className="mb-4 text-red-600" />
+          <h1 className="mb-2 text-2xl font-bold">{i18n.t('errorBoundary.title')}</h1>
+          <p className="mb-6 text-center text-gray-500">
             {i18n.t('errorBoundary.description')}
           </p>
           <button
             onClick={this.handleReload}
-            style={{
-              display: 'flex', alignItems: 'center', gap: '0.5rem',
-              padding: '0.75rem 1.5rem', backgroundColor: '#2563EB',
-              color: 'white', border: 'none', borderRadius: '0.5rem',
-              cursor: 'pointer', fontSize: '1rem',
-            }}
+            className="flex cursor-pointer items-center gap-2 rounded-lg border-none bg-blue-600 px-6 py-3 text-base text-white hover:bg-blue-700"
           >
             <RefreshCw size={18} />
             {i18n.t('errorBoundary.reload')}

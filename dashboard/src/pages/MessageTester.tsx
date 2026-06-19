@@ -6,7 +6,6 @@ import { useDocumentTitle } from '../hooks/useDocumentTitle';
 import { useRole } from '../hooks/useRole';
 import { useSessionsQuery, useSessionGroupsQuery } from '../hooks/queries';
 import { PageHeader } from '../components/PageHeader';
-import './MessageTester.css';
 
 interface ApiResponse {
   success: boolean;
@@ -93,26 +92,28 @@ export function MessageTester() {
 
   if (loadingSessions) {
     return (
-      <div
-        className="message-tester"
-        style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', minHeight: '400px' }}
-      >
+      <div className="flex min-h-[400px] w-full items-center justify-center p-8">
         <Loader2 className="animate-spin" size={32} />
       </div>
     );
   }
 
   return (
-    <div className="message-tester">
+    <div className="w-full p-8">
       <PageHeader title={t('messageTester.title')} subtitle={t('messageTester.subtitle')} />
 
-      <div className="tester-panels">
-        <div className="compose-panel">
-          <h2>{t('messageTester.compose')}</h2>
+      <div className="grid grid-cols-2 gap-6 max-[1000px]:grid-cols-1">
+        {/* Compose Panel */}
+        <div className="rounded-xl border border-border bg-surface p-6 shadow-xs">
+          <h2 className="mb-6 text-lg font-bold text-ink">{t('messageTester.compose')}</h2>
 
-          <div className="form-group">
-            <label>{t('messageTester.session')}</label>
-            <select value={session} onChange={e => setSession(e.target.value)}>
+          <div className="mb-5">
+            <label className="mb-2 block text-[0.7rem] font-bold uppercase tracking-[0.05em] text-ink-secondary">{t('messageTester.session')}</label>
+            <select
+              className="w-full rounded-(--radius) border border-border bg-surface px-4 py-3 text-[0.9375rem] text-ink transition-all focus:border-primary focus:outline-none"
+              value={session}
+              onChange={e => setSession(e.target.value)}
+            >
               {sessions.length === 0 && <option value="">{t('messageTester.noReadySessions')}</option>}
               {sessions.map(s => (
                 <option key={s.id} value={s.id}>
@@ -122,26 +123,36 @@ export function MessageTester() {
             </select>
           </div>
 
-          <div className="form-group">
-            <label>{t('messageTester.recipientType')}</label>
-            <div className="toggle-group">
+          <div className="mb-5">
+            <label className="mb-2 block text-[0.7rem] font-bold uppercase tracking-[0.05em] text-ink-secondary">{t('messageTester.recipientType')}</label>
+            <div className="flex overflow-hidden rounded-(--radius) border border-border">
               <button
-                className={recipientType === 'personal' ? 'active' : ''}
+                className={`flex-1 cursor-pointer border-r border-border px-4 py-[0.625rem] text-sm font-medium transition-all ${
+                  recipientType === 'personal' ? 'bg-primary text-white' : 'bg-surface text-ink-secondary'
+                }`}
                 onClick={() => setRecipientType('personal')}
               >
                 {t('messageTester.personal')}
               </button>
-              <button className={recipientType === 'group' ? 'active' : ''} onClick={() => setRecipientType('group')}>
+              <button
+                className={`flex-1 cursor-pointer px-4 py-[0.625rem] text-sm font-medium transition-all ${
+                  recipientType === 'group' ? 'bg-primary text-white' : 'bg-surface text-ink-secondary'
+                }`}
+                onClick={() => setRecipientType('group')}
+              >
                 {t('messageTester.group')}
               </button>
             </div>
           </div>
 
-          <div className="form-group">
-            <label>{recipientType === 'group' ? t('messageTester.selectGroup') : t('messageTester.recipientPhone')}</label>
+          <div className="mb-5">
+            <label className="mb-2 block text-[0.7rem] font-bold uppercase tracking-[0.05em] text-ink-secondary">
+              {recipientType === 'group' ? t('messageTester.selectGroup') : t('messageTester.recipientPhone')}
+            </label>
             {recipientType === 'group' ? (
               <>
                 <select
+                  className="w-full rounded-(--radius) border border-border bg-surface px-4 py-3 text-[0.9375rem] text-ink transition-all focus:border-primary focus:outline-none disabled:cursor-not-allowed disabled:opacity-50"
                   value={selectedGroup}
                   onChange={e => setSelectedGroup(e.target.value)}
                   disabled={loadingGroups || groups.length === 0}
@@ -149,33 +160,36 @@ export function MessageTester() {
                   {loadingGroups && <option value="">{t('messageTester.loadingGroups')}</option>}
                   {!loadingGroups && groups.length === 0 && <option value="">{t('messageTester.noGroupsFound')}</option>}
                   {groups.map(g => (
-                    <option key={g.id} value={g.id}>
-                      {g.name}
-                    </option>
+                    <option key={g.id} value={g.id}>{g.name}</option>
                   ))}
                 </select>
-                <span className="hint">{t('messageTester.selectGroupHint')}</span>
+                <span className="mt-1 block text-xs text-ink-muted">{t('messageTester.selectGroupHint')}</span>
               </>
             ) : (
               <>
                 <input
                   type="text"
+                  className="w-full rounded-(--radius) border border-border bg-surface px-4 py-3 text-[0.9375rem] text-ink transition-all focus:border-primary focus:outline-none"
                   value={recipient}
                   onChange={e => setRecipient(e.target.value)}
                   placeholder="+62812345678"
                 />
-                <span className="hint">{t('messageTester.phoneHint')}</span>
+                <span className="mt-1 block text-xs text-ink-muted">{t('messageTester.phoneHint')}</span>
               </>
             )}
           </div>
 
-          <div className="form-group">
-            <label>{t('messageTester.messageType')}</label>
-            <div className="toggle-group">
-              {messageTypes.map(type => (
+          <div className="mb-5">
+            <label className="mb-2 block text-[0.7rem] font-bold uppercase tracking-[0.05em] text-ink-secondary">{t('messageTester.messageType')}</label>
+            <div className="flex overflow-hidden rounded-(--radius) border border-border">
+              {messageTypes.map((type, i) => (
                 <button
                   key={type}
-                  className={messageType === type ? 'active' : ''}
+                  className={`flex-1 cursor-pointer px-4 py-[0.625rem] text-sm font-medium transition-all ${
+                    i < messageTypes.length - 1 ? 'border-r border-border' : ''
+                  } ${
+                    messageType === type ? 'bg-primary text-white' : 'bg-surface text-ink-secondary'
+                  }`}
                   onClick={() => setMessageType(type)}
                 >
                   {t(`messageTester.types.${type}`)}
@@ -185,9 +199,10 @@ export function MessageTester() {
           </div>
 
           {messageType === 'text' ? (
-            <div className="form-group">
-              <label>{t('messageTester.messageContent')}</label>
+            <div className="mb-5">
+              <label className="mb-2 block text-[0.7rem] font-bold uppercase tracking-[0.05em] text-ink-secondary">{t('messageTester.messageContent')}</label>
               <textarea
+                className="min-h-[100px] w-full resize-y rounded-(--radius) border border-border bg-surface px-4 py-3 text-[0.9375rem] text-ink transition-all focus:border-primary focus:outline-none"
                 value={content}
                 onChange={e => setContent(e.target.value)}
                 placeholder={t('messageTester.messagePlaceholder')}
@@ -196,22 +211,24 @@ export function MessageTester() {
             </div>
           ) : (
             <>
-              <div className="form-group">
-                <label>{t('messageTester.mediaUrl')}</label>
+              <div className="mb-5">
+                <label className="mb-2 block text-[0.7rem] font-bold uppercase tracking-[0.05em] text-ink-secondary">{t('messageTester.mediaUrl')}</label>
                 <input
                   type="text"
+                  className="w-full rounded-(--radius) border border-border bg-surface px-4 py-3 text-[0.9375rem] text-ink transition-all focus:border-primary focus:outline-none"
                   value={mediaUrl}
                   onChange={e => setMediaUrl(e.target.value)}
                   placeholder="https://example.com/file.jpg"
                 />
               </div>
               {messageType !== 'audio' && (
-                <div className="form-group">
-                  <label>
+                <div className="mb-5">
+                  <label className="mb-2 block text-[0.7rem] font-bold uppercase tracking-[0.05em] text-ink-secondary">
                     {messageType === 'document' ? t('messageTester.filename') : t('messageTester.caption')} ({t('common.optional')})
                   </label>
                   <input
                     type="text"
+                    className="w-full rounded-(--radius) border border-border bg-surface px-4 py-3 text-[0.9375rem] text-ink transition-all focus:border-primary focus:outline-none"
                     value={content}
                     onChange={e => setContent(e.target.value)}
                     placeholder={messageType === 'document' ? t('messageTester.filenamePlaceholder') : t('messageTester.captionPlaceholder')}
@@ -222,7 +239,7 @@ export function MessageTester() {
           )}
 
           <button
-            className="send-btn"
+            className="flex w-full cursor-pointer items-center justify-center gap-2 rounded-(--radius) bg-primary px-6 py-[0.875rem] text-base font-semibold text-white transition-all hover:bg-primary-hover disabled:cursor-not-allowed disabled:opacity-70"
             onClick={handleSend}
             disabled={!canWrite || isLoading || !session || (recipientType === 'group' ? !selectedGroup : !recipient)}
           >
@@ -231,53 +248,47 @@ export function MessageTester() {
           </button>
         </div>
 
-        <div className="response-panel">
-          <h2>{t('messageTester.responseTitle')}</h2>
+        {/* Response Panel */}
+        <div className="rounded-xl border border-border bg-surface p-6 shadow-xs">
+          <h2 className="mb-6 text-lg font-bold text-ink">{t('messageTester.responseTitle')}</h2>
 
           {response ? (
             <>
-              <div className={`response-status ${response.success ? 'success' : 'error'}`}>
-                {response.success ? (
-                  <>
-                    <CheckCircle size={20} />
-                    <span>{t('messageTester.successLabel')}</span>
-                  </>
-                ) : (
-                  <>
-                    <XCircle size={20} />
-                    <span>{t('messageTester.failedLabel')}</span>
-                  </>
-                )}
+              <div className={`mb-4 flex items-center gap-2 rounded-(--radius) px-4 py-3 text-[0.9375rem] font-semibold ${
+                response.success ? 'bg-primary/10 text-primary' : 'bg-red-100 text-red-600'
+              }`}>
+                {response.success ? <CheckCircle size={20} /> : <XCircle size={20} />}
+                <span>{response.success ? t('messageTester.successLabel') : t('messageTester.failedLabel')}</span>
               </div>
 
-              <div className="response-details">
-                <div className="detail-row">
-                  <span className="detail-label">{t('messageTester.response.timestamp')}</span>
-                  <span className="detail-value">{response.timestamp}</span>
+              <div className="mb-4">
+                <div className="flex justify-between border-b border-border py-[0.625rem]">
+                  <span className="text-sm text-ink-secondary">{t('messageTester.response.timestamp')}</span>
+                  <span className="text-sm font-medium text-ink">{response.timestamp}</span>
                 </div>
                 {response.messageId && (
-                  <div className="detail-row">
-                    <span className="detail-label">{t('messageTester.response.messageId')}</span>
-                    <span className="detail-value mono">{response.messageId}</span>
+                  <div className="flex justify-between border-b border-border py-[0.625rem]">
+                    <span className="text-sm text-ink-secondary">{t('messageTester.response.messageId')}</span>
+                    <span className="font-mono text-sm font-medium text-ink">{response.messageId}</span>
                   </div>
                 )}
                 {response.error && (
-                  <div className="detail-row">
-                    <span className="detail-label">{t('messageTester.response.error')}</span>
-                    <span className="detail-value" style={{ color: '#DC2626' }}>
-                      {response.error}
-                    </span>
+                  <div className="flex justify-between border-b border-border py-[0.625rem]">
+                    <span className="text-sm text-ink-secondary">{t('messageTester.response.error')}</span>
+                    <span className="text-sm font-medium text-red-600">{response.error}</span>
                   </div>
                 )}
               </div>
 
-              <div className="response-json">
-                <pre>{JSON.stringify(response, null, 2)}</pre>
+              <div className="overflow-x-auto rounded-(--radius) bg-slate-800 p-4">
+                <pre className="m-0 font-['JetBrains_Mono',monospace] text-xs text-slate-200 whitespace-pre-wrap">
+                  {JSON.stringify(response, null, 2)}
+                </pre>
               </div>
             </>
           ) : (
-            <div className="response-empty">
-              <p>{t('messageTester.responseEmpty')}</p>
+            <div className="flex min-h-[200px] items-center justify-center rounded-(--radius) bg-muted">
+              <p className="m-0 text-ink-muted">{t('messageTester.responseEmpty')}</p>
             </div>
           )}
         </div>

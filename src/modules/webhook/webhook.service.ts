@@ -46,7 +46,7 @@ export class WebhookService {
     @InjectQueue(QUEUE_NAMES.WEBHOOK)
     private readonly webhookQueue?: Queue<WebhookJobData>,
   ) {
-    this.queueEnabled = configService.get<boolean>('queue.enabled', false);
+    this.queueEnabled = configService.get<boolean>('redis.enabled', false);
   }
 
   async create(sessionId: string, dto: CreateWebhookDto): Promise<Webhook> {

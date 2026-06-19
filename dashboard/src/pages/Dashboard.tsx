@@ -4,7 +4,6 @@ import { MessageSquare, Send, Webhook, Activity, ArrowUpRight, ArrowDownRight, L
 import { useDocumentTitle } from '../hooks/useDocumentTitle';
 import { useSessionsQuery, useSessionStatsQuery, useWebhooksQuery, useStopSessionMutation } from '../hooks/queries';
 import { PageHeader } from '../components/PageHeader';
-import './Dashboard.css';
 
 export function Dashboard() {
   const { t } = useTranslation();
@@ -56,10 +55,7 @@ export function Dashboard() {
 
   if (loading) {
     return (
-      <div
-        className="dashboard"
-        style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', minHeight: '400px' }}
-      >
+      <div className="flex min-h-[400px] w-full items-center justify-center p-8">
         <Loader2 className="animate-spin" size={32} />
       </div>
     );
@@ -67,37 +63,45 @@ export function Dashboard() {
 
   if (error) {
     return (
-      <div className="dashboard" style={{ padding: '2rem' }}>
-        <div style={{ background: '#FEE2E2', padding: '1rem', borderRadius: '8px', color: '#DC2626' }}>
+      <div className="p-8">
+        <div className="rounded-lg bg-red-100 p-4 text-red-600">
           {t('dashboard.errorPrefix', { message: error })}
         </div>
       </div>
     );
   }
 
+  const statusColor = (status: string) => {
+    if (status === 'ready') return 'bg-primary/10 text-primary';
+    if (status === 'connecting' || status === 'initializing' || status === 'qr_ready') return 'bg-amber-100 text-amber-600';
+    return 'bg-gray-100 text-ink-muted';
+  };
+
   return (
-    <div className="dashboard">
+    <div className="w-full p-8 box-border max-sm:p-4">
       <PageHeader
         title={t('dashboard.title')}
         subtitle={t('dashboard.subtitle')}
         badge={
-          <span className={`status-badge ${stats && stats.ready > 0 ? 'connected' : 'disconnected'}`}>
+          <span className={`rounded-full px-3 py-1.5 text-xs font-bold uppercase tracking-wide ${
+            stats && stats.ready > 0 ? 'bg-primary/10 text-primary' : 'bg-gray-100 text-ink-muted'
+          }`}>
             {stats && stats.ready > 0 ? t('common.connected') : t('common.disconnected')}
           </span>
         }
       />
 
-      <div className="stats-grid">
+      <div className="mb-8 grid w-full grid-cols-4 gap-6 max-lg:grid-cols-2 max-sm:grid-cols-1 max-sm:gap-4">
         {statsCards.map(({ label, value, icon: Icon, trend, trendUp }) => (
-          <div key={label} className="stat-card">
-            <Icon className="stat-watermark" />
-            <div className="stat-header">
-              <span className="stat-label">{label}</span>
-              <Icon size={20} className="stat-icon" />
+          <div key={label} className="relative min-w-0 overflow-hidden rounded-xl border border-border bg-surface p-6 shadow-sm transition-all duration-200 ease-in-out hover:-translate-y-0.5 hover:shadow-md">
+            <Icon className="pointer-events-none absolute -bottom-[15px] -right-[10px] z-1 h-24 w-24 rotate-[-15deg] text-ink opacity-[0.04]" />
+            <div className="relative z-2 mb-3 flex items-center justify-between">
+              <span className="relative z-2 text-xs font-semibold uppercase tracking-wider text-ink-secondary">{label}</span>
+              <Icon size={20} className="relative z-2 text-ink-muted" />
             </div>
-            <div className="stat-value">{typeof value === 'number' ? value.toLocaleString() : value}</div>
+            <div className="relative z-2 text-3xl font-bold text-ink">{typeof value === 'number' ? value.toLocaleString() : value}</div>
             {trend !== '0' && (
-              <div className={`stat-trend ${trendUp ? 'up' : 'down'}`}>
+              <div className={`relative z-2 mt-2 flex items-center gap-1 text-xs font-medium ${trendUp ? 'text-primary' : 'text-error'}`}>
                 {trendUp ? <ArrowUpRight size={14} /> : <ArrowDownRight size={14} />}
                 {trend}
               </div>
@@ -106,44 +110,42 @@ export function Dashboard() {
         ))}
       </div>
 
-      <section className="sessions-section">
-        <div className="section-header">
-          <h2>{t('dashboard.sessionsOverview')}</h2>
-          <span className="section-subtitle">
+      <section className="w-full rounded-xl border border-border bg-surface p-6 shadow-sm box-border">
+        <div className="mb-6 flex items-center justify-between">
+          <h2 className="m-0 text-xs font-semibold uppercase tracking-wider text-ink-secondary">{t('dashboard.sessionsOverview')}</h2>
+          <span className="text-sm text-ink-muted">
             {t('dashboard.showingSessions', { shown: sessions.length, total: stats?.total ?? 0 })}
           </span>
         </div>
 
-        <div className="sessions-table">
-          <div className="table-header">
+        <div className="flex w-full flex-col text-sm">
+          <div className="grid grid-cols-[140px_200px_140px_1fr_180px] gap-4 border-b border-border bg-muted px-6 py-4 text-[0.7rem] font-bold uppercase tracking-wider text-ink-secondary rounded-t-[var(--radius)] max-md:hidden">
             <span>{t('dashboard.columns.sessionId')}</span>
             <span>{t('dashboard.columns.phone')}</span>
             <span>{t('dashboard.columns.status')}</span>
             <span>{t('dashboard.columns.lastActive')}</span>
-            <span>{t('dashboard.columns.actions')}</span>
+            <span className="text-right">{t('dashboard.columns.actions')}</span>
           </div>
           {sessions.length === 0 ? (
-            <div className="table-row" style={{ justifyContent: 'center', color: 'var(--text-muted)' }}>
+            <div className="flex justify-center border-b border-border px-6 py-4 text-ink-muted">
               {t('dashboard.noSessions')}
             </div>
           ) : (
             sessions.map(session => (
-              <div key={session.id} className="table-row">
-                <div className="session-info-cell">
-                  <span className="session-id">{session.id.substring(0, 12)}</span>
-                  <span className="session-name" title={session.name}>
-                    {session.name}
-                  </span>
+              <div key={session.id} className="grid grid-cols-[140px_200px_140px_1fr_180px] items-center gap-4 border-b border-border px-6 py-4 last:border-b-0 max-md:flex max-md:flex-col max-md:gap-2 max-md:border-b max-md:px-4 max-md:py-3">
+                <div className="flex min-w-0 flex-col gap-0.5">
+                  <span className="whitespace-nowrap font-mono text-xs text-ink">{session.id.substring(0, 12)}</span>
+                  <span className="max-w-[140px] truncate text-xs text-ink-muted" title={session.name}>{session.name}</span>
                 </div>
-                <span className="phone">{session.phone || '—'}</span>
-                <span className={`status-pill ${session.status}`}>{formatStatus(session.status)}</span>
-                <span className="last-active">{formatLastActive(session.lastActive)}</span>
-                <div className="actions">
-                  <button className="btn-sm" onClick={() => navigate('/sessions')}>
+                <span className="whitespace-nowrap text-xs text-ink">{session.phone || '—'}</span>
+                <span className={`w-fit rounded-full px-3 py-1 text-xs font-medium ${statusColor(session.status)}`}>{formatStatus(session.status)}</span>
+                <span className="text-sm text-ink-secondary">{formatLastActive(session.lastActive)}</span>
+                <div className="flex justify-end gap-2">
+                  <button className="cursor-pointer rounded-md border border-border bg-muted px-3 py-1.5 text-xs font-medium text-ink-secondary transition-all duration-200 hover:border-ink-muted hover:bg-surface" onClick={() => navigate('/sessions')}>
                     {t('dashboard.view')}
                   </button>
                   {['ready', 'initializing', 'connecting', 'qr_ready'].includes(session.status) && (
-                    <button className="btn-sm danger" onClick={() => handleDisconnect(session.id)}>
+                    <button className="cursor-pointer rounded-md border border-red-200 bg-red-50 px-3 py-1.5 text-xs font-medium text-red-600 transition-all duration-200 hover:bg-red-100" onClick={() => handleDisconnect(session.id)}>
                       {t('dashboard.disconnect')}
                     </button>
                   )}

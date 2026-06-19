@@ -1,6 +1,5 @@
 import { createContext, useContext, useState, useCallback, type ReactNode } from 'react';
 import { CheckCircle, XCircle, AlertCircle, Info, X } from 'lucide-react';
-import './Toast.css';
 
 type ToastType = 'success' | 'error' | 'warning' | 'info';
 
@@ -49,7 +48,6 @@ export function ToastProvider({ children }: ToastProviderProps) {
       const newToast = { ...toast, id };
       setToasts(prev => [...prev, newToast]);
 
-      // Auto-remove after duration
       const duration = toast.duration ?? 4000;
       if (duration > 0) {
         setTimeout(() => removeToast(id), duration);
@@ -108,17 +106,29 @@ interface ToastContainerProps {
 
 function ToastContainer({ toasts, removeToast }: ToastContainerProps) {
   return (
-    <div className="toast-container">
+    <div className="fixed bottom-6 right-6 z-[9999] flex max-w-[400px] flex-col gap-3 rtl:left-4 rtl:right-auto">
       {toasts.map(toast => {
         const Icon = icons[toast.type];
+        const colorStyles = {
+          success: 'border-l-success text-success',
+          error: 'border-l-error text-error',
+          warning: 'border-l-warning text-warning',
+          info: 'border-l-blue-500 text-blue-500',
+        };
         return (
-          <div key={toast.id} className={`toast toast-${toast.type}`}>
-            <Icon className="toast-icon" size={20} />
-            <div className="toast-content">
-              <div className="toast-title">{toast.title}</div>
-              {toast.message && <div className="toast-message">{toast.message}</div>}
+          <div
+            key={toast.id}
+            className={`flex items-start gap-3 rounded-xl border-l-4 bg-white p-4 shadow-[0_10px_40px_rgba(0,0,0,0.12),0_4px_12px_rgba(0,0,0,0.08)] animate-[slideIn_0.3s_ease-out] ${colorStyles[toast.type]}`}
+          >
+            <Icon size={20} className="mt-0.5 shrink-0" />
+            <div className="min-w-0 flex-1">
+              <div className="text-[0.9375rem] font-semibold leading-1.4 text-slate-800">{toast.title}</div>
+              {toast.message && <div className="mt-1 text-[0.8125rem] leading-1.5 text-slate-500">{toast.message}</div>}
             </div>
-            <button className="toast-close" onClick={() => removeToast(toast.id)}>
+            <button
+              className="flex h-6 w-6 shrink-0 cursor-pointer items-center justify-center rounded-md border-none bg-transparent text-slate-400 transition-all duration-150 ease-in-out hover:bg-slate-100 hover:text-slate-600"
+              onClick={() => removeToast(toast.id)}
+            >
               <X size={16} />
             </button>
           </div>

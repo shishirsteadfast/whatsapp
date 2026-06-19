@@ -44,8 +44,15 @@
     "collapse": "Collapse",
     "logout": "Logout",
     "refresh": "Refresh",
+    "notifications": "Notifications",
+    "noNotifications": "No new notifications",
+    "profile": "Profile",
+    "changePassword": "Change Password",
+    "settings": "Settings",
     "errorGeneric": "An error occurred",
-    "unknownError": "Unknown error"
+    "unknownError": "Unknown error",
+    "lightMode": "Light mode",
+    "darkMode": "Dark mode"
   },
   "theme": {
     "light": "Light",
