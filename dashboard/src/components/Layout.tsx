@@ -9,6 +9,7 @@ import {
   Send,
   Server,
   Puzzle,
+  Users,
   Menu,
   X,
   ChevronLeft,
@@ -26,6 +27,7 @@ interface LayoutProps {
 const allNavItems = [
   { to: '/',               icon: LayoutDashboard, key: 'dashboard'      as const, adminOnly: false },
   { to: '/sessions',       icon: Smartphone,      key: 'sessions'       as const, adminOnly: false },
+  { to: '/contacts',       icon: Users,           key: 'contacts'       as const, adminOnly: false },
   { to: '/webhooks',       icon: Webhook,         key: 'webhooks'       as const, adminOnly: false },
   { to: '/message-tester', icon: Send,            key: 'messageTester'  as const, adminOnly: false },
   { to: '/infrastructure', icon: Server,          key: 'infrastructure' as const, adminOnly: false },

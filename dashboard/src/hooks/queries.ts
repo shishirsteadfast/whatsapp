@@ -5,7 +5,10 @@ import {
   auditApi,
   infraApi,
   pluginsApi,
+  contactApi,
+  locationApi,
   type Webhook,
+  type ContactPayload,
 } from '../services/api';
 
 // ── Query Keys ────────────────────────────────────────────────────────
@@ -21,6 +24,10 @@ export const queryKeys = {
   plugins: ['plugins'] as const,
   engines: ['engines'] as const,
   currentEngine: ['engines', 'current'] as const,
+  contacts: ['contacts'] as const,
+  countries: ['locations', 'countries'] as const,
+  states: (countryId: number) => ['locations', 'states', countryId] as const,
+  cities: (stateId: number) => ['locations', 'cities', stateId] as const,
 };
 
 // ── Session Queries ───────────────────────────────────────────────────
@@ -183,5 +190,74 @@ export function useCurrentEngineQuery() {
     queryKey: queryKeys.currentEngine,
     queryFn: pluginsApi.getCurrentEngine,
     staleTime: 60_000,
+  });
+}
+
+// ── Contact Queries ───────────────────────────────────────────────────
+
+export function useContactsQuery() {
+  return useQuery({
+    queryKey: queryKeys.contacts,
+    queryFn: contactApi.list,
+    staleTime: 30_000,
+  });
+}
+
+export function useCreateContactMutation() {
+  return useMutation({
+    mutationFn: (data: ContactPayload) => contactApi.create(data),
+  });
+}
+
+export function useUpdateContactMutation() {
+  return useMutation({
+    mutationFn: ({ id, data }: { id: string; data: Partial<ContactPayload> }) =>
+      contactApi.update(id, data),
+  });
+}
+
+export function useDeleteContactMutation() {
+  return useMutation({
+    mutationFn: (id: string) => contactApi.delete(id),
+  });
+}
+
+export function useBulkDeleteContactsMutation() {
+  return useMutation({
+    mutationFn: (ids: string[]) => contactApi.bulkDelete(ids),
+  });
+}
+
+// ── Location Queries ───────────────────────────────────────────────
+
+export function useCountriesQuery() {
+  return useQuery({
+    queryKey: queryKeys.countries,
+    queryFn: locationApi.listCountries,
+    staleTime: Infinity, // countries never change
+  });
+}
+
+export function useStatesQuery(countryId: number | null, enabled = true) {
+  return useQuery({
+    queryKey: queryKeys.states(countryId ?? 0),
+    queryFn: () => locationApi.listStates(countryId!),
+    enabled: enabled && !!countryId,
+    staleTime: Infinity,
+  });
+}
+
+export function useCitiesQuery(stateId: number | null, enabled = true) {
+  return useQuery({
+    queryKey: queryKeys.cities(stateId ?? 0),
+    queryFn: () => locationApi.listCities(stateId!),
+    enabled: enabled && !!stateId,
+    staleTime: Infinity,
+  });
+}
+
+export function useBulkCreateContactsMutation() {
+  return useMutation({
+    mutationFn: (contacts: ContactPayload[]) => contactApi.bulkCreate(contacts),
   });
 }

@@ -1,5 +1,5 @@
-import { createContext, useContext, useState, useCallback, type ReactNode } from 'react';
-import { CheckCircle, XCircle, AlertCircle, Info, X } from 'lucide-react';
+import { createContext, useContext, useState, useCallback, useRef, type ReactNode } from 'react';
+import { Check, X, AlertTriangle, Info } from 'lucide-react';
 
 type ToastType = 'success' | 'error' | 'warning' | 'info';
 
@@ -92,48 +92,130 @@ export function ToastProvider({ children }: ToastProviderProps) {
   );
 }
 
-const icons = {
-  success: CheckCircle,
-  error: XCircle,
-  warning: AlertCircle,
+/* ─── Icons & Color Map ────────────────────────────────────────────────────── */
+
+const iconMap: Record<ToastType, typeof Check> = {
+  success: Check,
+  error: X,
+  warning: AlertTriangle,
   info: Info,
 };
 
-interface ToastContainerProps {
-  toasts: Toast[];
-  removeToast: (id: string) => void;
+const colorMap: Record<ToastType, { bg: string; icon: string; border: string; progress: string; title: string; message: string; closeHover: string }> = {
+  success: {
+    bg: 'bg-emerald-50 dark:bg-emerald-950/40',
+    icon: 'text-emerald-600 bg-emerald-100 dark:text-emerald-400 dark:bg-emerald-500/20',
+    border: 'border-emerald-200 dark:border-emerald-800/50',
+    progress: 'bg-emerald-500',
+    title: 'text-emerald-900 dark:text-emerald-100',
+    message: 'text-emerald-700 dark:text-emerald-300/80',
+    closeHover: 'hover:bg-emerald-100 dark:hover:bg-emerald-800/30 text-emerald-400 dark:text-emerald-500 hover:text-emerald-700 dark:hover:text-emerald-200',
+  },
+  error: {
+    bg: 'bg-red-50 dark:bg-red-950/40',
+    icon: 'text-red-600 bg-red-100 dark:text-red-400 dark:bg-red-500/20',
+    border: 'border-red-200 dark:border-red-800/50',
+    progress: 'bg-red-500',
+    title: 'text-red-900 dark:text-red-100',
+    message: 'text-red-700 dark:text-red-300/80',
+    closeHover: 'hover:bg-red-100 dark:hover:bg-red-800/30 text-red-400 dark:text-red-500 hover:text-red-700 dark:hover:text-red-200',
+  },
+  warning: {
+    bg: 'bg-amber-50 dark:bg-amber-950/40',
+    icon: 'text-amber-600 bg-amber-100 dark:text-amber-400 dark:bg-amber-500/20',
+    border: 'border-amber-200 dark:border-amber-800/50',
+    progress: 'bg-amber-500',
+    title: 'text-amber-900 dark:text-amber-100',
+    message: 'text-amber-700 dark:text-amber-300/80',
+    closeHover: 'hover:bg-amber-100 dark:hover:bg-amber-800/30 text-amber-400 dark:text-amber-500 hover:text-amber-700 dark:hover:text-amber-200',
+  },
+  info: {
+    bg: 'bg-blue-50 dark:bg-blue-950/40',
+    icon: 'text-blue-600 bg-blue-100 dark:text-blue-400 dark:bg-blue-500/20',
+    border: 'border-blue-200 dark:border-blue-800/50',
+    progress: 'bg-blue-500',
+    title: 'text-blue-900 dark:text-blue-100',
+    message: 'text-blue-700 dark:text-blue-300/80',
+    closeHover: 'hover:bg-blue-100 dark:hover:bg-blue-800/30 text-blue-400 dark:text-blue-500 hover:text-blue-700 dark:hover:text-blue-200',
+  },
+};
+
+/* ─── Single Toast Item ────────────────────────────────────────────────────── */
+
+function ToastItem({
+  toast,
+  onRemove,
+}: {
+  toast: Toast;
+  onRemove: (id: string) => void;
+}) {
+  const Icon = iconMap[toast.type];
+  const colors = colorMap[toast.type];
+  const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const duration = toast.duration ?? 4000;
+
+  const handleMouseEnter = () => {
+    if (timerRef.current) clearTimeout(timerRef.current);
+  };
+
+  const handleMouseLeave = () => {
+    timerRef.current = setTimeout(() => onRemove(toast.id), 2000);
+  };
+
+  return (
+    <div
+      className={`group relative overflow-hidden rounded-2xl border ${colors.border} ${colors.bg} shadow-lg shadow-black/5 backdrop-blur-sm transition-all duration-300 hover:shadow-xl hover:shadow-black/8 animate-[slideIn_0.35s_cubic-bezier(0.21,1.02,0.73,1)_forwards]`}
+      onMouseEnter={handleMouseEnter}
+      onMouseLeave={handleMouseLeave}
+    >
+      <div className="flex items-center gap-3 px-4 py-3">
+        {/* Icon with background */}
+        <div className={`flex h-9 w-9 shrink-0 items-center justify-center rounded-xl ${colors.icon}`}>
+          <Icon size={17} strokeWidth={2.5} />
+        </div>
+
+        {/* Content */}
+        <div className="min-w-0 flex-1">
+          <p className={`m-0 text-[0.875rem] font-semibold leading-tight ${colors.title}`}>
+            {toast.title}
+          </p>
+          {toast.message && (
+            <p className={`m-0 mt-0.5 text-[0.8125rem] leading-snug ${colors.message}`}>
+              {toast.message}
+            </p>
+          )}
+        </div>
+
+        {/* Close button */}
+        <button
+          onClick={() => onRemove(toast.id)}
+          className={`flex h-7 w-7 shrink-0 cursor-pointer items-center justify-center rounded-lg border-none bg-transparent opacity-0 transition-all duration-200 group-hover:opacity-100 ${colors.closeHover}`}
+        >
+          <X size={14} />
+        </button>
+      </div>
+
+      {/* Progress bar */}
+      <div className="h-[3px] w-full bg-black/5 dark:bg-white/10">
+        <div
+          className={`h-full ${colors.progress} rounded-full`}
+          style={{
+            animation: `shrink ${duration}ms linear forwards`,
+          }}
+        />
+      </div>
+    </div>
+  );
 }
 
-function ToastContainer({ toasts, removeToast }: ToastContainerProps) {
+/* ─── Toast Container ──────────────────────────────────────────────────────── */
+
+function ToastContainer({ toasts, removeToast }: { toasts: Toast[]; removeToast: (id: string) => void }) {
   return (
-    <div className="fixed bottom-6 right-6 z-[9999] flex max-w-[400px] flex-col gap-3 rtl:left-4 rtl:right-auto">
-      {toasts.map(toast => {
-        const Icon = icons[toast.type];
-        const colorStyles = {
-          success: 'border-l-success text-success',
-          error: 'border-l-error text-error',
-          warning: 'border-l-warning text-warning',
-          info: 'border-l-blue-500 text-blue-500',
-        };
-        return (
-          <div
-            key={toast.id}
-            className={`flex items-start gap-3 rounded-xl border-l-4 bg-surface p-4 shadow-[0_10px_40px_rgba(0,0,0,0.12),0_4px_12px_rgba(0,0,0,0.08)] animate-[slideIn_0.3s_ease-out] ${colorStyles[toast.type]}`}
-          >
-            <Icon size={20} className="mt-0.5 shrink-0" />
-            <div className="min-w-0 flex-1">
-              <div className="text-[0.9375rem] font-semibold leading-1.4 text-ink">{toast.title}</div>
-              {toast.message && <div className="mt-1 text-[0.8125rem] leading-1.5 text-ink-muted">{toast.message}</div>}
-            </div>
-            <button
-              className="flex h-6 w-6 shrink-0 cursor-pointer items-center justify-center rounded-md border-none bg-transparent text-ink-muted transition-all duration-150 ease-in-out hover:bg-muted hover:text-ink-secondary"
-              onClick={() => removeToast(toast.id)}
-            >
-              <X size={16} />
-            </button>
-          </div>
-        );
-      })}
+    <div className="fixed bottom-5 right-5 z-[9999] flex w-[380px] max-w-[calc(100vw-2.5rem)] flex-col gap-2.5 rtl:left-5 rtl:right-auto">
+      {toasts.map(toast => (
+        <ToastItem key={toast.id} toast={toast} onRemove={removeToast} />
+      ))}
     </div>
   );
 }

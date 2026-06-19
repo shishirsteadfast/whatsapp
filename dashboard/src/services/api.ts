@@ -263,6 +263,114 @@ export interface Engine {
   features: string[];
 }
 
+// =============================================================================
+// Location Types & API
+// =============================================================================
+
+export interface CountryLocation {
+  id: number;
+  name: string;
+  code: string;
+  dialCode: string;
+  flag: string;
+  iso3: string;
+  capital: string;
+  currency: string;
+  region: string;
+  subregion: string;
+}
+
+export interface StateLocation {
+  id: number;
+  name: string;
+  stateCode: string;
+  countryId: number;
+}
+
+export interface CityLocation {
+  id: number;
+  name: string;
+  stateId: number;
+}
+
+export const locationApi = {
+  listCountries: () => request<CountryLocation[]>('/locations/countries'),
+  listStates: (countryId: number) => request<StateLocation[]>(`/locations/countries/${countryId}/states`),
+  listCities: (stateId: number) => request<CityLocation[]>(`/locations/states/${stateId}/cities`),
+};
+
+// =============================================================================
+// Contact Types & API
+// =============================================================================
+
+export interface Contact {
+  id: string;
+  fullName?: string;
+  phone: string;
+  countryCode: string;
+  countryId?: number;
+  stateId?: number;
+  cityId?: number;
+  country?: CountryLocation;
+  state?: StateLocation;
+  city?: CityLocation;
+  address?: string;
+  note?: string;
+  createdAt: string;
+  updatedAt: string;
+}
+
+export interface ContactPayload {
+  fullName?: string;
+  phone: string;
+  countryCode: string;
+  countryId?: number;
+  stateId?: number;
+  cityId?: number;
+  address?: string;
+  note?: string;
+}
+
+export interface ContactMessage {
+  id: string;
+  sessionId: string;
+  waMessageId?: string;
+  chatId: string;
+  from: string;
+  to: string;
+  body?: string;
+  type: string;
+  direction: 'incoming' | 'outgoing';
+  timestamp?: number;
+  status: 'pending' | 'sent' | 'delivered' | 'read' | 'failed';
+  createdAt: string;
+}
+
+export const contactApi = {
+  list: () => request<Contact[]>('/contacts'),
+  create: (data: ContactPayload) =>
+    request<Contact>('/contacts', { method: 'POST', body: JSON.stringify(data) }),
+  update: (id: string, data: Partial<ContactPayload>) =>
+    request<Contact>(`/contacts/${id}`, { method: 'PUT', body: JSON.stringify(data) }),
+  delete: (id: string) =>
+    request<void>(`/contacts/${id}`, { method: 'DELETE' }),
+  bulkDelete: (ids: string[]) =>
+    request<{ deleted: number }>('/contacts/bulk-delete', { method: 'POST', body: JSON.stringify({ ids }) }),
+  bulkCreate: (contacts: ContactPayload[]) =>
+    request<{ created: number; skipped: number }>('/contacts/bulk', { method: 'POST', body: JSON.stringify({ contacts }) }),
+  getMessages: (id: string, limit?: number, offset?: number) => {
+    const params = new URLSearchParams();
+    if (limit) params.set('limit', String(limit));
+    if (offset) params.set('offset', String(offset));
+    const qs = params.toString();
+    return request<{ messages: ContactMessage[]; total: number }>(
+      `/contacts/${id}/messages${qs ? `?${qs}` : ''}`,
+    );
+  },
+  exportAll: () =>
+    request<Array<Contact & { totalSentMessages: number }>>('/contacts/export'),
+};
+
 export const pluginsApi = {
   list: () => request<Plugin[]>('/plugins'),
   get: (id: string) => request<Plugin>(`/plugins/${id}`),
