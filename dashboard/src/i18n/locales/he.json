@@ -328,6 +328,7 @@
       "action": "פעולה",
       "session": "Session",
       "apiKey": "מפתח API",
+      "user": "משתמש",
       "ip": "כתובת IP",
       "severity": "חומרה"
     },

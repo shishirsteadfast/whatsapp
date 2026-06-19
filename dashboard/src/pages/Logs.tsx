@@ -100,7 +100,7 @@ export function Logs() {
                 <span>{t('logs.columns.action')}</span>
                 <span>{t('logs.columns.session')}</span>
                 <span>{t('logs.columns.ip')}</span>
-                <span>{t('logs.columns.apiKey')}</span>
+                <span>{t('logs.columns.user')}</span>
                 <span>{t('logs.columns.severity')}</span>
               </div>
 

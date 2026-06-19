@@ -328,9 +328,11 @@
       "action": "Action",
       "session": "Session",
       "apiKey": "API Key",
+      "user": "User",
       "ip": "IP Address",
       "severity": "Severity"
     },
+    "pagination": "Page {{page}} of {{total}} ({{count}} total)",
     "empty": {
       "title": "No logs found",
       "description": "Audit logs will appear here as actions are performed"
