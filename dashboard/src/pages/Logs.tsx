@@ -113,7 +113,7 @@ export function Logs() {
                 <span className="font-mono text-[0.8125rem] text-ink-muted whitespace-nowrap max-sm:order-2 max-sm:text-xs">{formatTimestamp(log.createdAt)}</span>
                 <span className="text-[0.8125rem] font-semibold text-ink whitespace-nowrap max-sm:order-1 max-sm:mb-1 max-sm:text-[0.9375rem]">{log.action}</span>
                 <span className="text-sm text-ink-secondary max-sm:hidden">{log.sessionName || log.sessionId || '—'}</span>
-                <span className="font-mono text-[0.8125rem] whitespace-nowrap max-sm:hidden">{log.apiKeyName || '—'}</span>
+                <span className="font-mono text-[0.8125rem] whitespace-nowrap max-sm:hidden">{log.userName || '—'}</span>
                 <span className="font-mono text-[0.8125rem] whitespace-nowrap max-sm:hidden">{log.ipAddress || '—'}</span>
                 <span className="max-sm:order-3 max-sm:self-start">
                   <span className={`inline-block whitespace-nowrap rounded-md px-[0.625rem] py-1 text-[0.6875rem] font-bold uppercase tracking-[0.025em] ${severityStyles[log.severity] || 'bg-gray-100 text-gray-600'}`}>
