@@ -1,5 +1,4 @@
 import { Controller, Get, Put, Post, Body } from '@nestjs/common';
-import { ApiTags, ApiOperation, ApiResponse, ApiBody } from '@nestjs/swagger';
 import { ConfigService } from '@nestjs/config';
 import { DataSource } from 'typeorm';
 import { InjectDataSource } from '@nestjs/typeorm';
@@ -132,7 +131,6 @@ interface MigrationTables {
   messageBatches: MessageBatchRow[];
 }
 
-@ApiTags('infrastructure')
 @Controller('infra')
 export class InfraController {
   private readonly logger = createLogger('InfraController');
@@ -149,8 +147,6 @@ export class InfraController {
   ) {}
 
   @Get('status')
-  @ApiOperation({ summary: 'Get infrastructure status' })
-  @ApiResponse({ status: 200, description: 'Infrastructure status' })
   async getStatus(): Promise<InfraStatus> {
     const dbConnected = this.dataSource.isInitialized;
     const redisHost = this.configService.get<string>('redis.host', 'localhost');
@@ -175,23 +171,16 @@ export class InfraController {
   }
 
   @Get('engines')
-  @ApiOperation({ summary: 'Get available WhatsApp engines' })
-  @ApiResponse({ status: 200, description: 'List of available engines' })
   getEngines(): Array<{ id: string; name: string; enabled: boolean; features: string[] }> {
     return this.engineFactory.getAvailableEngines();
   }
 
   @Get('engines/current')
-  @ApiOperation({ summary: 'Get current active engine' })
-  @ApiResponse({ status: 200, description: 'Current engine info' })
   getCurrentEngine(): { engineType: string } {
     return { engineType: this.engineFactory.getCurrentEngine() };
   }
 
   @Put('config')
-  @ApiOperation({ summary: 'Save infrastructure configuration to .env file' })
-  @ApiResponse({ status: 200, description: 'Configuration saved' })
-  @ApiBody({ description: 'Configuration to save' })
   saveConfig(@Body() config: SaveConfigDto): { message: string; saved: boolean; envPath: string; profiles: string[] } {
     try {
       // Build .env content from config
@@ -263,8 +252,6 @@ export class InfraController {
     }
   }
   @Post('restart')
-  @ApiOperation({ summary: 'Request server restart with Docker orchestration' })
-  @ApiResponse({ status: 200, description: 'Server will restart with new profiles' })
   async requestRestart(@Body() body?: { profiles?: string[]; profilesToRemove?: string[] }): Promise<{
     message: string;
     restarting: boolean;
@@ -354,8 +341,6 @@ export class InfraController {
 
   @Get('health')
   @Public()
-  @ApiOperation({ summary: 'Health check endpoint' })
-  @ApiResponse({ status: 200, description: 'Server is healthy' })
   healthCheck(): { status: string; timestamp: string } {
     return {
       status: 'ok',
@@ -364,8 +349,6 @@ export class InfraController {
   }
 
   @Get('export-data')
-  @ApiOperation({ summary: 'Export all data from Data DB for migration' })
-  @ApiResponse({ status: 200, description: 'Exported data as JSON' })
   async exportData(): Promise<{
     exportedAt: string;
     dataDbType: string;
@@ -411,25 +394,6 @@ export class InfraController {
   }
 
   @Post('import-data')
-  @ApiOperation({ summary: 'Import data to Data DB (replaces existing data)' })
-  @ApiBody({
-    description: 'Exported data from export-data endpoint',
-    schema: {
-      type: 'object',
-      properties: {
-        tables: {
-          type: 'object',
-          properties: {
-            sessions: { type: 'array' },
-            webhooks: { type: 'array' },
-            messages: { type: 'array' },
-            messageBatches: { type: 'array' },
-          },
-        },
-      },
-    },
-  })
-  @ApiResponse({ status: 200, description: 'Data imported successfully' })
   async importData(
     @Body()
     data: {
@@ -596,8 +560,6 @@ export class InfraController {
   // ============================================================================
 
   @Get('storage/files/count')
-  @ApiOperation({ summary: 'Get file count in current storage' })
-  @ApiResponse({ status: 200, description: 'File count and size' })
   async getStorageFileCount(): Promise<{
     storageType: string;
     count: number;
@@ -614,8 +576,6 @@ export class InfraController {
   }
 
   @Get('storage/export')
-  @ApiOperation({ summary: 'Export all storage files as tar.gz' })
-  @ApiResponse({ status: 200, description: 'Tar.gz archive stream' })
   async exportStorage(): Promise<{ message: string; download: string }> {
     // Note: In production, this would return a StreamableFile
     // For simplicity, we'll save to a temp file and return the path
@@ -637,9 +597,6 @@ export class InfraController {
   }
 
   @Post('storage/import')
-  @ApiOperation({ summary: 'Import storage files from tar.gz' })
-  @ApiBody({ description: 'Path to tar.gz file to import' })
-  @ApiResponse({ status: 200, description: 'Import result' })
   async importStorage(
     @Body() body: { filePath: string },
   ): Promise<{ imported: boolean; count: number; storageType: string }> {

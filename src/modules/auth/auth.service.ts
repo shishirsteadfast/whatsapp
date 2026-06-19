@@ -33,7 +33,7 @@ export class AuthService implements OnModuleInit {
     this.logger.log('  Welcome to OpenWA - WhatsApp API Gateway');
     this.logger.log('');
     this.logger.log(`  Dashboard : ${dashboardUrl}`);
-    this.logger.log(`  API Docs  : ${apiBaseUrl}/api/docs`);
+    this.logger.log(`  Base API Path  : ${apiBaseUrl}/api`);
     this.logger.log('');
     this.logger.log('  Default login credentials:');
     this.logger.log('    Phone    : 01712345678');

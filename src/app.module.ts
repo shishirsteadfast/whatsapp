@@ -27,7 +27,7 @@ import { HooksModule } from './core/hooks';
 import { PluginsModule } from './core/plugins';
 import { PluginsApiModule } from './modules/plugins/plugins.module';
 import { QueueModule } from './modules/queue/queue.module';
-import { AddressBookModule } from './modules/address-book/address-book.module';
+import { ContactsModule } from './modules/contacts/contacts.module';
 import { LocationsModule } from './modules/locations/locations.module';
 
 @Module({
@@ -45,7 +45,9 @@ import { LocationsModule } from './modules/locations/locations.module';
         type: 'sqlite' as const,
         database: configService.get<string>('database.database', './data/openwa.sqlite'),
         entities: [__dirname + '/modules/**/*.entity{.ts,.js}'],
-        synchronize: configService.get<boolean>('database.synchronize', true),
+        // WARNING: synchronize can drop data — keep false in production.
+        // Use migrations instead: npm run migration:run
+        synchronize: configService.get<boolean>('database.synchronize', false),
         logging: configService.get<boolean>('database.logging', false),
       }),
     }),
@@ -91,7 +93,7 @@ import { LocationsModule } from './modules/locations/locations.module';
     SettingsModule,
     InfraModule,
     ContactModule,
-    AddressBookModule,
+    ContactsModule,
     LocationsModule,
     GroupModule,
     LabelModule,

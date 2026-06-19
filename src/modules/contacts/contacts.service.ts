@@ -5,30 +5,30 @@ import {
 } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { In, Repository } from 'typeorm';
-import { AddressBookContact } from './address-book.entity';
+import { Contact } from './contacts.entity';
 import { Message } from '../message/entities/message.entity';
 import {
-  CreateAddressBookContactDto,
-  UpdateAddressBookContactDto,
-} from './dto/address-book.dto';
+  CreateContactDto,
+  UpdateContactDto,
+} from './dto/contacts.dto';
 
 @Injectable()
-export class AddressBookService {
+export class ContactsService {
   constructor(
-    @InjectRepository(AddressBookContact)
-    private readonly repo: Repository<AddressBookContact>,
+    @InjectRepository(Contact)
+    private readonly repo: Repository<Contact>,
     @InjectRepository(Message)
     private readonly messageRepo: Repository<Message>,
   ) {}
 
-  findAll(): Promise<AddressBookContact[]> {
+  findAll(): Promise<Contact[]> {
     return this.repo.find({
       order: { createdAt: 'DESC' },
       relations: ['country', 'state', 'city'],
     });
   }
 
-  async findOne(id: string): Promise<AddressBookContact> {
+  async findOne(id: string): Promise<Contact> {
     const contact = await this.repo.findOne({
       where: { id },
       relations: ['country', 'state', 'city'],
@@ -37,7 +37,7 @@ export class AddressBookService {
     return contact;
   }
 
-  async create(dto: CreateAddressBookContactDto): Promise<AddressBookContact> {
+  async create(dto: CreateContactDto): Promise<Contact> {
     const existing = await this.repo.findOne({ where: { phone: dto.phone } });
     if (existing) {
       throw new ConflictException(`Phone number ${dto.phone} already exists`);
@@ -56,7 +56,7 @@ export class AddressBookService {
     return this.findOne(saved.id);
   }
 
-  async update(id: string, dto: UpdateAddressBookContactDto): Promise<AddressBookContact> {
+  async update(id: string, dto: UpdateContactDto): Promise<Contact> {
     const contact = await this.findOne(id);
 
     if (dto.phone && dto.phone !== contact.phone) {
@@ -93,7 +93,7 @@ export class AddressBookService {
   }
 
   async bulkCreate(
-    dtos: CreateAddressBookContactDto[],
+    dtos: CreateContactDto[],
   ): Promise<{ created: number; skipped: number }> {
     let created = 0;
     let skipped = 0;
@@ -137,7 +137,7 @@ export class AddressBookService {
     return { messages, total };
   }
 
-  async findAllWithMessageCounts(): Promise<Array<AddressBookContact & { totalSentMessages: number }>> {
+  async findAllWithMessageCounts(): Promise<Array<Contact & { totalSentMessages: number }>> {
     const contacts = await this.repo.find({
       order: { createdAt: 'DESC' },
       relations: ['country', 'state', 'city'],
