@@ -28,7 +28,9 @@ import { PluginsModule } from './core/plugins';
 import { PluginsApiModule } from './modules/plugins/plugins.module';
 import { QueueModule } from './modules/queue/queue.module';
 import { ContactsModule } from './modules/contacts/contacts.module';
+import { GroupsModule } from './modules/groups/groups.module';
 import { LocationsModule } from './modules/locations/locations.module';
+import { UploadModule } from './modules/upload/upload.module';
 
 @Module({
   imports: [
@@ -94,7 +96,9 @@ import { LocationsModule } from './modules/locations/locations.module';
     InfraModule,
     ContactModule,
     ContactsModule,
+    GroupsModule,
     LocationsModule,
+    UploadModule,
     GroupModule,
     LabelModule,
     ChannelModule,

@@ -1,12 +1,20 @@
-import { Injectable, UnauthorizedException, OnModuleInit } from '@nestjs/common';
+import {
+  Injectable,
+  UnauthorizedException,
+  BadRequestException,
+  ConflictException,
+  OnModuleInit,
+} from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { JwtService } from '@nestjs/jwt';
 import * as bcrypt from 'bcrypt';
+
 import { User, UserRole } from './entities/user.entity';
 import { LoginDto } from './dto/login.dto';
 import { createLogger } from '../../common/services/logger.service';
 import { ConfigService } from '@nestjs/config';
+import { UploadService } from '../upload/upload.service';
 
 const BCRYPT_ROUNDS = 12;
 
@@ -19,6 +27,7 @@ export class AuthService implements OnModuleInit {
     private readonly userRepository: Repository<User>,
     private readonly jwtService: JwtService,
     private readonly configService: ConfigService,
+    private readonly uploadService: UploadService,
   ) {}
 
   async onModuleInit(): Promise<void> {
@@ -101,5 +110,65 @@ export class AuthService implements OnModuleInit {
       [UserRole.ADMIN]: 3,
     };
     return hierarchy[userRole] >= hierarchy[requiredRole];
+  }
+
+  async updateProfile(
+    userId: string,
+    dto: { name?: string; phone?: string; profilePic?: string },
+  ): Promise<Omit<User, 'password'>> {
+    const user = await this.userRepository.findOne({ where: { id: userId } });
+    if (!user) throw new BadRequestException('User not found');
+
+    if (dto.phone && dto.phone !== user.phone) {
+      const existing = await this.userRepository.findOne({
+        where: { phone: dto.phone },
+      });
+      if (existing) {
+        throw new ConflictException('Phone number already in use');
+      }
+    }
+
+    // Delete old profile pic if a new one is being set
+    if (dto.profilePic !== undefined && dto.profilePic !== user.profilePic && user.profilePic) {
+      this.deleteUploadedFile(user.profilePic);
+    }
+
+    if (dto.name !== undefined) user.name = dto.name;
+    if (dto.phone !== undefined) user.phone = dto.phone;
+    if (dto.profilePic !== undefined) user.profilePic = dto.profilePic ?? null;
+
+    const saved = await this.userRepository.save(user);
+    const { password: _pw, ...safeUser } = saved;
+    return safeUser;
+  }
+
+  private deleteUploadedFile(url: string): void {
+    try {
+      // Extract folder and filename from URL like /api/upload/profile/abc123.jpg
+      const match = url.match(/\/api\/upload\/([^/]+)\/([^/]+)$/);
+      if (match) {
+        const [, folder, filename] = match;
+        this.uploadService.deleteFile(folder, filename);
+      }
+    } catch {
+      // Ignore errors when deleting old files
+    }
+  }
+
+  async changePassword(
+    userId: string,
+    dto: { currentPassword: string; newPassword: string },
+  ): Promise<{ success: boolean }> {
+    const user = await this.userRepository.findOne({ where: { id: userId } });
+    if (!user) throw new BadRequestException('User not found');
+
+    const passwordMatch = await bcrypt.compare(dto.currentPassword, user.password);
+    if (!passwordMatch) {
+      throw new UnauthorizedException('Current password is incorrect');
+    }
+
+    user.password = await bcrypt.hash(dto.newPassword, BCRYPT_ROUNDS);
+    await this.userRepository.save(user);
+    return { success: true };
   }
 }
