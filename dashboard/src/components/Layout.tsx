@@ -10,6 +10,8 @@ import {
   Server,
   Puzzle,
   Users,
+  UserPlus,
+  Settings,
   Menu,
   X,
   ChevronLeft,
@@ -28,11 +30,14 @@ const allNavItems = [
   { to: '/',               icon: LayoutDashboard, key: 'dashboard'      as const, adminOnly: false },
   { to: '/sessions',       icon: Smartphone,      key: 'sessions'       as const, adminOnly: false },
   { to: '/contacts',       icon: Users,           key: 'contacts'       as const, adminOnly: false },
+  { to: '/groups',         icon: UserPlus,        key: 'groups'         as const, adminOnly: false },
+  { to: '/messages',       icon: Send,            key: 'messages'       as const, adminOnly: false },
   { to: '/webhooks',       icon: Webhook,         key: 'webhooks'       as const, adminOnly: false },
   { to: '/message-tester', icon: Send,            key: 'messageTester'  as const, adminOnly: false },
   { to: '/infrastructure', icon: Server,          key: 'infrastructure' as const, adminOnly: false },
   { to: '/plugins',        icon: Puzzle,          key: 'plugins'        as const, adminOnly: true  },
   { to: '/logs',           icon: FileText,        key: 'logs'           as const, adminOnly: false },
+  { to: '/settings',       icon: Settings,        key: 'settings'       as const, adminOnly: false },
 ];
 
 export function Layout({ onLogout, userRole }: LayoutProps) {

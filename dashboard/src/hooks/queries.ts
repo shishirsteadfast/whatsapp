@@ -6,9 +6,15 @@ import {
   infraApi,
   pluginsApi,
   contactApi,
+  groupApi,
+  messageApi,
   locationApi,
+  authApi,
+  systemSettingsApi,
   type Webhook,
   type ContactPayload,
+  type ContactGroupPayload,
+  type FilterParams,
 } from '../services/api';
 
 // ── Query Keys ────────────────────────────────────────────────────────
@@ -25,6 +31,8 @@ export const queryKeys = {
   engines: ['engines'] as const,
   currentEngine: ['engines', 'current'] as const,
   contacts: ['contacts'] as const,
+  contactGroups: ['groups'] as const,
+  contactGroup: (id: string) => ['groups', id] as const,
   countries: ['locations', 'countries'] as const,
   states: (countryId: number) => ['locations', 'states', countryId] as const,
   cities: (stateId: number) => ['locations', 'cities', stateId] as const,
@@ -259,5 +267,149 @@ export function useCitiesQuery(stateId: number | null, enabled = true) {
 export function useBulkCreateContactsMutation() {
   return useMutation({
     mutationFn: (contacts: ContactPayload[]) => contactApi.bulkCreate(contacts),
+  });
+}
+
+// ── Contact Group Queries ──────────────────────────────────────────
+
+export function useContactGroupsQuery() {
+  return useQuery({
+    queryKey: queryKeys.contactGroups,
+    queryFn: groupApi.list,
+    staleTime: 30_000,
+  });
+}
+
+export function useContactGroupQuery(id: string, enabled = true) {
+  return useQuery({
+    queryKey: queryKeys.contactGroup(id),
+    queryFn: () => groupApi.get(id),
+    enabled: enabled && !!id,
+    staleTime: 30_000,
+  });
+}
+
+export function useCreateContactGroupMutation() {
+  return useMutation({
+    mutationFn: (data: ContactGroupPayload) => groupApi.create(data),
+  });
+}
+
+export function useUpdateContactGroupMutation() {
+  return useMutation({
+    mutationFn: ({ id, data }: { id: string; data: Partial<ContactGroupPayload> }) =>
+      groupApi.update(id, data),
+  });
+}
+
+export function useDeleteContactGroupMutation() {
+  return useMutation({
+    mutationFn: (id: string) => groupApi.delete(id),
+  });
+}
+
+export function useAddGroupMembersMutation() {
+  return useMutation({
+    mutationFn: ({ id, contactIds }: { id: string; contactIds: string[] }) =>
+      groupApi.addMembers(id, contactIds),
+  });
+}
+
+export function useRemoveGroupMembersMutation() {
+  return useMutation({
+    mutationFn: ({ id, contactIds }: { id: string; contactIds: string[] }) =>
+      groupApi.removeMembers(id, contactIds),
+  });
+}
+
+export function useFilterContactsQuery(filters: FilterParams, enabled = true) {
+  return useQuery({
+    queryKey: ['contacts', 'filter', filters],
+    queryFn: () => groupApi.filterContacts(filters),
+    enabled,
+    staleTime: 10_000,
+  });
+}
+
+export function useBulkCreateWithGroupMutation() {
+  return useMutation({
+    mutationFn: (data: {
+      name: string;
+      description?: string;
+      contacts: ContactPayload[];
+    }) => groupApi.bulkCreateWithGroup(data),
+  });
+}
+
+// ── Message Queries ────────────────────────────────────────────────
+
+export function useMessagesQuery(params?: {
+  limit?: number;
+  offset?: number;
+  direction?: string;
+  sessionId?: string;
+  status?: string;
+}) {
+  return useQuery({
+    queryKey: ['messages', params],
+    queryFn: () => messageApi.list(params),
+    staleTime: 10_000,
+  });
+}
+
+// ── Auth / Profile Queries ────────────────────────────────────────
+
+export function useProfileQuery() {
+  return useQuery({
+    queryKey: ['profile'],
+    queryFn: authApi.me,
+    staleTime: 60_000,
+  });
+}
+
+export function useUpdateProfileMutation() {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: (data: { name?: string; phone?: string; profilePic?: string }) =>
+      authApi.updateProfile(data),
+    onSuccess: () => {
+      void queryClient.invalidateQueries({ queryKey: ['profile'] });
+    },
+  });
+}
+
+export function useChangePasswordMutation() {
+  return useMutation({
+    mutationFn: (data: { currentPassword: string; newPassword: string }) =>
+      authApi.changePassword(data),
+  });
+}
+
+// ── System Settings Queries ───────────────────────────────────────
+
+export function useSystemSettingsQuery() {
+  return useQuery({
+    queryKey: ['system-settings'],
+    queryFn: systemSettingsApi.get,
+    staleTime: 60_000,
+  });
+}
+
+export function useUpdateSystemSettingsMutation() {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: (data: Partial<{
+      businessLogo: string;
+      smallLogo: string;
+      email: string;
+      altPhone: string;
+      website: string;
+      name: string;
+      address: string;
+      googleMapLink: string;
+    }>) => systemSettingsApi.update(data),
+    onSuccess: () => {
+      void queryClient.invalidateQueries({ queryKey: ['system-settings'] });
+    },
   });
 }

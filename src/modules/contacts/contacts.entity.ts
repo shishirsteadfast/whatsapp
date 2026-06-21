@@ -13,7 +13,7 @@ import { State } from '../locations/entities/state.entity';
 import { City } from '../locations/entities/city.entity';
 
 @Entity('contacts')
-export class AddressBookContact {
+export class Contact {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 

@@ -9,7 +9,7 @@ import { createLogger } from '../../common/services/logger.service';
 // We need to dynamically import countries-states-cities at runtime
 // because it's a CommonJS package
 // eslint-disable-next-line @typescript-eslint/no-require-imports
-const csc = require('countries-states-cities');
+const csc = require('countries-states-cities').default;
 
 @Injectable()
 export class LocationsService implements OnModuleInit {

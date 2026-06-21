@@ -1,5 +1,4 @@
 import { Controller, Get, Put, Body } from '@nestjs/common';
-import { ApiTags, ApiOperation, ApiResponse } from '@nestjs/swagger';
 import { ConfigService } from '@nestjs/config';
 import { RequireRole } from '../auth/decorators/auth.decorators';
 import { UserRole } from '../auth/entities/user.entity';
@@ -23,7 +22,6 @@ interface Settings {
   };
 }
 
-@ApiTags('settings')
 @Controller('settings')
 export class SettingsController {
   private settings: Settings;
@@ -53,16 +51,12 @@ export class SettingsController {
   }
 
   @Get()
-  @ApiOperation({ summary: 'Get application settings' })
-  @ApiResponse({ status: 200, description: 'Current settings' })
   get(): Settings {
     return this.settings;
   }
 
   @Put()
   @RequireRole(UserRole.ADMIN)
-  @ApiOperation({ summary: 'Update application settings' })
-  @ApiResponse({ status: 200, description: 'Settings updated' })
   update(@Body() newSettings: Partial<Settings>): Settings {
     if (newSettings.general) {
       this.settings.general = {

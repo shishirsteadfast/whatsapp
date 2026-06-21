@@ -1,6 +1,7 @@
 import { NestFactory } from '@nestjs/core';
 import { ValidationPipe } from '@nestjs/common';
 import helmet from 'helmet';
+import { DataSource } from 'typeorm';
 import { AppModule } from './app.module';
 import { ShutdownService } from './common/services/shutdown.service';
 import * as dotenv from 'dotenv';
@@ -99,16 +100,17 @@ async function bootstrap() {
     }),
   );
 
-  // CORS Configuration (Phase 3 Security Audit)
-  const allowedOrigins = process.env.CORS_ORIGINS?.split(',').map(o => o.trim()) || ['*'];
+  // CORS Configuration
+  const allowedOrigins = process.env.CORS_ORIGINS?.split(',').map(o => o.trim());
   app.enableCors({
-    origin: (origin: string | undefined, callback: (err: Error | null, allow?: boolean) => void) => {
+    origin: (origin: string | undefined, callback: (err: Error | null, allow?: string | boolean) => void) => {
       // Allow requests with no origin (mobile apps, Postman, server-to-server)
       if (!origin) return callback(null, true);
 
-      // Check if wildcard or origin matches
-      if (allowedOrigins.includes('*') || allowedOrigins.includes(origin)) {
-        callback(null, true);
+      // Wildcard allowed — echo back the request origin so credentials work
+      // (browsers reject Access-Control-Allow-Origin: * when credentials: true)
+      if (!allowedOrigins || allowedOrigins.includes('*') || allowedOrigins.includes(origin)) {
+        callback(null, origin);
       } else {
         callback(new Error('Not allowed by CORS'));
       }
@@ -138,6 +140,24 @@ async function bootstrap() {
 
   const port = process.env.PORT || 2785;
   await app.listen(port);
+
+  // ── SQLite PRAGMAs ─────────────────────────────────────────────────────
+  // Run on every start to ensure safe concurrent access and data integrity.
+  // These are connection-level settings that do NOT persist across restarts.
+  if ((process.env.DATABASE_TYPE || 'sqlite') === 'sqlite') {
+    const dataSource = app.get(DataSource);
+    try {
+      await dataSource.query('PRAGMA journal_mode = WAL');
+      await dataSource.query('PRAGMA synchronous = NORMAL');
+      await dataSource.query('PRAGMA busy_timeout = 5000');
+      await dataSource.query('PRAGMA foreign_keys = ON');
+      await dataSource.query('PRAGMA cache_size = -8000');          // 8 MB page cache
+      await dataSource.query('PRAGMA temp_store = MEMORY');
+      console.log('[Bootstrap] SQLite PRAGMAs applied (WAL, synchronous=NORMAL, busy_timeout=5000, foreign_keys=ON)');
+    } catch (pragmaError) {
+      console.warn('[Bootstrap] Could not apply SQLite PRAGMAs:', String(pragmaError));
+    }
+  }
 
   console.log(`🚀 JeishanulWa is running on: http://localhost:${port}`);
 }
