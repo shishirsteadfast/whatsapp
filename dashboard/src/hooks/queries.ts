@@ -11,10 +11,13 @@ import {
   locationApi,
   authApi,
   systemSettingsApi,
+  campaignApi,
   type Webhook,
   type ContactPayload,
   type ContactGroupPayload,
   type FilterParams,
+  type CampaignPayload,
+  type CampaignUpdatePayload,
 } from '../services/api';
 
 // ── Query Keys ────────────────────────────────────────────────────────
@@ -338,6 +341,135 @@ export function useBulkCreateWithGroupMutation() {
       description?: string;
       contacts: ContactPayload[];
     }) => groupApi.bulkCreateWithGroup(data),
+  });
+}
+
+// ── Campaign Queries ─────────────────────────────────────────────
+
+export const campaignQueryKeys = {
+  all: ['campaigns'] as const,
+  list: (params?: Record<string, unknown>) => ['campaigns', 'list', params] as const,
+  detail: (id: string) => ['campaigns', id] as const,
+  recipients: (id: string, params?: Record<string, unknown>) => ['campaigns', id, 'recipients', params] as const,
+  stats: ['campaigns', 'stats'] as const,
+};
+
+export function useCampaignsQuery(params?: { status?: string; search?: string; page?: number; limit?: number }) {
+  return useQuery({
+    queryKey: campaignQueryKeys.list(params as Record<string, unknown>),
+    queryFn: () => campaignApi.list(params),
+    staleTime: 10_000,
+  });
+}
+
+export function useCampaignQuery(id: string, enabled = true) {
+  return useQuery({
+    queryKey: campaignQueryKeys.detail(id),
+    queryFn: () => campaignApi.get(id),
+    enabled: enabled && !!id,
+    staleTime: 10_000,
+  });
+}
+
+export function useCampaignStatsQuery() {
+  return useQuery({
+    queryKey: campaignQueryKeys.stats,
+    queryFn: campaignApi.getStats,
+    staleTime: 30_000,
+  });
+}
+
+export function useCampaignRecipientsQuery(
+  id: string,
+  params?: { status?: string; search?: string; page?: number; limit?: number },
+  enabled = true,
+) {
+  return useQuery({
+    queryKey: campaignQueryKeys.recipients(id, params as Record<string, unknown>),
+    queryFn: () => campaignApi.getRecipients(id, params),
+    enabled: enabled && !!id,
+    staleTime: 5_000,
+  });
+}
+
+export function useCreateCampaignMutation() {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: (data: CampaignPayload) => campaignApi.create(data),
+    onSuccess: () => {
+      void queryClient.invalidateQueries({ queryKey: campaignQueryKeys.all });
+      void queryClient.invalidateQueries({ queryKey: campaignQueryKeys.stats });
+    },
+  });
+}
+
+export function useUpdateCampaignMutation() {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: ({ id, data }: { id: string; data: CampaignUpdatePayload }) =>
+      campaignApi.update(id, data),
+    onSuccess: (_data, variables) => {
+      void queryClient.invalidateQueries({ queryKey: campaignQueryKeys.detail(variables.id) });
+      void queryClient.invalidateQueries({ queryKey: campaignQueryKeys.all });
+    },
+  });
+}
+
+export function useDeleteCampaignMutation() {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: (id: string) => campaignApi.delete(id),
+    onSuccess: () => {
+      void queryClient.invalidateQueries({ queryKey: campaignQueryKeys.all });
+      void queryClient.invalidateQueries({ queryKey: campaignQueryKeys.stats });
+    },
+  });
+}
+
+export function useStartCampaignMutation() {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: (id: string) => campaignApi.start(id),
+    onSuccess: (_data, id) => {
+      void queryClient.invalidateQueries({ queryKey: campaignQueryKeys.detail(id) });
+      void queryClient.invalidateQueries({ queryKey: campaignQueryKeys.all });
+      void queryClient.invalidateQueries({ queryKey: campaignQueryKeys.stats });
+    },
+  });
+}
+
+export function usePauseCampaignMutation() {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: (id: string) => campaignApi.pause(id),
+    onSuccess: (_data, id) => {
+      void queryClient.invalidateQueries({ queryKey: campaignQueryKeys.detail(id) });
+      void queryClient.invalidateQueries({ queryKey: campaignQueryKeys.all });
+    },
+  });
+}
+
+export function useCancelCampaignMutation() {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: (id: string) => campaignApi.cancel(id),
+    onSuccess: (_data, id) => {
+      void queryClient.invalidateQueries({ queryKey: campaignQueryKeys.detail(id) });
+      void queryClient.invalidateQueries({ queryKey: campaignQueryKeys.all });
+      void queryClient.invalidateQueries({ queryKey: campaignQueryKeys.stats });
+    },
+  });
+}
+
+export function useResendFailedCampaignMutation() {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: (id: string) => campaignApi.resendFailed(id),
+    onSuccess: (_data, id) => {
+      void queryClient.invalidateQueries({ queryKey: campaignQueryKeys.detail(id) });
+      void queryClient.invalidateQueries({ queryKey: campaignQueryKeys.recipients(id) });
+      void queryClient.invalidateQueries({ queryKey: campaignQueryKeys.all });
+    },
   });
 }
 

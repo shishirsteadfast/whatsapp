@@ -21,6 +21,13 @@ export class ContactsService {
     private readonly messageRepo: Repository<Message>,
   ) {}
 
+  async findByIds(ids: string[]): Promise<Contact[]> {
+    return this.repo.find({
+      where: { id: In(ids) },
+      relations: ['country', 'state', 'city'],
+    });
+  }
+
   findAll(): Promise<Contact[]> {
     return this.repo.find({
       order: { createdAt: 'DESC' },

@@ -341,6 +341,122 @@ export const locationApi = {
 };
 
 // =============================================================================
+// Campaign Types & API
+// =============================================================================
+
+export interface Campaign {
+  id: string;
+  name: string;
+  description?: string;
+  sessionId: string;
+  status: 'draft' | 'scheduled' | 'sending' | 'completed' | 'paused' | 'cancelled' | 'failed';
+  recipientType: 'contacts' | 'groups';
+  recipientIds: string[];
+  totalRecipients: number;
+  messageContent: {
+    type: string;
+    text?: string;
+    url?: string;
+    caption?: string;
+    filename?: string;
+    latitude?: number;
+    longitude?: number;
+    contactName?: string;
+    contactPhone?: string;
+  };
+  scheduleAt: string | null;
+  startedAt: string | null;
+  completedAt: string | null;
+  sentCount: number;
+  failedCount: number;
+  currentIndex: number;
+  createdAt: string;
+  updatedAt: string;
+}
+
+export interface CampaignRecipient {
+  id: string;
+  campaignId: string;
+  chatId: string;
+  recipientName: string;
+  contactId?: string;
+  groupId?: string;
+  status: 'pending' | 'sent' | 'failed' | 'cancelled';
+  messageId?: string;
+  errorMessage?: string;
+  sentAt?: string;
+  createdAt: string;
+}
+
+export interface CampaignStats {
+  total: number;
+  draft: number;
+  scheduled: number;
+  sending: number;
+  completed: number;
+  failed: number;
+  paused: number;
+  cancelled: number;
+  totalRecipients: number;
+  totalSent: number;
+  totalFailed: number;
+}
+
+export interface CampaignPayload {
+  name: string;
+  description?: string;
+  sessionId: string;
+  recipientType: 'contacts' | 'groups';
+  recipientIds: string[];
+  messageContent: Campaign['messageContent'];
+  scheduleAt?: string;
+}
+
+export interface CampaignUpdatePayload {
+  name?: string;
+  description?: string;
+  messageContent?: Campaign['messageContent'];
+  scheduleAt?: string;
+}
+
+export const campaignApi = {
+  list: (params?: { status?: string; search?: string; page?: number; limit?: number }) => {
+    const query = new URLSearchParams();
+    if (params?.status) query.set('status', params.status);
+    if (params?.search) query.set('search', params.search);
+    if (params?.page) query.set('page', String(params.page));
+    if (params?.limit) query.set('limit', String(params.limit));
+    const qs = query.toString();
+    return request<{ campaigns: Campaign[]; total: number }>(`/campaigns${qs ? `?${qs}` : ''}`);
+  },
+  get: (id: string) => request<Campaign>(`/campaigns/${id}`),
+  create: (data: CampaignPayload) =>
+    request<Campaign>('/campaigns', { method: 'POST', body: JSON.stringify(data) }),
+  update: (id: string, data: CampaignUpdatePayload) =>
+    request<Campaign>(`/campaigns/${id}`, { method: 'PUT', body: JSON.stringify(data) }),
+  delete: (id: string) =>
+    request<{ success: boolean }>(`/campaigns/${id}`, { method: 'DELETE' }),
+  start: (id: string) =>
+    request<Campaign>(`/campaigns/${id}/start`, { method: 'POST' }),
+  pause: (id: string) =>
+    request<Campaign>(`/campaigns/${id}/pause`, { method: 'POST' }),
+  cancel: (id: string) =>
+    request<Campaign>(`/campaigns/${id}/cancel`, { method: 'POST' }),
+  resendFailed: (id: string) =>
+    request<Campaign>(`/campaigns/${id}/resend-failed`, { method: 'POST' }),
+  getRecipients: (id: string, params?: { status?: string; search?: string; page?: number; limit?: number }) => {
+    const query = new URLSearchParams();
+    if (params?.status) query.set('status', params.status);
+    if (params?.search) query.set('search', params.search);
+    if (params?.page) query.set('page', String(params.page));
+    if (params?.limit) query.set('limit', String(params.limit));
+    const qs = query.toString();
+    return request<{ recipients: CampaignRecipient[]; total: number }>(`/campaigns/${id}/recipients${qs ? `?${qs}` : ''}`);
+  },
+  getStats: () => request<CampaignStats>('/campaigns/stats'),
+};
+
+// =============================================================================
 // Contact Types & API
 // =============================================================================
 

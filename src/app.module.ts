@@ -31,6 +31,7 @@ import { ContactsModule } from './modules/contacts/contacts.module';
 import { GroupsModule } from './modules/groups/groups.module';
 import { LocationsModule } from './modules/locations/locations.module';
 import { UploadModule } from './modules/upload/upload.module';
+import { CampaignModule } from './modules/campaign/campaign.module';
 
 @Module({
   imports: [
@@ -105,6 +106,7 @@ import { UploadModule } from './modules/upload/upload.module';
     StatsModule,
     StatusModule,
     CatalogModule,
+    CampaignModule.register(process.env.REDIS_ENABLED === 'true'),
     PluginsApiModule,
   ],
 })

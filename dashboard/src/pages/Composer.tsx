@@ -116,7 +116,8 @@ export function Composer() {
         })
         .catch(() => setLoadingWaContacts(false));
     }
-  }, [recipientTab, sessionId, waContacts.length, loadingWaContacts]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [recipientTab, sessionId]);
 
   // Pagination state for contacts list
   const [contactsLimit, setContactsLimit] = useState(10);
@@ -537,6 +538,8 @@ export function Composer() {
                       </button>
                     )}
                 </>
+              )}
+              </>
               )}
 
               {recipientTab === 'whatsapp' && (

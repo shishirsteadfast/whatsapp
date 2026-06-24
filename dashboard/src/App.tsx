@@ -18,6 +18,9 @@ const Plugins = lazy(() => import('./pages/Plugins'));
 const Contacts = lazy(() => import('./pages/Contacts').then(m => ({ default: m.Contacts })));
 const Groups = lazy(() => import('./pages/Groups').then(m => ({ default: m.Groups })));
 const Messages = lazy(() => import('./pages/Messages').then(m => ({ default: m.Messages })));
+const Campaigns = lazy(() => import('./pages/Campaigns').then(m => ({ default: m.Campaigns })));
+const CampaignNew = lazy(() => import('./pages/CampaignNew').then(m => ({ default: m.CampaignNew })));
+const CampaignDetail = lazy(() => import('./pages/CampaignDetail').then(m => ({ default: m.CampaignDetail })));
 const SettingsPage = lazy(() => import('./pages/Settings').then(m => ({ default: m.SettingsPage })));
 
 const TOKEN_KEY = 'openwa_token';
@@ -172,6 +175,10 @@ function AppContent() {
               <Route path="contacts" element={<Contacts />} />
               <Route path="groups" element={<Groups />} />
               <Route path="messages" element={<Messages />} />
+              <Route path="campaigns" element={<Campaigns />} />
+              <Route path="campaigns/new" element={<CampaignNew />} />
+              <Route path="campaigns/:id" element={<CampaignDetail />} />
+              <Route path="campaigns/:id/edit" element={<CampaignNew />} />
               <Route path="settings" element={<SettingsPage />} />
               {role === 'admin' && <Route path="plugins" element={<Plugins />} />}
               <Route path="*" element={<Navigate to="/" replace />} />
