@@ -341,8 +341,7 @@
     "empty": {
       "title": "No logs found",
       "description": "Audit logs will appear here as actions are performed"
-    },
-    "pagination": "Page {{page}} of {{total}} · {{count}} entries"
+    }
   },
   "composer": {
     "title": "Composer",
