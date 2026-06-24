@@ -16,6 +16,9 @@ const Composer = lazy(() => import('./pages/Composer').then(m => ({ default: m.C
 const Infrastructure = lazy(() => import('./pages/Infrastructure').then(m => ({ default: m.Infrastructure })));
 const Plugins = lazy(() => import('./pages/Plugins'));
 const Contacts = lazy(() => import('./pages/Contacts').then(m => ({ default: m.Contacts })));
+const Groups = lazy(() => import('./pages/Groups').then(m => ({ default: m.Groups })));
+const Messages = lazy(() => import('./pages/Messages').then(m => ({ default: m.Messages })));
+const SettingsPage = lazy(() => import('./pages/Settings').then(m => ({ default: m.SettingsPage })));
 
 const TOKEN_KEY = 'openwa_token';
 
@@ -167,6 +170,9 @@ function AppContent() {
               <Route path="composer" element={<Composer />} />
               <Route path="infrastructure" element={<Infrastructure />} />
               <Route path="contacts" element={<Contacts />} />
+              <Route path="groups" element={<Groups />} />
+              <Route path="messages" element={<Messages />} />
+              <Route path="settings" element={<SettingsPage />} />
               {role === 'admin' && <Route path="plugins" element={<Plugins />} />}
               <Route path="*" element={<Navigate to="/" replace />} />
             </Route>

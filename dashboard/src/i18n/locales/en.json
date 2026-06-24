@@ -68,6 +68,10 @@
     "apiKeys": "API Keys",
     "contacts": "Contacts",
     "composer": "Composer",
+    "groups": "Groups",
+    "messages": "Messages",
+    "settings": "Settings",
+    "messageTester": "Message Tester",
     "infrastructure": "Infrastructure",
     "plugins": "Plugins",
     "logs": "Logs"
@@ -693,6 +697,189 @@
       "importError": "Import failed",
       "exportSuccess": "{{count}} contacts exported",
       "exportError": "Export failed"
+    }
+  },
+  "groups": {
+    "title": "Contact Groups",
+    "subtitle": "Organize your contacts into groups for targeted messaging",
+    "newGroup": "New Group",
+    "searchPlaceholder": "Search groups...",
+    "empty": {
+      "title": "No groups yet",
+      "description": "Create a group to organize your contacts"
+    },
+    "columns": {
+      "name": "Name",
+      "description": "Description",
+      "members": "Members",
+      "created": "Created",
+      "actions": "Actions"
+    },
+    "form": {
+      "createTitle": "Create New Group",
+      "editTitle": "Edit Group",
+      "name": "Group Name",
+      "namePlaceholder": "e.g. VIP Customers",
+      "description": "Description",
+      "descriptionPlaceholder": "Optional description for this group",
+      "nameRequired": "Group name is required"
+    },
+    "create": {
+      "step1Title": "Group Details",
+      "step2Title": "Add Members",
+      "step3Title": "Review & Create",
+      "method": "How would you like to add contacts?",
+      "csvImport": "Import from CSV",
+      "csvImportDesc": "Upload a CSV file to create contacts and add them to this group",
+      "filterSelect": "Filter & Select",
+      "filterSelectDesc": "Search and filter existing contacts to add to this group",
+      "csv": {
+        "title": "Import Contacts from CSV",
+        "dropzone": "Drop your CSV file here, or click to browse",
+        "dropzoneHint": "Supported format: .csv. Phone numbers must include country code (e.g. +601234567890)",
+        "validRows": "{{count}} valid",
+        "invalidRows": "{{count}} invalid",
+        "importBtn": "Import {{count}} Contacts",
+        "importing": "Importing...",
+        "step2Title": "Preview & Validate",
+        "step2Desc": "Review your contacts before importing. Invalid rows will be highlighted.",
+        "step3Title": "Import Complete",
+        "successDesc": "{{created}} contacts created and added to group, {{skipped}} skipped",
+        "errorPhone": "Phone number is empty",
+        "errorNoCountryCode": "Phone must include country code (e.g. +601234567890)",
+        "errorDuplicate": "Duplicate phone in file",
+        "previewColumns": {
+          "row": "#",
+          "status": "Status",
+          "name": "Full Name",
+          "phone": "Phone",
+          "country": "Country",
+          "city": "City",
+          "note": "Note",
+          "error": "Issue"
+        }
+      },
+      "filter": {
+        "title": "Select Contacts",
+        "searchPlaceholder": "Search by name or phone...",
+        "country": "Country",
+        "allCountries": "All Countries",
+        "state": "State",
+        "allStates": "All States",
+        "city": "City",
+        "allCities": "All Cities",
+        "namePlaceholder": "Filter by name...",
+        "phonePlaceholder": "Filter by phone prefix...",
+        "selected": "{{count}} contacts selected",
+        "noResults": "No contacts match your filters",
+        "clearFilters": "Clear Filters"
+      },
+      "review": {
+        "title": "Review Group",
+        "nameLabel": "Group Name",
+        "descriptionLabel": "Description",
+        "membersLabel": "Members",
+        "noMembers": "No members added yet",
+        "addMore": "Add More Contacts"
+      }
+    },
+    "detail": {
+      "title": "Group Details",
+      "members": "Members",
+      "noMembers": "No members in this group",
+      "addMembers": "Add Members",
+      "removeSelected": "Remove Selected",
+      "searchPlaceholder": "Search members...",
+      "removeConfirm": "Remove {{count}} contacts from this group?",
+      "empty": {
+        "title": "No members",
+        "description": "Add contacts to this group"
+      }
+    },
+    "delete": {
+      "title": "Delete Group",
+      "message": "Are you sure you want to delete <strong>\"{{name}}\"</strong>? This cannot be undone.",
+      "successTitle": "Group Deleted",
+      "successDesc": "Group has been deleted"
+    },
+    "toasts": {
+      "createSuccess": "Group created",
+      "createError": "Failed to create group",
+      "updateSuccess": "Group updated",
+      "updateError": "Failed to update group",
+      "deleteSuccess": "Group deleted",
+      "deleteError": "Failed to delete group",
+      "addMembersSuccess": "{{count}} contacts added to group",
+      "addMembersError": "Failed to add members",
+      "removeMembersSuccess": "{{count}} contacts removed from group",
+      "removeMembersError": "Failed to remove members",
+      "importSuccess": "{{created}} contacts imported and added to group",
+      "importError": "Import failed"
+    }
+  },
+  "settings": {
+    "title": "Settings",
+    "subtitle": "Manage your profile, password, and system settings",
+    "tabs": {
+      "profile": "Profile",
+      "password": "Password",
+      "system": "System Settings"
+    },
+    "profile": {
+      "name": "Full Name",
+      "namePlaceholder": "e.g. John Doe",
+      "phone": "Phone Number",
+      "phonePlaceholder": "e.g. 01712345678",
+      "profilePic": "Profile Picture",
+      "profilePicHint": "Upload an image (JPEG, PNG, WebP, GIF). Max 5MB.",
+      "chooseFile": "Choose File",
+      "uploading": "Uploading...",
+      "remove": "Remove",
+      "toasts": {
+        "updateSuccess": "Profile updated",
+        "updateError": "Failed to update profile",
+        "uploadError": "Upload failed"
+      }
+    },
+    "password": {
+      "current": "Current Password",
+      "currentHint": "Enter your current password to verify identity",
+      "currentPlaceholder": "Enter current password",
+      "newPassword": "New Password",
+      "newPlaceholder": "Enter new password (min 6 characters)",
+      "confirm": "Confirm New Password",
+      "confirmPlaceholder": "Re-enter new password",
+      "save": "Change Password",
+      "errors": {
+        "currentRequired": "Current password is required",
+        "newRequired": "New password is required",
+        "tooShort": "Password must be at least 6 characters",
+        "mismatch": "Passwords do not match"
+      },
+      "toasts": {
+        "updateSuccess": "Password changed successfully",
+        "updateError": "Failed to change password"
+      }
+    },
+    "system": {
+      "name": "Business Name",
+      "namePlaceholder": "e.g. My Company",
+      "email": "Email",
+      "emailPlaceholder": "e.g. info@company.com",
+      "altPhone": "Alternative Phone",
+      "altPhonePlaceholder": "e.g. +60198765432",
+      "website": "Website",
+      "websitePlaceholder": "e.g. https://company.com",
+      "address": "Address",
+      "addressPlaceholder": "e.g. 123 Jalan Ampang, Kuala Lumpur",
+      "googleMapLink": "Google Map Link",
+      "googleMapLinkPlaceholder": "e.g. https://maps.google.com/...",
+      "businessLogo": "Business Logo",
+      "smallLogo": "Small Logo",
+      "toasts": {
+        "updateSuccess": "System settings updated",
+        "updateError": "Failed to update system settings"
+      }
     }
   }
 }

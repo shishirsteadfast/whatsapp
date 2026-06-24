@@ -57,6 +57,21 @@ export interface MessageResponse {
   timestamp: number;
 }
 
+export interface Message {
+  id: string;
+  sessionId: string;
+  waMessageId?: string;
+  chatId: string;
+  from: string;
+  to: string;
+  body?: string;
+  type: string;
+  direction: 'incoming' | 'outgoing';
+  timestamp?: number;
+  status: 'pending' | 'sent' | 'delivered' | 'read' | 'failed';
+  createdAt: string;
+}
+
 export interface HealthStatus {
   status: 'ok' | 'error';
   timestamp?: string;
@@ -178,6 +193,22 @@ export const auditApi = {
 // =============================================================================
 
 export const messageApi = {
+  list: (params?: {
+    limit?: number;
+    offset?: number;
+    direction?: string;
+    sessionId?: string;
+    status?: string;
+  }) => {
+    const query = new URLSearchParams();
+    if (params?.limit) query.set('limit', String(params.limit));
+    if (params?.offset) query.set('offset', String(params.offset));
+    if (params?.direction) query.set('direction', params.direction);
+    if (params?.sessionId) query.set('sessionId', params.sessionId);
+    if (params?.status) query.set('status', params.status);
+    const qs = query.toString();
+    return request<Message[]>(`/messages${qs ? `?${qs}` : ''}`);
+  },
   sendText: (sessionId: string, chatId: string, text: string) =>
     request<MessageResponse>(`/sessions/${sessionId}/messages/send-text`, {
       method: 'POST',
@@ -381,6 +412,77 @@ export const contactApi = {
     request<Array<Contact & { totalSentMessages: number }>>('/contacts/export'),
 };
 
+// =============================================================================
+// Contact Group Types & API
+// =============================================================================
+
+export interface ContactGroup {
+  id: string;
+  name: string;
+  description?: string;
+  memberCount?: number;
+  members?: Array<{
+    contactId: string;
+    groupId: string;
+    contact: Contact;
+  }>;
+  createdAt: string;
+  updatedAt: string;
+}
+
+export interface ContactGroupPayload {
+  name: string;
+  description?: string;
+}
+
+export interface FilterParams {
+  countryId?: number;
+  stateId?: number;
+  cityId?: number;
+  name?: string;
+  phonePrefix?: string;
+}
+
+export const groupApi = {
+  list: () => request<ContactGroup[]>('/groups'),
+  get: (id: string) => request<ContactGroup>(`/groups/${id}`),
+  create: (data: ContactGroupPayload) =>
+    request<ContactGroup>('/groups', { method: 'POST', body: JSON.stringify(data) }),
+  update: (id: string, data: Partial<ContactGroupPayload>) =>
+    request<ContactGroup>(`/groups/${id}`, { method: 'PUT', body: JSON.stringify(data) }),
+  delete: (id: string) =>
+    request<void>(`/groups/${id}`, { method: 'DELETE' }),
+  addMembers: (id: string, contactIds: string[]) =>
+    request<{ added: number; alreadyExists: number }>(`/groups/${id}/members`, {
+      method: 'POST',
+      body: JSON.stringify({ contactIds }),
+    }),
+  removeMembers: (id: string, contactIds: string[]) =>
+    request<{ removed: number }>(`/groups/${id}/members`, {
+      method: 'DELETE',
+      body: JSON.stringify({ contactIds }),
+    }),
+  filterContacts: (filters: FilterParams) => {
+    const params = new URLSearchParams();
+    if (filters.countryId) params.set('countryId', String(filters.countryId));
+    if (filters.stateId) params.set('stateId', String(filters.stateId));
+    if (filters.cityId) params.set('cityId', String(filters.cityId));
+    if (filters.name) params.set('name', filters.name);
+    if (filters.phonePrefix) params.set('phonePrefix', filters.phonePrefix);
+    const qs = params.toString();
+    return request<Contact[]>(`/groups/contacts/filter${qs ? `?${qs}` : ''}`);
+  },
+  bulkCreateWithGroup: (data: {
+    name: string;
+    description?: string;
+    contacts: ContactPayload[];
+  }) =>
+    request<{ group: ContactGroup; created: number; skipped: number }>(
+      '/groups/bulk-create-with-group',
+      { method: 'POST', body: JSON.stringify(data) },
+    ),
+};
+
 export const pluginsApi = {
   list: () => request<Plugin[]>('/plugins'),
   get: (id: string) => request<Plugin>(`/plugins/${id}`),
@@ -394,4 +496,80 @@ export const pluginsApi = {
   healthCheck: (id: string) => request<{ healthy: boolean; message?: string }>(`/plugins/${id}/health`),
   getEngines: () => request<Engine[]>('/infra/engines'),
   getCurrentEngine: () => request<{ engineType: string }>('/infra/engines/current'),
+};
+
+// =============================================================================
+// Auth API (Profile & Password)
+// =============================================================================
+
+export interface UserProfile {
+  id: string;
+  phone: string;
+  name: string;
+  profilePic?: string;
+  role: string;
+  isActive: boolean;
+  lastLoginAt?: string;
+  createdAt: string;
+  updatedAt: string;
+}
+
+export interface SystemSettingsData {
+  id: string;
+  businessLogo?: string;
+  smallLogo?: string;
+  email?: string;
+  altPhone?: string;
+  website?: string;
+  name?: string;
+  address?: string;
+  googleMapLink?: string;
+  updatedAt: string;
+}
+
+export const authApi = {
+  me: () => request<UserProfile>('/auth/me'),
+  updateProfile: (data: { name?: string; phone?: string; profilePic?: string }) =>
+    request<UserProfile>('/auth/profile', {
+      method: 'PUT',
+      body: JSON.stringify(data),
+    }),
+  changePassword: (data: { currentPassword: string; newPassword: string }) =>
+    request<{ success: boolean }>('/auth/change-password', {
+      method: 'PUT',
+      body: JSON.stringify(data),
+    }),
+};
+
+export const systemSettingsApi = {
+  get: () => request<SystemSettingsData>('/system-settings'),
+  update: (data: Partial<SystemSettingsData>) =>
+    request<SystemSettingsData>('/system-settings', {
+      method: 'PUT',
+      body: JSON.stringify(data),
+    }),
+};
+
+// =============================================================================
+// Upload API
+// =============================================================================
+
+export const uploadApi = {
+  upload: async (folder: string, file: File): Promise<{ url: string; filename: string }> => {
+    const formData = new FormData();
+    formData.append('file', file);
+    const token = localStorage.getItem('openwa_token');
+    const response = await fetch(`/api/upload/${folder}`, {
+      method: 'POST',
+      headers: {
+        ...(token ? { Authorization: `Bearer ${token}` } : {}),
+      },
+      body: formData,
+    });
+    if (!response.ok) {
+      const error = await response.json().catch(() => ({ message: response.statusText }));
+      throw new Error(error.message || `Upload failed`);
+    }
+    return response.json();
+  },
 };
