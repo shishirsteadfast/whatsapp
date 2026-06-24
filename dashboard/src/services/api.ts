@@ -203,6 +203,16 @@ export const messageApi = {
       method: 'POST',
       body: JSON.stringify({ chatId, url, filename }),
     }),
+  sendLocation: (sessionId: string, chatId: string, latitude: number, longitude: number, description?: string) =>
+    request<MessageResponse>(`/sessions/${sessionId}/messages/send-location`, {
+      method: 'POST',
+      body: JSON.stringify({ chatId, latitude, longitude, description }),
+    }),
+  sendContact: (sessionId: string, chatId: string, contactName: string, contactNumber: string) =>
+    request<MessageResponse>(`/sessions/${sessionId}/messages/send-contact`, {
+      method: 'POST',
+      body: JSON.stringify({ chatId, contactName, contactNumber }),
+    }),
 };
 
 // =============================================================================

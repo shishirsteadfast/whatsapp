@@ -29,7 +29,7 @@ const allNavItems = [
   { to: '/sessions',       icon: Smartphone,      key: 'sessions'       as const, adminOnly: false },
   { to: '/contacts',       icon: Users,           key: 'contacts'       as const, adminOnly: false },
   { to: '/webhooks',       icon: Webhook,         key: 'webhooks'       as const, adminOnly: false },
-  { to: '/message-tester', icon: Send,            key: 'messageTester'  as const, adminOnly: false },
+  { to: '/composer',       icon: Send,            key: 'composer'       as const, adminOnly: false },
   { to: '/infrastructure', icon: Server,          key: 'infrastructure' as const, adminOnly: false },
   { to: '/plugins',        icon: Puzzle,          key: 'plugins'        as const, adminOnly: true  },
   { to: '/logs',           icon: FileText,        key: 'logs'           as const, adminOnly: false },

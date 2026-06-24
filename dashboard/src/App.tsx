@@ -12,7 +12,7 @@ const Dashboard = lazy(() => import('./pages/Dashboard').then(m => ({ default: m
 const Sessions = lazy(() => import('./pages/Sessions').then(m => ({ default: m.Sessions })));
 const Webhooks = lazy(() => import('./pages/Webhooks').then(m => ({ default: m.Webhooks })));
 const Logs = lazy(() => import('./pages/Logs').then(m => ({ default: m.Logs })));
-const MessageTester = lazy(() => import('./pages/MessageTester').then(m => ({ default: m.MessageTester })));
+const Composer = lazy(() => import('./pages/Composer').then(m => ({ default: m.Composer })));
 const Infrastructure = lazy(() => import('./pages/Infrastructure').then(m => ({ default: m.Infrastructure })));
 const Plugins = lazy(() => import('./pages/Plugins'));
 const Contacts = lazy(() => import('./pages/Contacts').then(m => ({ default: m.Contacts })));
@@ -164,7 +164,7 @@ function AppContent() {
               <Route path="sessions" element={<Sessions />} />
               <Route path="webhooks" element={<Webhooks />} />
               <Route path="logs" element={<Logs />} />
-              <Route path="message-tester" element={<MessageTester />} />
+              <Route path="composer" element={<Composer />} />
               <Route path="infrastructure" element={<Infrastructure />} />
               <Route path="contacts" element={<Contacts />} />
               {role === 'admin' && <Route path="plugins" element={<Plugins />} />}
