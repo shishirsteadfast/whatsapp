@@ -53,7 +53,8 @@
     "unknownError": "Unknown error",
     "lightMode": "Light mode",
     "darkMode": "Dark mode",
-    "viewAll": "View All"
+    "viewAll": "View All",
+    "copied": "Copied!"
   },
   "theme": {
     "light": "Light",
@@ -270,12 +271,37 @@
     }
   },
   "apiKeys": {
-    "title": "API Keys",
-    "subtitle": "Manage API keys for authentication and access control",
+    "title": "API Management",
+    "subtitle": "Manage API keys, view credentials, and browse API documentation",
+    "tabs": {
+      "overview": "Overview",
+      "keys": "API Keys",
+      "docs": "Documentation"
+    },
+    "stats": {
+      "totalKeys": "Total Keys",
+      "activeKeys": "Active Keys",
+      "totalCalls": "Total Calls",
+      "rateLimit": "Calls Today"
+    },
+    "credentials": {
+      "baseUrl": "API Base URL",
+      "baseUrlHint": "Use this URL as the base endpoint for all API requests."
+    },
+    "quickLinks": {
+      "title": "Quick Links",
+      "manageKeys": "Manage API Keys",
+      "manageKeysDesc": "View, create, revoke, and delete your API keys",
+      "viewDocs": "API Documentation",
+      "viewDocsDesc": "Browse detailed endpoint reference with examples",
+      "createKey": "Create New Key",
+      "createKeyDesc": "Generate a new API key with a specific role"
+    },
     "createBtn": "Create API Key",
     "modalTitle": "Create API Key",
     "createdTitle": "API Key Created",
     "createdHint": "Copy this key now. You won't be able to see it again.",
+    "createdHintExtra": "This secret key will not be shown again. Store it securely.",
     "namePlaceholder": "e.g., Production Key",
     "rolesTitle": "Roles Reference",
     "roles": {
@@ -316,6 +342,59 @@
       "copy": "Copy",
       "revoke": "Revoke",
       "delete": "Delete"
+    }
+  },
+  "apiDocs": {
+    "auth": {
+      "title": "Authentication",
+      "description": "All API requests require authentication. Include your API key in the <code>X-API-Key</code> request header. You can manage your API keys in the API Keys tab.",
+      "example": "Example request with authentication",
+      "none": "No authentication required",
+      "apiKey": "API Key required",
+      "admin": "Admin access required"
+    },
+    "sdks": {
+      "title": "SDKs & Libraries",
+      "description": "Use our official SDKs to integrate OpenWA with your application seamlessly."
+    },
+    "endpoints": {
+      "title": "API Endpoints",
+      "health": {
+        "desc": "Check API server health status"
+      },
+      "sessions": {
+        "list": "List all WhatsApp sessions",
+        "create": "Create a new WhatsApp session",
+        "qr": "Get QR code for a session",
+        "delete": "Delete a WhatsApp session"
+      },
+      "messages": {
+        "sendText": "Send a text message",
+        "sendImage": "Send an image message",
+        "sendLocation": "Send a location message",
+        "list": "List messages with optional filters"
+      },
+      "contacts": {
+        "list": "List all saved contacts",
+        "create": "Create a new contact"
+      },
+      "webhooks": {
+        "list": "List all configured webhooks"
+      },
+      "campaigns": {
+        "list": "List all broadcast campaigns",
+        "create": "Create a new broadcast campaign"
+      },
+      "settings": {
+        "get": "Get system settings (admin only)"
+      }
+    },
+    "requestBody": "Request Body",
+    "example": "Example",
+    "response": "Response",
+    "rateLimit": {
+      "title": "Rate Limiting",
+      "description": "API requests are rate-limited to ensure fair usage. The default limit is 100 requests per 60-second window per API key. Exceeding this limit will result in a 429 Too Many Requests response. Contact support if you need a higher limit."
     }
   },
   "logs": {

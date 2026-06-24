@@ -21,6 +21,7 @@ const Messages = lazy(() => import('./pages/Messages').then(m => ({ default: m.M
 const Campaigns = lazy(() => import('./pages/Campaigns').then(m => ({ default: m.Campaigns })));
 const CampaignNew = lazy(() => import('./pages/CampaignNew').then(m => ({ default: m.CampaignNew })));
 const CampaignDetail = lazy(() => import('./pages/CampaignDetail').then(m => ({ default: m.CampaignDetail })));
+const ApiKeys = lazy(() => import('./pages/ApiKeys').then(m => ({ default: m.ApiKeys })));
 const SettingsPage = lazy(() => import('./pages/Settings').then(m => ({ default: m.SettingsPage })));
 
 const TOKEN_KEY = 'openwa_token';
@@ -179,6 +180,7 @@ function AppContent() {
               <Route path="campaigns/new" element={<CampaignNew />} />
               <Route path="campaigns/:id" element={<CampaignDetail />} />
               <Route path="campaigns/:id/edit" element={<CampaignNew />} />
+              <Route path="api-keys" element={<ApiKeys />} />
               <Route path="settings" element={<SettingsPage />} />
               {role === 'admin' && <Route path="plugins" element={<Plugins />} />}
               <Route path="*" element={<Navigate to="/" replace />} />

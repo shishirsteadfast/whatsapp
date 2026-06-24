@@ -670,6 +670,50 @@ export const systemSettingsApi = {
 // Upload API
 // =============================================================================
 
+// =============================================================================
+// API Key Types & API
+// =============================================================================
+
+export interface ApiKey {
+  id: string;
+  name: string;
+  keyPrefix: string;
+  role: string;
+  isActive: boolean;
+  lastUsedAt: string | null;
+  usageCount: number;
+  createdAt: string;
+  updatedAt: string;
+}
+
+export interface CreateApiKeyPayload {
+  name: string;
+  role: string;
+}
+
+export interface ApiKeyWithSecret {
+  apiKey: string;
+  data: ApiKey;
+}
+
+export interface ApiKeyStats {
+  totalKeys: number;
+  activeKeys: number;
+  revokedKeys: number;
+  totalCalls: number;
+  callsToday: number;
+  callsThisMonth: number;
+  topEndpoints: Array<{ path: string; method: string; count: number }>;
+}
+
+export const apiKeysApi = {
+  list: () => request<ApiKey[]>('/api-keys'),
+  create: (data: CreateApiKeyPayload) => request<ApiKeyWithSecret>('/api-keys', { method: 'POST', body: JSON.stringify(data) }),
+  revoke: (id: string) => request<{ success: boolean }>(`/api-keys/${id}/revoke`, { method: 'POST' }),
+  delete: (id: string) => request<void>(`/api-keys/${id}`, { method: 'DELETE' }),
+  getStats: () => request<ApiKeyStats>('/api-keys/stats'),
+};
+
 export const uploadApi = {
   upload: async (folder: string, file: File): Promise<{ url: string; filename: string }> => {
     const formData = new FormData();

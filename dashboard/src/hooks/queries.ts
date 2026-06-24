@@ -12,12 +12,14 @@ import {
   authApi,
   systemSettingsApi,
   campaignApi,
+  apiKeysApi,
   type Webhook,
   type ContactPayload,
   type ContactGroupPayload,
   type FilterParams,
   type CampaignPayload,
   type CampaignUpdatePayload,
+  type CreateApiKeyPayload,
 } from '../services/api';
 
 // ── Query Keys ────────────────────────────────────────────────────────
@@ -341,6 +343,62 @@ export function useBulkCreateWithGroupMutation() {
       description?: string;
       contacts: ContactPayload[];
     }) => groupApi.bulkCreateWithGroup(data),
+  });
+}
+
+// ── API Key Queries ───────────────────────────────────────────────────
+
+export const apiKeyQueryKeys = {
+  all: ['api-keys'] as const,
+  stats: ['api-keys', 'stats'] as const,
+};
+
+export function useApiKeysQuery() {
+  return useQuery({
+    queryKey: apiKeyQueryKeys.all,
+    queryFn: apiKeysApi.list,
+    staleTime: 30_000,
+  });
+}
+
+export function useApiKeyStatsQuery() {
+  return useQuery({
+    queryKey: apiKeyQueryKeys.stats,
+    queryFn: apiKeysApi.getStats,
+    staleTime: 30_000,
+  });
+}
+
+export function useCreateApiKeyMutation() {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: (data: CreateApiKeyPayload) => apiKeysApi.create(data),
+    onSuccess: () => {
+      void queryClient.invalidateQueries({ queryKey: apiKeyQueryKeys.all });
+      void queryClient.invalidateQueries({ queryKey: apiKeyQueryKeys.stats });
+    },
+  });
+}
+
+export function useDeleteApiKeyMutation() {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: (id: string) => apiKeysApi.delete(id),
+    onSuccess: () => {
+      void queryClient.invalidateQueries({ queryKey: apiKeyQueryKeys.all });
+      void queryClient.invalidateQueries({ queryKey: apiKeyQueryKeys.stats });
+    },
+  });
+}
+
+export function useRevokeApiKeyMutation() {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: (id: string) => apiKeysApi.revoke(id),
+    onSuccess: () => {
+      void queryClient.invalidateQueries({ queryKey: apiKeyQueryKeys.all });
+      void queryClient.invalidateQueries({ queryKey: apiKeyQueryKeys.stats });
+    },
   });
 }
 

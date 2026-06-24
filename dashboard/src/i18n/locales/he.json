@@ -53,7 +53,8 @@
     "unknownError": "שגיאה לא ידועה",
     "lightMode": "מצב בהיר",
     "darkMode": "מצב כהה",
-    "viewAll": "הצג הכל"
+    "viewAll": "הצג הכל",
+    "copied": "הועתק!"
   },
   "theme": {
     "light": "בהיר",
@@ -266,12 +267,37 @@
     }
   },
   "apiKeys": {
-    "title": "מפתחות API",
-    "subtitle": "ניהול מפתחות API לאימות ובקרת גישה",
+    "title": "ניהול API",
+    "subtitle": "ניהול מפתחות API, צפייה בפרטי התחברות ועיון בתיעוד API",
+    "tabs": {
+      "overview": "סקירה",
+      "keys": "מפתחות API",
+      "docs": "תיעוד"
+    },
+    "stats": {
+      "totalKeys": "סה\"כ מפתחות",
+      "activeKeys": "מפתחות פעילים",
+      "totalCalls": "סה\"כ קריאות",
+      "rateLimit": "קריאות היום"
+    },
+    "credentials": {
+      "baseUrl": "כתובת בסיס API",
+      "baseUrlHint": "השתמש בכתובת זו כבסיס לכל בקשות ה-API."
+    },
+    "quickLinks": {
+      "title": "קישורים מהירים",
+      "manageKeys": "ניהול מפתחות API",
+      "manageKeysDesc": "צפייה, יצירה, ביטול ומחיקה של מפתחות API",
+      "viewDocs": "תיעוד API",
+      "viewDocsDesc": "עיון במדריך נקודות הקצה עם דוגמאות",
+      "createKey": "יצירת מפתח חדש",
+      "createKeyDesc": "יצירת מפתח API חדש עם תפקיד ספציפי"
+    },
     "createBtn": "יצירת מפתח API",
     "modalTitle": "יצירת מפתח API",
     "createdTitle": "מפתח ה-API נוצר",
     "createdHint": "יש להעתיק את המפתח כעת. לא ניתן יהיה לצפות בו שוב.",
+    "createdHintExtra": "מפתח סודי זה לא יוצג שוב. יש לשמור אותו במקום בטוח.",
     "namePlaceholder": "לדוגמה: Production Key",
     "rolesTitle": "מדריך תפקידים",
     "roles": {
@@ -312,6 +338,59 @@
       "copy": "העתקה",
       "revoke": "ביטול",
       "delete": "מחיקה"
+    }
+  },
+  "apiDocs": {
+    "auth": {
+      "title": "אימות",
+      "description": "כל בקשות ה-API דורשות אימות. יש להוסיף את מפתח ה-API בכותרת <code>X-API-Key</code>. ניתן לנהל מפתחות API בלשונית מפתחות API.",
+      "example": "דוגמה לבקשה עם אימות",
+      "none": "לא נדרש אימות",
+      "apiKey": "נדרש מפתח API",
+      "admin": "נדרשת גישת מנהל"
+    },
+    "sdks": {
+      "title": "ערכות פיתוח (SDKs)",
+      "description": "השתמש בערכות הפיתוח הרשמיות שלנו לשילוב חלק של OpenWA באפליקציה שלך."
+    },
+    "endpoints": {
+      "title": "נקודות קצה API",
+      "health": {
+        "desc": "בדיקת תקינות השרת"
+      },
+      "sessions": {
+        "list": "רשימת כל ה-Sessions",
+        "create": "יצירת Session חדש",
+        "qr": "קבלת קוד QR ל-Session",
+        "delete": "מחיקת Session"
+      },
+      "messages": {
+        "sendText": "שליחת הודעת טקסט",
+        "sendImage": "שליחת תמונה",
+        "sendLocation": "שליחת מיקום",
+        "list": "רשימת הודעות עם סינון אופציונלי"
+      },
+      "contacts": {
+        "list": "רשימת כל אנשי הקשר",
+        "create": "יצירת איש קשר חדש"
+      },
+      "webhooks": {
+        "list": "רשימת כל ה-Webhooks"
+      },
+      "campaigns": {
+        "list": "רשימת כל הקמפיינים",
+        "create": "יצירת קמפיין חדש"
+      },
+      "settings": {
+        "get": "קבלת הגדרות מערכת (מנהל בלבד)"
+      }
+    },
+    "requestBody": "גוף הבקשה",
+    "example": "דוגמה",
+    "response": "תגובה",
+    "rateLimit": {
+      "title": "הגבלת קצב",
+      "description": "בקשות API מוגבלות בקצב כדי להבטיח שימוש הוגן. המגבלה ברירת המחדל היא 100 בקשות בחלון של 60 שניות לכל מפתח API. חריגה ממגבלה זו תגרור תגובת 429 Too Many Requests. צור קשר עם התמיכה אם יש צורך במגבלה גבוהה יותר."
     }
   },
   "logs": {
