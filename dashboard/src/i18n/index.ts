@@ -3,11 +3,22 @@ import { initReactI18next } from 'react-i18next';
 import LanguageDetector from 'i18next-browser-languagedetector';
 import en from './locales/en.json';
 import he from './locales/he.json';
+import zh from './locales/zh.json';
+import es from './locales/es.json';
+import ar from './locales/ar.json';
+import bn from './locales/bn.json';
+import pt from './locales/pt.json';
+import id from './locales/id.json';
+import ur from './locales/ur.json';
+import ru from './locales/ru.json';
+import de from './locales/de.json';
+import ja from './locales/ja.json';
+import it from './locales/it.json';
 
-export const supportedLanguages = ['en', 'he'] as const;
+export const supportedLanguages = ['en', 'he', 'zh', 'es', 'ar', 'bn', 'pt', 'id', 'ur', 'ru', 'de', 'ja', 'it'] as const;
 export type SupportedLanguage = (typeof supportedLanguages)[number];
 
-export const rtlLanguages: SupportedLanguage[] = ['he'];
+export const rtlLanguages: SupportedLanguage[] = ['he', 'ar', 'ur'];
 
 void i18n
   .use(LanguageDetector)
@@ -16,6 +27,17 @@ void i18n
     resources: {
       en: { translation: en },
       he: { translation: he },
+      zh: { translation: zh },
+      es: { translation: es },
+      ar: { translation: ar },
+      bn: { translation: bn },
+      pt: { translation: pt },
+      id: { translation: id },
+      ur: { translation: ur },
+      ru: { translation: ru },
+      de: { translation: de },
+      ja: { translation: ja },
+      it: { translation: it },
     },
     fallbackLng: 'en',
     supportedLngs: supportedLanguages as unknown as string[],

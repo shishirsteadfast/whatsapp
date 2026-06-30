@@ -1,0 +1,1119 @@
+{
+  "common": {
+    "appName": "OpenWA",
+    "appSubtitle": "WhatsApp API",
+    "loading": "読み込み中...",
+    "save": "保存",
+    "cancel": "キャンセル",
+    "delete": "削除",
+    "edit": "編集",
+    "create": "作成",
+    "close": "閉じる",
+    "submit": "送信",
+    "confirm": "確認",
+    "search": "検索",
+    "filter": "フィルター",
+    "actions": "操作",
+    "status": "ステータス",
+    "name": "名前",
+    "role": "ロール",
+    "type": "タイプ",
+    "url": "URL",
+    "port": "ポート",
+    "host": "ホスト",
+    "username": "ユーザー名",
+    "password": "パスワード",
+    "active": "有効",
+    "inactive": "無効",
+    "enabled": "オン",
+    "disabled": "オフ",
+    "connected": "接続済み",
+    "disconnected": "切断済み",
+    "never": "なし",
+    "justNow": "たった今",
+    "minAgo": "{{count}}分前",
+    "hoursAgo": "{{count}}時間前",
+    "optional": "任意",
+    "language": "言語",
+    "english": "English",
+    "hebrew": "עברית",
+    "back": "戻る",
+    "next": "次へ",
+    "previous": "前へ",
+    "expand": "展開",
+    "collapse": "折りたたむ",
+    "logout": "ログアウト",
+    "refresh": "更新",
+    "notifications": "通知",
+    "noNotifications": "新しい通知はありません",
+    "profile": "プロフィール",
+    "changePassword": "パスワード変更",
+    "settings": "設定",
+    "errorGeneric": "エラーが発生しました",
+    "unknownError": "不明なエラー",
+    "lightMode": "ライトモード",
+    "darkMode": "ダークモード",
+    "viewAll": "すべて表示",
+    "copied": "コピーしました！"
+  },
+  "theme": {
+    "light": "ライト",
+    "dark": "ダーク",
+    "system": "システム",
+    "label": "テーマ: {{value}}"
+  },
+  "nav": {
+    "dashboard": "ダッシュボード",
+    "sessions": "セッション",
+    "webhooks": "Webhook",
+    "apiKeys": "APIキー",
+    "contacts": "連絡先",
+    "composer": "メッセージ作成",
+    "groups": "グループ",
+    "messages": "メッセージ",
+    "settings": "設定",
+    "messageTester": "メッセージテスト",
+    "infrastructure": "インフラ",
+    "plugins": "プラグイン",
+    "campaigns": "キャンペーン",
+    "logs": "ログ"
+  },
+  "errorBoundary": {
+    "title": "問題が発生しました",
+    "description": "ダッシュボードで予期しないエラーが発生しました。",
+    "reload": "ダッシュボードを再読み込み"
+  },
+  "login": {
+    "apiKey": "APIキー",
+    "apiKeyPlaceholder": "APIキーを入力",
+    "apiKeyRequired": "APIキーが必要です",
+    "connect": "接続",
+    "connecting": "接続中...",
+    "invalidKey": "無効なAPIキーです",
+    "connectionError": "サーバーに接続できません。もう一度お試しください。",
+    "help": "ヘルプが必要ですか？",
+    "viewDocs": "ドキュメントを見る",
+    "footer": "Yudhi Armyndharis と OpenWA コミュニティが ❤️ を込めて制作",
+    "version": "v{{version}} · {{date}}",
+    "title": "サインイン",
+    "subtitle": "ダッシュボードにアクセスするには認証情報を入力してください。",
+    "phoneLabel": "電話番号",
+    "phonePlaceholder": "例: 09012345678",
+    "passwordLabel": "パスワード",
+    "passwordPlaceholder": "パスワードを入力",
+    "signIn": "サインイン",
+    "phoneRequired": "電話番号が必要です",
+    "passwordRequired": "パスワードが必要です",
+    "invalidCredentials": "電話番号またはパスワードが間違っています"
+  },
+  "dashboard": {
+    "title": "ダッシュボード",
+    "subtitle": "WhatsAppセッションとアクティビティの概要",
+    "stats": {
+      "activeSessions": "アクティブセッション",
+      "messagesToday": "今日のメッセージ",
+      "webhooksConfigured": "設定済みWebhook",
+      "apiCalls": "API呼び出し（24時間）"
+    },
+    "sessionsOverview": "セッション概要",
+    "showingSessions": "全{{total}}件中{{shown}}件を表示",
+    "columns": {
+      "sessionId": "セッションID",
+      "phone": "電話番号",
+      "status": "ステータス",
+      "lastActive": "最終アクティブ",
+      "actions": "操作"
+    },
+    "noSessions": "セッションが見つかりません。作成して開始してください。",
+    "view": "表示",
+    "disconnect": "切断",
+    "errorPrefix": "エラー: {{message}}",
+    "loadError": "データの読み込みに失敗しました",
+    "statActive": "{{count}}件アクティブ",
+    "statNoData": "まだデータがありません"
+  },
+  "sessionStatus": {
+    "created": "新規",
+    "idle": "待機中",
+    "initializing": "起動中...",
+    "connecting": "接続中...",
+    "qr_ready": "QRをスキャン",
+    "ready": "接続済み",
+    "disconnected": "切断済み"
+  },
+  "sessions": {
+    "title": "セッション",
+    "subtitle": "WhatsAppセッションとQRコード接続を管理",
+    "newSession": "新規セッション",
+    "searchPlaceholder": "セッションを検索...",
+    "filter": {
+      "all": "すべてのステータス",
+      "active": "アクティブ（接続済み）",
+      "inactive": "非アクティブ",
+      "connecting": "接続中"
+    },
+    "empty": {
+      "title": "セッションが見つかりません",
+      "description": "新しいセッションを作成して開始"
+    },
+    "create": {
+      "title": "新規セッションを作成",
+      "label": "セッション名",
+      "placeholder": "例: marketing-bot",
+      "hint": "小文字、数字、ハイフンのみ使用可能。例: <code>customer-support</code>",
+      "invalidChars": "無効な文字です。小文字、数字、ハイフンのみ許可されています。",
+      "tooLong": "名前は50文字以内にしてください（{{length}}/50）。",
+      "duplicate": "この名前のセッションは既に存在します。",
+      "successTitle": "セッションを作成しました",
+      "successDesc": "セッション「{{name}}」を作成しました",
+      "errorTitle": "作成に失敗",
+      "errorDefault": "セッションの作成に失敗しました"
+    },
+    "delete": {
+      "title": "削除の確認",
+      "message": "セッション <strong>「{{name}}」</strong> を削除してもよろしいですか？",
+      "warning": "この操作は元に戻せません。",
+      "successTitle": "セッションを削除しました",
+      "successDescNamed": "セッション「{{name}}」を削除しました",
+      "successDescGeneric": "セッションを削除しました",
+      "errorTitle": "削除に失敗",
+      "errorDefault": "セッションの削除に失敗しました"
+    },
+    "qr": {
+      "title": "QRコードをスキャン",
+      "step1": "<strong>1.</strong> スマートフォンでWhatsAppを開く",
+      "step2": "<strong>2.</strong> <strong>メニュー</strong> → <strong>連携デバイス</strong> をタップ",
+      "step3": "<strong>3.</strong> <strong>デバイスを連携</strong> をタップしてQRコードをスキャン",
+      "autoRefresh": "QRは5秒ごとに自動更新されます",
+      "generating": "QRコードを生成中...",
+      "unavailable": "QRコードはまだ利用できません。しばらく待ってからお試しください。",
+      "preparing": "QRコードを準備中...",
+      "showQr": "QRを表示",
+      "loading": "読み込み中...",
+      "scanToConnect": "QRコードをスキャンして接続"
+    },
+    "details": {
+      "title": "セッション詳細",
+      "name": "名前",
+      "status": "ステータス",
+      "sessionId": "セッションID",
+      "phone": "電話番号",
+      "phoneNone": "未接続",
+      "created": "作成日",
+      "lastActive": "最終アクティブ"
+    },
+    "actions": {
+      "view": "表示",
+      "start": "開始",
+      "stop": "停止",
+      "reconnect": "再接続",
+      "delete": "削除"
+    },
+    "toasts": {
+      "readyTitle": "セッション準備完了",
+      "readyDesc": "WhatsAppセッションが接続されました",
+      "disconnectedTitle": "セッション切断",
+      "disconnectedDesc": "WhatsAppセッションが切断されました"
+    },
+    "card": {
+      "phone": "電話",
+      "sessionId": "セッションID",
+      "lastActive": "最終アクティブ"
+    }
+  },
+  "webhooks": {
+    "title": "Webhook",
+    "subtitle": "リアルタイムイベント通知のHTTPコールバックを設定",
+    "addWebhook": "Webhookを追加",
+    "createTitle": "Webhookを作成",
+    "editTitle": "Webhookを編集",
+    "deleteTitle": "Webhookを削除",
+    "deleteConfirm": "このWebhookを削除してもよろしいですか？",
+    "selectSession": "セッションを選択...",
+    "session": "セッション",
+    "events": "イベント",
+    "available": "利用可能なイベント",
+    "saveChanges": "変更を保存",
+    "columns": {
+      "url": "URL",
+      "events": "イベント",
+      "session": "セッション",
+      "status": "ステータス",
+      "actions": "操作"
+    },
+    "empty": {
+      "title": "Webhookが設定されていません",
+      "description": "リアルタイム通知を受け取るにはWebhookを追加してください"
+    },
+    "toasts": {
+      "created": "Webhookを作成しました",
+      "createFailed": "Webhookの作成に失敗: {{message}}",
+      "deleted": "Webhookを削除しました",
+      "deleteFailed": "Webhookの削除に失敗: {{message}}",
+      "updated": "Webhookを更新しました",
+      "updateFailed": "Webhookの更新に失敗: {{message}}",
+      "testOk": "Webhookテスト成功！ステータス: {{status}}",
+      "testFailed": "Webhookテスト失敗: {{message}}",
+      "testError": "Webhookテストに失敗: {{message}}"
+    },
+    "actions": {
+      "test": "テスト",
+      "edit": "編集",
+      "delete": "削除"
+    },
+    "eventDescriptions": {
+      "message.received": "メッセージを受信したとき",
+      "message.sent": "メッセージを送信したとき",
+      "session.connected": "セッションが接続したとき",
+      "session.disconnected": "セッションが切断したとき",
+      "session.qr": "QRコードが生成されたとき",
+      "all": "すべてのイベント"
+    }
+  },
+  "apiKeys": {
+    "title": "API管理",
+    "subtitle": "APIキー、認証情報、APIドキュメントを管理",
+    "tabs": {
+      "overview": "概要",
+      "keys": "APIキー",
+      "docs": "ドキュメント"
+    },
+    "stats": {
+      "totalKeys": "合計キー数",
+      "activeKeys": "アクティブキー",
+      "totalCalls": "合計呼び出し",
+      "rateLimit": "今日の呼び出し"
+    },
+    "credentials": {
+      "baseUrl": "APIベースURL",
+      "baseUrlHint": "このURLをすべてのAPIリクエストのベースエンドポイントとして使用します。"
+    },
+    "quickLinks": {
+      "title": "クイックリンク",
+      "manageKeys": "APIキー管理",
+      "manageKeysDesc": "APIキーの表示、作成、無効化、削除",
+      "viewDocs": "APIドキュメント",
+      "viewDocsDesc": "サンプル付きのエンドポイントリファレンス",
+      "createKey": "新規キー作成",
+      "createKeyDesc": "特定のロールを持つ新しいAPIキーを生成"
+    },
+    "createBtn": "APIキーを作成",
+    "modalTitle": "APIキーを作成",
+    "createdTitle": "APIキーを作成しました",
+    "createdHint": "今すぐこのキーをコピーしてください。再度表示することはできません。",
+    "createdHintExtra": "この秘密キーは再度表示されません。安全に保管してください。",
+    "namePlaceholder": "例: プロダクションキー",
+    "rolesTitle": "ロール一覧",
+    "roles": {
+      "admin": "管理者",
+      "operator": "オペレーター",
+      "viewer": "閲覧者"
+    },
+    "roleDescriptions": {
+      "admin": "すべてのリソースへのフルアクセス",
+      "operator": "セッションとメッセージの管理",
+      "viewer": "読み取り専用"
+    },
+    "columns": {
+      "name": "名前",
+      "key": "キー",
+      "role": "ロール",
+      "status": "ステータス",
+      "lastUsed": "最終使用",
+      "actions": "操作"
+    },
+    "statuses": {
+      "active": "有効",
+      "revoked": "無効化済み"
+    },
+    "empty": {
+      "title": "APIキーが作成されていません",
+      "description": "リクエスト認証のためAPIキーを作成してください"
+    },
+    "confirm": {
+      "deleteTitle": "APIキーを削除",
+      "revokeTitle": "APIキーを無効化",
+      "deleteMessage": "<strong>{{name}}</strong> を完全に削除してもよろしいですか？この操作は元に戻せません。",
+      "revokeMessage": "<strong>{{name}}</strong> を無効化してもよろしいですか？使用できなくなります。",
+      "delete": "削除",
+      "revoke": "無効化"
+    },
+    "actions": {
+      "copy": "コピー",
+      "revoke": "無効化",
+      "delete": "削除"
+    }
+  },
+  "apiDocs": {
+    "auth": {
+      "title": "認証",
+      "description": "すべてのAPIリクエストには認証が必要です。<code>X-API-Key</code> ヘッダーにAPIキーを含めてください。「APIキー」タブでキーを管理できます。",
+      "example": "認証ありのリクエスト例",
+      "none": "認証不要",
+      "apiKey": "APIキーが必要",
+      "admin": "管理者アクセスが必要"
+    },
+    "sdks": {
+      "title": "SDKとライブラリ",
+      "description": "公式SDKを使用してOpenWAをアプリケーションにシームレスに統合できます。"
+    },
+    "endpoints": {
+      "title": "APIエンドポイント",
+      "health": {
+        "desc": "APIサーバーのヘルスステータスを確認"
+      },
+      "sessions": {
+        "list": "すべてのWhatsAppセッション一覧",
+        "create": "新しいWhatsAppセッションを作成",
+        "qr": "セッションのQRコードを取得",
+        "delete": "WhatsAppセッションを削除"
+      },
+      "messages": {
+        "sendText": "テキストメッセージを送信",
+        "sendImage": "画像メッセージを送信",
+        "sendLocation": "位置情報を送信",
+        "list": "フィルター付きでメッセージ一覧"
+      },
+      "contacts": {
+        "list": "保存済み連絡先一覧",
+        "create": "新しい連絡先を作成"
+      },
+      "webhooks": {
+        "list": "設定済みWebhook一覧"
+      },
+      "campaigns": {
+        "list": "すべてのキャンペーン一覧",
+        "create": "新しいキャンペーンを作成"
+      },
+      "settings": {
+        "get": "システム設定を取得（管理者のみ）"
+      }
+    },
+    "requestBody": "リクエストボディ",
+    "example": "例",
+    "response": "レスポンス",
+    "rateLimit": {
+      "title": "レート制限",
+      "description": "公平な利用を確保するためAPIリクエストにはレート制限があります。デフォルトはAPIキー1つにつき60秒間に100リクエストです。制限を超えると429 Too Many Requestsレスポンスが返されます。より高い制限が必要な場合はサポートにお問い合わせください。"
+    }
+  },
+  "logs": {
+    "title": "監査ログ",
+    "subtitle": "すべてのAPIアクションとシステムイベントを追跡・確認",
+    "exportCsv": "CSVエクスポート",
+    "searchPlaceholder": "ログを検索...",
+    "severity": {
+      "all": "すべて",
+      "info": "情報",
+      "warn": "警告",
+      "error": "エラー"
+    },
+    "columns": {
+      "timestamp": "日時",
+      "action": "アクション",
+      "session": "セッション",
+      "apiKey": "APIキー",
+      "user": "ユーザー",
+      "ip": "IPアドレス",
+      "severity": "重要度"
+    },
+    "pagination": "{{page}} / {{total}} ページ（全{{count}}件）",
+    "empty": {
+      "title": "ログが見つかりません",
+      "description": "アクションが実行されると監査ログがここに表示されます"
+    }
+  },
+  "composer": {
+    "title": "メッセージ作成",
+    "subtitle": "WhatsAppのようにメッセージを作成・送信",
+    "session": "WhatsAppセッション",
+    "noReadySessions": "準備ができたセッションがありません",
+    "contactType": "連絡先タイプ",
+    "recipients": "送信先",
+    "selected": "{{count}}件選択中",
+    "savedContacts": "連絡先",
+    "waContacts": "WA連絡先",
+    "groups": "グループ",
+    "newNumber": "新規番号",
+    "searchContacts": "連絡先を検索...",
+    "searchGroups": "グループを検索...",
+    "noContacts": "保存された連絡先がありません",
+    "noGroups": "グループが見つかりません",
+    "noResults": "結果が見つかりません",
+    "schedule": "予約",
+    "messageType": "メッセージタイプ",
+    "types": {
+      "text": "テキスト",
+      "image": "画像",
+      "video": "動画",
+      "audio": "音声",
+      "document": "ドキュメント",
+      "location": "位置情報",
+      "contact": "連絡先"
+    },
+    "message": "メッセージ",
+    "messagePlaceholder": "メッセージを入力...",
+    "mediaUrl": "メディアURL",
+    "mediaUrlPlaceholder": "https://example.com/file.jpg",
+    "caption": "キャプション",
+    "captionPlaceholder": "キャプションを追加...",
+    "fileName": "ファイル名",
+    "fileNamePlaceholder": "document.pdf",
+    "latitude": "緯度",
+    "latitudePlaceholder": "35.6762",
+    "longitude": "経度",
+    "longitudePlaceholder": "139.6503",
+    "locationDescription": "説明",
+    "locationDescriptionPlaceholder": "例: 待ち合わせ場所",
+    "contactName": "連絡先名前",
+    "contactNamePlaceholder": "山田 太郎",
+    "contactPhone": "連絡先電話",
+    "contactPhonePlaceholder": "+819012345678",
+    "send": "送信",
+    "sending": "送信中...",
+    "sendTo": "{{count}}人の受信者に送信",
+    "sendTo_plural": "{{count}}人の受信者に送信",
+    "sendingTo": "{{count}}人の受信者に送信中",
+    "sendingTo_plural": "{{count}}人の受信者に送信中...",
+    "sentSuccess": "{{count}}人の受信者に送信しました",
+    "sentSuccess_plural": "{{count}}人の受信者に送信しました",
+    "sentPartial": "{{sent}}件送信成功、{{failed}}件失敗",
+    "sentPartial_plural": "{{sent}}件送信成功、{{failed}}件失敗",
+    "progress": "進捗",
+    "charCount": "{{count}} / 4096 文字",
+    "livePreview": "ライブプレビュー",
+    "noMessages": "メッセージはまだありません",
+    "noMessagesHint": "メッセージを送信して会話を開始"
+  },
+  "campaigns": {
+    "title": "キャンペーン",
+    "subtitle": "一斉配信キャンペーンの作成と管理",
+    "newCampaign": "新規キャンペーン",
+    "editCampaign": "キャンペーン編集",
+    "duplicate": "複製",
+    "searchPlaceholder": "キャンペーンを検索...",
+    "filterStatus": "すべてのステータス",
+    "statuses": {
+      "draft": "下書き",
+      "scheduled": "予約済み",
+      "sending": "送信中",
+      "completed": "完了",
+      "paused": "一時停止",
+      "cancelled": "キャンセル",
+      "failed": "失敗"
+    },
+    "recipientType": {
+      "contacts": "連絡先",
+      "groups": "グループ"
+    },
+    "stats": {
+      "total": "合計キャンペーン",
+      "active": "アクティブ",
+      "completed": "完了",
+      "failed": "失敗",
+      "totalRecipients": "合計受信者",
+      "totalSent": "合計送信",
+      "totalFailed": "合計失敗"
+    },
+    "columns": {
+      "name": "名前",
+      "status": "ステータス",
+      "recipients": "受信者",
+      "sent": "送信済み",
+      "failed": "失敗",
+      "schedule": "予定",
+      "created": "作成日",
+      "actions": "操作"
+    },
+    "empty": {
+      "title": "キャンペーンはまだありません",
+      "description": "最初のキャンペーンを作成して配信を開始"
+    },
+    "wizard": {
+      "step1": "詳細",
+      "step2": "メッセージ",
+      "step3": "受信者",
+      "step4": "予約",
+      "step5": "確認",
+      "name": "キャンペーン名",
+      "namePlaceholder": "例: キャンペーン",
+      "description": "説明",
+      "descriptionPlaceholder": "キャンペーンの説明（任意）",
+      "session": "WhatsAppセッション",
+      "noSessions": "利用可能なセッションがありません",
+      "messageType": "メッセージタイプ",
+      "text": "テキスト",
+      "image": "画像",
+      "video": "動画",
+      "audio": "音声",
+      "document": "ドキュメント",
+      "location": "位置情報",
+      "contact": "連絡先",
+      "textPlaceholder": "メッセージを入力...",
+      "mediaUrl": "メディアURL",
+      "mediaUrlPlaceholder": "https://example.com/file.jpg",
+      "caption": "キャプション",
+      "captionPlaceholder": "キャプションを追加...",
+      "fileName": "ファイル名",
+      "fileNamePlaceholder": "document.pdf",
+      "latitude": "緯度",
+      "latitudePlaceholder": "35.6762",
+      "longitude": "経度",
+      "longitudePlaceholder": "139.6503",
+      "contactName": "連絡先名前",
+      "contactNamePlaceholder": "山田 太郎",
+      "contactPhone": "連絡先電話",
+      "contactPhonePlaceholder": "+819012345678",
+      "selectRecipients": "受信者を選択",
+      "contacts": "保存済み連絡先",
+      "groups": "連絡先グループ",
+      "searchContacts": "連絡先を検索...",
+      "searchGroups": "グループを検索...",
+      "noContacts": "連絡先が見つかりません",
+      "noGroups": "グループが見つかりません",
+      "selected": "{{count}}件選択中",
+      "scheduleNow": "今すぐ送信",
+      "scheduleLater": "後で送信",
+      "scheduleDate": "予約日",
+      "scheduleTime": "予約時間",
+      "reviewTitle": "キャンペーン確認",
+      "reviewName": "名前",
+      "reviewSession": "セッション",
+      "reviewMessageType": "メッセージタイプ",
+      "reviewMessagePreview": "メッセージプレビュー",
+      "reviewRecipients": "受信者",
+      "reviewRecipientCount": "{{count}}人の受信者",
+      "reviewSchedule": "予定",
+      "reviewScheduleNow": "今すぐ送信",
+      "reviewScheduleDate": "{{date}}に予約済み",
+      "createBtn": "キャンペーン作成",
+      "creating": "作成中...",
+      "saveBtn": "変更を保存",
+      "saving": "保存中..."
+    },
+    "detail": {
+      "title": "キャンペーン詳細",
+      "overview": "概要",
+      "recipients": "受信者",
+      "stats": {
+        "total": "合計受信者",
+        "sent": "送信済み",
+        "failed": "失敗",
+        "pending": "保留中",
+        "progress": "進捗"
+      },
+      "actions": {
+        "start": "キャンペーン開始",
+        "pause": "一時停止",
+        "cancel": "キャンセル",
+        "resendFailed": "失敗を再送",
+        "edit": "編集",
+        "delete": "削除",
+        "back": "キャンペーン一覧に戻る"
+      },
+      "confirmDelete": "このキャンペーンを削除してもよろしいですか？",
+      "confirmStart": "このキャンペーンを開始してもよろしいですか？",
+      "noRecipients": "受信者が見つかりません",
+      "searchRecipients": "受信者を検索...",
+      "filterStatus": "ステータスで絞り込み"
+    },
+    "toasts": {
+      "createSuccess": "キャンペーンを作成しました",
+      "createError": "キャンペーンの作成に失敗",
+      "updateSuccess": "キャンペーンを更新しました",
+      "updateError": "キャンペーンの更新に失敗",
+      "deleteSuccess": "キャンペーンを削除しました",
+      "deleteError": "キャンペーンの削除に失敗",
+      "startSuccess": "キャンペーンを開始しました",
+      "startError": "キャンペーンの開始に失敗",
+      "pauseSuccess": "キャンペーンを一時停止しました",
+      "pauseError": "キャンペーンの一時停止に失敗",
+      "cancelSuccess": "キャンペーンをキャンセルしました",
+      "cancelError": "キャンペーンのキャンセルに失敗",
+      "resendSuccess": "失敗メッセージを再送信中",
+      "resendError": "メッセージの再送に失敗"
+    }
+  },
+  "infrastructure": {
+    "title": "インフラ",
+    "subtitle": "サーバー、データベース、キャッシュ、ストレージ、エンジンの設定",
+    "saveConfig": "設定を保存",
+    "saving": "保存中...",
+    "server": {
+      "title": "サーバー設定",
+      "production": "本番",
+      "development": "開発",
+      "environment": "環境",
+      "domain": "ドメイン",
+      "apiPort": "APIポート",
+      "dashboardPort": "ダッシュボードポート",
+      "corsOrigins": "CORSオリジン",
+      "corsPlaceholder": "* またはカンマ区切りのオリジン",
+      "publicApiUrl": "公開API URL（任意）",
+      "publicDashboardUrl": "公開ダッシュボードURL（任意）"
+    },
+    "webhook": {
+      "title": "Webhookとレート制限",
+      "settings": "Webhook設定",
+      "timeout": "タイムアウト（ms）",
+      "maxRetries": "最大リトライ回数",
+      "retryDelay": "リトライ間隔（ms）",
+      "rateLimit": "レート制限",
+      "window": "時間枠（秒）",
+      "maxReq": "枠内の最大リクエスト数"
+    },
+    "database": {
+      "title": "データベース設定",
+      "sqlite": "SQLite",
+      "sqliteDesc": "ローカルファイルベースのデータベース",
+      "postgres": "PostgreSQL",
+      "postgresDesc": "本番対応データベース",
+      "useBuiltIn": "組み込みPostgreSQLコンテナを使用",
+      "builtInDesc": "OpenWAがPostgreSQLコンテナを管理します",
+      "dbName": "データベース名",
+      "poolSize": "プールサイズ",
+      "ssl": "SSL接続",
+      "sslDesc": "安全なDB接続のためにTLS/SSLを有効化",
+      "migrationsTitle": "データベースマイグレーション",
+      "migrationsStatus": "スキーマはTypeORMと自動同期されます",
+      "migrationsHint": "マイグレーションは自動管理されます。手動の場合はCLIを使用。"
+    },
+    "redis": {
+      "title": "Redis",
+      "enable": "Redisを有効化",
+      "enableDesc": "キャッシュ、セッションストレージ、BullMQキューに必要",
+      "useBuiltIn": "組み込みRedisコンテナを使用",
+      "builtInDesc": "OpenWAがRedisコンテナを管理します",
+      "queueTitle": "BullMQキューシステムを有効化",
+      "queueDesc": "メッセージキューで信頼性の高い配信を実現",
+      "statsTitle": "キュー統計",
+      "messageQueue": "メッセージキュー",
+      "webhookQueue": "Webhookキュー",
+      "pending": "保留中",
+      "completed": "完了",
+      "failed": "失敗",
+      "clearFailed": "失敗ジョブをクリア",
+      "viewBullMq": "Bull MQダッシュボード",
+      "disabledTitle": "Redisが無効です",
+      "disabledDesc": "キャッシュ、セッションストレージ、BullMQキューのためにRedisを有効にしてください。",
+      "passwordOptional": "（任意）"
+    },
+    "storage": {
+      "title": "ストレージ設定",
+      "local": "ローカルファイルシステム",
+      "localDesc": "メディアファイルをローカルに保存",
+      "s3": "Amazon S3",
+      "s3Desc": "クラウドストレージ（S3互換）",
+      "useBuiltIn": "組み込みMinIOコンテナを使用",
+      "builtInDesc": "OpenWAがMinIO（S3互換）コンテナを管理します",
+      "storagePath": "ストレージパス",
+      "bucket": "バケット名",
+      "region": "リージョン",
+      "accessKey": "アクセスキー",
+      "secretKey": "シークレットキー",
+      "endpoint": "カスタムエンドポイント（任意）",
+      "endpointHint": "MinIOや他のS3互換サービス用"
+    },
+    "statusLabels": {
+      "connected": "接続済み",
+      "disconnected": "切断済み",
+      "disabled": "無効"
+    },
+    "restart": {
+      "idleTitle": "⚙️ 設定を保存しました",
+      "restartingTitle": "🔄 サーバー再起動中...",
+      "waitingTitle": "⏳ お待ちください...",
+      "successTitle": "✅ サーバー準備完了",
+      "errorTitle": "❌ 再起動に失敗",
+      "idleDesc": "設定は <code>.env.generated</code> に保存されました。<br/>変更を適用するにはサーバーの再起動が必要です。",
+      "later": "後で再起動",
+      "now": "今すぐ再起動",
+      "restartingMsg": "サーバー再起動中... {{count}}秒",
+      "checking": "サーバーステータスを確認中...",
+      "dontClose": "このウィンドウを閉じないでください",
+      "successMsg": "サーバーが復旧しました！ページが自動的にリロードされます。",
+      "errorMsg": "30秒経過してもサーバーが応答しません。Dockerログを確認して手動で再起動してください。",
+      "reload": "ページをリロード"
+    },
+    "toasts": {
+      "saveFailed": "保存に失敗",
+      "saveSuccess": "設定を保存しました",
+      "saveError": "設定の保存に失敗"
+    }
+  },
+  "pluginStatus": {
+    "installed": "インストール済み",
+    "enabled": "有効",
+    "disabled": "無効",
+    "error": "エラー"
+  },
+  "pluginType": {
+    "engine": "エンジン",
+    "storage": "ストレージ",
+    "queue": "キュー",
+    "auth": "認証",
+    "extension": "拡張"
+  },
+  "plugins": {
+    "title": "プラグイン",
+    "subtitle": "エンジン、ストレージバックエンド、拡張機能を管理",
+    "refresh": "更新",
+    "engineCard": "アクティブなWhatsAppエンジン",
+    "running": "実行中",
+    "supportedFeatures": "サポート機能:",
+    "more": "+{{count}}件",
+    "builtIn": "組み込み",
+    "noDescription": "説明がありません",
+    "required": "必須",
+    "active": "アクティブ",
+    "activate": "アクティブ化",
+    "enable": "有効化",
+    "disable": "無効化",
+    "healthCheck": "ヘルスチェック",
+    "configure": "設定",
+    "empty": {
+      "title": "プラグインが見つかりません",
+      "description": "OpenWAの機能を拡張するプラグインをインストール"
+    },
+    "config": {
+      "title": "{{name}} の設定",
+      "restartNotice": "変更を反映するにはサーバーの再起動が必要です",
+      "engineType": "エンジンタイプ",
+      "headless": "ヘッドレスモード",
+      "headlessDesc": "ブラウザをUIなしで実行（本番環境推奨）",
+      "sessionDataPath": "セッションデータパス",
+      "browserArgs": "ブラウザ引数",
+      "noOptions": "このプラグインの設定オプションはありません",
+      "save": "設定を保存"
+    },
+    "toasts": {
+      "errorTitle": "プラグインエラー",
+      "errorDefault": "プラグインの切り替えに失敗",
+      "healthOk": "ヘルスチェック正常",
+      "healthFail": "ヘルスチェック異常",
+      "healthError": "ヘルスチェックエラー",
+      "savedTitle": "設定を保存しました",
+      "savedDesc": "変更を反映するにはサーバーの再起動が必要です。",
+      "saveFailed": "保存に失敗"
+    }
+  },
+  "contacts": {
+    "title": "連絡先",
+    "subtitle": "WhatsApp連絡先を管理",
+    "newContact": "新規連絡先",
+    "searchPlaceholder": "名前または電話番号で検索...",
+    "selected": "{{count}}件選択中",
+    "bulkDelete": "選択を削除",
+    "importBtn": "CSVインポート",
+    "exportBtn": "CSVエクスポート",
+    "downloadTemplate": "CSVサンプルをダウンロード",
+    "empty": {
+      "title": "連絡先はまだありません",
+      "description": "最初の連絡先を追加するか、CSVファイルからインポート"
+    },
+    "columns": {
+      "name": "名前",
+      "phone": "電話",
+      "country": "国",
+      "city": "都市",
+      "note": "メモ",
+      "actions": "操作"
+    },
+    "form": {
+      "createTitle": "新規連絡先",
+      "editTitle": "連絡先を編集",
+      "fullName": "氏名",
+      "fullNamePlaceholder": "例: 山田 太郎",
+      "countryCode": "国コード",
+      "phone": "WhatsApp番号",
+      "phonePlaceholder": "例: 9012345678",
+      "phoneHint": "国コードなしで番号を入力してください（自動追加されます）",
+      "country": "国",
+      "countryPlaceholder": "例: 日本",
+      "state": "都道府県",
+      "statePlaceholder": "例: 東京都",
+      "city": "市区町村",
+      "cityPlaceholder": "例: 新宿区",
+      "address": "住所",
+      "addressPlaceholder": "例: 新宿1-1-1",
+      "note": "メモ",
+      "notePlaceholder": "追加メモ...",
+      "phoneRequired": "電話番号が必要です",
+      "phoneDuplicate": "この電話番号は既に存在します",
+      "phoneInvalid": "電話番号は数字のみで入力してください"
+    },
+    "delete": {
+      "title": "連絡先を削除",
+      "message": "<strong>{{name}}</strong> を削除してもよろしいですか？元に戻せません。",
+      "messagePhone": "連絡先 <strong>{{phone}}</strong> を削除してもよろしいですか？元に戻せません。",
+      "successTitle": "連絡先を削除しました",
+      "successDesc": "連絡先を削除しました"
+    },
+    "bulkDeleteModal": {
+      "title": "{{count}}件の連絡先を削除",
+      "message": "選択した{{count}}件の連絡先を削除してもよろしいですか？元に戻せません。",
+      "successTitle": "連絡先を削除しました",
+      "successDesc": "{{count}}件の連絡先を削除しました"
+    },
+    "import": {
+      "title": "連絡先をインポート",
+      "step1Title": "CSVファイルをアップロード",
+      "step1Desc": "連絡先のCSVファイルをアップロード。電話番号列に国コードを含めてください（例: +819012345678）。",
+      "step2Title": "プレビューと検証",
+      "step2Desc": "インポート前に連絡先を確認。無効な行はハイライトされます。",
+      "step3Title": "インポート完了",
+      "dropzone": "CSVファイルをここにドロップ、またはクリックして選択",
+      "dropzoneHint": "対応形式: .csv",
+      "validRows": "{{count}}件有効",
+      "invalidRows": "{{count}}件無効",
+      "importValid": "有効な行のみインポート",
+      "importAll": "すべてインポート",
+      "importBtn": "{{count}}件の連絡先をインポート",
+      "importing": "インポート中...",
+      "successTitle": "インポート成功",
+      "successDesc": "{{created}}件インポート、{{skipped}}件スキップ",
+      "errorPhone": "電話番号が空です",
+      "errorNoCountryCode": "電話番号に国コードを含めてください（例: +819012345678）",
+      "errorDuplicate": "ファイル内に重複した電話番号があります",
+      "previewColumns": {
+        "row": "#",
+        "status": "ステータス",
+        "name": "氏名",
+        "phone": "電話",
+        "country": "国",
+        "city": "都市",
+        "note": "メモ",
+        "error": "問題"
+      }
+    },
+    "detail": {
+      "title": "連絡先詳細",
+      "phone": "電話",
+      "country": "国",
+      "state": "都道府県",
+      "city": "市区町村",
+      "address": "住所",
+      "note": "メモ",
+      "created": "作成日",
+      "messages": "メッセージ履歴",
+      "noMessages": "この連絡先のメッセージは見つかりません。",
+      "incoming": "受信",
+      "outgoing": "送信",
+      "loadMore": "さらに読み込む",
+      "loadingMessages": "メッセージを読み込み中...",
+      "totalMessages": "全{{count}}件のメッセージ",
+      "session": "セッション",
+      "type": "タイプ",
+      "direction": "方向",
+      "messageBody": "メッセージ",
+      "timestamp": "日時",
+      "status": "ステータス"
+    },
+    "pagination": {
+      "showing": "全{{total}}件中{{from}}〜{{to}}件を表示",
+      "perPage": "件/ページ"
+    },
+    "toasts": {
+      "createSuccess": "連絡先を作成しました",
+      "createError": "連絡先の作成に失敗",
+      "updateSuccess": "連絡先を更新しました",
+      "updateError": "連絡先の更新に失敗",
+      "deleteSuccess": "連絡先を削除しました",
+      "deleteError": "連絡先の削除に失敗",
+      "bulkDeleteSuccess": "{{count}}件の連絡先を削除しました",
+      "bulkDeleteError": "連絡先の削除に失敗",
+      "importSuccess": "{{created}}件の連絡先をインポートしました",
+      "importError": "インポートに失敗",
+      "exportSuccess": "{{count}}件の連絡先をエクスポートしました",
+      "exportError": "エクスポートに失敗"
+    }
+  },
+  "groups": {
+    "title": "連絡先グループ",
+    "subtitle": "連絡先をグループ化してターゲット配信",
+    "newGroup": "新規グループ",
+    "searchPlaceholder": "グループを検索...",
+    "empty": {
+      "title": "グループはまだありません",
+      "description": "連絡先を整理するグループを作成"
+    },
+    "columns": {
+      "name": "名前",
+      "description": "説明",
+      "members": "メンバー数",
+      "created": "作成日",
+      "actions": "操作"
+    },
+    "form": {
+      "createTitle": "新規グループ作成",
+      "editTitle": "グループ編集",
+      "name": "グループ名",
+      "namePlaceholder": "例: VIP顧客",
+      "description": "説明",
+      "descriptionPlaceholder": "グループの説明（任意）",
+      "nameRequired": "グループ名は必須です"
+    },
+    "create": {
+      "step1Title": "グループ詳細",
+      "step2Title": "メンバー追加",
+      "step3Title": "確認と作成",
+      "method": "連絡先の追加方法",
+      "csvImport": "CSVからインポート",
+      "csvImportDesc": "CSVファイルをアップロードして連絡先を作成しグループに追加",
+      "filterSelect": "フィルターと選択",
+      "filterSelectDesc": "既存の連絡先を検索・フィルターしてグループに追加",
+      "csv": {
+        "title": "CSVから連絡先をインポート",
+        "dropzone": "CSVファイルをここにドロップ",
+        "dropzoneHint": "形式: .csv。電話番号に国コードを含めてください（例: +819012345678）",
+        "validRows": "{{count}}件有効",
+        "invalidRows": "{{count}}件無効",
+        "importBtn": "{{count}}件インポート",
+        "importing": "インポート中...",
+        "step2Title": "プレビューと検証",
+        "step2Desc": "インポート前にデータを確認。",
+        "step3Title": "インポート完了",
+        "successDesc": "{{created}}件作成・追加、{{skipped}}件スキップ",
+        "errorPhone": "電話番号が空",
+        "errorNoCountryCode": "国コードが必要",
+        "errorDuplicate": "重複番号",
+        "previewColumns": {
+          "row": "#",
+          "status": "ステータス",
+          "name": "名前",
+          "phone": "電話",
+          "country": "国",
+          "city": "都市",
+          "note": "メモ",
+          "error": "問題"
+        }
+      },
+      "filter": {
+        "title": "連絡先を選択",
+        "searchPlaceholder": "検索...",
+        "country": "国",
+        "allCountries": "すべて",
+        "state": "都道府県",
+        "allStates": "すべて",
+        "city": "市区町村",
+        "allCities": "すべて",
+        "namePlaceholder": "名前でフィルター...",
+        "phonePlaceholder": "電話番号でフィルター...",
+        "selected": "{{count}}件選択中",
+        "noResults": "該当する連絡先がありません",
+        "clearFilters": "フィルターをクリア"
+      },
+      "review": {
+        "title": "グループ確認",
+        "nameLabel": "グループ名",
+        "descriptionLabel": "説明",
+        "membersLabel": "メンバー",
+        "noMembers": "まだ追加されていません",
+        "addMore": "さらに追加"
+      }
+    },
+    "detail": {
+      "title": "グループ詳細",
+      "members": "メンバー",
+      "noMembers": "このグループにメンバーはいません",
+      "addMembers": "メンバー追加",
+      "removeSelected": "選択を削除",
+      "searchPlaceholder": "メンバーを検索...",
+      "removeConfirm": "このグループから{{count}}件の連絡先を削除しますか？",
+      "empty": {
+        "title": "メンバーなし",
+        "description": "連絡先をこのグループに追加"
+      }
+    },
+    "delete": {
+      "title": "グループを削除",
+      "message": "グループ <strong>「{{name}}」</strong> を削除してもよろしいですか？元に戻せません。",
+      "successTitle": "グループを削除しました",
+      "successDesc": "グループを削除しました"
+    },
+    "toasts": {
+      "createSuccess": "グループを作成しました",
+      "createError": "グループの作成に失敗",
+      "updateSuccess": "グループを更新しました",
+      "updateError": "グループの更新に失敗",
+      "deleteSuccess": "グループを削除しました",
+      "deleteError": "グループの削除に失敗",
+      "addMembersSuccess": "{{count}}件の連絡先をグループに追加",
+      "addMembersError": "メンバー追加に失敗",
+      "removeMembersSuccess": "{{count}}件の連絡先をグループから削除",
+      "removeMembersError": "メンバー削除に失敗",
+      "importSuccess": "{{created}}件インポート・追加",
+      "importError": "インポートに失敗"
+    }
+  },
+  "settings": {
+    "title": "設定",
+    "subtitle": "プロフィール、パスワード、システム設定を管理",
+    "tabs": {
+      "profile": "プロフィール",
+      "password": "パスワード",
+      "language": "言語",
+      "system": "システム"
+    },
+    "language": {
+      "title": "言語",
+      "subtitle": "ダッシュボード画面の表示言語を選択してください"
+    },
+    "profile": {
+      "name": "氏名",
+      "namePlaceholder": "例: 山田 太郎",
+      "phone": "電話番号",
+      "phonePlaceholder": "例: 09012345678",
+      "profilePic": "プロフィール画像",
+      "profilePicHint": "画像をアップロード（JPEG, PNG, WebP, GIF）。最大5MB。",
+      "chooseFile": "ファイルを選択",
+      "uploading": "アップロード中...",
+      "remove": "削除",
+      "toasts": {
+        "updateSuccess": "プロフィールを更新しました",
+        "updateError": "プロフィールの更新に失敗",
+        "uploadError": "アップロードに失敗"
+      }
+    },
+    "password": {
+      "current": "現在のパスワード",
+      "currentHint": "本人確認のため現在のパスワードを入力",
+      "currentPlaceholder": "現在のパスワードを入力",
+      "newPassword": "新しいパスワード",
+      "newPlaceholder": "新しいパスワード（6文字以上）",
+      "confirm": "新しいパスワード（確認）",
+      "confirmPlaceholder": "新しいパスワードを再入力",
+      "save": "パスワードを変更",
+      "errors": {
+        "currentRequired": "現在のパスワードが必要です",
+        "newRequired": "新しいパスワードが必要です",
+        "tooShort": "パスワードは6文字以上必要です",
+        "mismatch": "パスワードが一致しません"
+      },
+      "toasts": {
+        "updateSuccess": "パスワードを変更しました",
+        "updateError": "パスワードの変更に失敗"
+      }
+    },
+    "system": {
+      "name": "会社名",
+      "namePlaceholder": "例: 株式会社",
+      "email": "メールアドレス",
+      "emailPlaceholder": "例: info@company.com",
+      "altPhone": "予備電話",
+      "altPhonePlaceholder": "例: +819012345678",
+      "website": "ウェブサイト",
+      "websitePlaceholder": "例: https://company.com",
+      "address": "住所",
+      "addressPlaceholder": "例: 東京都新宿区新宿1-1-1",
+      "googleMapLink": "Googleマップリンク",
+      "googleMapLinkPlaceholder": "例: https://maps.google.com/...",
+      "businessLogo": "会社ロゴ",
+      "smallLogo": "小ロゴ",
+      "toasts": {
+        "updateSuccess": "システム設定を更新しました",
+        "updateError": "システム設定の更新に失敗"
+      }
+    }
+  }
+}

@@ -920,7 +920,76 @@
       "importSuccess": "{{created}} אנשי קשר יובאו",
       "importError": "הייבוא נכשל",
       "exportSuccess": "{{count}} אנשי קשר יוצאו",
-      "exportError": "הייצוא נכשל"
+    }
+  },
+  "settings": {
+    "title": "הגדרות",
+    "subtitle": "ניהול פרופיל, סיסמה והגדרות מערכת",
+    "tabs": {
+      "profile": "פרופיל",
+      "password": "סיסמה",
+      "language": "שפה",
+      "system": "הגדרות מערכת"
+    },
+    "language": {
+      "title": "שפה",
+      "subtitle": "בחר את השפה המועדפת שלך לממשק הדאשבורד"
+    },
+    "profile": {
+      "name": "שם מלא",
+      "namePlaceholder": "לדוגמה: ישראל ישראלי",
+      "phone": "מספר טלפון",
+      "phonePlaceholder": "לדוגמה: 0501234567",
+      "profilePic": "תמונת פרופיל",
+      "profilePicHint": "העלה תמונה (JPEG, PNG, WebP, GIF). עד 5MB.",
+      "chooseFile": "בחר קובץ",
+      "uploading": "מעלה...",
+      "remove": "הסר",
+      "toasts": {
+        "updateSuccess": "הפרופיל עודכן",
+        "updateError": "עדכון הפרופיל נכשל",
+        "uploadError": "ההעלאה נכשלה"
+      }
+    },
+    "password": {
+      "current": "סיסמה נוכחית",
+      "currentHint": "הזן את הסיסמה הנוכחית לאימות זהות",
+      "currentPlaceholder": "הזן סיסמה נוכחית",
+      "newPassword": "סיסמה חדשה",
+      "newPlaceholder": "הזן סיסמה חדשה (לפחות 6 תווים)",
+      "confirm": "אשר סיסמה חדשה",
+      "confirmPlaceholder": "הזן שוב את הסיסמה החדשה",
+      "save": "שנה סיסמה",
+      "errors": {
+        "currentRequired": "נדרשת סיסמה נוכחית",
+        "newRequired": "נדרשת סיסמה חדשה",
+        "tooShort": "הסיסמה חייבת להכיל לפחות 6 תווים",
+        "mismatch": "הסיסמאות אינן תואמות"
+      },
+      "toasts": {
+        "updateSuccess": "הסיסמה שונתה בהצלחה",
+        "updateError": "שינוי הסיסמה נכשל"
+      }
+    },
+    "system": {
+      "name": "שם העסק",
+      "namePlaceholder": "לדוגמה: החברה שלי",
+      "email": "אימייל",
+      "emailPlaceholder": "לדוגמה: info@company.com",
+      "altPhone": "טלפון חלופי",
+      "altPhonePlaceholder": "לדוגמה: +972501234567",
+      "website": "אתר אינטרנט",
+      "websitePlaceholder": "לדוגמה: https://company.com",
+      "address": "כתובת",
+      "addressPlaceholder": "לדוגמה: רחוב הרצל 1, תל אביב",
+      "googleMapLink": "קישור Google Maps",
+      "googleMapLinkPlaceholder": "לדוגמה: https://maps.google.com/...",
+      "businessLogo": "לוגו עסקי",
+      "smallLogo": "לוגו קטן",
+      "toasts": {
+        "updateSuccess": "הגדרות המערכת עודכנו",
+        "updateError": "עדכון הגדרות המערכת נכשל"
+      }
     }
   }
 }

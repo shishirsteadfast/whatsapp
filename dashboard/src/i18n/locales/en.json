@@ -1052,7 +1052,12 @@
     "tabs": {
       "profile": "Profile",
       "password": "Password",
+      "language": "Language",
       "system": "System Settings"
+    },
+    "language": {
+      "title": "Language",
+      "subtitle": "Choose your preferred language for the dashboard interface"
     },
     "profile": {
       "name": "Full Name",

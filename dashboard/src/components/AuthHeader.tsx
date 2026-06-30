@@ -36,7 +36,22 @@ export function AuthHeader({ onLogout }: AuthHeaderProps) {
     const idx = supportedLanguages.indexOf(currentLang);
     void i18n.changeLanguage(supportedLanguages[(idx + 1) % supportedLanguages.length]);
   };
-  const langLabel = currentLang === 'he' ? 'עב' : 'EN';
+  const langLabels: Record<string, string> = {
+    en: 'EN',
+    he: 'עב',
+    zh: '中文',
+    es: 'ES',
+    ar: 'العربية',
+    bn: 'বাংলা',
+    pt: 'PT',
+    id: 'ID',
+    ur: 'اردو',
+    ru: 'RU',
+    de: 'DE',
+    ja: '日本語',
+    it: 'IT',
+  };
+  const langLabel = langLabels[currentLang] || currentLang.toUpperCase();
 
   /* Shared icon-button style */
   const iconBtn = 'flex h-8 w-8 cursor-pointer items-center justify-center rounded-[var(--radius)] border-none bg-transparent text-[var(--color-ink-muted)] transition-all hover:bg-[var(--color-muted)] hover:text-[var(--color-ink)]';

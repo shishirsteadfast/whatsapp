@@ -1,0 +1,1120 @@
+{
+  "common": {
+    "appName": "OpenWA",
+    "appSubtitle": "WhatsApp API",
+    "loading": "لوڈ ہو رہا ہے...",
+    "save": "محفوظ کریں",
+    "cancel": "منسوخ کریں",
+    "delete": "حذف کریں",
+    "edit": "ترمیم کریں",
+    "create": "بنائیں",
+    "close": "بند کریں",
+    "submit": "جمع کروائیں",
+    "confirm": "تصدیق کریں",
+    "search": "تلاش کریں",
+    "filter": "فلٹر کریں",
+    "actions": "کارروائیاں",
+    "status": "حالت",
+    "name": "نام",
+    "role": "کردار",
+    "type": "قسم",
+    "url": "URL",
+    "port": "پورٹ",
+    "host": "ہوسٹ",
+    "username": "صارف نام",
+    "password": "پاس ورڈ",
+    "active": "فعال",
+    "inactive": "غیر فعال",
+    "enabled": "چالو",
+    "disabled": "غیر چالو",
+    "connected": "منسلک",
+    "disconnected": "منقطع",
+    "never": "کبھی نہیں",
+    "justNow": "ابھی ابھی",
+    "minAgo": "{{count}} منٹ پہلے",
+    "hoursAgo": "{{count}} گھنٹے پہلے",
+    "optional": "اختیاری",
+    "language": "زبان",
+    "english": "English",
+    "hebrew": "עברית",
+    "back": "واپس",
+    "next": "اگلا",
+    "previous": "پچھلا",
+    "expand": "پھیلائیں",
+    "collapse": "سمیٹیں",
+    "logout": "لاگ آؤٹ",
+    "refresh": "ریفریش",
+    "notifications": "اطلاعات",
+    "noNotifications": "کوئی نئی اطلاع نہیں",
+    "profile": "پروفائل",
+    "changePassword": "پاس ورڈ تبدیل کریں",
+    "settings": "ترتیبات",
+    "errorGeneric": "ایک خرابی پیش آگئی",
+    "unknownError": "نامعلوم خرابی",
+    "lightMode": "روشن وضع",
+    "darkMode": "اندھیرا وضع",
+    "viewAll": "سب دیکھیں",
+    "copied": "نقل ہو گیا!"
+  },
+  "theme": {
+    "light": "روشن",
+    "dark": "اندھیرا",
+    "system": "سسٹم",
+    "label": "تھیم: {{value}}"
+  },
+  "nav": {
+    "dashboard": "ڈیش بورڈ",
+    "sessions": "سیشنز",
+    "webhooks": "ویب ہکس",
+    "apiKeys": "API کی چابیاں",
+    "contacts": "رابطے",
+    "composer": "کمپوزر",
+    "groups": "گروپس",
+    "messages": "پیغامات",
+    "settings": "ترتیبات",
+    "messageTester": "پیغام ٹیسٹر",
+    "infrastructure": "انفراسٹرکچر",
+    "plugins": "پلگ انز",
+    "campaigns": "مہمات",
+    "logs": "لاگز"
+  },
+  "errorBoundary": {
+    "title": "کچھ غلط ہو گیا",
+    "description": "ڈیش بورڈ میں ایک غیر متوقع خرابی پیش آگئی۔",
+    "reload": "ڈیش بورڈ دوبارہ لوڈ کریں"
+  },
+  "login": {
+    "apiKey": "API کلید",
+    "apiKeyPlaceholder": "اپنی API کلید درج کریں",
+    "apiKeyRequired": "API کلید ضروری ہے",
+    "connect": "منسلک ہوں",
+    "connecting": "منسلک ہو رہا ہے...",
+    "invalidKey": "غلط API کلید",
+    "connectionError": "سرور سے منسلک نہیں ہو سکا۔ براہ کرم دوبارہ کوشش کریں۔",
+    "help": "مدد چاہیے؟",
+    "viewDocs": "دستاویز دیکھیں",
+    "footer": "Yudhi Armyndharis اور OpenWA کمیونٹی نے ❤️ سے بنایا",
+    "version": "v{{version}} · {{date}}",
+    "title": "سائن ان",
+    "subtitle": "ڈیش بورڈ تک رسائی کے لیے اپنی اسناد درج کریں۔",
+    "phoneLabel": "فون نمبر",
+    "phonePlaceholder": "مثلاً 03123456789",
+    "passwordLabel": "پاس ورڈ",
+    "passwordPlaceholder": "پاس ورڈ درج کریں",
+    "signIn": "سائن ان",
+    "phoneRequired": "فون نمبر ضروری ہے",
+    "passwordRequired": "پاس ورڈ ضروری ہے",
+    "invalidCredentials": "غلط فون یا پاس ورڈ"
+  },
+  "dashboard": {
+    "title": "ڈیش بورڈ",
+    "subtitle": "آپ کے WhatsApp سیشنز اور سرگرمی کا جائزہ",
+    "stats": {
+      "activeSessions": "فعال سیشنز",
+      "messagesToday": "آج کے پیغامات",
+      "webhooksConfigured": "ویب ہکس ترتیب شدہ",
+      "apiCalls": "API کالز (24 گھنٹے)"
+    },
+    "sessionsOverview": "سیشنز کا جائزہ",
+    "showingSessions": "کل {{total}} میں سے {{shown}} سیشن دکھائے جا رہے ہیں",
+    "columns": {
+      "sessionId": "سیشن ID",
+      "phone": "فون نمبر",
+      "status": "حالت",
+      "lastActive": "آخری سرگرمی",
+      "actions": "کارروائیاں"
+    },
+    "noSessions": "کوئی سیشن نہیں ملا۔ شروع کرنے کے لیے ایک بنائیں۔",
+    "view": "دیکھیں",
+    "disconnect": "منقطع کریں",
+    "errorPrefix": "خرابی: {{message}}",
+    "loadError": "ڈیٹا لوڈ کرنے میں ناکام",
+    "statActive": "{{count}} فعال",
+    "statNoData": "ابھی تک کوئی ڈیٹا نہیں"
+  },
+  "sessionStatus": {
+    "created": "نیا",
+    "idle": "بیکار",
+    "initializing": "شروع ہو رہا ہے...",
+    "connecting": "منسلک ہو رہا ہے...",
+    "qr_ready": "QR اسکین کریں",
+    "ready": "منسلک",
+    "disconnected": "منقطع"
+  },
+  "sessions": {
+    "title": "سیشنز",
+    "subtitle": "اپنے WhatsApp سیشنز اور QR کوڈ کنکشنز کا نظم کریں",
+    "newSession": "نیا سیشن",
+    "searchPlaceholder": "سیشنز تلاش کریں...",
+    "filter": {
+      "all": "تمام حالتیں",
+      "active": "فعال (منسلک)",
+      "inactive": "غیر فعال",
+      "connecting": "منسلک ہو رہا ہے"
+    },
+    "empty": {
+      "title": "کوئی سیشن نہیں ملا",
+      "description": "شروع کرنے کے لیے ایک نیا سیشن بنائیں"
+    },
+    "create": {
+      "title": "نیا سیشن بنائیں",
+      "label": "سیشن کا نام",
+      "placeholder": "مثلاً marketing-bot",
+      "hint": "صرف چھوٹے حروف، اعداد اور ہائفن استعمال کریں۔ مثال: <code>customer-support</code>",
+      "invalidChars": "غلط حروف۔ صرف چھوٹے حروف، اعداد اور ہائفن کی اجازت ہے۔",
+      "tooLong": "نام 50 حروف سے کم ہونا چاہیے ({{length}}/50).",
+      "duplicate": "اس نام سے پہلے سے ایک سیشن موجود ہے۔",
+      "successTitle": "سیشن بن گیا",
+      "successDesc": "سیشن «{{name}}» کامیابی سے بن گیا",
+      "errorTitle": "بنانے میں ناکام",
+      "errorDefault": "سیشن بنانے میں ناکام"
+    },
+    "delete": {
+      "title": "حذف کرنے کی تصدیق",
+      "message": "کیا آپ واقعی سیشن <strong>«{{name}}»</strong> حذف کرنا چاہتے ہیں؟",
+      "warning": "یہ عمل واپس نہیں لیا جا سکتا۔",
+      "successTitle": "سیشن حذف ہو گیا",
+      "successDescNamed": "سیشن «{{name}}» حذف ہو گیا",
+      "successDescGeneric": "سیشن حذف ہو گیا",
+      "errorTitle": "حذف کرنے میں ناکام",
+      "errorDefault": "سیشن حذف کرنے میں ناکام"
+    },
+    "qr": {
+      "title": "QR کوڈ اسکین کریں",
+      "step1": "<strong>1.</strong> اپنے فون پر WhatsApp کھولیں",
+      "step2": "<strong>2.</strong> <strong>مینو</strong> → <strong>منسلک آلات</strong> پر ٹیپ کریں",
+      "step3": "<strong>3.</strong> <strong>ایک آلہ منسلک کریں</strong> پر ٹیپ کریں اور اس QR کو اسکین کریں",
+      "autoRefresh": "QR ہر 5 سیکنڈ میں خود بخود اپ ڈیٹ ہوتا ہے",
+      "generating": "QR کوڈ بنا رہا ہے...",
+      "unavailable": "QR کوڈ ابھی دستیاب نہیں۔ تھوڑی دیر بعد دوبارہ کوشش کریں۔",
+      "preparing": "QR کوڈ تیار ہو رہا ہے...",
+      "showQr": "QR دکھائیں",
+      "loading": "لوڈ ہو رہا ہے...",
+      "scanToConnect": "منسلک ہونے کے لیے QR اسکین کریں"
+    },
+    "details": {
+      "title": "سیشن کی تفصیلات",
+      "name": "نام",
+      "status": "حالت",
+      "sessionId": "سیشن ID",
+      "phone": "فون نمبر",
+      "phoneNone": "منسلک نہیں",
+      "created": "بنایا گیا",
+      "lastActive": "آخری سرگرمی"
+    },
+    "actions": {
+      "view": "دیکھیں",
+      "start": "شروع کریں",
+      "stop": "روکیں",
+      "reconnect": "دوبارہ منسلک کریں",
+      "delete": "حذف کریں"
+    },
+    "toasts": {
+      "readyTitle": "سیشن تیار",
+      "readyDesc": "WhatsApp سیشن اب منسلک ہے",
+      "disconnectedTitle": "سیشن منقطع ہو گیا",
+      "disconnectedDesc": "WhatsApp سیشن منقطع ہو گیا"
+    },
+    "card": {
+      "phone": "فون",
+      "sessionId": "سیشن ID",
+      "lastActive": "آخری سرگرمی"
+    }
+  },
+  "webhooks": {
+    "title": "ویب ہکس",
+    "subtitle": "ریئل ٹائم اطلاعوں کے لیے HTTP کال بیکس ترتیب دیں",
+    "addWebhook": "ویب ہک شامل کریں",
+    "createTitle": "ویب ہک بنائیں",
+    "editTitle": "ویب ہک میں ترمیم کریں",
+    "deleteTitle": "ویب ہک حذف کریں",
+    "deleteConfirm": "کیا آپ واقعی یہ ویب ہک حذف کرنا چاہتے ہیں؟",
+    "selectSession": "سیشن منتخب کریں...",
+    "session": "سیشن",
+    "events": "واقعات",
+    "available": "دستیاب واقعات",
+    "saveChanges": "تبدیلیاں محفوظ کریں",
+    "columns": {
+      "url": "URL",
+      "events": "واقعات",
+      "session": "سیشن",
+      "status": "حالت",
+      "actions": "کارروائیاں"
+    },
+    "empty": {
+      "title": "کوئی ویب ہک ترتیب نہیں دیا گیا",
+      "description": "ریئل ٹائم اطلاعیں حاصل کرنے کے لیے ویب ہک شامل کریں"
+    },
+    "toasts": {
+      "created": "ویب ہک کامیابی سے بن گیا",
+      "createFailed": "ویب ہک بنانے میں ناکام: {{message}}",
+      "deleted": "ویب ہک کامیابی سے حذف ہو گیا",
+      "deleteFailed": "ویب ہک حذف کرنے میں ناکام: {{message}}",
+      "updated": "ویب ہک کامیابی سے اپ ڈیٹ ہو گیا",
+      "updateFailed": "ویب ہک اپ ڈیٹ کرنے میں ناکام: {{message}}",
+      "testOk": "ویب ہک ٹیسٹ کامیاب! حیثیت: {{status}}",
+      "testFailed": "ویب ہک ٹیسٹ ناکام: {{message}}",
+      "testError": "ویب ہک ٹیسٹ کرنے میں ناکام: {{message}}"
+    },
+    "actions": {
+      "test": "ٹیسٹ کریں",
+      "edit": "ترمیم کریں",
+      "delete": "حذف کریں"
+    },
+    "eventDescriptions": {
+      "message.received": "جب پیغام موصول ہوتا ہے",
+      "message.sent": "جب پیغام بھیجا جاتا ہے",
+      "session.connected": "جب سیشن منسلک ہوتا ہے",
+      "session.disconnected": "جب سیشن منقطع ہوتا ہے",
+      "session.qr": "جب QR کوڈ بنتا ہے",
+      "all": "تمام واقعات"
+    }
+  },
+  "apiKeys": {
+    "title": "API کا نظم",
+    "subtitle": "API چابیاں، اسناد اور API دستاویزات کا نظم کریں",
+    "tabs": {
+      "overview": "جائزہ",
+      "keys": "API چابیاں",
+      "docs": "دستاویزات"
+    },
+    "stats": {
+      "totalKeys": "کل چابیاں",
+      "activeKeys": "فعال چابیاں",
+      "totalCalls": "کل کالیں",
+      "rateLimit": "آج کی کالیں"
+    },
+    "credentials": {
+      "baseUrl": "API بنیادی URL",
+      "baseUrlHint": "تمام API درخواستوں کے لیے اس URL کو بنیادی اختتامی نقطہ کے طور پر استعمال کریں۔"
+    },
+    "quickLinks": {
+      "title": "فوری روابط",
+      "manageKeys": "API چابیاں منظم کریں",
+      "manageKeysDesc": "اپنی API چابیاں دیکھیں، بنائیں، منسوخ کریں اور حذف کریں",
+      "viewDocs": "API دستاویزات",
+      "viewDocsDesc": "مثالوں کے ساتھ تفصیلی اختتامی نکاتی حوالہ دیکھیں",
+      "createKey": "نئی چابی بنائیں",
+      "createKeyDesc": "مخصوص کردار کے ساتھ نئی API چابی بنائیں"
+    },
+    "createBtn": "API چابی بنائیں",
+    "modalTitle": "API چابی بنائیں",
+    "createdTitle": "API چابی بن گئی",
+    "createdHint": "اس چابی کو ابھی کاپی کریں۔ آپ اسے دوبارہ نہیں دیکھ سکیں گے۔",
+    "createdHintExtra": "یہ خفیہ چابی دوبارہ نہیں دکھائی جائے گی۔ اسے محفوظ رکھیں۔",
+    "namePlaceholder": "مثلاً پروڈکشن کلید",
+    "rolesTitle": "کرداروں کا حوالہ",
+    "roles": {
+      "admin": "منتظم",
+      "operator": "آپریٹر",
+      "viewer": "دیکھنے والا"
+    },
+    "roleDescriptions": {
+      "admin": "تمام وسائل تک مکمل رسائی",
+      "operator": "سیشن اور پیغام کا نظم",
+      "viewer": "صرف پڑھنے کی رسائی"
+    },
+    "columns": {
+      "name": "نام",
+      "key": "چابی",
+      "role": "کردار",
+      "status": "حالت",
+      "lastUsed": "آخری استعمال",
+      "actions": "کارروائیاں"
+    },
+    "statuses": {
+      "active": "فعال",
+      "revoked": "منسوخ شدہ"
+    },
+    "empty": {
+      "title": "کوئی API چابی نہیں بنائی گئی",
+      "description": "اپنی درخواستوں کی تصدیق کے لیے API چابی بنائیں"
+    },
+    "confirm": {
+      "deleteTitle": "API چابی حذف کریں",
+      "revokeTitle": "API چابی منسوخ کریں",
+      "deleteMessage": "کیا آپ واقعی <strong>{{name}}</strong> کو مستقل طور پر حذف کرنا چاہتے ہیں؟ یہ عمل واپس نہیں لیا جا سکتا۔",
+      "revokeMessage": "کیا آپ واقعی <strong>{{name}}</strong> کو منسوخ کرنا چاہتے ہیں؟ یہ مزید کام نہیں کرے گی۔",
+      "delete": "حذف کریں",
+      "revoke": "منسوخ کریں"
+    },
+    "actions": {
+      "copy": "کاپی کریں",
+      "revoke": "منسوخ کریں",
+      "delete": "حذف کریں"
+    }
+  },
+  "apiDocs": {
+    "auth": {
+      "title": "تصدیق",
+      "description": "تمام API درخواستوں کے لیے تصدیق ضروری ہے۔ اپنی API کلید کو <code>X-API-Key</code> ہیڈر میں شامل کریں۔ آپ API چابیاں والے ٹیب میں اپنی چابیاں منظم کر سکتے ہیں۔",
+      "example": "تصدیق کے ساتھ درخواست کی مثال",
+      "none": "کسی تصدیق کی ضرورت نہیں",
+      "apiKey": "API کلید ضروری",
+      "admin": "منتظم رسائی ضروری"
+    },
+    "sdks": {
+      "title": "SDKs اور لائبریریاں",
+      "description": "OpenWA کو اپنی ایپلیکیشن میں شامل کرنے کے لیے ہمارے سرکاری SDKs استعمال کریں۔"
+    },
+    "endpoints": {
+      "title": "API اختتامی نکات",
+      "health": {
+        "desc": "API سرور کی صحت کی حیثیت چیک کریں"
+      },
+      "sessions": {
+        "list": "تمام WhatsApp سیشنز کی فہرست",
+        "create": "نیا WhatsApp سیشن بنائیں",
+        "qr": "سیشن کے لیے QR کوڈ حاصل کریں",
+        "delete": "WhatsApp سیشن حذف کریں"
+      },
+      "messages": {
+        "sendText": "متن پیغام بھیجیں",
+        "sendImage": "تصویری پیغام بھیجیں",
+        "sendLocation": "مقام کا پیغام بھیجیں",
+        "list": "اختیاری فلٹرز کے ساتھ پیغامات کی فہرست"
+      },
+      "contacts": {
+        "list": "تمام محفوظ شدہ رابطوں کی فہرست",
+        "create": "نیا رابطہ بنائیں"
+      },
+      "webhooks": {
+        "list": "تمام ترتیب شدہ ویب ہکس کی فہرست"
+      },
+      "campaigns": {
+        "list": "تمام براڈکاسٹ مہمات کی فہرست",
+        "create": "نئی براڈکاسٹ مہم بنائیں"
+      },
+      "settings": {
+        "get": "سسٹم کی ترتیبات حاصل کریں (صرف منتظم)"
+      }
+    },
+    "requestBody": "درخواست کا جسم",
+    "example": "مثال",
+    "response": "جواب",
+    "rateLimit": {
+      "title": "شرح کی حد",
+      "description": "منصفانہ استعمال کو یقینی بنانے کے لیے API درخواستوں کی شرح محدود ہے۔ ڈیفالٹ حد 100 درخواستیں فی 60 سیکنڈ ونڈو فی API کلید ہے۔ اس حد سے تجاوز کرنے پر 429 Too Many Requests کا جواب ملے گا۔ اگر آپ کو زیادہ حد درکار ہو تو سپورٹ سے رابطہ کریں۔"
+    }
+  },
+  "logs": {
+    "title": "آڈٹ لاگز",
+    "subtitle": "تمام API کارروائیوں اور سسٹم واقعات کو ٹریک اور جائزہ لیں",
+    "exportCsv": "CSV برآمد کریں",
+    "searchPlaceholder": "لاگز تلاش کریں...",
+    "severity": {
+      "all": "تمام سطحیں",
+      "info": "معلومات",
+      "warn": "انتباہ",
+      "error": "خرابی"
+    },
+    "columns": {
+      "timestamp": "وقت",
+      "action": "کارروائی",
+      "session": "سیشن",
+      "apiKey": "API کلید",
+      "user": "صارف",
+      "ip": "IP پتہ",
+      "severity": "سطح"
+    },
+    "pagination": "صفحہ {{page}} از {{total}} (کل {{count}})",
+    "empty": {
+      "title": "کوئی لاگ نہیں ملا",
+      "description": "کارروائیاں انجام دینے کے ساتھ ہی آڈٹ لاگز یہاں ظاہر ہوں گے"
+    }
+  },
+  "composer": {
+    "title": "کمپوزر",
+    "subtitle": "WhatsApp کی طرح پیغامات تحریر اور بھیجیں",
+    "session": "WhatsApp سیشن",
+    "noReadySessions": "کوئی تیار سیشن نہیں",
+    "contactType": "رابطے کی قسم",
+    "recipients": "وصول کنندگان",
+    "selected": "{{count}} منتخب",
+    "savedContacts": "رابطے",
+    "waContacts": "WA رابطے",
+    "groups": "گروپس",
+    "newNumber": "نیا نمبر",
+    "searchContacts": "رابطے تلاش کریں...",
+    "searchGroups": "گروپس تلاش کریں...",
+    "noContacts": "ابھی تک کوئی رابطہ محفوظ نہیں",
+    "noGroups": "کوئی گروپ نہیں ملا",
+    "noResults": "کوئی نتیجہ نہیں ملا",
+    "schedule": "شیڈول کریں",
+    "messageType": "پیغام کی قسم",
+    "types": {
+      "text": "متن",
+      "image": "تصویر",
+      "video": "ویڈیو",
+      "audio": "آڈیو",
+      "document": "دستاویز",
+      "location": "مقام",
+      "contact": "رابطہ"
+    },
+    "message": "پیغام",
+    "messagePlaceholder": "اپنا پیغام یہاں لکھیں...",
+    "mediaUrl": "میڈیا URL",
+    "mediaUrlPlaceholder": "https://example.com/file.jpg",
+    "caption": "کیپشن",
+    "captionPlaceholder": "کیپشن شامل کریں...",
+    "fileName": "فائل کا نام",
+    "fileNamePlaceholder": "document.pdf",
+    "latitude": "عرض البلد",
+    "latitudePlaceholder": "24.8607",
+    "longitude": "طول البلد",
+    "longitudePlaceholder": "67.0011",
+    "locationDescription": "تفصیل",
+    "locationDescriptionPlaceholder": "مثلاً ہمارا ملاقات کا مقام",
+    "contactName": "رابطے کا نام",
+    "contactNamePlaceholder": "علی خان",
+    "contactPhone": "رابطے کا فون",
+    "contactPhonePlaceholder": "+923001234567",
+    "send": "پیغام بھیجیں",
+    "sending": "بھیج رہا ہے...",
+    "sendTo": "{{count}} وصول کنندہ کو بھیجیں",
+    "sendTo_plural": "{{count}} وصول کنندگان کو بھیجیں",
+    "sendingTo": "{{count}} وصول کنندہ کو بھیج رہا ہے",
+    "sendingTo_plural": "{{count}} وصول کنندگان کو بھیج رہا ہے...",
+    "sentSuccess": "{{count}} وصول کنندہ کو پیغام بھیج دیا گیا",
+    "sentSuccess_plural": "{{count}} وصول کنندگان کو پیغام بھیج دیا گیا",
+    "sentPartial": "{{sent}} کو بھیجا گیا، {{failed}} کے لیے ناکام",
+    "sentPartial_plural": "{{sent}} کو بھیجا گیا، {{failed}} کے لیے ناکام",
+    "progress": "پیش رفت",
+    "charCount": "{{count}} / 4096 حروف",
+    "livePreview": "لائیو پیش نظارہ",
+    "noMessages": "ابھی تک کوئی پیغام نہیں",
+    "noMessagesHint": "بات چیت شروع کرنے کے لیے پیغام بھیجیں"
+  },
+  "campaigns": {
+    "title": "مہمات",
+    "subtitle": "براڈکاسٹ مہمات بنائیں اور ان کا نظم کریں",
+    "newCampaign": "نئی مہم",
+    "editCampaign": "مہم میں ترمیم",
+    "duplicate": "نقل کریں",
+    "searchPlaceholder": "مہمات تلاش کریں...",
+    "filterStatus": "تمام حالتیں",
+    "statuses": {
+      "draft": "مسودہ",
+      "scheduled": "شیڈول شدہ",
+      "sending": "بھیج رہا ہے",
+      "completed": "مکمل",
+      "paused": "موقوف",
+      "cancelled": "منسوخ",
+      "failed": "ناکام"
+    },
+    "recipientType": {
+      "contacts": "رابطے",
+      "groups": "گروپس"
+    },
+    "stats": {
+      "total": "کل مہمات",
+      "active": "فعال",
+      "completed": "مکمل",
+      "failed": "ناکام",
+      "totalRecipients": "کل وصول کنندگان",
+      "totalSent": "کل بھیجے گئے",
+      "totalFailed": "کل ناکام"
+    },
+    "columns": {
+      "name": "نام",
+      "status": "حالت",
+      "recipients": "وصول کنندگان",
+      "sent": "بھیجے گئے",
+      "failed": "ناکام",
+      "schedule": "شیڈول",
+      "created": "بنائی گئی",
+      "actions": "کارروائیاں"
+    },
+    "empty": {
+      "title": "ابھی تک کوئی مہم نہیں",
+      "description": "پیغامات کی نشریات شروع کرنے کے لیے اپنی پہلی مہم بنائیں"
+    },
+    "wizard": {
+      "step1": "تفصیلات",
+      "step2": "پیغام",
+      "step3": "وصول کنندگان",
+      "step4": "شیڈول",
+      "step5": "جائزہ",
+      "name": "مہم کا نام",
+      "namePlaceholder": "مثلاً چھٹیوں کا پروموشن",
+      "description": "تفصیل",
+      "descriptionPlaceholder": "اس مہم کے لیے اختیاری تفصیل",
+      "session": "WhatsApp سیشن",
+      "noSessions": "کوئی تیار سیشن دستیاب نہیں",
+      "messageType": "پیغام کی قسم",
+      "text": "متن",
+      "image": "تصویر",
+      "video": "ویڈیو",
+      "audio": "آڈیو",
+      "document": "دستاویز",
+      "location": "مقام",
+      "contact": "رابطہ",
+      "textPlaceholder": "اپنا پیغام درج کریں...",
+      "mediaUrl": "میڈیا URL",
+      "mediaUrlPlaceholder": "https://example.com/file.jpg",
+      "caption": "کیپشن",
+      "captionPlaceholder": "کیپشن شامل کریں...",
+      "fileName": "فائل کا نام",
+      "fileNamePlaceholder": "document.pdf",
+      "latitude": "عرض البلد",
+      "latitudePlaceholder": "24.8607",
+      "longitude": "طول البلد",
+      "longitudePlaceholder": "67.0011",
+      "contactName": "رابطے کا نام",
+      "contactNamePlaceholder": "علی خان",
+      "contactPhone": "رابطے کا فون",
+      "contactPhonePlaceholder": "+923001234567",
+      "selectRecipients": "وصول کنندگان منتخب کریں",
+      "contacts": "محفوظ کردہ رابطے",
+      "groups": "رابطوں کے گروپس",
+      "searchContacts": "رابطے تلاش کریں...",
+      "searchGroups": "گروپس تلاش کریں...",
+      "noContacts": "کوئی رابطہ نہیں ملا",
+      "noGroups": "کوئی گروپ نہیں ملا",
+      "selected": "{{count}} منتخب",
+      "scheduleNow": "ابھی بھیجیں",
+      "scheduleLater": "بعد میں بھیجنے کا شیڈول",
+      "scheduleDate": "شیڈول کی تاریخ",
+      "scheduleTime": "شیڈول کا وقت",
+      "reviewTitle": "مہم کا جائزہ",
+      "reviewName": "نام",
+      "reviewSession": "سیشن",
+      "reviewMessageType": "پیغام کی قسم",
+      "reviewMessagePreview": "پیغام کا پیش نظارہ",
+      "reviewRecipients": "وصول کنندگان",
+      "reviewRecipientCount": "{{count}} وصول کنندہ",
+      "reviewRecipientCount_plural": "{{count}} وصول کنندگان",
+      "reviewSchedule": "شیڈول",
+      "reviewScheduleNow": "ابھی بھیجیں",
+      "reviewScheduleDate": "{{date}} کو شیڈول",
+      "createBtn": "مہم بنائیں",
+      "creating": "بنا رہا ہے...",
+      "saveBtn": "تبدیلیاں محفوظ کریں",
+      "saving": "محفوظ کر رہا ہے..."
+    },
+    "detail": {
+      "title": "مہم کی تفصیلات",
+      "overview": "جائزہ",
+      "recipients": "وصول کنندگان",
+      "stats": {
+        "total": "کل وصول کنندگان",
+        "sent": "بھیجے گئے",
+        "failed": "ناکام",
+        "pending": "زیر التواء",
+        "progress": "پیش رفت"
+      },
+      "actions": {
+        "start": "مہم شروع کریں",
+        "pause": "توقف کریں",
+        "cancel": "منسوخ کریں",
+        "resendFailed": "ناکام دوبارہ بھیجیں",
+        "edit": "ترمیم",
+        "delete": "حذف",
+        "back": "مہمات پر واپس جائیں"
+      },
+      "confirmDelete": "کیا آپ واقعی یہ مہم حذف کرنا چاہتے ہیں؟",
+      "confirmStart": "کیا آپ واقعی یہ مہم شروع کرنا چاہتے ہیں؟",
+      "noRecipients": "کوئی وصول کنندہ نہیں ملا",
+      "searchRecipients": "وصول کنندگان تلاش کریں...",
+      "filterStatus": "حالت کے مطابق فلٹر کریں"
+    },
+    "toasts": {
+      "createSuccess": "مہم بن گئی",
+      "createError": "مہم بنانے میں ناکام",
+      "updateSuccess": "مہم اپ ڈیٹ ہو گئی",
+      "updateError": "مہم اپ ڈیٹ کرنے میں ناکام",
+      "deleteSuccess": "مہم حذف ہو گئی",
+      "deleteError": "مہم حذف کرنے میں ناکام",
+      "startSuccess": "مہم شروع ہو گئی",
+      "startError": "مہم شروع کرنے میں ناکام",
+      "pauseSuccess": "مہم موقوف ہو گئی",
+      "pauseError": "مہم موقوف کرنے میں ناکام",
+      "cancelSuccess": "مہم منسوخ ہو گئی",
+      "cancelError": "مہم منسوخ کرنے میں ناکام",
+      "resendSuccess": "ناکام پیغامات دوبارہ بھیجے جا رہے ہیں",
+      "resendError": "پیغامات دوبارہ بھیجنے میں ناکام"
+    }
+  },
+  "infrastructure": {
+    "title": "انفراسٹرکچر",
+    "subtitle": "سرور، ڈیٹا بیس، کیش، اسٹوریج اور انجن کی ترتیبات ترتیب دیں",
+    "saveConfig": "ترتیب محفوظ کریں",
+    "saving": "محفوظ کر رہا ہے...",
+    "server": {
+      "title": "سرور کی ترتیب",
+      "production": "پروڈکشن",
+      "development": "ڈیولپمنٹ",
+      "environment": "ماحول",
+      "domain": "ڈومین",
+      "apiPort": "API پورٹ",
+      "dashboardPort": "ڈیش بورڈ پورٹ",
+      "corsOrigins": "CORS ماخذ",
+      "corsPlaceholder": "* یا کوما سے علیحدہ کردہ ماخذ",
+      "publicApiUrl": "عوامی API URL (اختیاری)",
+      "publicDashboardUrl": "عوامی ڈیش بورڈ URL (اختیاری)"
+    },
+    "webhook": {
+      "title": "ویب ہک اور شرح کی حد",
+      "settings": "ویب ہک کی ترتیبات",
+      "timeout": "وقت ختم (ms)",
+      "maxRetries": "زیادہ سے زیادہ دوبارہ کوشش",
+      "retryDelay": "دوبارہ کوشش میں تاخیر (ms)",
+      "rateLimit": "شرح کی حد",
+      "window": "وقتی ونڈو (سیکنڈ)",
+      "maxReq": "فی ونڈو زیادہ سے زیادہ درخواستیں"
+    },
+    "database": {
+      "title": "ڈیٹا بیس کی ترتیب",
+      "sqlite": "SQLite",
+      "sqliteDesc": "مقامی فائل پر مبنی ڈیٹا بیس",
+      "postgres": "PostgreSQL",
+      "postgresDesc": "پروڈکشن کے لیے تیار ڈیٹا بیس",
+      "useBuiltIn": "بلٹ ان PostgreSQL کنٹینر استعمال کریں",
+      "builtInDesc": "OpenWA آپ کے لیے PostgreSQL کنٹینر منظم کرے گا",
+      "dbName": "ڈیٹا بیس کا نام",
+      "poolSize": "پول کا سائز",
+      "ssl": "SSL کنکشن",
+      "sslDesc": "محفوظ ڈیٹا بیس کنکشن کے لیے TLS/SSL فعال کریں",
+      "migrationsTitle": "ڈیٹا بیس مائیگریشنز",
+      "migrationsStatus": "TypeORM کے ساتھ اسکیما خود بخود ہم آہنگ ہو جاتا ہے",
+      "migrationsHint": "مائیگریشنز خود بخود منظم ہوتی ہیں۔ دستی مائیگریشنز کے لیے CLI استعمال کریں۔"
+    },
+    "redis": {
+      "title": "Redis",
+      "enable": "Redis فعال کریں",
+      "enableDesc": "کیشنگ، سیشن اسٹوریج اور BullMQ قطاروں کے لیے ضروری",
+      "useBuiltIn": "بلٹ ان Redis کنٹینر استعمال کریں",
+      "builtInDesc": "OpenWA آپ کے لیے Redis کنٹینر منظم کرے گا",
+      "queueTitle": "BullMQ قطار کا نظام فعال کریں",
+      "queueDesc": "قابل اعتماد پیغام اور ویب ہک ترسیل کے لیے پیغام کی قطاریں استعمال کریں",
+      "statsTitle": "قطار کے اعدادوشمار",
+      "messageQueue": "پیغام کی قطار",
+      "webhookQueue": "ویب ہک قطار",
+      "pending": "زیر التواء",
+      "completed": "مکمل",
+      "failed": "ناکام",
+      "clearFailed": "ناکام کام صاف کریں",
+      "viewBullMq": "Bull MQ ڈیش بورڈ دیکھیں",
+      "disabledTitle": "Redis غیر فعال ہے",
+      "disabledDesc": "کیشنگ، سیشن اسٹوریج اور BullMQ میسج قطاروں کے لیے Redis فعال کریں۔",
+      "passwordOptional": "(اختیاری)"
+    },
+    "storage": {
+      "title": "اسٹوریج کی ترتیب",
+      "local": "مقامی فائل سسٹم",
+      "localDesc": "میڈیا فائلیں مقامی طور پر اسٹور کریں",
+      "s3": "Amazon S3",
+      "s3Desc": "کلاؤڈ اسٹوریج (S3 مطابق)",
+      "useBuiltIn": "بلٹ ان MinIO کنٹینر استعمال کریں",
+      "builtInDesc": "OpenWA آپ کے لیے MinIO (S3-مطابق) کنٹینر منظم کرے گا",
+      "storagePath": "اسٹوریج کا راستہ",
+      "bucket": "بکٹ کا نام",
+      "region": "علاقہ",
+      "accessKey": "رسائی کی کلید",
+      "secretKey": "خفیہ کلید",
+      "endpoint": "حسب ضرورت اختتامی نقطہ (اختیاری)",
+      "endpointHint": "MinIO یا دیگر S3-مطابق خدمات کے لیے"
+    },
+    "statusLabels": {
+      "connected": "منسلک",
+      "disconnected": "منقطع",
+      "disabled": "غیر فعال"
+    },
+    "restart": {
+      "idleTitle": "⚙️ ترتیب محفوظ ہو گئی",
+      "restartingTitle": "🔄 سرور دوبارہ شروع ہو رہا ہے...",
+      "waitingTitle": "⏳ براہ کرم انتظار کریں...",
+      "successTitle": "✅ سرور تیار",
+      "errorTitle": "❌ دوبارہ شروع کرنا ناکام",
+      "idleDesc": "ترتیب <code>.env.generated</code> میں محفوظ ہو گئی ہے۔<br/>تبدیلیاں لاگو کرنے کے لیے سرور کو دوبارہ شروع کرنا ضروری ہے۔",
+      "later": "بعد میں شروع کریں",
+      "now": "ابھی شروع کریں",
+      "restartingMsg": "سرور دوبارہ شروع ہو رہا ہے... {{count}}s",
+      "checking": "سرور کی حیثیت چیک کر رہا ہے...",
+      "dontClose": "براہ کرم اس ونڈو کو بند نہ کریں",
+      "successMsg": "سرور واپس آن لائن ہے! صفحہ خود بخود دوبارہ لوڈ ہو جائے گا۔",
+      "errorMsg": "30 سیکنڈ کے بعد سرور نے جواب نہیں دیا۔ براہ کرم Docker لاگز چیک کریں اور دستی طور پر دوبارہ شروع کریں۔",
+      "reload": "صفحہ دوبارہ لوڈ کریں"
+    },
+    "toasts": {
+      "saveFailed": "محفوظ کرنا ناکام",
+      "saveSuccess": "ترتیب کامیابی سے محفوظ ہو گئی",
+      "saveError": "ترتیب محفوظ کرنے میں ناکام"
+    }
+  },
+  "pluginStatus": {
+    "installed": "انسٹال شدہ",
+    "enabled": "فعال",
+    "disabled": "غیر فعال",
+    "error": "خرابی"
+  },
+  "pluginType": {
+    "engine": "انجن",
+    "storage": "اسٹوریج",
+    "queue": "قطار",
+    "auth": "تصدیق",
+    "extension": "توسیع"
+  },
+  "plugins": {
+    "title": "پلگ انز",
+    "subtitle": "انجنز، اسٹوریج بیک اینڈز اور توسیعات کا نظم کریں",
+    "refresh": "ریفریش",
+    "engineCard": "فعال WhatsApp انجن",
+    "running": "چل رہا ہے",
+    "supportedFeatures": "مطابق خصوصیات:",
+    "more": "+{{count}} مزید",
+    "builtIn": "بلٹ ان",
+    "noDescription": "کوئی تفصیل دستیاب نہیں",
+    "required": "ضروری",
+    "active": "فعال",
+    "activate": "فعال کریں",
+    "enable": "چالو کریں",
+    "disable": "غیر چالو کریں",
+    "healthCheck": "صحت کی جانچ",
+    "configure": "ترتیب دیں",
+    "empty": {
+      "title": "کوئی پلگ ان نہیں ملا",
+      "description": "OpenWA کی فعالیت بڑھانے کے لیے پلگ ان انسٹال کریں"
+    },
+    "config": {
+      "title": "{{name}} کو ترتیب دیں",
+      "restartNotice": "تبدیلیوں کو اثر انداز ہونے کے لیے سرور کو دوبارہ شروع کرنا ضروری ہے",
+      "engineType": "انجن کی قسم",
+      "headless": "ہیڈلیس موڈ",
+      "headlessDesc": "براؤزر کو مرئی UI کے بغیر چلائیں (پروڈکشن کے لیے تجویز کردہ)",
+      "sessionDataPath": "سیشن ڈیٹا کا راستہ",
+      "browserArgs": "براؤزر کے آرگیومینٹس",
+      "noOptions": "اس پلگ ان کے لیے کوئی ترتیب کے اختیارات دستیاب نہیں",
+      "save": "ترتیب محفوظ کریں"
+    },
+    "toasts": {
+      "errorTitle": "پلگ ان خرابی",
+      "errorDefault": "پلگ ان کی حالت تبدیل کرنے میں ناکام",
+      "healthOk": "صحت کی جانچ کامیاب",
+      "healthFail": "صحت کی جانچ ناکام",
+      "healthError": "صحت کی جانچ میں خرابی",
+      "savedTitle": "ترتیب محفوظ ہو گئی",
+      "savedDesc": "تبدیلیاں لاگو کرنے کے لیے سرور کو دوبارہ شروع کرنا ضروری ہے۔",
+      "saveFailed": "محفوظ کرنا ناکام"
+    }
+  },
+  "contacts": {
+    "title": "رابطے",
+    "subtitle": "اپنے WhatsApp رابطوں کا نظم کریں",
+    "newContact": "نیا رابطہ",
+    "searchPlaceholder": "نام یا فون سے تلاش کریں...",
+    "selected": "{{count}} منتخب",
+    "bulkDelete": "منتخب کردہ حذف کریں",
+    "importBtn": "CSV درآمد کریں",
+    "exportBtn": "CSV برآمد کریں",
+    "downloadTemplate": "نمونہ CSV ڈاؤن لوڈ کریں",
+    "empty": {
+      "title": "ابھی تک کوئی رابطہ نہیں",
+      "description": "اپنا پہلا رابطہ شامل کریں یا CSV فائل سے درآمد کریں"
+    },
+    "columns": {
+      "name": "نام",
+      "phone": "فون",
+      "country": "ملک",
+      "city": "شہر",
+      "note": "نوٹ",
+      "actions": "کارروائیاں"
+    },
+    "form": {
+      "createTitle": "نیا رابطہ",
+      "editTitle": "رابطے میں ترمیم",
+      "fullName": "مکمل نام",
+      "fullNamePlaceholder": "مثلاً علی خان",
+      "countryCode": "ملکی کوڈ",
+      "phone": "WhatsApp فون",
+      "phonePlaceholder": "مثلاً 3001234567",
+      "phoneHint": "ملکی کوڈ کے بغیر نمبر درج کریں — یہ خود بخود شامل ہو جائے گا",
+      "country": "ملک",
+      "countryPlaceholder": "مثلاً پاکستان",
+      "state": "صوبہ",
+      "statePlaceholder": "مثلاً سندھ",
+      "city": "شہر",
+      "cityPlaceholder": "مثلاً کراچی",
+      "address": "پتہ",
+      "addressPlaceholder": "مثلاً 123 شاہراہ فیصل",
+      "note": "نوٹ",
+      "notePlaceholder": "اضافی نوٹس...",
+      "phoneRequired": "فون نمبر ضروری ہے",
+      "phoneDuplicate": "یہ فون نمبر پہلے سے موجود ہے",
+      "phoneInvalid": "فون نمبر میں صرف اعداد ہونے چاہئیں"
+    },
+    "delete": {
+      "title": "رابطہ حذف کریں",
+      "message": "کیا آپ واقعی <strong>{{name}}</strong> کو حذف کرنا چاہتے ہیں؟ یہ واپس نہیں لیا جا سکتا۔",
+      "messagePhone": "کیا آپ واقعی رابطہ <strong>{{phone}}</strong> حذف کرنا چاہتے ہیں؟ یہ واپس نہیں لیا جا سکتا۔",
+      "successTitle": "رابطہ حذف ہو گیا",
+      "successDesc": "رابطہ حذف کر دیا گیا"
+    },
+    "bulkDeleteModal": {
+      "title": "{{count}} رابطے حذف کریں",
+      "message": "کیا آپ واقعی {{count}} منتخب رابطے حذف کرنا چاہتے ہیں؟ یہ واپس نہیں لیا جا سکتا۔",
+      "successTitle": "رابطے حذف ہو گئے",
+      "successDesc": "{{count}} رابطے حذف کر دیے گئے"
+    },
+    "import": {
+      "title": "رابطے درآمد کریں",
+      "step1Title": "CSV فائل اپ لوڈ کریں",
+      "step1Desc": "اپنے رابطوں کے ساتھ CSV فائل اپ لوڈ کریں۔ فون کالم میں ملکی کوڈ شامل ہونا چاہیے (مثلاً +923001234567)۔",
+      "step2Title": "پیش نظارہ اور توثیق",
+      "step2Desc": "درآمد کرنے سے پہلے اپنے رابطوں کا جائزہ لیں۔ غلط قطاریں نمایاں ہوں گی۔",
+      "step3Title": "درآمد مکمل",
+      "dropzone": "اپنی CSV فائل یہاں چھوڑیں، یا براؤز کرنے کے لیے کلک کریں",
+      "dropzoneHint": "معاون فارمیٹ: .csv",
+      "validRows": "{{count}} درست",
+      "invalidRows": "{{count}} غلط",
+      "importValid": "صرف درست درآمد کریں",
+      "importAll": "سب درآمد کریں",
+      "importBtn": "{{count}} رابطے درآمد کریں",
+      "importing": "درآمد کر رہا ہے...",
+      "successTitle": "درآمد کامیاب",
+      "successDesc": "{{created}} رابطے درآمد ہوئے، {{skipped}} چھوڑے گئے",
+      "errorPhone": "فون نمبر خالی ہے",
+      "errorNoCountryCode": "فون میں ملکی کوڈ شامل ہونا چاہیے (مثلاً +923001234567)",
+      "errorDuplicate": "فائل میں ڈپلیکیٹ فون نمبر",
+      "previewColumns": {
+        "row": "#",
+        "status": "حالت",
+        "name": "مکمل نام",
+        "phone": "فون",
+        "country": "ملک",
+        "city": "شہر",
+        "note": "نوٹ",
+        "error": "مسئلہ"
+      }
+    },
+    "detail": {
+      "title": "رابطے کی تفصیلات",
+      "phone": "فون",
+      "country": "ملک",
+      "state": "صوبہ",
+      "city": "شہر",
+      "address": "پتہ",
+      "note": "نوٹ",
+      "created": "بنایا گیا",
+      "messages": "پیغامات کی تاریخ",
+      "noMessages": "اس رابطے کے لیے کوئی پیغام نہیں ملا۔",
+      "incoming": "آنے والا",
+      "outgoing": "جانے والا",
+      "loadMore": "مزید لوڈ کریں",
+      "loadingMessages": "پیغامات لوڈ ہو رہے ہیں...",
+      "totalMessages": "کل {{count}} پیغامات",
+      "session": "سیشن",
+      "type": "قسم",
+      "direction": "سمت",
+      "messageBody": "پیغام",
+      "timestamp": "تاریخ",
+      "status": "حالت"
+    },
+    "pagination": {
+      "showing": "کل {{total}} میں سے {{from}} سے {{to}} دکھائے جا رہے ہیں",
+      "perPage": "فی صفحہ"
+    },
+    "toasts": {
+      "createSuccess": "رابطہ بن گیا",
+      "createError": "رابطہ بنانے میں ناکام",
+      "updateSuccess": "رابطہ اپ ڈیٹ ہو گیا",
+      "updateError": "رابطہ اپ ڈیٹ کرنے میں ناکام",
+      "deleteSuccess": "رابطہ حذف ہو گیا",
+      "deleteError": "رابطہ حذف کرنے میں ناکام",
+      "bulkDeleteSuccess": "{{count}} رابطے حذف ہو گئے",
+      "bulkDeleteError": "رابطے حذف کرنے میں ناکام",
+      "importSuccess": "{{created}} رابطے درآمد ہوئے",
+      "importError": "درآمد ناکام",
+      "exportSuccess": "{{count}} رابطے برآمد ہوئے",
+      "exportError": "برآمد ناکام"
+    }
+  },
+  "groups": {
+    "title": "رابطوں کے گروپس",
+    "subtitle": "ہدفی پیغام رسانی کے لیے اپنے رابطوں کو گروپس میں منظم کریں",
+    "newGroup": "نیا گروپ",
+    "searchPlaceholder": "گروپس تلاش کریں...",
+    "empty": {
+      "title": "ابھی تک کوئی گروپ نہیں",
+      "description": "اپنے رابطوں کو منظم کرنے کے لیے ایک گروپ بنائیں"
+    },
+    "columns": {
+      "name": "نام",
+      "description": "تفصیل",
+      "members": "اراکین",
+      "created": "بنایا گیا",
+      "actions": "کارروائیاں"
+    },
+    "form": {
+      "createTitle": "نیا گروپ بنائیں",
+      "editTitle": "گروپ میں ترمیم",
+      "name": "گروپ کا نام",
+      "namePlaceholder": "مثلاً VIP گاہک",
+      "description": "تفصیل",
+      "descriptionPlaceholder": "اس گروپ کے لیے اختیاری تفصیل",
+      "nameRequired": "گروپ کا نام ضروری ہے"
+    },
+    "create": {
+      "step1Title": "گروپ کی تفصیلات",
+      "step2Title": "اراکین شامل کریں",
+      "step3Title": "جائزہ لیں اور بنائیں",
+      "method": "آپ رابطے کیسے شامل کرنا چاہیں گے؟",
+      "csvImport": "CSV سے درآمد کریں",
+      "csvImportDesc": "رابطے بنانے اور اس گروپ میں شامل کرنے کے لیے CSV فائل اپ لوڈ کریں",
+      "filterSelect": "فلٹر اور منتخب کریں",
+      "filterSelectDesc": "اس گروپ میں شامل کرنے کے لیے موجودہ رابطوں کو تلاش اور فلٹر کریں",
+      "csv": {
+        "title": "CSV سے رابطے درآمد کریں",
+        "dropzone": "اپنی CSV فائل یہاں چھوڑیں، یا براؤز کرنے کے لیے کلک کریں",
+        "dropzoneHint": "معاون فارمیٹ: .csv۔ فون نمبروں میں ملکی کوڈ شامل ہونا چاہیے (مثلاً +923001234567)",
+        "validRows": "{{count}} درست",
+        "invalidRows": "{{count}} غلط",
+        "importBtn": "{{count}} رابطے درآمد کریں",
+        "importing": "درآمد کر رہا ہے...",
+        "step2Title": "پیش نظارہ اور توثیق",
+        "step2Desc": "درآمد کرنے سے پہلے اپنے رابطوں کا جائزہ لیں۔ غلط قطاریں نمایاں ہوں گی۔",
+        "step3Title": "درآمد مکمل",
+        "successDesc": "{{created}} رابطے بنائے گئے اور گروپ میں شامل ہوئے، {{skipped}} چھوڑے گئے",
+        "errorPhone": "فون نمبر خالی ہے",
+        "errorNoCountryCode": "فون میں ملکی کوڈ شامل ہونا چاہیے (مثلاً +923001234567)",
+        "errorDuplicate": "فائل میں ڈپلیکیٹ فون نمبر",
+        "previewColumns": {
+          "row": "#",
+          "status": "حالت",
+          "name": "مکمل نام",
+          "phone": "فون",
+          "country": "ملک",
+          "city": "شہر",
+          "note": "نوٹ",
+          "error": "مسئلہ"
+        }
+      },
+      "filter": {
+        "title": "رابطے منتخب کریں",
+        "searchPlaceholder": "نام یا فون سے تلاش کریں...",
+        "country": "ملک",
+        "allCountries": "تمام ممالک",
+        "state": "صوبہ",
+        "allStates": "تمام صوبے",
+        "city": "شہر",
+        "allCities": "تمام شہر",
+        "namePlaceholder": "نام کے مطابق فلٹر کریں...",
+        "phonePlaceholder": "فون کے ابتدائی نمبروں کے مطابق فلٹر کریں...",
+        "selected": "{{count}} رابطے منتخب",
+        "noResults": "کوئی رابطہ آپ کے فلٹر سے مطابقت نہیں رکھتا",
+        "clearFilters": "فلٹر صاف کریں"
+      },
+      "review": {
+        "title": "گروپ کا جائزہ",
+        "nameLabel": "گروپ کا نام",
+        "descriptionLabel": "تفصیل",
+        "membersLabel": "اراکین",
+        "noMembers": "ابھی تک کوئی رکن شامل نہیں",
+        "addMore": "مزید رابطے شامل کریں"
+      }
+    },
+    "detail": {
+      "title": "گروپ کی تفصیلات",
+      "members": "اراکین",
+      "noMembers": "اس گروپ میں کوئی رکن نہیں",
+      "addMembers": "اراکین شامل کریں",
+      "removeSelected": "منتخب کردہ ہٹائیں",
+      "searchPlaceholder": "اراکین تلاش کریں...",
+      "removeConfirm": "اس گروپ سے {{count}} رابطے ہٹا دیں؟",
+      "empty": {
+        "title": "کوئی رکن نہیں",
+        "description": "اس گروپ میں رابطے شامل کریں"
+      }
+    },
+    "delete": {
+      "title": "گروپ حذف کریں",
+      "message": "کیا آپ واقعی گروپ <strong>«{{name}}»</strong> کو حذف کرنا چاہتے ہیں؟ یہ واپس نہیں لیا جا سکتا۔",
+      "successTitle": "گروپ حذف ہو گیا",
+      "successDesc": "گروپ حذف کر دیا گیا"
+    },
+    "toasts": {
+      "createSuccess": "گروپ بن گیا",
+      "createError": "گروپ بنانے میں ناکام",
+      "updateSuccess": "گروپ اپ ڈیٹ ہو گیا",
+      "updateError": "گروپ اپ ڈیٹ کرنے میں ناکام",
+      "deleteSuccess": "گروپ حذف ہو گیا",
+      "deleteError": "گروپ حذف کرنے میں ناکام",
+      "addMembersSuccess": "{{count}} رابطے گروپ میں شامل ہو گئے",
+      "addMembersError": "اراکین شامل کرنے میں ناکام",
+      "removeMembersSuccess": "{{count}} رابطے گروپ سے ہٹا دیے گئے",
+      "removeMembersError": "اراکین ہٹانے میں ناکام",
+      "importSuccess": "{{created}} رابطے درآمد ہوئے اور گروپ میں شامل ہو گئے",
+      "importError": "درآمد ناکام"
+    }
+  },
+  "settings": {
+    "title": "ترتیبات",
+    "subtitle": "اپنا پروفائل، پاس ورڈ اور سسٹم کی ترتیبات منظم کریں",
+    "tabs": {
+      "profile": "پروفائل",
+      "password": "پاس ورڈ",
+      "language": "زبان",
+      "system": "سسٹم"
+    },
+    "language": {
+      "title": "زبان",
+      "subtitle": "ڈیش بورڈ انٹرفیس کے لیے اپنی پسندیدہ زبان منتخب کریں"
+    },
+    "profile": {
+      "name": "مکمل نام",
+      "namePlaceholder": "مثلاً علی خان",
+      "phone": "فون نمبر",
+      "phonePlaceholder": "مثلاً 03123456789",
+      "profilePic": "پروفائل تصویر",
+      "profilePicHint": "ایک تصویر اپ لوڈ کریں (JPEG, PNG, WebP, GIF)۔ زیادہ سے زیادہ 5MB۔",
+      "chooseFile": "فائل منتخب کریں",
+      "uploading": "اپ لوڈ ہو رہا ہے...",
+      "remove": "ہٹائیں",
+      "toasts": {
+        "updateSuccess": "پروفائل اپ ڈیٹ ہو گیا",
+        "updateError": "پروفائل اپ ڈیٹ کرنے میں ناکام",
+        "uploadError": "اپ لوڈ ناکام"
+      }
+    },
+    "password": {
+      "current": "موجودہ پاس ورڈ",
+      "currentHint": "شناخت کی تصدیق کے لیے اپنا موجودہ پاس ورڈ درج کریں",
+      "currentPlaceholder": "موجودہ پاس ورڈ درج کریں",
+      "newPassword": "نیا پاس ورڈ",
+      "newPlaceholder": "نیا پاس ورڈ درج کریں (کم از کم 6 حروف)",
+      "confirm": "نیا پاس ورڈ تصدیق کریں",
+      "confirmPlaceholder": "نیا پاس ورڈ دوبارہ درج کریں",
+      "save": "پاس ورڈ تبدیل کریں",
+      "errors": {
+        "currentRequired": "موجودہ پاس ورڈ ضروری ہے",
+        "newRequired": "نیا پاس ورڈ ضروری ہے",
+        "tooShort": "پاس ورڈ کم از کم 6 حروف کا ہونا چاہیے",
+        "mismatch": "پاس ورڈ مماثل نہیں ہیں"
+      },
+      "toasts": {
+        "updateSuccess": "پاس ورڈ کامیابی سے تبدیل ہو گیا",
+        "updateError": "پاس ورڈ تبدیل کرنے میں ناکام"
+      }
+    },
+    "system": {
+      "name": "کاروبار کا نام",
+      "namePlaceholder": "مثلاً میری کمپنی",
+      "email": "ای میل",
+      "emailPlaceholder": "مثلاً info@company.com",
+      "altPhone": "متبادل فون",
+      "altPhonePlaceholder": "مثلاً +923001234567",
+      "website": "ویب سائٹ",
+      "websitePlaceholder": "مثلاً https://company.com",
+      "address": "پتہ",
+      "addressPlaceholder": "مثلاً 123 شاہراہ فیصل، کراچی",
+      "googleMapLink": "Google Maps لنک",
+      "googleMapLinkPlaceholder": "مثلاً https://maps.google.com/...",
+      "businessLogo": "کاروبار کا لوگو",
+      "smallLogo": "چھوٹا لوگو",
+      "toasts": {
+        "updateSuccess": "سسٹم کی ترتیبات اپ ڈیٹ ہو گئیں",
+        "updateError": "سسٹم کی ترتیبات اپ ڈیٹ کرنے میں ناکام"
+      }
+    }
+  }
+}

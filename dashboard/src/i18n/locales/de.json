@@ -1,0 +1,1119 @@
+{
+  "common": {
+    "appName": "OpenWA",
+    "appSubtitle": "WhatsApp-API",
+    "loading": "Lädt...",
+    "save": "Speichern",
+    "cancel": "Abbrechen",
+    "delete": "Löschen",
+    "edit": "Bearbeiten",
+    "create": "Erstellen",
+    "close": "Schließen",
+    "submit": "Absenden",
+    "confirm": "Bestätigen",
+    "search": "Suchen",
+    "filter": "Filtern",
+    "actions": "Aktionen",
+    "status": "Status",
+    "name": "Name",
+    "role": "Rolle",
+    "type": "Typ",
+    "url": "URL",
+    "port": "Port",
+    "host": "Host",
+    "username": "Benutzername",
+    "password": "Passwort",
+    "active": "Aktiv",
+    "inactive": "Inaktiv",
+    "enabled": "Aktiviert",
+    "disabled": "Deaktiviert",
+    "connected": "Verbunden",
+    "disconnected": "Getrennt",
+    "never": "Nie",
+    "justNow": "Gerade eben",
+    "minAgo": "vor {{count}} Min.",
+    "hoursAgo": "vor {{count}} Std.",
+    "optional": "optional",
+    "language": "Sprache",
+    "english": "English",
+    "hebrew": "עברית",
+    "back": "Zurück",
+    "next": "Weiter",
+    "previous": "Vorherige",
+    "expand": "Aufklappen",
+    "collapse": "Einklappen",
+    "logout": "Abmelden",
+    "refresh": "Aktualisieren",
+    "notifications": "Benachrichtigungen",
+    "noNotifications": "Keine neuen Benachrichtigungen",
+    "profile": "Profil",
+    "changePassword": "Passwort ändern",
+    "settings": "Einstellungen",
+    "errorGeneric": "Ein Fehler ist aufgetreten",
+    "unknownError": "Unbekannter Fehler",
+    "lightMode": "Helles Design",
+    "darkMode": "Dunkles Design",
+    "viewAll": "Alle anzeigen",
+    "copied": "Kopiert!"
+  },
+  "theme": {
+    "light": "Hell",
+    "dark": "Dunkel",
+    "system": "System",
+    "label": "Design: {{value}}"
+  },
+  "nav": {
+    "dashboard": "Dashboard",
+    "sessions": "Sitzungen",
+    "webhooks": "Webhooks",
+    "apiKeys": "API-Schlüssel",
+    "contacts": "Kontakte",
+    "composer": "Editor",
+    "groups": "Gruppen",
+    "messages": "Nachrichten",
+    "settings": "Einstellungen",
+    "messageTester": "Testnachricht",
+    "infrastructure": "Infrastruktur",
+    "plugins": "Plugins",
+    "campaigns": "Kampagnen",
+    "logs": "Logs"
+  },
+  "errorBoundary": {
+    "title": "Etwas ist schiefgelaufen",
+    "description": "Das Dashboard hat einen unerwarteten Fehler festgestellt.",
+    "reload": "Dashboard neu laden"
+  },
+  "login": {
+    "apiKey": "API-Schlüssel",
+    "apiKeyPlaceholder": "API-Schlüssel eingeben",
+    "apiKeyRequired": "API-Schlüssel erforderlich",
+    "connect": "Verbinden",
+    "connecting": "Verbinde...",
+    "invalidKey": "Ungültiger API-Schlüssel",
+    "connectionError": "Verbindung zum Server fehlgeschlagen. Bitte versuchen Sie es erneut.",
+    "help": "Hilfe nötig?",
+    "viewDocs": "Dokumentation anzeigen",
+    "footer": "Mit ❤️ erstellt von Yudhi Armyndharis und der OpenWA-Community",
+    "version": "v{{version}} · {{date}}",
+    "title": "Anmelden",
+    "subtitle": "Geben Sie Ihre Anmeldedaten ein, um auf das Dashboard zuzugreifen.",
+    "phoneLabel": "Telefonnummer",
+    "phonePlaceholder": "z.B. 01712345678",
+    "passwordLabel": "Passwort",
+    "passwordPlaceholder": "Passwort eingeben",
+    "signIn": "Anmelden",
+    "phoneRequired": "Telefonnummer erforderlich",
+    "passwordRequired": "Passwort erforderlich",
+    "invalidCredentials": "Ungültige Telefonnummer oder Passwort"
+  },
+  "dashboard": {
+    "title": "Dashboard",
+    "subtitle": "Übersicht über Ihre WhatsApp-Sitzungen und Aktivitäten",
+    "stats": {
+      "activeSessions": "Aktive Sitzungen",
+      "messagesToday": "Nachrichten heute",
+      "webhooksConfigured": "Webhooks konfiguriert",
+      "apiCalls": "API-Aufrufe (24h)"
+    },
+    "sessionsOverview": "Sitzungsübersicht",
+    "showingSessions": "Zeige {{shown}} von {{total}} Sitzungen",
+    "columns": {
+      "sessionId": "Sitzungs-ID",
+      "phone": "Telefonnummer",
+      "status": "Status",
+      "lastActive": "Zuletzt aktiv",
+      "actions": "Aktionen"
+    },
+    "noSessions": "Keine Sitzungen gefunden. Erstellen Sie eine, um zu starten.",
+    "view": "Anzeigen",
+    "disconnect": "Trennen",
+    "errorPrefix": "Fehler: {{message}}",
+    "loadError": "Daten konnten nicht geladen werden",
+    "statActive": "{{count}} aktiv",
+    "statNoData": "Noch keine Daten"
+  },
+  "sessionStatus": {
+    "created": "Neu",
+    "idle": "Leerlauf",
+    "initializing": "Starte...",
+    "connecting": "Verbinde...",
+    "qr_ready": "QR scannen",
+    "ready": "Verbunden",
+    "disconnected": "Getrennt"
+  },
+  "sessions": {
+    "title": "Sitzungen",
+    "subtitle": "Verwalten Sie Ihre WhatsApp-Sitzungen und QR-Code-Verbindungen",
+    "newSession": "Neue Sitzung",
+    "searchPlaceholder": "Sitzungen durchsuchen...",
+    "filter": {
+      "all": "Alle Status",
+      "active": "Aktiv (verbunden)",
+      "inactive": "Inaktiv",
+      "connecting": "Verbinde"
+    },
+    "empty": {
+      "title": "Keine Sitzungen gefunden",
+      "description": "Erstellen Sie eine neue Sitzung, um zu starten"
+    },
+    "create": {
+      "title": "Neue Sitzung erstellen",
+      "label": "Sitzungsname",
+      "placeholder": "z.B. marketing-bot",
+      "hint": "Nur Kleinbuchstaben, Zahlen und Bindestriche. Beispiel: <code>customer-support</code>",
+      "invalidChars": "Ungültige Zeichen. Nur Kleinbuchstaben, Zahlen und Bindestriche erlaubt.",
+      "tooLong": "Name darf max. 50 Zeichen lang sein ({{length}}/50).",
+      "duplicate": "Eine Sitzung mit diesem Namen existiert bereits.",
+      "successTitle": "Sitzung erstellt",
+      "successDesc": "Sitzung «{{name}}» erfolgreich erstellt",
+      "errorTitle": "Erstellung fehlgeschlagen",
+      "errorDefault": "Sitzung konnte nicht erstellt werden"
+    },
+    "delete": {
+      "title": "Löschen bestätigen",
+      "message": "Sind Sie sicher, dass Sie die Sitzung <strong>«{{name}}»</strong> löschen möchten?",
+      "warning": "Diese Aktion kann nicht rückgängig gemacht werden.",
+      "successTitle": "Sitzung gelöscht",
+      "successDescNamed": "Sitzung «{{name}}» gelöscht",
+      "successDescGeneric": "Sitzung gelöscht",
+      "errorTitle": "Löschen fehlgeschlagen",
+      "errorDefault": "Sitzung konnte nicht gelöscht werden"
+    },
+    "qr": {
+      "title": "QR-Code scannen",
+      "step1": "<strong>1.</strong> Öffnen Sie WhatsApp auf Ihrem Telefon",
+      "step2": "<strong>2.</strong> Tippen Sie auf <strong>Menü</strong> → <strong>Verknüpfte Geräte</strong>",
+      "step3": "<strong>3.</strong> Tippen Sie auf <strong>Gerät verknüpfen</strong> und scannen Sie diesen QR",
+      "autoRefresh": "QR aktualisiert sich automatisch alle 5 Sekunden",
+      "generating": "Generiere QR-Code...",
+      "unavailable": "QR-Code noch nicht verfügbar. Versuchen Sie es gleich nochmal.",
+      "preparing": "Bereite QR-Code vor...",
+      "showQr": "QR anzeigen",
+      "loading": "Lade...",
+      "scanToConnect": "QR-Code scannen, um zu verbinden"
+    },
+    "details": {
+      "title": "Sitzungsdetails",
+      "name": "Name",
+      "status": "Status",
+      "sessionId": "Sitzungs-ID",
+      "phone": "Telefonnummer",
+      "phoneNone": "Nicht verbunden",
+      "created": "Erstellt",
+      "lastActive": "Zuletzt aktiv"
+    },
+    "actions": {
+      "view": "Anzeigen",
+      "start": "Starten",
+      "stop": "Stoppen",
+      "reconnect": "Neu verbinden",
+      "delete": "Löschen"
+    },
+    "toasts": {
+      "readyTitle": "Sitzung bereit",
+      "readyDesc": "WhatsApp-Sitzung ist jetzt verbunden",
+      "disconnectedTitle": "Sitzung getrennt",
+      "disconnectedDesc": "WhatsApp-Sitzung wurde getrennt"
+    },
+    "card": {
+      "phone": "Telefon",
+      "sessionId": "Sitzungs-ID",
+      "lastActive": "Zuletzt aktiv"
+    }
+  },
+  "webhooks": {
+    "title": "Webhooks",
+    "subtitle": "Konfigurieren Sie HTTP-Rückrufe für Echtzeit-Benachrichtigungen",
+    "addWebhook": "Webhook hinzufügen",
+    "createTitle": "Webhook erstellen",
+    "editTitle": "Webhook bearbeiten",
+    "deleteTitle": "Webhook löschen",
+    "deleteConfirm": "Sind Sie sicher, dass Sie diesen Webhook löschen möchten?",
+    "selectSession": "Sitzung auswählen...",
+    "session": "Sitzung",
+    "events": "Ereignisse",
+    "available": "Verfügbare Ereignisse",
+    "saveChanges": "Änderungen speichern",
+    "columns": {
+      "url": "URL",
+      "events": "Ereignisse",
+      "session": "Sitzung",
+      "status": "Status",
+      "actions": "Aktionen"
+    },
+    "empty": {
+      "title": "Keine Webhooks konfiguriert",
+      "description": "Fügen Sie einen Webhook hinzu, um Echtzeit-Benachrichtigungen zu erhalten"
+    },
+    "toasts": {
+      "created": "Webhook erfolgreich erstellt",
+      "createFailed": "Webhook-Erstellung fehlgeschlagen: {{message}}",
+      "deleted": "Webhook erfolgreich gelöscht",
+      "deleteFailed": "Webhook-Löschung fehlgeschlagen: {{message}}",
+      "updated": "Webhook erfolgreich aktualisiert",
+      "updateFailed": "Webhook-Aktualisierung fehlgeschlagen: {{message}}",
+      "testOk": "Webhook-Test erfolgreich! Status: {{status}}",
+      "testFailed": "Webhook-Test fehlgeschlagen: {{message}}",
+      "testError": "Webhook-Test fehlgeschlagen: {{message}}"
+    },
+    "actions": {
+      "test": "Testen",
+      "edit": "Bearbeiten",
+      "delete": "Löschen"
+    },
+    "eventDescriptions": {
+      "message.received": "Wenn eine Nachricht empfangen wird",
+      "message.sent": "Wenn eine Nachricht gesendet wird",
+      "session.connected": "Wenn eine Sitzung verbindet",
+      "session.disconnected": "Wenn eine Sitzung trennt",
+      "session.qr": "Wenn ein QR-Code generiert wird",
+      "all": "Alle Ereignisse"
+    }
+  },
+  "apiKeys": {
+    "title": "API-Verwaltung",
+    "subtitle": "Verwalten Sie API-Schlüssel, Anmeldedaten und API-Dokumentation",
+    "tabs": {
+      "overview": "Übersicht",
+      "keys": "API-Schlüssel",
+      "docs": "Dokumentation"
+    },
+    "stats": {
+      "totalKeys": "Schlüssel gesamt",
+      "activeKeys": "Aktive Schlüssel",
+      "totalCalls": "Aufrufe gesamt",
+      "rateLimit": "Aufrufe heute"
+    },
+    "credentials": {
+      "baseUrl": "API-Basis-URL",
+      "baseUrlHint": "Verwenden Sie diese URL als Basis-Endpoint für alle API-Anfragen."
+    },
+    "quickLinks": {
+      "title": "Schnellzugriff",
+      "manageKeys": "API-Schlüssel verwalten",
+      "manageKeysDesc": "API-Schlüssel anzeigen, erstellen, widerrufen und löschen",
+      "viewDocs": "API-Dokumentation",
+      "viewDocsDesc": "Endpoint-Referenz mit Beispielen durchstöbern",
+      "createKey": "Neuen Schlüssel erstellen",
+      "createKeyDesc": "Einen neuen API-Schlüssel mit bestimmter Rolle generieren"
+    },
+    "createBtn": "API-Schlüssel erstellen",
+    "modalTitle": "API-Schlüssel erstellen",
+    "createdTitle": "API-Schlüssel erstellt",
+    "createdHint": "Kopieren Sie diesen Schlüssel jetzt. Sie werden ihn nicht wieder sehen können.",
+    "createdHintExtra": "Dieser geheime Schlüssel wird nicht wieder angezeigt. Bewahren Sie ihn sicher auf.",
+    "namePlaceholder": "z.B. Produktionsschlüssel",
+    "rolesTitle": "Rollen-Referenz",
+    "roles": {
+      "admin": "Admin",
+      "operator": "Operator",
+      "viewer": "Betrachter"
+    },
+    "roleDescriptions": {
+      "admin": "Vollzugriff auf alle Ressourcen",
+      "operator": "Sitzungs- & Nachrichtenverwaltung",
+      "viewer": "Nur-Lese-Zugriff"
+    },
+    "columns": {
+      "name": "Name",
+      "key": "Schlüssel",
+      "role": "Rolle",
+      "status": "Status",
+      "lastUsed": "Zuletzt genutzt",
+      "actions": "Aktionen"
+    },
+    "statuses": {
+      "active": "Aktiv",
+      "revoked": "Widerrufen"
+    },
+    "empty": {
+      "title": "Keine API-Schlüssel erstellt",
+      "description": "Erstellen Sie einen API-Schlüssel zur Authentifizierung Ihrer Anfragen"
+    },
+    "confirm": {
+      "deleteTitle": "API-Schlüssel löschen",
+      "revokeTitle": "API-Schlüssel widerrufen",
+      "deleteMessage": "Sind Sie sicher, dass Sie <strong>{{name}}</strong> dauerhaft löschen möchten? Dies kann nicht rückgängig gemacht werden.",
+      "revokeMessage": "Sind Sie sicher, dass Sie <strong>{{name}}</strong> widerrufen möchten? Er wird nicht mehr funktionieren.",
+      "delete": "Löschen",
+      "revoke": "Widerrufen"
+    },
+    "actions": {
+      "copy": "Kopieren",
+      "revoke": "Widerrufen",
+      "delete": "Löschen"
+    }
+  },
+  "apiDocs": {
+    "auth": {
+      "title": "Authentifizierung",
+      "description": "Alle API-Anfragen erfordern eine Authentifizierung. Fügen Sie Ihren API-Schlüssel im <code>X-API-Key</code>-Header hinzu. Sie können Ihre Schlüssel im Tab API-Schlüssel verwalten.",
+      "example": "Beispielanfrage mit Authentifizierung",
+      "none": "Keine Authentifizierung erforderlich",
+      "apiKey": "API-Schlüssel erforderlich",
+      "admin": "Admin-Zugriff erforderlich"
+    },
+    "sdks": {
+      "title": "SDKs & Bibliotheken",
+      "description": "Nutzen Sie unsere offiziellen SDKs, um OpenWA nahtlos in Ihre Anwendung zu integrieren."
+    },
+    "endpoints": {
+      "title": "API-Endpoints",
+      "health": {
+        "desc": "Server-Health-Status prüfen"
+      },
+      "sessions": {
+        "list": "Alle WhatsApp-Sitzungen auflisten",
+        "create": "Neue WhatsApp-Sitzung erstellen",
+        "qr": "QR-Code für eine Sitzung abrufen",
+        "delete": "WhatsApp-Sitzung löschen"
+      },
+      "messages": {
+        "sendText": "Textnachricht senden",
+        "sendImage": "Bild senden",
+        "sendLocation": "Standort senden",
+        "list": "Nachrichten mit optionalen Filtern auflisten"
+      },
+      "contacts": {
+        "list": "Alle gespeicherten Kontakte auflisten",
+        "create": "Neuen Kontakt erstellen"
+      },
+      "webhooks": {
+        "list": "Alle konfigurierten Webhooks auflisten"
+      },
+      "campaigns": {
+        "list": "Alle Kampagnen auflisten",
+        "create": "Neue Kampagne erstellen"
+      },
+      "settings": {
+        "get": "Systemeinstellungen abrufen (nur Admin)"
+      }
+    },
+    "requestBody": "Anfragekörper",
+    "example": "Beispiel",
+    "response": "Antwort",
+    "rateLimit": {
+      "title": "Ratenbegrenzung",
+      "description": "API-Anfragen werden zur Gewährleistung einer fairen Nutzung ratenbegrenzt. Das Standardlimit beträgt 100 Anfragen pro 60-Sekunden-Fenster pro API-Schlüssel. Bei Überschreitung erhalten Sie eine 429 Too Many Requests-Antwort. Kontaktieren Sie den Support, wenn Sie ein höheres Limit benötigen."
+    }
+  },
+  "logs": {
+    "title": "Audit-Logs",
+    "subtitle": "Verfolgen und überprüfen Sie alle API-Aktionen und Systemereignisse",
+    "exportCsv": "CSV exportieren",
+    "searchPlaceholder": "Logs durchsuchen...",
+    "severity": {
+      "all": "Alle Stufen",
+      "info": "Info",
+      "warn": "Warnung",
+      "error": "Fehler"
+    },
+    "columns": {
+      "timestamp": "Zeitstempel",
+      "action": "Aktion",
+      "session": "Sitzung",
+      "apiKey": "API-Schlüssel",
+      "user": "Benutzer",
+      "ip": "IP-Adresse",
+      "severity": "Stufe"
+    },
+    "pagination": "Seite {{page}} von {{total}} ({{count}} gesamt)",
+    "empty": {
+      "title": "Keine Logs gefunden",
+      "description": "Audit-Logs erscheinen hier, sobald Aktionen ausgeführt werden"
+    }
+  },
+  "composer": {
+    "title": "Editor",
+    "subtitle": "Verfassen und senden Sie Nachrichten wie in WhatsApp",
+    "session": "WhatsApp-Sitzung",
+    "noReadySessions": "Keine bereiten Sitzungen",
+    "contactType": "Kontakttyp",
+    "recipients": "Empfänger",
+    "selected": "{{count}} ausgewählt",
+    "savedContacts": "Kontakte",
+    "waContacts": "WA-Kontakte",
+    "groups": "Gruppen",
+    "newNumber": "Neue Nummer",
+    "searchContacts": "Kontakte durchsuchen...",
+    "searchGroups": "Gruppen durchsuchen...",
+    "noContacts": "Noch keine gespeicherten Kontakte",
+    "noGroups": "Keine Gruppen gefunden",
+    "noResults": "Keine Ergebnisse gefunden",
+    "schedule": "Zeitplan",
+    "messageType": "Nachrichtentyp",
+    "types": {
+      "text": "Text",
+      "image": "Bild",
+      "video": "Video",
+      "audio": "Audio",
+      "document": "Dokument",
+      "location": "Standort",
+      "contact": "Kontakt"
+    },
+    "message": "Nachricht",
+    "messagePlaceholder": "Geben Sie Ihre Nachricht hier ein...",
+    "mediaUrl": "Medien-URL",
+    "mediaUrlPlaceholder": "https://example.com/file.jpg",
+    "caption": "Bildunterschrift",
+    "captionPlaceholder": "Bildunterschrift hinzufügen...",
+    "fileName": "Dateiname",
+    "fileNamePlaceholder": "dokument.pdf",
+    "latitude": "Breitengrad",
+    "latitudePlaceholder": "52.5200",
+    "longitude": "Längengrad",
+    "longitudePlaceholder": "13.4050",
+    "locationDescription": "Beschreibung",
+    "locationDescriptionPlaceholder": "z.B. Unser Treffpunkt",
+    "contactName": "Kontaktname",
+    "contactNamePlaceholder": "Max Mustermann",
+    "contactPhone": "Kontakttelefon",
+    "contactPhonePlaceholder": "+49123456789",
+    "send": "Nachricht senden",
+    "sending": "Sende...",
+    "sendTo": "An {{count}} Empfänger senden",
+    "sendTo_plural": "An {{count}} Empfänger senden",
+    "sendingTo": "Sende an {{count}} Empfänger",
+    "sendingTo_plural": "Sende an {{count}} Empfänger...",
+    "sentSuccess": "Nachricht an {{count}} Empfänger gesendet",
+    "sentSuccess_plural": "Nachricht an {{count}} Empfänger gesendet",
+    "sentPartial": "An {{sent}} gesendet, bei {{failed}} fehlgeschlagen",
+    "sentPartial_plural": "An {{sent}} gesendet, bei {{failed}} fehlgeschlagen",
+    "progress": "Fortschritt",
+    "charCount": "{{count}} / 4096 Zeichen",
+    "livePreview": "Live-Vorschau",
+    "noMessages": "Noch keine Nachrichten",
+    "noMessagesHint": "Senden Sie eine Nachricht, um die Unterhaltung zu starten"
+  },
+  "campaigns": {
+    "title": "Kampagnen",
+    "subtitle": "Erstellen und verwalten Sie Broadcast-Kampagnen",
+    "newCampaign": "Neue Kampagne",
+    "editCampaign": "Kampagne bearbeiten",
+    "duplicate": "Duplizieren",
+    "searchPlaceholder": "Kampagnen durchsuchen...",
+    "filterStatus": "Alle Status",
+    "statuses": {
+      "draft": "Entwurf",
+      "scheduled": "Geplant",
+      "sending": "Sende",
+      "completed": "Abgeschlossen",
+      "paused": "Pausiert",
+      "cancelled": "Abgebrochen",
+      "failed": "Fehlgeschlagen"
+    },
+    "recipientType": {
+      "contacts": "Kontakte",
+      "groups": "Gruppen"
+    },
+    "stats": {
+      "total": "Kampagnen gesamt",
+      "active": "Aktiv",
+      "completed": "Abgeschlossen",
+      "failed": "Fehlgeschlagen",
+      "totalRecipients": "Empfänger gesamt",
+      "totalSent": "Gesendet gesamt",
+      "totalFailed": "Fehlgeschlagen gesamt"
+    },
+    "columns": {
+      "name": "Name",
+      "status": "Status",
+      "recipients": "Empfänger",
+      "sent": "Gesendet",
+      "failed": "Fehlgeschlagen",
+      "schedule": "Geplant",
+      "created": "Erstellt",
+      "actions": "Aktionen"
+    },
+    "empty": {
+      "title": "Noch keine Kampagnen",
+      "description": "Erstellen Sie Ihre erste Kampagne, um Nachrichten zu versenden"
+    },
+    "wizard": {
+      "step1": "Details",
+      "step2": "Nachricht",
+      "step3": "Empfänger",
+      "step4": "Zeitplan",
+      "step5": "Prüfung",
+      "name": "Kampagnenname",
+      "namePlaceholder": "z.B. Weihnachtsaktion",
+      "description": "Beschreibung",
+      "descriptionPlaceholder": "Optionale Beschreibung der Kampagne",
+      "session": "WhatsApp-Sitzung",
+      "noSessions": "Keine Sitzungen verfügbar",
+      "messageType": "Nachrichtentyp",
+      "text": "Text",
+      "image": "Bild",
+      "video": "Video",
+      "audio": "Audio",
+      "document": "Dokument",
+      "location": "Standort",
+      "contact": "Kontakt",
+      "textPlaceholder": "Geben Sie Ihre Nachricht ein...",
+      "mediaUrl": "Medien-URL",
+      "mediaUrlPlaceholder": "https://example.com/file.jpg",
+      "caption": "Bildunterschrift",
+      "captionPlaceholder": "Bildunterschrift hinzufügen...",
+      "fileName": "Dateiname",
+      "fileNamePlaceholder": "dokument.pdf",
+      "latitude": "Breitengrad",
+      "latitudePlaceholder": "52.5200",
+      "longitude": "Längengrad",
+      "longitudePlaceholder": "13.4050",
+      "contactName": "Kontaktname",
+      "contactNamePlaceholder": "Max Mustermann",
+      "contactPhone": "Kontakttelefon",
+      "contactPhonePlaceholder": "+49123456789",
+      "selectRecipients": "Empfänger auswählen",
+      "contacts": "Gespeicherte Kontakte",
+      "groups": "Kontaktgruppen",
+      "searchContacts": "Kontakte durchsuchen...",
+      "searchGroups": "Gruppen durchsuchen...",
+      "noContacts": "Keine Kontakte gefunden",
+      "noGroups": "Keine Gruppen gefunden",
+      "selected": "{{count}} ausgewählt",
+      "scheduleNow": "Sofort senden",
+      "scheduleLater": "Später senden",
+      "scheduleDate": "Datum",
+      "scheduleTime": "Uhrzeit",
+      "reviewTitle": "Kampagne prüfen",
+      "reviewName": "Name",
+      "reviewSession": "Sitzung",
+      "reviewMessageType": "Nachrichtentyp",
+      "reviewMessagePreview": "Nachrichtenvorschau",
+      "reviewRecipients": "Empfänger",
+      "reviewRecipientCount": "{{count}} Empfänger",
+      "reviewSchedule": "Zeitplan",
+      "reviewScheduleNow": "Sofort senden",
+      "reviewScheduleDate": "Geplant für {{date}}",
+      "createBtn": "Kampagne erstellen",
+      "creating": "Erstelle...",
+      "saveBtn": "Änderungen speichern",
+      "saving": "Speichere..."
+    },
+    "detail": {
+      "title": "Kampagnendetails",
+      "overview": "Übersicht",
+      "recipients": "Empfänger",
+      "stats": {
+        "total": "Empfänger gesamt",
+        "sent": "Gesendet",
+        "failed": "Fehlgeschlagen",
+        "pending": "Ausstehend",
+        "progress": "Fortschritt"
+      },
+      "actions": {
+        "start": "Kampagne starten",
+        "pause": "Pausieren",
+        "cancel": "Abbrechen",
+        "resendFailed": "Fehlgeschlagene erneut senden",
+        "edit": "Bearbeiten",
+        "delete": "Löschen",
+        "back": "Zurück zu Kampagnen"
+      },
+      "confirmDelete": "Sind Sie sicher, dass Sie diese Kampagne löschen möchten?",
+      "confirmStart": "Sind Sie sicher, dass Sie diese Kampagne starten möchten?",
+      "noRecipients": "Keine Empfänger gefunden",
+      "searchRecipients": "Empfänger durchsuchen...",
+      "filterStatus": "Nach Status filtern"
+    },
+    "toasts": {
+      "createSuccess": "Kampagne erstellt",
+      "createError": "Kampagne konnte nicht erstellt werden",
+      "updateSuccess": "Kampagne aktualisiert",
+      "updateError": "Kampagne konnte nicht aktualisiert werden",
+      "deleteSuccess": "Kampagne gelöscht",
+      "deleteError": "Kampagne konnte nicht gelöscht werden",
+      "startSuccess": "Kampagne gestartet",
+      "startError": "Kampagne konnte nicht gestartet werden",
+      "pauseSuccess": "Kampagne pausiert",
+      "pauseError": "Kampagne konnte nicht pausiert werden",
+      "cancelSuccess": "Kampagne abgebrochen",
+      "cancelError": "Kampagne konnte nicht abgebrochen werden",
+      "resendSuccess": "Sende fehlgeschlagene Nachrichten erneut",
+      "resendError": "Erneutes Senden fehlgeschlagen"
+    }
+  },
+  "infrastructure": {
+    "title": "Infrastruktur",
+    "subtitle": "Server, Datenbank, Cache, Speicher und Engine konfigurieren",
+    "saveConfig": "Konfiguration speichern",
+    "saving": "Speichere...",
+    "server": {
+      "title": "Server-Konfiguration",
+      "production": "Produktion",
+      "development": "Entwicklung",
+      "environment": "Umgebung",
+      "domain": "Domain",
+      "apiPort": "API-Port",
+      "dashboardPort": "Dashboard-Port",
+      "corsOrigins": "CORS-Ursprünge",
+      "corsPlaceholder": "* oder kommagetrennte Ursprünge",
+      "publicApiUrl": "Öffentliche API-URL (opt.)",
+      "publicDashboardUrl": "Öffentliche Dashboard-URL (opt.)"
+    },
+    "webhook": {
+      "title": "Webhook & Ratenbegrenzung",
+      "settings": "Webhook-Einstellungen",
+      "timeout": "Zeitüberschreitung (ms)",
+      "maxRetries": "Max. Wiederholungen",
+      "retryDelay": "Wiederholungsverzögerung (ms)",
+      "rateLimit": "Ratenbegrenzung",
+      "window": "Zeitfenster (Sek.)",
+      "maxReq": "Max. Anfragen pro Fenster"
+    },
+    "database": {
+      "title": "Datenbank-Konfiguration",
+      "sqlite": "SQLite",
+      "sqliteDesc": "Lokale dateibasierte Datenbank",
+      "postgres": "PostgreSQL",
+      "postgresDesc": "Produktionsbereite Datenbank",
+      "useBuiltIn": "Integrierten PostgreSQL-Container nutzen",
+      "builtInDesc": "OpenWA verwaltet einen PostgreSQL-Container für Sie",
+      "dbName": "Datenbankname",
+      "poolSize": "Poolgröße",
+      "ssl": "SSL-Verbindung",
+      "sslDesc": "TLS/SSL für sichere Datenbankverbindungen aktivieren",
+      "migrationsTitle": "Datenbank-Migrationen",
+      "migrationsStatus": "Schema wird automatisch mit TypeORM synchronisiert",
+      "migrationsHint": "Migrationen werden automatisch verwaltet. Nutzen Sie die CLI für manuelle Migrationen."
+    },
+    "redis": {
+      "title": "Redis",
+      "enable": "Redis aktivieren",
+      "enableDesc": "Erforderlich für Caching, Sitzungsspeicher und BullMQ-Warteschlangen",
+      "useBuiltIn": "Integrierten Redis-Container nutzen",
+      "builtInDesc": "OpenWA verwaltet einen Redis-Container für Sie",
+      "queueTitle": "BullMQ-Warteschlangensystem aktivieren",
+      "queueDesc": "Nachrichtenwarteschlangen für zuverlässige Zustellung nutzen",
+      "statsTitle": "Warteschlangen-Statistiken",
+      "messageQueue": "Nachrichten-Warteschlange",
+      "webhookQueue": "Webhook-Warteschlange",
+      "pending": "Ausstehend",
+      "completed": "Abgeschlossen",
+      "failed": "Fehlgeschlagen",
+      "clearFailed": "Fehlgeschlagene löschen",
+      "viewBullMq": "Bull MQ Dashboard anzeigen",
+      "disabledTitle": "Redis deaktiviert",
+      "disabledDesc": "Aktivieren Sie Redis für Caching, Sitzungsspeicher und BullMQ-Warteschlangen.",
+      "passwordOptional": "(optional)"
+    },
+    "storage": {
+      "title": "Speicher-Konfiguration",
+      "local": "Lokales Dateisystem",
+      "localDesc": "Mediendateien lokal speichern",
+      "s3": "Amazon S3",
+      "s3Desc": "Cloud-Speicher (S3-kompatibel)",
+      "useBuiltIn": "Integrierten MinIO-Container nutzen",
+      "builtInDesc": "OpenWA verwaltet einen MinIO-Container (S3-kompatibel) für Sie",
+      "storagePath": "Speicherpfad",
+      "bucket": "Bucket-Name",
+      "region": "Region",
+      "accessKey": "Access Key",
+      "secretKey": "Secret Key",
+      "endpoint": "Benutzerdefinierter Endpoint (opt.)",
+      "endpointHint": "Für MinIO oder andere S3-kompatible Dienste"
+    },
+    "statusLabels": {
+      "connected": "Verbunden",
+      "disconnected": "Getrennt",
+      "disabled": "Deaktiviert"
+    },
+    "restart": {
+      "idleTitle": "⚙️ Konfiguration gespeichert",
+      "restartingTitle": "🔄 Server wird neu gestartet...",
+      "waitingTitle": "⏳ Bitte warten...",
+      "successTitle": "✅ Server bereit",
+      "errorTitle": "❌ Neustart fehlgeschlagen",
+      "idleDesc": "Konfiguration wurde in <code>.env.generated</code> gespeichert.<br/>Ein Server-Neustart ist erforderlich.",
+      "later": "Später neu starten",
+      "now": "Jetzt neu starten",
+      "restartingMsg": "Server-Neustart... {{count}}s",
+      "checking": "Server-Status prüfen...",
+      "dontClose": "Bitte schließen Sie dieses Fenster nicht",
+      "successMsg": "Server ist wieder online! Die Seite wird automatisch neu geladen.",
+      "errorMsg": "Server hat nach 30 Sekunden nicht geantwortet. Bitte überprüfen Sie die Docker-Logs.",
+      "reload": "Seite neu laden"
+    },
+    "toasts": {
+      "saveFailed": "Speichern fehlgeschlagen",
+      "saveSuccess": "Konfiguration erfolgreich gespeichert",
+      "saveError": "Konfiguration konnte nicht gespeichert werden"
+    }
+  },
+  "pluginStatus": {
+    "installed": "Installiert",
+    "enabled": "Aktiviert",
+    "disabled": "Deaktiviert",
+    "error": "Fehler"
+  },
+  "pluginType": {
+    "engine": "Engine",
+    "storage": "Speicher",
+    "queue": "Warteschlange",
+    "auth": "Authentifizierung",
+    "extension": "Erweiterung"
+  },
+  "plugins": {
+    "title": "Plugins",
+    "subtitle": "Engines, Speicher-Backends und Erweiterungen verwalten",
+    "refresh": "Aktualisieren",
+    "engineCard": "Aktive WhatsApp-Engine",
+    "running": "Läuft",
+    "supportedFeatures": "Unterstützte Funktionen:",
+    "more": "+{{count}} mehr",
+    "builtIn": "Integriert",
+    "noDescription": "Keine Beschreibung verfügbar",
+    "required": "Erforderlich",
+    "active": "Aktiv",
+    "activate": "Aktivieren",
+    "enable": "Einschalten",
+    "disable": "Ausschalten",
+    "healthCheck": "Health-Check",
+    "configure": "Konfigurieren",
+    "empty": {
+      "title": "Keine Plugins gefunden",
+      "description": "Installieren Sie Plugins, um die Funktionalität von OpenWA zu erweitern"
+    },
+    "config": {
+      "title": "{{name}} konfigurieren",
+      "restartNotice": "Änderungen erfordern einen Server-Neustart",
+      "engineType": "Engine-Typ",
+      "headless": "Headless-Modus",
+      "headlessDesc": "Browser ohne sichtbare UI ausführen (empfohlen für Produktion)",
+      "sessionDataPath": "Sitzungsdatenpfad",
+      "browserArgs": "Browser-Argumente",
+      "noOptions": "Keine Konfigurationsoptionen für dieses Plugin verfügbar",
+      "save": "Konfiguration speichern"
+    },
+    "toasts": {
+      "errorTitle": "Plugin-Fehler",
+      "errorDefault": "Plugin-Status konnte nicht umgeschaltet werden",
+      "healthOk": "Health-Check bestanden",
+      "healthFail": "Health-Check fehlgeschlagen",
+      "healthError": "Health-Check-Fehler",
+      "savedTitle": "Konfiguration gespeichert",
+      "savedDesc": "Server-Neustart erforderlich, um Änderungen zu übernehmen.",
+      "saveFailed": "Speichern fehlgeschlagen"
+    }
+  },
+  "contacts": {
+    "title": "Kontakte",
+    "subtitle": "Verwalten Sie Ihre WhatsApp-Kontakte",
+    "newContact": "Neuer Kontakt",
+    "searchPlaceholder": "Suche nach Name oder Telefon...",
+    "selected": "{{count}} ausgewählt",
+    "bulkDelete": "Ausgewählte löschen",
+    "importBtn": "CSV importieren",
+    "exportBtn": "CSV exportieren",
+    "downloadTemplate": "CSV-Vorlage herunterladen",
+    "empty": {
+      "title": "Noch keine Kontakte",
+      "description": "Fügen Sie Ihren ersten Kontakt hinzu oder importieren Sie aus einer CSV-Datei"
+    },
+    "columns": {
+      "name": "Name",
+      "phone": "Telefon",
+      "country": "Land",
+      "city": "Stadt",
+      "note": "Notiz",
+      "actions": "Aktionen"
+    },
+    "form": {
+      "createTitle": "Neuer Kontakt",
+      "editTitle": "Kontakt bearbeiten",
+      "fullName": "Vollständiger Name",
+      "fullNamePlaceholder": "z.B. Max Mustermann",
+      "countryCode": "Ländervorwahl",
+      "phone": "WhatsApp-Telefon",
+      "phonePlaceholder": "z.B. 1234567890",
+      "phoneHint": "Nummer ohne Ländervorwahl eingeben — wird automatisch hinzugefügt",
+      "country": "Land",
+      "countryPlaceholder": "z.B. Deutschland",
+      "state": "Bundesland",
+      "statePlaceholder": "z.B. Bayern",
+      "city": "Stadt",
+      "cityPlaceholder": "z.B. München",
+      "address": "Adresse",
+      "addressPlaceholder": "z.B. Musterstraße 123",
+      "note": "Notiz",
+      "notePlaceholder": "Weitere Notizen...",
+      "phoneRequired": "Telefonnummer erforderlich",
+      "phoneDuplicate": "Diese Telefonnummer existiert bereits",
+      "phoneInvalid": "Telefonnummer darf nur Ziffern enthalten"
+    },
+    "delete": {
+      "title": "Kontakt löschen",
+      "message": "Sind Sie sicher, dass Sie <strong>{{name}}</strong> löschen möchten? Dies kann nicht rückgängig gemacht werden.",
+      "messagePhone": "Sind Sie sicher, dass Sie den Kontakt <strong>{{phone}}</strong> löschen möchten? Dies kann nicht rückgängig gemacht werden.",
+      "successTitle": "Kontakt gelöscht",
+      "successDesc": "Der Kontakt wurde gelöscht"
+    },
+    "bulkDeleteModal": {
+      "title": "{{count}} Kontakte löschen",
+      "message": "Sind Sie sicher, dass Sie {{count}} ausgewählte Kontakte löschen möchten? Dies kann nicht rückgängig gemacht werden.",
+      "successTitle": "Kontakte gelöscht",
+      "successDesc": "{{count}} Kontakte wurden gelöscht"
+    },
+    "import": {
+      "title": "Kontakte importieren",
+      "step1Title": "CSV-Datei hochladen",
+      "step1Desc": "Laden Sie eine CSV-Datei mit Ihren Kontakten hoch. Die Telefonspalte muss die Ländervorwahl enthalten (z.B. +49123456789).",
+      "step2Title": "Vorschau & Validierung",
+      "step2Desc": "Überprüfen Sie Ihre Kontakte vor dem Import. Ungültige Zeilen werden hervorgehoben.",
+      "step3Title": "Import abgeschlossen",
+      "dropzone": "CSV-Datei hier ablegen oder klicken zum Durchsuchen",
+      "dropzoneHint": "Unterstütztes Format: .csv",
+      "validRows": "{{count}} gültig",
+      "invalidRows": "{{count}} ungültig",
+      "importValid": "Nur gültige importieren",
+      "importAll": "Alle importieren",
+      "importBtn": "{{count}} Kontakte importieren",
+      "importing": "Importiere...",
+      "successTitle": "Import erfolgreich",
+      "successDesc": "{{created}} Kontakte importiert, {{skipped}} übersprungen",
+      "errorPhone": "Telefonnummer leer",
+      "errorNoCountryCode": "Telefon muss Ländervorwahl enthalten (z.B. +49123456789)",
+      "errorDuplicate": "Doppelte Telefonnummer in Datei",
+      "previewColumns": {
+        "row": "#",
+        "status": "Status",
+        "name": "Vollständiger Name",
+        "phone": "Telefon",
+        "country": "Land",
+        "city": "Stadt",
+        "note": "Notiz",
+        "error": "Problem"
+      }
+    },
+    "detail": {
+      "title": "Kontaktdetails",
+      "phone": "Telefon",
+      "country": "Land",
+      "state": "Bundesland",
+      "city": "Stadt",
+      "address": "Adresse",
+      "note": "Notiz",
+      "created": "Erstellt",
+      "messages": "Nachrichtenverlauf",
+      "noMessages": "Keine Nachrichten für diesen Kontakt gefunden.",
+      "incoming": "Eingehend",
+      "outgoing": "Ausgehend",
+      "loadMore": "Mehr laden",
+      "loadingMessages": "Lade Nachrichten...",
+      "totalMessages": "{{count}} Nachrichten gesamt",
+      "session": "Sitzung",
+      "type": "Typ",
+      "direction": "Richtung",
+      "messageBody": "Nachricht",
+      "timestamp": "Datum",
+      "status": "Status"
+    },
+    "pagination": {
+      "showing": "Zeige {{from}} bis {{to}} von {{total}} Einträgen",
+      "perPage": "pro Seite"
+    },
+    "toasts": {
+      "createSuccess": "Kontakt erstellt",
+      "createError": "Kontakt konnte nicht erstellt werden",
+      "updateSuccess": "Kontakt aktualisiert",
+      "updateError": "Kontakt konnte nicht aktualisiert werden",
+      "deleteSuccess": "Kontakt gelöscht",
+      "deleteError": "Kontakt konnte nicht gelöscht werden",
+      "bulkDeleteSuccess": "{{count}} Kontakte gelöscht",
+      "bulkDeleteError": "Kontakte konnten nicht gelöscht werden",
+      "importSuccess": "{{created}} Kontakte importiert",
+      "importError": "Import fehlgeschlagen",
+      "exportSuccess": "{{count}} Kontakte exportiert",
+      "exportError": "Export fehlgeschlagen"
+    }
+  },
+  "groups": {
+    "title": "Kontaktgruppen",
+    "subtitle": "Organisieren Sie Ihre Kontakte in Gruppen für gezielte Nachrichten",
+    "newGroup": "Neue Gruppe",
+    "searchPlaceholder": "Gruppen durchsuchen...",
+    "empty": {
+      "title": "Noch keine Gruppen",
+      "description": "Erstellen Sie eine Gruppe, um Ihre Kontakte zu organisieren"
+    },
+    "columns": {
+      "name": "Name",
+      "description": "Beschreibung",
+      "members": "Mitglieder",
+      "created": "Erstellt",
+      "actions": "Aktionen"
+    },
+    "form": {
+      "createTitle": "Neue Gruppe erstellen",
+      "editTitle": "Gruppe bearbeiten",
+      "name": "Gruppenname",
+      "namePlaceholder": "z.B. VIP-Kunden",
+      "description": "Beschreibung",
+      "descriptionPlaceholder": "Optionale Beschreibung der Gruppe",
+      "nameRequired": "Gruppenname erforderlich"
+    },
+    "create": {
+      "step1Title": "Gruppendetails",
+      "step2Title": "Mitglieder hinzufügen",
+      "step3Title": "Prüfen & Erstellen",
+      "method": "Wie möchten Sie Kontakte hinzufügen?",
+      "csvImport": "Aus CSV importieren",
+      "csvImportDesc": "Laden Sie eine CSV-Datei hoch, um Kontakte zu erstellen und zur Gruppe hinzuzufügen",
+      "filterSelect": "Filtern & Auswählen",
+      "filterSelectDesc": "Vorhandene Kontakte durchsuchen und zur Gruppe hinzufügen",
+      "csv": {
+        "title": "Kontakte aus CSV importieren",
+        "dropzone": "CSV hier ablegen oder klicken",
+        "dropzoneHint": "Format: .csv. Telefonnummern mit Ländervorwahl (z.B. +49123456789)",
+        "validRows": "{{count}} gültig",
+        "invalidRows": "{{count}} ungültig",
+        "importBtn": "{{count}} Kontakte importieren",
+        "importing": "Importiere...",
+        "step2Title": "Vorschau & Validierung",
+        "step2Desc": "Überprüfen Sie die Daten vor dem Import.",
+        "step3Title": "Import abgeschlossen",
+        "successDesc": "{{created}} Kontakte erstellt & hinzugefügt, {{skipped}} übersprungen",
+        "errorPhone": "Telefonnummer leer",
+        "errorNoCountryCode": "Ländervorwahl erforderlich",
+        "errorDuplicate": "Doppelte Nummer",
+        "previewColumns": {
+          "row": "#",
+          "status": "Status",
+          "name": "Name",
+          "phone": "Telefon",
+          "country": "Land",
+          "city": "Stadt",
+          "note": "Notiz",
+          "error": "Problem"
+        }
+      },
+      "filter": {
+        "title": "Kontakte auswählen",
+        "searchPlaceholder": "Suche...",
+        "country": "Land",
+        "allCountries": "Alle",
+        "state": "Bundesland",
+        "allStates": "Alle",
+        "city": "Stadt",
+        "allCities": "Alle",
+        "namePlaceholder": "Nach Name filtern...",
+        "phonePlaceholder": "Nach Vorwahl filtern...",
+        "selected": "{{count}} Kontakte ausgewählt",
+        "noResults": "Keine passenden Kontakte",
+        "clearFilters": "Filter zurücksetzen"
+      },
+      "review": {
+        "title": "Gruppe prüfen",
+        "nameLabel": "Gruppenname",
+        "descriptionLabel": "Beschreibung",
+        "membersLabel": "Mitglieder",
+        "noMembers": "Noch keine Mitglieder",
+        "addMore": "Weitere Kontakte hinzufügen"
+      }
+    },
+    "detail": {
+      "title": "Gruppendetails",
+      "members": "Mitglieder",
+      "noMembers": "Keine Mitglieder in dieser Gruppe",
+      "addMembers": "Mitglieder hinzufügen",
+      "removeSelected": "Ausgewählte entfernen",
+      "searchPlaceholder": "Mitglieder durchsuchen...",
+      "removeConfirm": "{{count}} Kontakte aus dieser Gruppe entfernen?",
+      "empty": {
+        "title": "Keine Mitglieder",
+        "description": "Fügen Sie Kontakte zu dieser Gruppe hinzu"
+      }
+    },
+    "delete": {
+      "title": "Gruppe löschen",
+      "message": "Sind Sie sicher, dass Sie die Gruppe <strong>«{{name}}»</strong> löschen möchten? Dies kann nicht rückgängig gemacht werden.",
+      "successTitle": "Gruppe gelöscht",
+      "successDesc": "Die Gruppe wurde gelöscht"
+    },
+    "toasts": {
+      "createSuccess": "Gruppe erstellt",
+      "createError": "Gruppe konnte nicht erstellt werden",
+      "updateSuccess": "Gruppe aktualisiert",
+      "updateError": "Gruppe konnte nicht aktualisiert werden",
+      "deleteSuccess": "Gruppe gelöscht",
+      "deleteError": "Gruppe konnte nicht gelöscht werden",
+      "addMembersSuccess": "{{count}} Kontakte zur Gruppe hinzugefügt",
+      "addMembersError": "Mitglieder konnten nicht hinzugefügt werden",
+      "removeMembersSuccess": "{{count}} Kontakte aus Gruppe entfernt",
+      "removeMembersError": "Mitglieder konnten nicht entfernt werden",
+      "importSuccess": "{{created}} Kontakte importiert & hinzugefügt",
+      "importError": "Import fehlgeschlagen"
+    }
+  },
+  "settings": {
+    "title": "Einstellungen",
+    "subtitle": "Verwalten Sie Ihr Profil, Passwort und Systemeinstellungen",
+    "tabs": {
+      "profile": "Profil",
+      "password": "Passwort",
+      "language": "Sprache",
+      "system": "System"
+    },
+    "language": {
+      "title": "Sprache",
+      "subtitle": "Wählen Sie Ihre bevorzugte Sprache für die Dashboard-Oberfläche"
+    },
+    "profile": {
+      "name": "Vollständiger Name",
+      "namePlaceholder": "z.B. Max Mustermann",
+      "phone": "Telefonnummer",
+      "phonePlaceholder": "z.B. 01712345678",
+      "profilePic": "Profilbild",
+      "profilePicHint": "Bild hochladen (JPEG, PNG, WebP, GIF). Max. 5 MB.",
+      "chooseFile": "Datei auswählen",
+      "uploading": "Lade hoch...",
+      "remove": "Entfernen",
+      "toasts": {
+        "updateSuccess": "Profil aktualisiert",
+        "updateError": "Profil konnte nicht aktualisiert werden",
+        "uploadError": "Upload fehlgeschlagen"
+      }
+    },
+    "password": {
+      "current": "Aktuelles Passwort",
+      "currentHint": "Geben Sie Ihr aktuelles Passwort zur Identitätsprüfung ein",
+      "currentPlaceholder": "Aktuelles Passwort eingeben",
+      "newPassword": "Neues Passwort",
+      "newPlaceholder": "Neues Passwort (min. 6 Zeichen)",
+      "confirm": "Neues Passwort bestätigen",
+      "confirmPlaceholder": "Neues Passwort wiederholen",
+      "save": "Passwort ändern",
+      "errors": {
+        "currentRequired": "Aktuelles Passwort erforderlich",
+        "newRequired": "Neues Passwort erforderlich",
+        "tooShort": "Passwort muss mindestens 6 Zeichen lang sein",
+        "mismatch": "Passwörter stimmen nicht überein"
+      },
+      "toasts": {
+        "updateSuccess": "Passwort erfolgreich geändert",
+        "updateError": "Passwort konnte nicht geändert werden"
+      }
+    },
+    "system": {
+      "name": "Firmenname",
+      "namePlaceholder": "z.B. Meine Firma",
+      "email": "E-Mail",
+      "emailPlaceholder": "z.B. info@firma.de",
+      "altPhone": "Alternative Telefonnummer",
+      "altPhonePlaceholder": "z.B. +49123456789",
+      "website": "Webseite",
+      "websitePlaceholder": "z.B. https://firma.de",
+      "address": "Adresse",
+      "addressPlaceholder": "z.B. Musterstraße 123, Berlin",
+      "googleMapLink": "Google Maps Link",
+      "googleMapLinkPlaceholder": "z.B. https://maps.google.com/...",
+      "businessLogo": "Firmenlogo",
+      "smallLogo": "Kleines Logo",
+      "toasts": {
+        "updateSuccess": "Systemeinstellungen aktualisiert",
+        "updateError": "Systemeinstellungen konnten nicht aktualisiert werden"
+      }
+    }
+  }
+}

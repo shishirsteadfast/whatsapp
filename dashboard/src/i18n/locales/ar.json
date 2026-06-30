@@ -1,0 +1,1142 @@
+{
+  "common": {
+    "appName": "OpenWA",
+    "appSubtitle": "واجهة WhatsApp API",
+    "loading": "جارٍ التحميل...",
+    "save": "حفظ",
+    "cancel": "إلغاء",
+    "delete": "حذف",
+    "edit": "تعديل",
+    "create": "إنشاء",
+    "close": "إغلاق",
+    "submit": "إرسال",
+    "confirm": "تأكيد",
+    "search": "بحث",
+    "filter": "تصفية",
+    "actions": "إجراءات",
+    "status": "الحالة",
+    "name": "الاسم",
+    "role": "الدور",
+    "type": "النوع",
+    "url": "الرابط",
+    "port": "المنفذ",
+    "host": "المضيف",
+    "username": "اسم المستخدم",
+    "password": "كلمة المرور",
+    "active": "نشط",
+    "inactive": "غير نشط",
+    "enabled": "مُفعّل",
+    "disabled": "مُعطّل",
+    "connected": "متصل",
+    "disconnected": "غير متصل",
+    "never": "أبداً",
+    "justNow": "الآن",
+    "minAgo": "منذ {{count}} دقيقة",
+    "minAgo_plural": "منذ {{count}} دقائق",
+    "hoursAgo": "منذ {{count}} ساعة",
+    "hoursAgo_plural": "منذ {{count}} ساعات",
+    "optional": "اختياري",
+    "language": "اللغة",
+    "english": "English",
+    "hebrew": "עברית",
+    "back": "رجوع",
+    "next": "التالي",
+    "previous": "السابق",
+    "expand": "توسيع",
+    "collapse": "طي",
+    "logout": "تسجيل خروج",
+    "refresh": "تحديث",
+    "notifications": "الإشعارات",
+    "noNotifications": "لا توجد إشعارات جديدة",
+    "profile": "الملف الشخصي",
+    "changePassword": "تغيير كلمة المرور",
+    "settings": "الإعدادات",
+    "errorGeneric": "حدث خطأ",
+    "unknownError": "خطأ غير معروف",
+    "lightMode": "الوضع النهاري",
+    "darkMode": "الوضع الليلي",
+    "viewAll": "عرض الكل",
+    "copied": "تم النسخ!"
+  },
+  "theme": {
+    "light": "نهاري",
+    "dark": "ليلي",
+    "system": "النظام",
+    "label": "السمة: {{value}}"
+  },
+  "nav": {
+    "dashboard": "لوحة التحكم",
+    "sessions": "الجلسات",
+    "webhooks": "Webhooks",
+    "apiKeys": "مفاتيح API",
+    "contacts": "جهات الاتصال",
+    "composer": "المحرر",
+    "groups": "المجموعات",
+    "messages": "الرسائل",
+    "settings": "الإعدادات",
+    "messageTester": "اختبار الرسائل",
+    "infrastructure": "البنية التحتية",
+    "plugins": "الإضافات",
+    "campaigns": "الحملات",
+    "logs": "السجلات"
+  },
+  "errorBoundary": {
+    "title": "حدث خطأ ما",
+    "description": "واجهت لوحة التحكم خطأ غير متوقع.",
+    "reload": "إعادة تحميل"
+  },
+  "login": {
+    "apiKey": "مفتاح API",
+    "apiKeyPlaceholder": "أدخل مفتاح API",
+    "apiKeyRequired": "مفتاح API مطلوب",
+    "connect": "اتصال",
+    "connecting": "جارٍ الاتصال...",
+    "invalidKey": "مفتاح API غير صالح",
+    "connectionError": "تعذّر الاتصال بالخادم. حاول مرة أخرى.",
+    "help": "تحتاج مساعدة؟",
+    "viewDocs": "عرض التوثيق",
+    "footer": "صُنع بحب ❤️ بواسطة Yudhi Armyndharis ومجتمع OpenWA",
+    "version": "v{{version}} · {{date}}",
+    "title": "تسجيل الدخول",
+    "subtitle": "أدخل بيانات الدخول للوصول إلى لوحة التحكم.",
+    "phoneLabel": "رقم الهاتف",
+    "phonePlaceholder": "مثال: 0501234567",
+    "passwordLabel": "كلمة المرور",
+    "passwordPlaceholder": "أدخل كلمة المرور",
+    "signIn": "دخول",
+    "phoneRequired": "رقم الهاتف مطلوب",
+    "passwordRequired": "كلمة المرور مطلوبة",
+    "invalidCredentials": "رقم الهاتف أو كلمة المرور غير صحيحة"
+  },
+  "dashboard": {
+    "title": "لوحة التحكم",
+    "subtitle": "نظرة عامة على جلسات WhatsApp ونشاطك",
+    "stats": {
+      "activeSessions": "الجلسات النشطة",
+      "messagesToday": "رسائل اليوم",
+      "webhooksConfigured": "Webhooks مُعدّة",
+      "apiCalls": "استدعاءات API (24 ساعة)"
+    },
+    "sessionsOverview": "نظرة عامة على الجلسات",
+    "showingSessions": "عرض {{shown}} من {{total}} جلسات",
+    "columns": {
+      "sessionId": "معرّف الجلسة",
+      "phone": "رقم الهاتف",
+      "status": "الحالة",
+      "lastActive": "آخر نشاط",
+      "actions": "إجراءات"
+    },
+    "noSessions": "لا توجد جلسات. أنشئ واحدة للبدء.",
+    "view": "عرض",
+    "disconnect": "قطع الاتصال",
+    "errorPrefix": "خطأ: {{message}}",
+    "loadError": "فشل تحميل البيانات",
+    "statActive": "{{count}} نشط",
+    "statActive_plural": "{{count}} نشطة",
+    "statNoData": "لا توجد بيانات بعد"
+  },
+  "sessionStatus": {
+    "created": "جديد",
+    "idle": "خامل",
+    "initializing": "جارٍ التشغيل...",
+    "connecting": "جارٍ الاتصال...",
+    "qr_ready": "امسح QR",
+    "ready": "متصل",
+    "disconnected": "غير متصل"
+  },
+  "sessions": {
+    "title": "الجلسات",
+    "subtitle": "إدارة جلسات WhatsApp واتصالات QR",
+    "newSession": "جلسة جديدة",
+    "searchPlaceholder": "بحث في الجلسات...",
+    "filter": {
+      "all": "جميع الحالات",
+      "active": "نشطة (متصلة)",
+      "inactive": "غير نشطة",
+      "connecting": "جارٍ الاتصال"
+    },
+    "empty": {
+      "title": "لا توجد جلسات",
+      "description": "أنشئ جلسة جديدة للبدء"
+    },
+    "create": {
+      "title": "إنشاء جلسة جديدة",
+      "label": "اسم الجلسة",
+      "placeholder": "مثال: marketing-bot",
+      "hint": "استخدم الأحرف الصغيرة والأرقام والواصلات فقط. مثال: <code>customer-support</code>",
+      "invalidChars": "أحرف غير صالحة. يُسمح فقط بالأحرف الصغيرة والأرقام والواصلات.",
+      "tooLong": "يجب ألا يتجاوز الاسم 50 حرفاً ({{length}}/50).",
+      "duplicate": "يوجد جلسة بهذا الاسم بالفعل.",
+      "successTitle": "تم إنشاء الجلسة",
+      "successDesc": "تم إنشاء الجلسة «{{name}}» بنجاح",
+      "errorTitle": "فشل الإنشاء",
+      "errorDefault": "فشل إنشاء الجلسة"
+    },
+    "delete": {
+      "title": "تأكيد الحذف",
+      "message": "هل أنت متأكد من حذف الجلسة <strong>«{{name}}»</strong>؟",
+      "warning": "لا يمكن التراجع عن هذا الإجراء.",
+      "successTitle": "تم حذف الجلسة",
+      "successDescNamed": "تم حذف الجلسة «{{name}}»",
+      "successDescGeneric": "تم حذف الجلسة",
+      "errorTitle": "فشل الحذف",
+      "errorDefault": "فشل حذف الجلسة"
+    },
+    "qr": {
+      "title": "امسح رمز QR",
+      "step1": "<strong>1.</strong> افتح WhatsApp على هاتفك",
+      "step2": "<strong>2.</strong> اضغط <strong>القائمة</strong> ← <strong>الأجهزة المرتبطة</strong>",
+      "step3": "<strong>3.</strong> اضغط <strong>ربط جهاز</strong> وامسح رمز QR هذا",
+      "autoRefresh": "يتحدّث QR تلقائياً كل 5 ثوانٍ",
+      "generating": "جارٍ إنشاء رمز QR...",
+      "unavailable": "رمز QR غير متاح بعد. حاول مرة أخرى بعد قليل.",
+      "preparing": "جارٍ تحضير رمز QR...",
+      "showQr": "إظهار QR",
+      "loading": "جارٍ التحميل...",
+      "scanToConnect": "امسح QR للاتصال"
+    },
+    "details": {
+      "title": "تفاصيل الجلسة",
+      "name": "الاسم",
+      "status": "الحالة",
+      "sessionId": "معرّف الجلسة",
+      "phone": "رقم الهاتف",
+      "phoneNone": "غير متصل",
+      "created": "تاريخ الإنشاء",
+      "lastActive": "آخر نشاط"
+    },
+    "actions": {
+      "view": "عرض",
+      "start": "تشغيل",
+      "stop": "إيقاف",
+      "reconnect": "إعادة الاتصال",
+      "delete": "حذف"
+    },
+    "toasts": {
+      "readyTitle": "الجلسة جاهزة",
+      "readyDesc": "جلسة WhatsApp متصلة الآن",
+      "disconnectedTitle": "الجلسة غير متصلة",
+      "disconnectedDesc": "تم فصل جلسة WhatsApp"
+    },
+    "card": {
+      "phone": "الهاتف",
+      "sessionId": "معرّف الجلسة",
+      "lastActive": "آخر نشاط"
+    }
+  },
+  "webhooks": {
+    "title": "Webhooks",
+    "subtitle": "إعداد استدعاءات HTTP للإشعارات الفورية",
+    "addWebhook": "إضافة Webhook",
+    "createTitle": "إنشاء Webhook",
+    "editTitle": "تعديل Webhook",
+    "deleteTitle": "حذف Webhook",
+    "deleteConfirm": "هل أنت متأكد من حذف هذا Webhook؟",
+    "selectSession": "اختر جلسة...",
+    "session": "الجلسة",
+    "events": "الأحداث",
+    "available": "الأحداث المتاحة",
+    "saveChanges": "حفظ التغييرات",
+    "columns": {
+      "url": "الرابط",
+      "events": "الأحداث",
+      "session": "الجلسة",
+      "status": "الحالة",
+      "actions": "إجراءات"
+    },
+    "empty": {
+      "title": "لم يتم إعداد أي Webhooks",
+      "description": "أضف Webhook لتلقي الإشعارات الفورية"
+    },
+    "toasts": {
+      "created": "تم إنشاء Webhook بنجاح",
+      "createFailed": "فشل إنشاء Webhook: {{message}}",
+      "deleted": "تم حذف Webhook بنجاح",
+      "deleteFailed": "فشل حذف Webhook: {{message}}",
+      "updated": "تم تحديث Webhook بنجاح",
+      "updateFailed": "فشل تحديث Webhook: {{message}}",
+      "testOk": "اختبار Webhook ناجح! الحالة: {{status}}",
+      "testFailed": "فشل اختبار Webhook: {{message}}",
+      "testError": "خطأ أثناء اختبار Webhook: {{message}}"
+    },
+    "actions": {
+      "test": "اختبار",
+      "edit": "تعديل",
+      "delete": "حذف"
+    },
+    "eventDescriptions": {
+      "message.received": "عند استلام رسالة",
+      "message.sent": "عند إرسال رسالة",
+      "session.connected": "عند اتصال الجلسة",
+      "session.disconnected": "عند انقطاع الجلسة",
+      "session.qr": "عند إنشاء رمز QR",
+      "all": "جميع الأحداث"
+    }
+  },
+  "apiKeys": {
+    "title": "إدارة API",
+    "subtitle": "إدارة مفاتيح API وبيانات الاعتماد وتوثيق API",
+    "tabs": {
+      "overview": "نظرة عامة",
+      "keys": "مفاتيح API",
+      "docs": "التوثيق"
+    },
+    "stats": {
+      "totalKeys": "إجمالي المفاتيح",
+      "activeKeys": "المفاتيح النشطة",
+      "totalCalls": "إجمالي الاستدعاءات",
+      "rateLimit": "استدعاءات اليوم"
+    },
+    "credentials": {
+      "baseUrl": "الرابط الأساسي لـ API",
+      "baseUrlHint": "استخدم هذا الرابط كنقطة نهاية أساسية لجميع طلبات API."
+    },
+    "quickLinks": {
+      "title": "روابط سريعة",
+      "manageKeys": "إدارة مفاتيح API",
+      "manageKeysDesc": "عرض وإنشاء وإلغاء وحذف مفاتيح API",
+      "viewDocs": "توثيق API",
+      "viewDocsDesc": "تصفح مرجع النقاط النهائية مع أمثلة",
+      "createKey": "إنشاء مفتاح جديد",
+      "createKeyDesc": "إنشاء مفتاح API جديد بدور محدد"
+    },
+    "createBtn": "إنشاء مفتاح API",
+    "modalTitle": "إنشاء مفتاح API",
+    "createdTitle": "تم إنشاء مفتاح API",
+    "createdHint": "انسخ هذا المفتاح الآن. لن تتمكن من رؤيته مرة أخرى.",
+    "createdHintExtra": "لن يظهر هذا المفتاح السري مرة أخرى. احفظه في مكان آمن.",
+    "namePlaceholder": "مثال: مفتاح الإنتاج",
+    "rolesTitle": "مرجع الأدوار",
+    "roles": {
+      "admin": "مدير",
+      "operator": "مشغل",
+      "viewer": "مُشاهد"
+    },
+    "roleDescriptions": {
+      "admin": "وصول كامل لجميع الموارد",
+      "operator": "إدارة الجلسات والرسائل",
+      "viewer": "وصول للقراءة فقط"
+    },
+    "columns": {
+      "name": "الاسم",
+      "key": "المفتاح",
+      "role": "الدور",
+      "status": "الحالة",
+      "lastUsed": "آخر استخدام",
+      "actions": "إجراءات"
+    },
+    "statuses": {
+      "active": "نشط",
+      "revoked": "ملغي"
+    },
+    "empty": {
+      "title": "لم يتم إنشاء مفاتيح API",
+      "description": "أنشئ مفتاح API للمصادقة على طلباتك"
+    },
+    "confirm": {
+      "deleteTitle": "حذف مفتاح API",
+      "revokeTitle": "إلغاء مفتاح API",
+      "deleteMessage": "هل أنت متأكد من حذف <strong>{{name}}</strong> بشكل نهائي؟ لا يمكن التراجع.",
+      "revokeMessage": "هل أنت متأكد من إلغاء <strong>{{name}}</strong>؟ سيتوقف عن العمل.",
+      "delete": "حذف",
+      "revoke": "إلغاء"
+    },
+    "actions": {
+      "copy": "نسخ",
+      "revoke": "إلغاء",
+      "delete": "حذف"
+    }
+  },
+  "apiDocs": {
+    "auth": {
+      "title": "المصادقة",
+      "description": "جميع طلبات API تتطلب مصادقة. أضف مفتاح API في رأس الطلب <code>X-API-Key</code>. يمكنك إدارة مفاتيح API في علامة تبويب مفاتيح API.",
+      "example": "مثال لطلب مع مصادقة",
+      "none": "لا يتطلب مصادقة",
+      "apiKey": "مطلوب مفتاح API",
+      "admin": "مطلوب صلاحية مدير"
+    },
+    "sdks": {
+      "title": "SDK والمكتبات",
+      "description": "استخدم SDKs الرسمية لدمج OpenWA مع تطبيقك بسلاسة."
+    },
+    "endpoints": {
+      "title": "نقاط نهاية API",
+      "health": {
+        "desc": "التحقق من صحة الخادم"
+      },
+      "sessions": {
+        "list": "عرض جميع جلسات WhatsApp",
+        "create": "إنشاء جلسة WhatsApp جديدة",
+        "qr": "الحصول على رمز QR لجلسة",
+        "delete": "حذف جلسة WhatsApp"
+      },
+      "messages": {
+        "sendText": "إرسال رسالة نصية",
+        "sendImage": "إرسال صورة",
+        "sendLocation": "إرسال موقع",
+        "list": "عرض الرسائل مع مرشحات اختيارية"
+      },
+      "contacts": {
+        "list": "عرض جميع جهات الاتصال المحفوظة",
+        "create": "إنشاء جهة اتصال جديدة"
+      },
+      "webhooks": {
+        "list": "عرض جميع Webhooks المُعدّة"
+      },
+      "campaigns": {
+        "list": "عرض جميع الحملات",
+        "create": "إنشاء حملة جديدة"
+      },
+      "settings": {
+        "get": "الحصول على إعدادات النظام (للمدير فقط)"
+      }
+    },
+    "requestBody": "جسم الطلب",
+    "example": "مثال",
+    "response": "الرد",
+    "rateLimit": {
+      "title": "تحديد المعدل",
+      "description": "طلبات API محدودة المعدل لضمان الاستخدام العادل. الحد الافتراضي هو 100 طلب لكل نافذة 60 ثانية لكل مفتاح API. تجاوز هذا الحد سيؤدي إلى رد 429 Too Many Requests. اتصل بالدعم إذا كنت بحاجة إلى حد أعلى."
+    }
+  },
+  "logs": {
+    "title": "سجلات التدقيق",
+    "subtitle": "تتبع ومراجعة جميع إجراءات API وأحداث النظام",
+    "exportCsv": "تصدير CSV",
+    "searchPlaceholder": "بحث في السجلات...",
+    "severity": {
+      "all": "جميع المستويات",
+      "info": "معلومات",
+      "warn": "تحذير",
+      "error": "خطأ"
+    },
+    "columns": {
+      "timestamp": "الوقت",
+      "action": "الإجراء",
+      "session": "الجلسة",
+      "apiKey": "مفتاح API",
+      "user": "المستخدم",
+      "ip": "عنوان IP",
+      "severity": "المستوى"
+    },
+    "pagination": "صفحة {{page}} من {{total}} ({{count}} سجل)",
+    "empty": {
+      "title": "لا توجد سجلات",
+      "description": "ستظهر سجلات التدقيق هنا عند تنفيذ الإجراءات"
+    }
+  },
+  "composer": {
+    "title": "المحرر",
+    "subtitle": "كتابة وإرسال الرسائل مثل WhatsApp",
+    "session": "جلسة WhatsApp",
+    "noReadySessions": "لا توجد جلسات جاهزة",
+    "contactType": "نوع جهة الاتصال",
+    "recipients": "المستلمين",
+    "selected": "تم اختيار {{count}}",
+    "savedContacts": "جهات الاتصال",
+    "waContacts": "جهات اتصال WA",
+    "groups": "المجموعات",
+    "newNumber": "رقم جديد",
+    "searchContacts": "بحث في جهات الاتصال...",
+    "searchGroups": "بحث في المجموعات...",
+    "noContacts": "لا توجد جهات اتصال محفوظة",
+    "noGroups": "لم يتم العثور على مجموعات",
+    "noResults": "لا توجد نتائج",
+    "schedule": "جدولة",
+    "messageType": "نوع الرسالة",
+    "types": {
+      "text": "نص",
+      "image": "صورة",
+      "video": "فيديو",
+      "audio": "صوت",
+      "document": "مستند",
+      "location": "موقع",
+      "contact": "جهة اتصال"
+    },
+    "message": "الرسالة",
+    "messagePlaceholder": "اكتب رسالتك هنا...",
+    "mediaUrl": "رابط الملف",
+    "mediaUrlPlaceholder": "https://example.com/file.jpg",
+    "caption": "تعليق",
+    "captionPlaceholder": "أضف تعليقاً...",
+    "fileName": "اسم الملف",
+    "fileNamePlaceholder": "document.pdf",
+    "latitude": "خط العرض",
+    "latitudePlaceholder": "24.7136",
+    "longitude": "خط الطول",
+    "longitudePlaceholder": "46.6753",
+    "locationDescription": "الوصف",
+    "locationDescriptionPlaceholder": "مثال: نقطة لقائنا",
+    "contactName": "اسم جهة الاتصال",
+    "contactNamePlaceholder": "أحمد محمد",
+    "contactPhone": "هاتف جهة الاتصال",
+    "contactPhonePlaceholder": "+966501234567",
+    "send": "إرسال الرسالة",
+    "sending": "جارٍ الإرسال...",
+    "sendTo": "إرسال إلى {{count}} مستلم",
+    "sendTo_plural": "إرسال إلى {{count}} مستلمين",
+    "sendingTo": "جارٍ الإرسال إلى {{count}} مستلم",
+    "sendingTo_plural": "جارٍ الإرسال إلى {{count}} مستلمين...",
+    "sentSuccess": "تم إرسال الرسالة إلى {{count}} مستلم",
+    "sentSuccess_plural": "تم إرسال الرسالة إلى {{count}} مستلمين",
+    "sentPartial": "أُرسِل إلى {{sent}}، فشل لـ {{failed}} مستلم",
+    "sentPartial_plural": "أُرسِل إلى {{sent}}، فشل لـ {{failed}} مستلمين",
+    "progress": "التقدم",
+    "charCount": "{{count}} / 4096 حرفاً",
+    "livePreview": "معاينة حية",
+    "noMessages": "لا توجد رسائل بعد",
+    "noMessagesHint": "أرسل رسالة لبدء المحادثة"
+  },
+  "campaigns": {
+    "title": "الحملات",
+    "subtitle": "إنشاء وإدارة حملات البث",
+    "newCampaign": "حملة جديدة",
+    "editCampaign": "تعديل الحملة",
+    "duplicate": "نسخ",
+    "searchPlaceholder": "بحث في الحملات...",
+    "filterStatus": "جميع الحالات",
+    "statuses": {
+      "draft": "مسودة",
+      "scheduled": "مجدولة",
+      "sending": "جارٍ الإرسال",
+      "completed": "مكتملة",
+      "paused": "متوقفة مؤقتاً",
+      "cancelled": "ملغية",
+      "failed": "فشلت"
+    },
+    "recipientType": {
+      "contacts": "جهات اتصال",
+      "groups": "مجموعات"
+    },
+    "stats": {
+      "total": "إجمالي الحملات",
+      "active": "النشطة",
+      "completed": "المكتملة",
+      "failed": "الفاشلة",
+      "totalRecipients": "إجمالي المستلمين",
+      "totalSent": "إجمالي المرسَل",
+      "totalFailed": "إجمالي الفاشل"
+    },
+    "columns": {
+      "name": "الاسم",
+      "status": "الحالة",
+      "recipients": "المستلمين",
+      "sent": "أُرسِل",
+      "failed": "فشل",
+      "schedule": "الموعد",
+      "created": "تاريخ الإنشاء",
+      "actions": "إجراءات"
+    },
+    "empty": {
+      "title": "لا توجد حملات بعد",
+      "description": "أنشئ حملتك الأولى لبدء إرسال الرسائل"
+    },
+    "wizard": {
+      "step1": "التفاصيل",
+      "step2": "الرسالة",
+      "step3": "المستلمين",
+      "step4": "الجدولة",
+      "step5": "المراجعة",
+      "name": "اسم الحملة",
+      "namePlaceholder": "مثال: عروض العيد",
+      "description": "الوصف",
+      "descriptionPlaceholder": "وصف اختياري للحملة",
+      "session": "جلسة WhatsApp",
+      "noSessions": "لا توجد جلسات متاحة",
+      "messageType": "نوع الرسالة",
+      "text": "نص",
+      "image": "صورة",
+      "video": "فيديو",
+      "audio": "صوت",
+      "document": "مستند",
+      "location": "موقع",
+      "contact": "جهة اتصال",
+      "textPlaceholder": "أدخل رسالتك...",
+      "mediaUrl": "رابط الملف",
+      "mediaUrlPlaceholder": "https://example.com/file.jpg",
+      "caption": "تعليق",
+      "captionPlaceholder": "أضف تعليقاً...",
+      "fileName": "اسم الملف",
+      "fileNamePlaceholder": "document.pdf",
+      "latitude": "خط العرض",
+      "latitudePlaceholder": "24.7136",
+      "longitude": "خط الطول",
+      "longitudePlaceholder": "46.6753",
+      "contactName": "اسم جهة الاتصال",
+      "contactNamePlaceholder": "أحمد محمد",
+      "contactPhone": "هاتف جهة الاتصال",
+      "contactPhonePlaceholder": "+966501234567",
+      "selectRecipients": "اختر المستلمين",
+      "contacts": "جهات اتصال محفوظة",
+      "groups": "مجموعات الاتصال",
+      "searchContacts": "بحث في جهات الاتصال...",
+      "searchGroups": "بحث في المجموعات...",
+      "noContacts": "لم يتم العثور على جهات اتصال",
+      "noGroups": "لم يتم العثور على مجموعات",
+      "selected": "تم اختيار {{count}}",
+      "scheduleNow": "إرسال فوري",
+      "scheduleLater": "جدولة لوقت لاحق",
+      "scheduleDate": "تاريخ الجدولة",
+      "scheduleTime": "وقت الجدولة",
+      "reviewTitle": "مراجعة الحملة",
+      "reviewName": "الاسم",
+      "reviewSession": "الجلسة",
+      "reviewMessageType": "نوع الرسالة",
+      "reviewMessagePreview": "معاينة الرسالة",
+      "reviewRecipients": "المستلمين",
+      "reviewRecipientCount": "{{count}} مستلم",
+      "reviewRecipientCount_plural": "{{count}} مستلمين",
+      "reviewSchedule": "الموعد",
+      "reviewScheduleNow": "إرسال فوري",
+      "reviewScheduleDate": "مجدولة في {{date}}",
+      "createBtn": "إنشاء الحملة",
+      "creating": "جارٍ الإنشاء...",
+      "saveBtn": "حفظ التغييرات",
+      "saving": "جارٍ الحفظ..."
+    },
+    "detail": {
+      "title": "تفاصيل الحملة",
+      "overview": "نظرة عامة",
+      "recipients": "المستلمين",
+      "stats": {
+        "total": "إجمالي المستلمين",
+        "sent": "أُرسِل",
+        "failed": "فشل",
+        "pending": "قيد الانتظار",
+        "progress": "التقدم"
+      },
+      "actions": {
+        "start": "بدء الحملة",
+        "pause": "إيقاف مؤقت",
+        "cancel": "إلغاء",
+        "resendFailed": "إعادة إرسال الفاشلة",
+        "edit": "تعديل",
+        "delete": "حذف",
+        "back": "عودة للحملات"
+      },
+      "confirmDelete": "هل أنت متأكد من حذف هذه الحملة؟",
+      "confirmStart": "هل أنت متأكد من بدء هذه الحملة؟",
+      "noRecipients": "لم يتم العثور على مستلمين",
+      "searchRecipients": "بحث في المستلمين...",
+      "filterStatus": "تصفية حسب الحالة"
+    },
+    "toasts": {
+      "createSuccess": "تم إنشاء الحملة",
+      "createError": "فشل إنشاء الحملة",
+      "updateSuccess": "تم تحديث الحملة",
+      "updateError": "فشل تحديث الحملة",
+      "deleteSuccess": "تم حذف الحملة",
+      "deleteError": "فشل حذف الحملة",
+      "startSuccess": "تم بدء الحملة",
+      "startError": "فشل بدء الحملة",
+      "pauseSuccess": "تم إيقاف الحملة مؤقتاً",
+      "pauseError": "فشل إيقاف الحملة",
+      "cancelSuccess": "تم إلغاء الحملة",
+      "cancelError": "فشل إلغاء الحملة",
+      "resendSuccess": "جارٍ إعادة إرسال الرسائل الفاشلة",
+      "resendError": "فشل إعادة الإرسال"
+    }
+  },
+  "infrastructure": {
+    "title": "البنية التحتية",
+    "subtitle": "تكوين الخادم وقاعدة البيانات والتخزين المؤقت والتخزين والمحرك",
+    "saveConfig": "حفظ التكوين",
+    "saving": "جارٍ الحفظ...",
+    "server": {
+      "title": "تكوين الخادم",
+      "production": "إنتاج",
+      "development": "تطوير",
+      "environment": "البيئة",
+      "domain": "النطاق",
+      "apiPort": "منفذ API",
+      "dashboardPort": "منفذ لوحة التحكم",
+      "corsOrigins": "مصادر CORS",
+      "corsPlaceholder": "* أو مصادر مفصولة بفواصل",
+      "publicApiUrl": "رابط API العام (اختياري)",
+      "publicDashboardUrl": "رابط لوحة التحكم العام (اختياري)"
+    },
+    "webhook": {
+      "title": "Webhook وتحديد المعدل",
+      "settings": "إعدادات Webhook",
+      "timeout": "المهلة (مللي ثانية)",
+      "maxRetries": "أقصى عدد لإعادة المحاولة",
+      "retryDelay": "تأخير إعادة المحاولة (مللي ثانية)",
+      "rateLimit": "تحديد المعدل",
+      "window": "النافذة الزمنية (ثوانٍ)",
+      "maxReq": "أقصى عدد من الطلبات لكل نافذة"
+    },
+    "database": {
+      "title": "تكوين قاعدة البيانات",
+      "sqlite": "SQLite",
+      "sqliteDesc": "قاعدة بيانات محلية ملفية",
+      "postgres": "PostgreSQL",
+      "postgresDesc": "قاعدة بيانات جاهزة للإنتاج",
+      "useBuiltIn": "استخدام حاوية PostgreSQL المدمجة",
+      "builtInDesc": "OpenWA سيدير حاوية PostgreSQL لك",
+      "dbName": "اسم قاعدة البيانات",
+      "poolSize": "حجم مجمع الاتصالات",
+      "ssl": "اتصال SSL",
+      "sslDesc": "تفعيل TLS/SSL لاتصالات آمنة بقاعدة البيانات",
+      "migrationsTitle": "ترحيل قاعدة البيانات",
+      "migrationsStatus": "المخطط متزامن تلقائياً مع TypeORM",
+      "migrationsHint": "الترحيلات تُدار تلقائياً. استخدم CLI للترحيل اليدوي."
+    },
+    "redis": {
+      "title": "Redis",
+      "enable": "تفعيل Redis",
+      "enableDesc": "مطلوب للتخزين المؤقت وتخزين الجلسات وقوائم BullMQ",
+      "useBuiltIn": "استخدام حاوية Redis المدمجة",
+      "builtInDesc": "OpenWA سيدير حاوية Redis لك",
+      "queueTitle": "تفعيل نظام قوائم BullMQ",
+      "queueDesc": "استخدم قوائم الرسائل لتوصيل موثوق للرسائل و Webhooks",
+      "statsTitle": "إحصائيات القائمة",
+      "messageQueue": "قائمة الرسائل",
+      "webhookQueue": "قائمة Webhooks",
+      "pending": "قيد الانتظار",
+      "completed": "مكتملة",
+      "failed": "فاشلة",
+      "clearFailed": "مسح المهام الفاشلة",
+      "viewBullMq": "عرض لوحة Bull MQ",
+      "disabledTitle": "Redis معطل",
+      "disabledDesc": "فعّل Redis للتخزين المؤقت وتخزين الجلسات وقوائم BullMQ.",
+      "passwordOptional": "(اختياري)"
+    },
+    "storage": {
+      "title": "تكوين التخزين",
+      "local": "نظام الملفات المحلي",
+      "localDesc": "تخزين ملفات الوسائط محلياً",
+      "s3": "Amazon S3",
+      "s3Desc": "تخزين سحابي (متوافق مع S3)",
+      "useBuiltIn": "استخدام حاوية MinIO المدمجة",
+      "builtInDesc": "OpenWA سيدير حاوية MinIO (متوافقة مع S3) لك",
+      "storagePath": "مسار التخزين",
+      "bucket": "اسم الحاوية",
+      "region": "المنطقة",
+      "accessKey": "مفتاح الوصول",
+      "secretKey": "المفتاح السري",
+      "endpoint": "نقطة نهاية مخصصة (اختياري)",
+      "endpointHint": "لـ MinIO أو خدمات أخرى متوافقة مع S3"
+    },
+    "statusLabels": {
+      "connected": "متصل",
+      "disconnected": "غير متصل",
+      "disabled": "معطل"
+    },
+    "restart": {
+      "idleTitle": "⚙️ تم حفظ التكوين",
+      "restartingTitle": "🔄 جارٍ إعادة تشغيل الخادم...",
+      "waitingTitle": "⏳ الرجاء الانتظار...",
+      "successTitle": "✅ الخادم جاهز",
+      "errorTitle": "❌ فشلت إعادة التشغيل",
+      "idleDesc": "تم حفظ التكوين في <code>.env.generated</code>.<br/>يلزم إعادة تشغيل الخادم لتطبيق التغييرات.",
+      "later": "إعادة التشغيل لاحقاً",
+      "now": "إعادة التشغيل الآن",
+      "restartingMsg": "جارٍ إعادة تشغيل الخادم... {{count}}ث",
+      "checking": "جارٍ التحقق من حالة الخادم...",
+      "dontClose": "الرجاء عدم إغلاق هذه النافذة",
+      "successMsg": "الخادم عاد للعمل! سيتم إعادة تحميل الصفحة تلقائياً.",
+      "errorMsg": "الخادم لم يستجب بعد 30 ثانية. يُرجى مراجعة سجلات Docker وإعادة التشغيل يدوياً.",
+      "reload": "إعادة تحميل الصفحة"
+    },
+    "toasts": {
+      "saveFailed": "فشل الحفظ",
+      "saveSuccess": "تم حفظ التكوين بنجاح",
+      "saveError": "فشل حفظ التكوين"
+    }
+  },
+  "pluginStatus": {
+    "installed": "مثبت",
+    "enabled": "مُفعّل",
+    "disabled": "مُعطّل",
+    "error": "خطأ"
+  },
+  "pluginType": {
+    "engine": "محرك",
+    "storage": "تخزين",
+    "queue": "قائمة",
+    "auth": "مصادقة",
+    "extension": "إضافة"
+  },
+  "plugins": {
+    "title": "الإضافات",
+    "subtitle": "إدارة المحركات ووحدات التخزين والإضافات",
+    "refresh": "تحديث",
+    "engineCard": "محرك WhatsApp النشط",
+    "running": "قيد التشغيل",
+    "supportedFeatures": "الميزات المدعومة:",
+    "more": "+{{count}} المزيد",
+    "builtIn": "مدمج",
+    "noDescription": "لا يوجد وصف متاح",
+    "required": "مطلوب",
+    "active": "نشط",
+    "activate": "تفعيل",
+    "enable": "تمكين",
+    "disable": "تعطيل",
+    "healthCheck": "فحص الصحة",
+    "configure": "تكوين",
+    "empty": {
+      "title": "لم يتم العثور على إضافات",
+      "description": "قم بتثبيت الإضافات لتوسيع وظائف OpenWA"
+    },
+    "config": {
+      "title": "تكوين {{name}}",
+      "restartNotice": "التغييرات تتطلب إعادة تشغيل الخادم",
+      "engineType": "نوع المحرك",
+      "headless": "وضع بدون واجهة",
+      "headlessDesc": "تشغيل المتصفح دون واجهة مرئية (موصى به للإنتاج)",
+      "sessionDataPath": "مسار بيانات الجلسة",
+      "browserArgs": "وسائط المتصفح",
+      "noOptions": "لا توجد خيارات تكوين متاحة لهذه الإضافة",
+      "save": "حفظ التكوين"
+    },
+    "toasts": {
+      "errorTitle": "خطأ في الإضافة",
+      "errorDefault": "فشل تبديل حالة الإضافة",
+      "healthOk": "فحص الصحة ناجح",
+      "healthFail": "فحص الصحة فاشل",
+      "healthError": "خطأ في فحص الصحة",
+      "savedTitle": "تم حفظ التكوين",
+      "savedDesc": "يلزم إعادة تشغيل الخادم لتطبيق التغييرات.",
+      "saveFailed": "فشل الحفظ"
+    }
+  },
+  "contacts": {
+    "title": "جهات الاتصال",
+    "subtitle": "إدارة جهات اتصال WhatsApp الخاصة بك",
+    "newContact": "جهة اتصال جديدة",
+    "searchPlaceholder": "بحث بالاسم أو الهاتف...",
+    "selected": "تم اختيار {{count}}",
+    "bulkDelete": "حذف المحدد",
+    "importBtn": "استيراد CSV",
+    "exportBtn": "تصدير CSV",
+    "downloadTemplate": "تنزيل نموذج CSV",
+    "empty": {
+      "title": "لا توجد جهات اتصال بعد",
+      "description": "أضف أول جهة اتصال أو استورد من ملف CSV"
+    },
+    "columns": {
+      "name": "الاسم",
+      "phone": "الهاتف",
+      "country": "الدولة",
+      "city": "المدينة",
+      "note": "ملاحظة",
+      "actions": "إجراءات"
+    },
+    "form": {
+      "createTitle": "جهة اتصال جديدة",
+      "editTitle": "تعديل جهة اتصال",
+      "fullName": "الاسم الكامل",
+      "fullNamePlaceholder": "مثال: أحمد محمد",
+      "countryCode": "رمز الدولة",
+      "phone": "هاتف WhatsApp",
+      "phonePlaceholder": "مثال: 501234567",
+      "phoneHint": "أدخل الرقم بدون رمز الدولة — سيُضاف تلقائياً",
+      "country": "الدولة",
+      "countryPlaceholder": "مثال: السعودية",
+      "state": "المنطقة / المحافظة",
+      "statePlaceholder": "مثال: الرياض",
+      "city": "المدينة",
+      "cityPlaceholder": "مثال: الرياض",
+      "address": "العنوان",
+      "addressPlaceholder": "مثال: شارع الملك فهد 123",
+      "note": "ملاحظة",
+      "notePlaceholder": "ملاحظات إضافية...",
+      "phoneRequired": "رقم الهاتف مطلوب",
+      "phoneDuplicate": "رقم الهاتف موجود مسبقاً",
+      "phoneInvalid": "يجب أن يحتوي رقم الهاتف على أرقام فقط"
+    },
+    "delete": {
+      "title": "حذف جهة اتصال",
+      "message": "هل أنت متأكد من حذف <strong>{{name}}</strong>؟ لا يمكن التراجع.",
+      "messagePhone": "هل أنت متأكد من حذف جهة الاتصال <strong>{{phone}}</strong>؟ لا يمكن التراجع.",
+      "successTitle": "تم حذف جهة الاتصال",
+      "successDesc": "تم حذف جهة الاتصال"
+    },
+    "bulkDeleteModal": {
+      "title": "حذف {{count}} جهة اتصال",
+      "title_plural": "حذف {{count}} جهات اتصال",
+      "message": "هل أنت متأكد من حذف {{count}} جهة اتصال محددة؟ لا يمكن التراجع.",
+      "message_plural": "هل أنت متأكد من حذف {{count}} جهات اتصال محددة؟ لا يمكن التراجع.",
+      "successTitle": "تم حذف جهات الاتصال",
+      "successDesc": "تم حذف {{count}} جهة اتصال",
+      "successDesc_plural": "تم حذف {{count}} جهات اتصال"
+    },
+    "import": {
+      "title": "استيراد جهات اتصال",
+      "step1Title": "رفع ملف CSV",
+      "step1Desc": "ارفع ملف CSV مع جهات الاتصال. يجب أن يتضمن عمود الهاتف رمز الدولة (مثال: +966501234567).",
+      "step2Title": "معاينة والتحقق",
+      "step2Desc": "راجع جهات الاتصال قبل الاستيراد. سيتم تمييز الصفوف غير الصالحة.",
+      "step3Title": "اكتمل الاستيراد",
+      "dropzone": "أسقط ملف CSV هنا، أو انقر للتصفح",
+      "dropzoneHint": "الصيغة المدعومة: .csv",
+      "validRows": "{{count}} صحيح",
+      "validRows_plural": "{{count}} صحيحة",
+      "invalidRows": "{{count}} غير صالح",
+      "invalidRows_plural": "{{count}} غير صالحة",
+      "importValid": "استيراد الصحيح فقط",
+      "importAll": "استيراد الكل",
+      "importBtn": "استيراد {{count}} جهة اتصال",
+      "importBtn_plural": "استيراد {{count}} جهة اتصال",
+      "importing": "جارٍ الاستيراد...",
+      "successTitle": "استيراد ناجح",
+      "successDesc": "تم استيراد {{created}} جهة اتصال، وتخطي {{skipped}}",
+      "successDesc_plural": "تم استيراد {{created}} جهات اتصال، وتخطي {{skipped}}",
+      "errorPhone": "رقم الهاتف فارغ",
+      "errorNoCountryCode": "يجب أن يتضمن الهاتف رمز الدولة (مثال: +966501234567)",
+      "errorDuplicate": "رقم هاتف مكرر في الملف",
+      "previewColumns": {
+        "row": "#",
+        "status": "الحالة",
+        "name": "الاسم الكامل",
+        "phone": "الهاتف",
+        "country": "الدولة",
+        "city": "المدينة",
+        "note": "ملاحظة",
+        "error": "المشكلة"
+      }
+    },
+    "detail": {
+      "title": "تفاصيل جهة الاتصال",
+      "phone": "الهاتف",
+      "country": "الدولة",
+      "state": "المنطقة",
+      "city": "المدينة",
+      "address": "العنوان",
+      "note": "ملاحظة",
+      "created": "تاريخ الإنشاء",
+      "messages": "سجل الرسائل",
+      "noMessages": "لم يتم العثور على رسائل لهذه جهة الاتصال.",
+      "incoming": "وارد",
+      "outgoing": "صادر",
+      "loadMore": "تحميل المزيد",
+      "loadingMessages": "جارٍ تحميل الرسائل...",
+      "totalMessages": "إجمالي {{count}} رسالة",
+      "totalMessages_plural": "إجمالي {{count}} رسائل",
+      "session": "الجلسة",
+      "type": "النوع",
+      "direction": "الاتجاه",
+      "messageBody": "الرسالة",
+      "timestamp": "التاريخ",
+      "status": "الحالة"
+    },
+    "pagination": {
+      "showing": "عرض {{from}} إلى {{to}} من {{total}} مدخل",
+      "showing_plural": "عرض {{from}} إلى {{to}} من {{total}} مدخلات",
+      "perPage": "في الصفحة"
+    },
+    "toasts": {
+      "createSuccess": "تم إنشاء جهة الاتصال",
+      "createError": "فشل إنشاء جهة الاتصال",
+      "updateSuccess": "تم تحديث جهة الاتصال",
+      "updateError": "فشل تحديث جهة الاتصال",
+      "deleteSuccess": "تم حذف جهة الاتصال",
+      "deleteError": "فشل حذف جهة الاتصال",
+      "bulkDeleteSuccess": "تم حذف {{count}} جهة اتصال",
+      "bulkDeleteSuccess_plural": "تم حذف {{count}} جهات اتصال",
+      "bulkDeleteError": "فشل حذف جهات الاتصال",
+      "importSuccess": "تم استيراد {{created}} جهة اتصال",
+      "importSuccess_plural": "تم استيراد {{created}} جهات اتصال",
+      "importError": "فشل الاستيراد",
+      "exportSuccess": "تم تصدير {{count}} جهة اتصال",
+      "exportSuccess_plural": "تم تصدير {{count}} جهات اتصال",
+      "exportError": "فشل التصدير"
+    }
+  },
+  "groups": {
+    "title": "مجموعات الاتصال",
+    "subtitle": "نظم جهات اتصالك في مجموعات للرسائل المستهدفة",
+    "newGroup": "مجموعة جديدة",
+    "searchPlaceholder": "بحث في المجموعات...",
+    "empty": {
+      "title": "لا توجد مجموعات بعد",
+      "description": "أنشئ مجموعة لتنظيم جهات اتصالك"
+    },
+    "columns": {
+      "name": "الاسم",
+      "description": "الوصف",
+      "members": "الأعضاء",
+      "created": "تاريخ الإنشاء",
+      "actions": "إجراءات"
+    },
+    "form": {
+      "createTitle": "إنشاء مجموعة جديدة",
+      "editTitle": "تعديل المجموعة",
+      "name": "اسم المجموعة",
+      "namePlaceholder": "مثال: عملاء VIP",
+      "description": "الوصف",
+      "descriptionPlaceholder": "وصف اختياري للمجموعة",
+      "nameRequired": "اسم المجموعة مطلوب"
+    },
+    "create": {
+      "step1Title": "تفاصيل المجموعة",
+      "step2Title": "إضافة أعضاء",
+      "step3Title": "مراجعة وإنشاء",
+      "method": "كيف تريد إضافة جهات الاتصال؟",
+      "csvImport": "استيراد من CSV",
+      "csvImportDesc": "ارفع ملف CSV لإنشاء جهات اتصال وإضافتها إلى هذه المجموعة",
+      "filterSelect": "تصفية واختيار",
+      "filterSelectDesc": "ابحث وصنف جهات الاتصال الموجودة لإضافتها إلى المجموعة",
+      "csv": {
+        "title": "استيراد جهات اتصال من CSV",
+        "dropzone": "أسقط ملف CSV هنا، أو انقر للتصفح",
+        "dropzoneHint": "الصيغة المدعومة: .csv. يجب أن تتضمن الأرقام رمز الدولة (مثال: +966501234567)",
+        "validRows": "{{count}} صحيح",
+        "validRows_plural": "{{count}} صحيحة",
+        "invalidRows": "{{count}} غير صالح",
+        "invalidRows_plural": "{{count}} غير صالحة",
+        "importBtn": "استيراد {{count}} جهة اتصال",
+        "importing": "جارٍ الاستيراد...",
+        "step2Title": "معاينة والتحقق",
+        "step2Desc": "راجع جهات الاتصال قبل الاستيراد. سيتم تمييز الصفوف غير الصالحة.",
+        "step3Title": "اكتمل الاستيراد",
+        "successDesc": "تم إنشاء {{created}} جهة اتصال وإضافتها إلى المجموعة، وتخطي {{skipped}}",
+        "errorPhone": "رقم الهاتف فارغ",
+        "errorNoCountryCode": "يجب أن يتضمن الهاتف رمز الدولة (مثال: +966501234567)",
+        "errorDuplicate": "رقم هاتف مكرر في الملف",
+        "previewColumns": {
+          "row": "#",
+          "status": "الحالة",
+          "name": "الاسم الكامل",
+          "phone": "الهاتف",
+          "country": "الدولة",
+          "city": "المدينة",
+          "note": "ملاحظة",
+          "error": "المشكلة"
+        }
+      },
+      "filter": {
+        "title": "اختيار جهات الاتصال",
+        "searchPlaceholder": "بحث بالاسم أو الهاتف...",
+        "country": "الدولة",
+        "allCountries": "جميع الدول",
+        "state": "المنطقة",
+        "allStates": "جميع المناطق",
+        "city": "المدينة",
+        "allCities": "جميع المدن",
+        "namePlaceholder": "تصفية بالاسم...",
+        "phonePlaceholder": "تصفية ببادئة الهاتف...",
+        "selected": "تم اختيار {{count}} جهة اتصال",
+        "selected_plural": "تم اختيار {{count}} جهات اتصال",
+        "noResults": "لا توجد جهات اتصال تطابق مرشحاتك",
+        "clearFilters": "مسح المرشحات"
+      },
+      "review": {
+        "title": "مراجعة المجموعة",
+        "nameLabel": "اسم المجموعة",
+        "descriptionLabel": "الوصف",
+        "membersLabel": "الأعضاء",
+        "noMembers": "لم تتم إضافة أعضاء بعد",
+        "addMore": "إضافة المزيد من جهات الاتصال"
+      }
+    },
+    "detail": {
+      "title": "تفاصيل المجموعة",
+      "members": "الأعضاء",
+      "noMembers": "لا يوجد أعضاء في هذه المجموعة",
+      "addMembers": "إضافة أعضاء",
+      "removeSelected": "إزالة المحدد",
+      "searchPlaceholder": "بحث في الأعضاء...",
+      "removeConfirm": "إزالة {{count}} جهة اتصال من هذه المجموعة؟",
+      "removeConfirm_plural": "إزالة {{count}} جهات اتصال من هذه المجموعة؟",
+      "empty": {
+        "title": "لا يوجد أعضاء",
+        "description": "أضف جهات اتصال إلى هذه المجموعة"
+      }
+    },
+    "delete": {
+      "title": "حذف المجموعة",
+      "message": "هل أنت متأكد من حذف المجموعة <strong>«{{name}}»</strong>؟ لا يمكن التراجع.",
+      "successTitle": "تم حذف المجموعة",
+      "successDesc": "تم حذف المجموعة"
+    },
+    "toasts": {
+      "createSuccess": "تم إنشاء المجموعة",
+      "createError": "فشل إنشاء المجموعة",
+      "updateSuccess": "تم تحديث المجموعة",
+      "updateError": "فشل تحديث المجموعة",
+      "deleteSuccess": "تم حذف المجموعة",
+      "deleteError": "فشل حذف المجموعة",
+      "addMembersSuccess": "تمت إضافة {{count}} جهة اتصال إلى المجموعة",
+      "addMembersSuccess_plural": "تمت إضافة {{count}} جهات اتصال إلى المجموعة",
+      "addMembersError": "فشل إضافة الأعضاء",
+      "removeMembersSuccess": "تمت إزالة {{count}} جهة اتصال من المجموعة",
+      "removeMembersSuccess_plural": "تمت إزالة {{count}} جهات اتصال من المجموعة",
+      "removeMembersError": "فشل إزالة الأعضاء",
+      "importSuccess": "تم استيراد {{created}} جهة اتصال وإضافتها إلى المجموعة",
+      "importSuccess_plural": "تم استيراد {{created}} جهات اتصال وإضافتها إلى المجموعة",
+      "importError": "فشل الاستيراد"
+    }
+  },
+  "settings": {
+    "title": "الإعدادات",
+    "subtitle": "إدارة ملفك الشخصي وكلمة المرور وإعدادات النظام",
+    "tabs": {
+      "profile": "الملف الشخصي",
+      "password": "كلمة المرور",
+      "language": "اللغة",
+      "system": "إعدادات النظام"
+    },
+    "language": {
+      "title": "اللغة",
+      "subtitle": "اختر لغتك المفضلة لواجهة لوحة التحكم"
+    },
+    "profile": {
+      "name": "الاسم الكامل",
+      "namePlaceholder": "مثال: أحمد محمد",
+      "phone": "رقم الهاتف",
+      "phonePlaceholder": "مثال: 0501234567",
+      "profilePic": "الصورة الشخصية",
+      "profilePicHint": "ارفع صورة (JPEG, PNG, WebP, GIF). حد أقصى 5 ميجابايت.",
+      "chooseFile": "اختر ملفاً",
+      "uploading": "جارٍ الرفع...",
+      "remove": "إزالة",
+      "toasts": {
+        "updateSuccess": "تم تحديث الملف الشخصي",
+        "updateError": "فشل تحديث الملف الشخصي",
+        "uploadError": "فشل الرفع"
+      }
+    },
+    "password": {
+      "current": "كلمة المرور الحالية",
+      "currentHint": "أدخل كلمة المرور الحالية للتحقق من الهوية",
+      "currentPlaceholder": "أدخل كلمة المرور الحالية",
+      "newPassword": "كلمة المرور الجديدة",
+      "newPlaceholder": "أدخل كلمة المرور الجديدة (6 أحرف على الأقل)",
+      "confirm": "تأكيد كلمة المرور الجديدة",
+      "confirmPlaceholder": "أعد إدخال كلمة المرور الجديدة",
+      "save": "تغيير كلمة المرور",
+      "errors": {
+        "currentRequired": "كلمة المرور الحالية مطلوبة",
+        "newRequired": "كلمة المرور الجديدة مطلوبة",
+        "tooShort": "يجب أن تتكون كلمة المرور من 6 أحرف على الأقل",
+        "mismatch": "كلمتا المرور غير متطابقتين"
+      },
+      "toasts": {
+        "updateSuccess": "تم تغيير كلمة المرور بنجاح",
+        "updateError": "فشل تغيير كلمة المرور"
+      }
+    },
+    "system": {
+      "name": "اسم النشاط التجاري",
+      "namePlaceholder": "مثال: شركتي",
+      "email": "البريد الإلكتروني",
+      "emailPlaceholder": "مثال: info@company.com",
+      "altPhone": "هاتف بديل",
+      "altPhonePlaceholder": "مثال: +966501234567",
+      "website": "الموقع الإلكتروني",
+      "websitePlaceholder": "مثال: https://company.com",
+      "address": "العنوان",
+      "addressPlaceholder": "مثال: شارع الملك فهد، الرياض",
+      "googleMapLink": "رابط Google Maps",
+      "googleMapLinkPlaceholder": "مثال: https://maps.google.com/...",
+      "businessLogo": "شعار النشاط التجاري",
+      "smallLogo": "شعار صغير",
+      "toasts": {
+        "updateSuccess": "تم تحديث إعدادات النظام",
+        "updateError": "فشل تحديث إعدادات النظام"
+      }
+    }
+  }
+}

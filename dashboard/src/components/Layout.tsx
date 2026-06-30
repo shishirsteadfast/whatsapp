@@ -20,7 +20,7 @@ import {
   ChevronRight,
 } from 'lucide-react';
 import { type UserRole } from '../hooks/useRole';
-import { type SupportedLanguage } from '../i18n';
+import { type SupportedLanguage, rtlLanguages } from '../i18n';
 import { AuthHeader } from './AuthHeader';
 
 interface LayoutProps {
@@ -71,7 +71,7 @@ export function Layout({ onLogout, userRole }: LayoutProps) {
   const handleNavClick = () => { if (isMobile) setIsMobileOpen(false); };
 
   const currentLang = (i18n.resolvedLanguage || i18n.language || 'en').split('-')[0] as SupportedLanguage;
-  const isRtl = currentLang === 'he';
+  const isRtl = rtlLanguages.includes(currentLang);
 
   const sidebarW = isCollapsed ? 64 : 236;
 
