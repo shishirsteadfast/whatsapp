@@ -107,7 +107,8 @@ function AppContent() {
 
     fetch('/api/auth/me', { headers: { Authorization: `Bearer ${token}` } })
       .then(res => {
-        if (!res.ok) { performLogout(); return null; }
+        if (res.status === 401) { performLogout(); return null; }
+        if (!res.ok) return null;
         return res.json();
       })
       .then((data: { role?: string } | null) => {
