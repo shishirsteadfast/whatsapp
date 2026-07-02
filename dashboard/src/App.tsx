@@ -21,6 +21,8 @@ const CampaignNew = lazy(() => import('./pages/CampaignNew').then(m => ({ defaul
 const CampaignDetail = lazy(() => import('./pages/CampaignDetail').then(m => ({ default: m.CampaignDetail })));
 const ApiKeys = lazy(() => import('./pages/ApiKeys').then(m => ({ default: m.ApiKeys })));
 const SettingsPage = lazy(() => import('./pages/Settings').then(m => ({ default: m.SettingsPage })));
+const UsersPage = lazy(() => import('./pages/Users').then(m => ({ default: m.UsersPage })));
+const RolesPage = lazy(() => import('./pages/Roles').then(m => ({ default: m.RolesPage })));
 
 const TOKEN_KEY = 'openwa_token';
 
@@ -169,6 +171,8 @@ function AppContent() {
               <Route path="sessions" element={<Sessions />} />
               <Route path="webhooks" element={<Webhooks />} />
               <Route path="activity-log" element={<ActivityLog />} />
+              <Route path="users" element={<UsersPage />} />
+              <Route path="roles" element={<RolesPage />} />
               <Route path="composer" element={<Composer />} />
               <Route path="contacts" element={<Contacts />} />
               <Route path="groups" element={<Groups />} />

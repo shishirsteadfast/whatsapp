@@ -33,6 +33,7 @@ import { UploadModule } from './modules/upload/upload.module';
 import { CampaignModule } from './modules/campaign/campaign.module';
 import { SystemCheckModule } from './modules/system-check/system-check.module';
 import { MessageHealthModule } from './modules/message-health/message-health.module';
+import { RbacModule } from './modules/rbac/rbac.module';
 
 @Module({
   imports: [
@@ -110,6 +111,7 @@ import { MessageHealthModule } from './modules/message-health/message-health.mod
     CampaignModule.register(process.env.REDIS_ENABLED === 'true'),
     SystemCheckModule,
     MessageHealthModule,
+    RbacModule,
   ],
 })
 export class AppModule {}

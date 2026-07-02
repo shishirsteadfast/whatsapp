@@ -12,6 +12,8 @@ import {
   Settings,
   Megaphone,
   KeyRound,
+  Shield,
+  UserCog,
   Menu,
   X,
   ChevronLeft,
@@ -40,6 +42,8 @@ const allNavItems = [
   { to: '/api-keys',       icon: KeyRound,        key: 'apiKeys'        as const, adminOnly: false },
   { to: '/activity-log',   icon: FileText,        key: 'activityLog'    as const, adminOnly: false },
   { to: '/settings',       icon: Settings,        key: 'settings'       as const, adminOnly: false },
+  { to: '/users',          icon: UserCog,          key: 'usersNav'       as const, adminOnly: true },
+  { to: '/roles',          icon: Shield,           key: 'rolesNav'       as const, adminOnly: true },
 ];
 
 export function Layout({ onLogout, userRole }: LayoutProps) {

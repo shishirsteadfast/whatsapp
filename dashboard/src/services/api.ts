@@ -686,6 +686,107 @@ export const apiKeysApi = {
   getStats: () => request<ApiKeyStats>('/api-keys/stats'),
 };
 
+// =============================================================================
+// RBAC: Users, Roles & Permissions
+// =============================================================================
+
+export interface UserItem {
+  id: string;
+  phone: string;
+  name: string;
+  role: string;
+  isActive: boolean;
+  profilePic: string | null;
+  lastLoginAt: string | null;
+  createdAt: string;
+  updatedAt: string;
+  roles?: Array<{
+    id: string;
+    name: string;
+    description: string | null;
+  }>;
+}
+
+export interface CreateUserPayload {
+  phone: string;
+  password: string;
+  name: string;
+  role?: string;
+  roleIds?: string[];
+  isActive?: boolean;
+}
+
+export interface UpdateUserPayload {
+  phone?: string;
+  password?: string;
+  name?: string;
+  role?: string;
+  roleIds?: string[];
+  isActive?: boolean;
+}
+
+export interface RoleItem {
+  id: string;
+  name: string;
+  description: string | null;
+  isSystem: boolean;
+  isActive: boolean;
+  permissions: PermissionItem[];
+  createdAt: string;
+  updatedAt: string;
+}
+
+export interface PermissionItem {
+  id: string;
+  name: string;
+  group: string;
+  description: string | null;
+}
+
+export interface CreateRolePayload {
+  name: string;
+  description?: string;
+  permissionIds?: string[];
+}
+
+export interface UpdateRolePayload {
+  name?: string;
+  description?: string;
+  permissionIds?: string[];
+  isActive?: boolean;
+}
+
+export const userApi = {
+  list: () => request<UserItem[]>('/users'),
+  get: (id: string) => request<UserItem>(`/users/${id}`),
+  create: (data: CreateUserPayload) =>
+    request<UserItem>('/users', { method: 'POST', body: JSON.stringify(data) }),
+  update: (id: string, data: UpdateUserPayload) =>
+    request<UserItem>(`/users/${id}`, { method: 'PUT', body: JSON.stringify(data) }),
+  delete: (id: string) =>
+    request<void>(`/users/${id}`, { method: 'DELETE' }),
+  assignRoles: (id: string, roleIds: string[]) =>
+    request<UserItem>(`/users/${id}/roles`, { method: 'PUT', body: JSON.stringify({ roleIds }) }),
+};
+
+export const roleApi = {
+  list: () => request<RoleItem[]>('/roles'),
+  get: (id: string) => request<RoleItem>(`/roles/${id}`),
+  create: (data: CreateRolePayload) =>
+    request<RoleItem>('/roles', { method: 'POST', body: JSON.stringify(data) }),
+  update: (id: string, data: UpdateRolePayload) =>
+    request<RoleItem>(`/roles/${id}`, { method: 'PUT', body: JSON.stringify(data) }),
+  delete: (id: string) =>
+    request<void>(`/roles/${id}`, { method: 'DELETE' }),
+  assignPermissions: (id: string, permissionIds: string[]) =>
+    request<RoleItem>(`/roles/${id}/permissions`, { method: 'PUT', body: JSON.stringify({ permissionIds }) }),
+};
+
+export const permissionApi = {
+  list: () => request<PermissionItem[]>('/permissions'),
+  listByGroup: (group: string) => request<PermissionItem[]>(`/permissions/groups/${group}`),
+};
+
 export const uploadApi = {
   upload: async (folder: string, file: File): Promise<{ url: string; filename: string }> => {
     const formData = new FormData();
