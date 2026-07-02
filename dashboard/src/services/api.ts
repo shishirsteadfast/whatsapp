@@ -74,22 +74,6 @@ export interface Message {
   createdAt: string;
 }
 
-export interface HealthStatus {
-  status: 'ok' | 'error';
-  timestamp?: string;
-  details?: {
-    database?: { status: string };
-    redis?: { status: string };
-    queue?: { status: string };
-  };
-}
-
-export interface Settings {
-  general: { apiBaseUrl: string; sessionTimeout: number; autoReconnect: boolean; debugMode: boolean };
-  api: { rateLimit: number; rateLimitWindow: number; enableDocs: boolean };
-  notifications: { emailEnabled: boolean; notificationEmail: string; webhookAlerts: boolean };
-}
-
 // =============================================================================
 // API Client
 // =============================================================================
@@ -249,25 +233,6 @@ export const messageApi = {
       method: 'POST',
       body: JSON.stringify({ chatId, contactName, contactNumber }),
     }),
-};
-
-// =============================================================================
-// Health API
-// =============================================================================
-
-export const healthApi = {
-  check: () => request<HealthStatus>('/health'),
-  ready: () => request<HealthStatus>('/health/ready'),
-};
-
-// =============================================================================
-// Settings API
-// =============================================================================
-
-export const settingsApi = {
-  get: () => request<Settings>('/settings'),
-  update: (settings: Partial<Settings>) =>
-    request<Settings>('/settings', { method: 'PUT', body: JSON.stringify(settings) }),
 };
 
 // =============================================================================

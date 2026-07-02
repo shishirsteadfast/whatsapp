@@ -65,23 +65,3 @@ export class UpdateWebhookDto {
   @Max(5)
   retryCount?: number;
 }
-
-export class WebhookResponseDto {
-  id: string;
-
-  sessionId: string;
-
-  url: string;
-
-  events: string[];
-
-  active: boolean;
-
-  retryCount: number;
-
-  lastTriggeredAt?: Date | null;
-
-  createdAt: Date;
-
-  updatedAt: Date;
-}
