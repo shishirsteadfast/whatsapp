@@ -95,7 +95,7 @@
     "connectionError": "تعذّر الاتصال بالخادم. حاول مرة أخرى.",
     "help": "تحتاج مساعدة؟",
     "viewDocs": "عرض التوثيق",
-    "footer": "صُنع بحب ❤️ بواسطة Yudhi Armyndharis ومجتمع OpenWA",
+    "footer": "© {{year}} OpenWA · الإصدار {{version}} · جميع الحقوق محفوظة.",
     "version": "v{{version}} · {{date}}",
     "title": "تسجيل الدخول",
     "subtitle": "أدخل بيانات الدخول للوصول إلى لوحة التحكم.",
@@ -106,7 +106,15 @@
     "signIn": "دخول",
     "phoneRequired": "رقم الهاتف مطلوب",
     "passwordRequired": "كلمة المرور مطلوبة",
-    "invalidCredentials": "رقم الهاتف أو كلمة المرور غير صحيحة"
+    "invalidCredentials": "رقم الهاتف أو كلمة المرور غير صحيحة",
+    "heroTag": "بوابة WhatsApp",
+    "heroLine1": "أدر جلسات",
+    "heroBrand": "WhatsApp",
+    "heroLine2": "الخاصة بك بسهولة.",
+    "heroDescription": "بوابة ذاتية الاستضافة لأتمتة ومراقبة وتوسيع تكاملات WhatsApp الخاصة بك، مع تحكم كامل.",
+    "feature1": "إدارة جلسات WhatsApp متعددة",
+    "feature2": "أتمتة Webhook وواجهة API",
+    "feature3": "استضافة ذاتية — بياناتك تبقى ملكك"
   },
   "dashboard": {
     "title": "لوحة التحكم",
@@ -115,25 +123,46 @@
       "activeSessions": "الجلسات النشطة",
       "messagesToday": "رسائل اليوم",
       "webhooksConfigured": "Webhooks مُعدّة",
-      "apiCalls": "استدعاءات API (24 ساعة)"
+      "apiCalls": "استدعاءات API (24 ساعة)",
+      "contacts": "جهات الاتصال",
+      "activeCampaigns": "الحملات النشطة"
     },
-    "sessionsOverview": "نظرة عامة على الجلسات",
-    "showingSessions": "عرض {{shown}} من {{total}} جلسات",
-    "columns": {
-      "sessionId": "معرّف الجلسة",
-      "phone": "رقم الهاتف",
-      "status": "الحالة",
-      "lastActive": "آخر نشاط",
-      "actions": "إجراءات"
-    },
-    "noSessions": "لا توجد جلسات. أنشئ واحدة للبدء.",
-    "view": "عرض",
-    "disconnect": "قطع الاتصال",
     "errorPrefix": "خطأ: {{message}}",
     "loadError": "فشل تحميل البيانات",
-    "statActive": "{{count}} نشط",
     "statActive_plural": "{{count}} نشطة",
-    "statNoData": "لا توجد بيانات بعد"
+    "statsHints": {
+      "ofTotal": "من أصل {{total}}"
+    },
+    "charts": {
+      "messageVolume": {
+        "title": "حجم الرسائل",
+        "subtitle": "الرسائل الواردة مقابل الصادرة خلال آخر 14 يومًا",
+        "incoming": "واردة",
+        "outgoing": "صادرة"
+      },
+      "messageStatus": {
+        "title": "حالة الرسائل",
+        "subtitle": "توزيع آخر {{count}} رسالة"
+      },
+      "campaignPerformance": {
+        "title": "أداء الحملات",
+        "subtitle": "المُرسلة مقابل الفاشلة لأحدث حملاتك",
+        "sent": "مُرسلة",
+        "failed": "فاشلة",
+        "empty": "لا توجد حملات بعد"
+      }
+    },
+    "activeDevices": {
+      "title": "الأجهزة النشطة",
+      "subtitle": "الجلسات المتصلة الآن",
+      "empty": "لا توجد أجهزة متصلة"
+    },
+    "recentMessages": {
+      "title": "الرسائل الأخيرة",
+      "subtitle": "أحدث النشاطات عبر جميع الجلسات",
+      "empty": "لا توجد رسائل بعد"
+    },
+    "noChartData": "لا توجد بيانات كافية بعد"
   },
   "sessionStatus": {
     "created": "جديد",
@@ -1076,5 +1105,12 @@
       "webhook_triggered": "تشغيل Webhook",
       "webhook_failed": "فشل Webhook"
     }
+  },
+  "messageStatus": {
+    "pending": "قيد الانتظار",
+    "sent": "مُرسلة",
+    "delivered": "تم التسليم",
+    "read": "مقروءة",
+    "failed": "فشلت"
   }
 }

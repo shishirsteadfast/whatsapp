@@ -93,7 +93,7 @@
     "connectionError": "سرور سے منسلک نہیں ہو سکا۔ براہ کرم دوبارہ کوشش کریں۔",
     "help": "مدد چاہیے؟",
     "viewDocs": "دستاویز دیکھیں",
-    "footer": "Yudhi Armyndharis اور OpenWA کمیونٹی نے ❤️ سے بنایا",
+    "footer": "© {{year}} OpenWA · ورژن {{version}} · جملہ حقوق محفوظ ہیں۔",
     "version": "v{{version}} · {{date}}",
     "title": "سائن ان",
     "subtitle": "ڈیش بورڈ تک رسائی کے لیے اپنی اسناد درج کریں۔",
@@ -104,7 +104,15 @@
     "signIn": "سائن ان",
     "phoneRequired": "فون نمبر ضروری ہے",
     "passwordRequired": "پاس ورڈ ضروری ہے",
-    "invalidCredentials": "غلط فون یا پاس ورڈ"
+    "invalidCredentials": "غلط فون یا پاس ورڈ",
+    "heroTag": "WhatsApp گیٹ وے",
+    "heroLine1": "اپنے",
+    "heroBrand": "WhatsApp",
+    "heroLine2": "سیشنز کو آسانی سے منظم کریں۔",
+    "heroDescription": "ایک سیلف ہوسٹڈ گیٹ وے جو آپ کے WhatsApp انٹیگریشنز کو مکمل کنٹرول کے ساتھ خودکار، مانیٹر اور اسکیل کرتا ہے۔",
+    "feature1": "ملٹی سیشن WhatsApp مینجمنٹ",
+    "feature2": "ویب ہک اور API آٹومیشن",
+    "feature3": "سیلف ہوسٹڈ — آپ کا ڈیٹا آپ ہی کا رہتا ہے"
   },
   "dashboard": {
     "title": "ڈیش بورڈ",
@@ -113,24 +121,45 @@
       "activeSessions": "فعال سیشنز",
       "messagesToday": "آج کے پیغامات",
       "webhooksConfigured": "ویب ہکس ترتیب شدہ",
-      "apiCalls": "API کالز (24 گھنٹے)"
+      "apiCalls": "API کالز (24 گھنٹے)",
+      "contacts": "رابطے",
+      "activeCampaigns": "فعال مہمات"
     },
-    "sessionsOverview": "سیشنز کا جائزہ",
-    "showingSessions": "کل {{total}} میں سے {{shown}} سیشن دکھائے جا رہے ہیں",
-    "columns": {
-      "sessionId": "سیشن ID",
-      "phone": "فون نمبر",
-      "status": "حالت",
-      "lastActive": "آخری سرگرمی",
-      "actions": "کارروائیاں"
-    },
-    "noSessions": "کوئی سیشن نہیں ملا۔ شروع کرنے کے لیے ایک بنائیں۔",
-    "view": "دیکھیں",
-    "disconnect": "منقطع کریں",
     "errorPrefix": "خرابی: {{message}}",
     "loadError": "ڈیٹا لوڈ کرنے میں ناکام",
-    "statActive": "{{count}} فعال",
-    "statNoData": "ابھی تک کوئی ڈیٹا نہیں"
+    "statsHints": {
+      "ofTotal": "کل {{total}} میں سے"
+    },
+    "charts": {
+      "messageVolume": {
+        "title": "پیغامات کا حجم",
+        "subtitle": "گزشتہ 14 دنوں میں موصولہ بمقابلہ ارسال شدہ پیغامات",
+        "incoming": "موصولہ",
+        "outgoing": "ارسال شدہ"
+      },
+      "messageStatus": {
+        "title": "پیغام کی حیثیت",
+        "subtitle": "حالیہ {{count}} پیغامات کی تقسیم"
+      },
+      "campaignPerformance": {
+        "title": "مہم کی کارکردگی",
+        "subtitle": "آپ کی حالیہ مہمات کے ارسال شدہ بمقابلہ ناکام پیغامات",
+        "sent": "ارسال شدہ",
+        "failed": "ناکام",
+        "empty": "ابھی تک کوئی مہم نہیں"
+      }
+    },
+    "activeDevices": {
+      "title": "فعال آلات",
+      "subtitle": "اس وقت منسلک سیشنز",
+      "empty": "کوئی آلہ منسلک نہیں"
+    },
+    "recentMessages": {
+      "title": "حالیہ پیغامات",
+      "subtitle": "تمام سیشنز کی حالیہ سرگرمی",
+      "empty": "ابھی تک کوئی پیغام نہیں"
+    },
+    "noChartData": "ابھی تک کافی ڈیٹا موجود نہیں"
   },
   "sessionStatus": {
     "created": "نیا",
@@ -1054,5 +1083,12 @@
       "webhook_triggered": "ویب ہک متحرک ہوا",
       "webhook_failed": "ویب ہک ناکام"
     }
+  },
+  "messageStatus": {
+    "pending": "زیر التواء",
+    "sent": "ارسال شدہ",
+    "delivered": "موصول شدہ",
+    "read": "پڑھا گیا",
+    "failed": "ناکام"
   }
 }

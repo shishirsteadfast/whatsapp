@@ -93,7 +93,7 @@
     "connectionError": "无法连接到服务器，请重试。",
     "help": "需要帮助？",
     "viewDocs": "查看文档",
-    "footer": "由 Yudhi Armyndharis 和 OpenWA 社区用心打造 ❤️",
+    "footer": "© {{year}} OpenWA · v{{version}} · 保留所有权利。",
     "version": "v{{version}} · {{date}}",
     "title": "登录",
     "subtitle": "请输入账号信息以访问控制台。",
@@ -104,7 +104,15 @@
     "signIn": "登录",
     "phoneRequired": "请填写手机号",
     "passwordRequired": "请填写密码",
-    "invalidCredentials": "手机号或密码错误"
+    "invalidCredentials": "手机号或密码错误",
+    "heroTag": "WhatsApp 网关",
+    "heroLine1": "轻松管理您的",
+    "heroBrand": "WhatsApp",
+    "heroLine2": "会话",
+    "heroDescription": "一个自托管网关,让您完全掌控地自动化、监控和扩展 WhatsApp 集成。",
+    "feature1": "多会话 WhatsApp 管理",
+    "feature2": "Webhook 与 API 自动化",
+    "feature3": "自托管 — 数据始终由您掌控"
   },
   "dashboard": {
     "title": "控制台",
@@ -113,24 +121,45 @@
       "activeSessions": "活跃会话",
       "messagesToday": "今日消息",
       "webhooksConfigured": "已配置 Webhooks",
-      "apiCalls": "API 调用（24小时）"
+      "apiCalls": "API 调用（24小时）",
+      "contacts": "联系人",
+      "activeCampaigns": "进行中的活动"
     },
-    "sessionsOverview": "会话概览",
-    "showingSessions": "显示 {{shown}} / {{total}} 个会话",
-    "columns": {
-      "sessionId": "会话 ID",
-      "phone": "手机号",
-      "status": "状态",
-      "lastActive": "最后活跃",
-      "actions": "操作"
-    },
-    "noSessions": "暂无会话，创建一个开始使用吧。",
-    "view": "查看",
-    "disconnect": "断开",
     "errorPrefix": "错误：{{message}}",
     "loadError": "数据加载失败",
-    "statActive": "{{count}} 个活跃",
-    "statNoData": "暂无数据"
+    "statsHints": {
+      "ofTotal": "共 {{total}} 个"
+    },
+    "charts": {
+      "messageVolume": {
+        "title": "消息量",
+        "subtitle": "过去14天的收发消息对比",
+        "incoming": "接收",
+        "outgoing": "发送"
+      },
+      "messageStatus": {
+        "title": "消息状态",
+        "subtitle": "最近 {{count}} 条消息的分布"
+      },
+      "campaignPerformance": {
+        "title": "活动效果",
+        "subtitle": "最近活动的发送与失败对比",
+        "sent": "已发送",
+        "failed": "失败",
+        "empty": "暂无活动"
+      }
+    },
+    "activeDevices": {
+      "title": "活跃设备",
+      "subtitle": "当前已连接的会话",
+      "empty": "没有已连接的设备"
+    },
+    "recentMessages": {
+      "title": "最近消息",
+      "subtitle": "所有会话的最新动态",
+      "empty": "暂无消息"
+    },
+    "noChartData": "数据尚不足"
   },
   "sessionStatus": {
     "created": "新建",
@@ -1053,5 +1082,12 @@
       "webhook_triggered": "Webhook 已触发",
       "webhook_failed": "Webhook 失败"
     }
+  },
+  "messageStatus": {
+    "pending": "待处理",
+    "sent": "已发送",
+    "delivered": "已送达",
+    "read": "已读",
+    "failed": "失败"
   }
 }

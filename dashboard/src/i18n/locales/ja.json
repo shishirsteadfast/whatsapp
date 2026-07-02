@@ -93,7 +93,7 @@
     "connectionError": "サーバーに接続できません。もう一度お試しください。",
     "help": "ヘルプが必要ですか？",
     "viewDocs": "ドキュメントを見る",
-    "footer": "Yudhi Armyndharis と OpenWA コミュニティが ❤️ を込めて制作",
+    "footer": "© {{year}} OpenWA · v{{version}} · 全著作権所有。",
     "version": "v{{version}} · {{date}}",
     "title": "サインイン",
     "subtitle": "ダッシュボードにアクセスするには認証情報を入力してください。",
@@ -104,7 +104,15 @@
     "signIn": "サインイン",
     "phoneRequired": "電話番号が必要です",
     "passwordRequired": "パスワードが必要です",
-    "invalidCredentials": "電話番号またはパスワードが間違っています"
+    "invalidCredentials": "電話番号またはパスワードが間違っています",
+    "heroTag": "WhatsApp ゲートウェイ",
+    "heroLine1": "あなたの",
+    "heroBrand": "WhatsApp",
+    "heroLine2": "セッションを簡単に管理。",
+    "heroDescription": "WhatsApp 連携を完全な制御のもとで自動化、監視、拡張できるセルフホスト型ゲートウェイです。",
+    "feature1": "マルチセッション WhatsApp 管理",
+    "feature2": "Webhook と API の自動化",
+    "feature3": "セルフホスト — データは常にあなたのもの"
   },
   "dashboard": {
     "title": "ダッシュボード",
@@ -113,24 +121,45 @@
       "activeSessions": "アクティブセッション",
       "messagesToday": "今日のメッセージ",
       "webhooksConfigured": "設定済みWebhook",
-      "apiCalls": "API呼び出し（24時間）"
+      "apiCalls": "API呼び出し（24時間）",
+      "contacts": "連絡先",
+      "activeCampaigns": "実行中のキャンペーン"
     },
-    "sessionsOverview": "セッション概要",
-    "showingSessions": "全{{total}}件中{{shown}}件を表示",
-    "columns": {
-      "sessionId": "セッションID",
-      "phone": "電話番号",
-      "status": "ステータス",
-      "lastActive": "最終アクティブ",
-      "actions": "操作"
-    },
-    "noSessions": "セッションが見つかりません。作成して開始してください。",
-    "view": "表示",
-    "disconnect": "切断",
     "errorPrefix": "エラー: {{message}}",
     "loadError": "データの読み込みに失敗しました",
-    "statActive": "{{count}}件アクティブ",
-    "statNoData": "まだデータがありません"
+    "statsHints": {
+      "ofTotal": "全{{total}}件中"
+    },
+    "charts": {
+      "messageVolume": {
+        "title": "メッセージ量",
+        "subtitle": "過去14日間の受信・送信メッセージ",
+        "incoming": "受信",
+        "outgoing": "送信"
+      },
+      "messageStatus": {
+        "title": "メッセージステータス",
+        "subtitle": "直近{{count}}件のメッセージの内訳"
+      },
+      "campaignPerformance": {
+        "title": "キャンペーン実績",
+        "subtitle": "直近のキャンペーンの送信済みと失敗の比較",
+        "sent": "送信済み",
+        "failed": "失敗",
+        "empty": "キャンペーンはまだありません"
+      }
+    },
+    "activeDevices": {
+      "title": "アクティブなデバイス",
+      "subtitle": "現在接続中のセッション",
+      "empty": "接続中のデバイスはありません"
+    },
+    "recentMessages": {
+      "title": "最近のメッセージ",
+      "subtitle": "全セッションの最新アクティビティ",
+      "empty": "メッセージはまだありません"
+    },
+    "noChartData": "十分なデータがまだありません"
   },
   "sessionStatus": {
     "created": "新規",
@@ -1053,5 +1082,12 @@
       "webhook_triggered": "Webhookトリガー",
       "webhook_failed": "Webhook失敗"
     }
+  },
+  "messageStatus": {
+    "pending": "保留中",
+    "sent": "送信済み",
+    "delivered": "配信済み",
+    "read": "既読",
+    "failed": "失敗"
   }
 }

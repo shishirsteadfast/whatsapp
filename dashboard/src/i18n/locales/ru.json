@@ -93,7 +93,7 @@
     "connectionError": "Не удалось подключиться к серверу. Попробуйте снова.",
     "help": "Нужна помощь?",
     "viewDocs": "Документация",
-    "footer": "Сделано с ❤️ Yudhi Armyndharis и сообществом OpenWA",
+    "footer": "© {{year}} OpenWA · версия {{version}} · Все права защищены.",
     "version": "v{{version}} · {{date}}",
     "title": "Вход",
     "subtitle": "Введите учётные данные для доступа к дашборду.",
@@ -104,7 +104,15 @@
     "signIn": "Войти",
     "phoneRequired": "Номер телефона обязателен",
     "passwordRequired": "Пароль обязателен",
-    "invalidCredentials": "Неверный телефон или пароль"
+    "invalidCredentials": "Неверный телефон или пароль",
+    "heroTag": "Шлюз WhatsApp",
+    "heroLine1": "Управляйте",
+    "heroBrand": "WhatsApp",
+    "heroLine2": "сессиями легко.",
+    "heroDescription": "Локально размещаемый шлюз для автоматизации, мониторинга и масштабирования ваших интеграций WhatsApp с полным контролем.",
+    "feature1": "Управление несколькими сессиями WhatsApp",
+    "feature2": "Автоматизация Webhook и API",
+    "feature3": "Локальный хостинг — ваши данные остаются вашими"
   },
   "dashboard": {
     "title": "Дашборд",
@@ -113,24 +121,45 @@
       "activeSessions": "Активных сессий",
       "messagesToday": "Сообщений сегодня",
       "webhooksConfigured": "Вебхуков настроено",
-      "apiCalls": "API-вызовов (24ч)"
+      "apiCalls": "API-вызовов (24ч)",
+      "contacts": "Контакты",
+      "activeCampaigns": "Активные кампании"
     },
-    "sessionsOverview": "Обзор сессий",
-    "showingSessions": "Показано {{shown}} из {{total}} сессий",
-    "columns": {
-      "sessionId": "ID сессии",
-      "phone": "Номер телефона",
-      "status": "Статус",
-      "lastActive": "Посл. активность",
-      "actions": "Действия"
-    },
-    "noSessions": "Сессии не найдены. Создайте первую.",
-    "view": "Просмотр",
-    "disconnect": "Отключить",
     "errorPrefix": "Ошибка: {{message}}",
     "loadError": "Не удалось загрузить данные",
-    "statActive": "{{count}} активн.",
-    "statNoData": "Данных пока нет"
+    "statsHints": {
+      "ofTotal": "из {{total}} всего"
+    },
+    "charts": {
+      "messageVolume": {
+        "title": "Объём сообщений",
+        "subtitle": "Входящие и исходящие за последние 14 дней",
+        "incoming": "Входящие",
+        "outgoing": "Исходящие"
+      },
+      "messageStatus": {
+        "title": "Статус сообщений",
+        "subtitle": "Распределение по последним {{count}} сообщениям"
+      },
+      "campaignPerformance": {
+        "title": "Эффективность кампаний",
+        "subtitle": "Отправлено и не доставлено по последним кампаниям",
+        "sent": "Отправлено",
+        "failed": "Ошибки",
+        "empty": "Пока нет кампаний"
+      }
+    },
+    "activeDevices": {
+      "title": "Активные устройства",
+      "subtitle": "Сессии, подключённые прямо сейчас",
+      "empty": "Нет подключённых устройств"
+    },
+    "recentMessages": {
+      "title": "Последние сообщения",
+      "subtitle": "Недавняя активность по всем сессиям",
+      "empty": "Пока нет сообщений"
+    },
+    "noChartData": "Пока недостаточно данных"
   },
   "sessionStatus": {
     "created": "Новая",
@@ -1053,5 +1082,12 @@
       "webhook_triggered": "Вебхук сработал",
       "webhook_failed": "Ошибка вебхука"
     }
+  },
+  "messageStatus": {
+    "pending": "В ожидании",
+    "sent": "Отправлено",
+    "delivered": "Доставлено",
+    "read": "Прочитано",
+    "failed": "Ошибка"
   }
 }

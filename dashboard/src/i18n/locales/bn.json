@@ -93,7 +93,7 @@
     "connectionError": "সার্ভারে সংযোগ করা যায়নি। আবার চেষ্টা করুন।",
     "help": "সাহায্য প্রয়োজন?",
     "viewDocs": "ডকুমেন্টেশন দেখুন",
-    "footer": "Yudhi Armyndharis এবং OpenWA কমিউনিটি ❤️ দিয়ে তৈরি করেছেন",
+    "footer": "© {{year}} OpenWA · সংস্করণ {{version}} · সর্বস্বত্ব সংরক্ষিত।",
     "version": "v{{version}} · {{date}}",
     "title": "সাইন ইন",
     "subtitle": "ড্যাশবোর্ডে প্রবেশের জন্য আপনার credentials দিন।",
@@ -104,7 +104,15 @@
     "signIn": "সাইন ইন",
     "phoneRequired": "ফোন নম্বর আবশ্যক",
     "passwordRequired": "পাসওয়ার্ড আবশ্যক",
-    "invalidCredentials": "ফোন বা পাসওয়ার্ড ভুল"
+    "invalidCredentials": "ফোন বা পাসওয়ার্ড ভুল",
+    "heroTag": "WhatsApp গেটওয়ে",
+    "heroLine1": "সহজে পরিচালনা করুন আপনার",
+    "heroBrand": "WhatsApp",
+    "heroLine2": "সেশনসমূহ।",
+    "heroDescription": "একটি সেলফ-হোস্টেড গেটওয়ে যা আপনার WhatsApp ইন্টিগ্রেশন সম্পূর্ণ নিয়ন্ত্রণসহ স্বয়ংক্রিয়, পর্যবেক্ষণ এবং সম্প্রসারণ করতে দেয়।",
+    "feature1": "একাধিক WhatsApp সেশন ব্যবস্থাপনা",
+    "feature2": "Webhook ও API অটোমেশন",
+    "feature3": "সেলফ-হোস্টেড — আপনার ডেটা আপনারই থাকে"
   },
   "dashboard": {
     "title": "ড্যাশবোর্ড",
@@ -113,24 +121,45 @@
       "activeSessions": "সক্রিয় সেশন",
       "messagesToday": "আজকের বার্তা",
       "webhooksConfigured": "কনফিগার করা Webhooks",
-      "apiCalls": "API কল (২৪ ঘন্টা)"
+      "apiCalls": "API কল (২৪ ঘন্টা)",
+      "contacts": "পরিচিতি",
+      "activeCampaigns": "সক্রিয় ক্যাম্পেইন"
     },
-    "sessionsOverview": "সেশন ওভারভিউ",
-    "showingSessions": "{{total}}টি সেশনের মধ্যে {{shown}}টি দেখানো হচ্ছে",
-    "columns": {
-      "sessionId": "সেশন ID",
-      "phone": "ফোন নম্বর",
-      "status": "অবস্থা",
-      "lastActive": "সর্বশেষ সক্রিয়",
-      "actions": "কাজসমূহ"
-    },
-    "noSessions": "কোনো সেশন পাওয়া যায়নি। শুরু করতে একটি তৈরি করুন।",
-    "view": "দেখুন",
-    "disconnect": "সংযোগ বিচ্ছিন্ন",
     "errorPrefix": "ত্রুটি: {{message}}",
     "loadError": "ডেটা লোড করতে ব্যর্থ",
-    "statActive": "{{count}}টি সক্রিয়",
-    "statNoData": "এখনো কোনো ডেটা নেই"
+    "statsHints": {
+      "ofTotal": "মোট {{total}} এর মধ্যে"
+    },
+    "charts": {
+      "messageVolume": {
+        "title": "বার্তার পরিমাণ",
+        "subtitle": "গত ১৪ দিনে আগত বনাম প্রেরিত বার্তা",
+        "incoming": "আগত",
+        "outgoing": "প্রেরিত"
+      },
+      "messageStatus": {
+        "title": "বার্তার অবস্থা",
+        "subtitle": "সাম্প্রতিক {{count}}টি বার্তার বিভাজন"
+      },
+      "campaignPerformance": {
+        "title": "ক্যাম্পেইন পারফরম্যান্স",
+        "subtitle": "সাম্প্রতিক ক্যাম্পেইনের পাঠানো বনাম ব্যর্থ বার্তা",
+        "sent": "পাঠানো হয়েছে",
+        "failed": "ব্যর্থ",
+        "empty": "এখনও কোনো ক্যাম্পেইন নেই"
+      }
+    },
+    "activeDevices": {
+      "title": "সক্রিয় ডিভাইস",
+      "subtitle": "বর্তমানে সংযুক্ত সেশন",
+      "empty": "কোনো ডিভাইস সংযুক্ত নেই"
+    },
+    "recentMessages": {
+      "title": "সাম্প্রতিক বার্তা",
+      "subtitle": "সব সেশনের সাম্প্রতিক কার্যক্রম",
+      "empty": "এখনও কোনো বার্তা নেই"
+    },
+    "noChartData": "এখনও পর্যাপ্ত তথ্য নেই"
   },
   "sessionStatus": {
     "created": "নতুন",
@@ -1049,5 +1078,12 @@
       "webhook_triggered": "Webhook ট্রিগার হয়েছে",
       "webhook_failed": "Webhook ব্যর্থ হয়েছে"
     }
+  },
+  "messageStatus": {
+    "pending": "মুলতুবি",
+    "sent": "পাঠানো হয়েছে",
+    "delivered": "পৌঁছেছে",
+    "read": "পঠিত",
+    "failed": "ব্যর্থ"
   }
 }

@@ -93,7 +93,7 @@
     "connectionError": "Tidak dapat terhubung ke server. Silakan coba lagi.",
     "help": "Butuh bantuan?",
     "viewDocs": "Lihat Dokumentasi",
-    "footer": "Dibuat dengan ❤️ oleh Yudhi Armyndharis dan Komunitas OpenWA",
+    "footer": "© {{year}} OpenWA · v{{version}} · Hak cipta dilindungi.",
     "version": "v{{version}} · {{date}}",
     "title": "Masuk",
     "subtitle": "Masukkan kredensial Anda untuk mengakses dasbor.",
@@ -104,7 +104,15 @@
     "signIn": "Masuk",
     "phoneRequired": "Nomor telepon wajib diisi",
     "passwordRequired": "Kata sandi wajib diisi",
-    "invalidCredentials": "Nomor telepon atau kata sandi salah"
+    "invalidCredentials": "Nomor telepon atau kata sandi salah",
+    "heroTag": "Gateway WhatsApp",
+    "heroLine1": "Kelola",
+    "heroBrand": "WhatsApp",
+    "heroLine2": "sesi Anda dengan mudah.",
+    "heroDescription": "Gateway self-hosted untuk mengotomatisasi, memantau, dan menskalakan integrasi WhatsApp Anda dengan kendali penuh.",
+    "feature1": "Manajemen multi-sesi WhatsApp",
+    "feature2": "Otomatisasi Webhook & API",
+    "feature3": "Self-hosted — data Anda tetap milik Anda"
   },
   "dashboard": {
     "title": "Dasbor",
@@ -113,24 +121,45 @@
       "activeSessions": "Sesi Aktif",
       "messagesToday": "Pesan Hari Ini",
       "webhooksConfigured": "Webhook Terkonfigurasi",
-      "apiCalls": "Panggilan API (24 jam)"
+      "apiCalls": "Panggilan API (24 jam)",
+      "contacts": "Kontak",
+      "activeCampaigns": "Kampanye Aktif"
     },
-    "sessionsOverview": "Ikhtisar Sesi",
-    "showingSessions": "Menampilkan {{shown}} dari {{total}} sesi",
-    "columns": {
-      "sessionId": "ID Sesi",
-      "phone": "Nomor Telepon",
-      "status": "Status",
-      "lastActive": "Terakhir Aktif",
-      "actions": "Aksi"
-    },
-    "noSessions": "Tidak ada sesi. Buat satu untuk memulai.",
-    "view": "Lihat",
-    "disconnect": "Putuskan",
     "errorPrefix": "Error: {{message}}",
     "loadError": "Gagal memuat data",
-    "statActive": "{{count}} aktif",
-    "statNoData": "Belum ada data"
+    "statsHints": {
+      "ofTotal": "dari {{total}} total"
+    },
+    "charts": {
+      "messageVolume": {
+        "title": "Volume Pesan",
+        "subtitle": "Pesan masuk vs keluar dalam 14 hari terakhir",
+        "incoming": "Masuk",
+        "outgoing": "Keluar"
+      },
+      "messageStatus": {
+        "title": "Status Pesan",
+        "subtitle": "Rincian {{count}} pesan terbaru"
+      },
+      "campaignPerformance": {
+        "title": "Performa Kampanye",
+        "subtitle": "Terkirim vs gagal untuk kampanye terbaru Anda",
+        "sent": "Terkirim",
+        "failed": "Gagal",
+        "empty": "Belum ada kampanye"
+      }
+    },
+    "activeDevices": {
+      "title": "Perangkat Aktif",
+      "subtitle": "Sesi yang terhubung saat ini",
+      "empty": "Tidak ada perangkat yang terhubung"
+    },
+    "recentMessages": {
+      "title": "Pesan Terbaru",
+      "subtitle": "Aktivitas terbaru di semua sesi",
+      "empty": "Belum ada pesan"
+    },
+    "noChartData": "Belum cukup data"
   },
   "sessionStatus": {
     "created": "Baru",
@@ -1053,5 +1082,12 @@
       "webhook_triggered": "Webhook Terpicu",
       "webhook_failed": "Webhook Gagal"
     }
+  },
+  "messageStatus": {
+    "pending": "Menunggu",
+    "sent": "Terkirim",
+    "delivered": "Sampai",
+    "read": "Dibaca",
+    "failed": "Gagal"
   }
 }

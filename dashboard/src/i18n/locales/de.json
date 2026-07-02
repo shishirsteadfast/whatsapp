@@ -93,7 +93,7 @@
     "connectionError": "Verbindung zum Server fehlgeschlagen. Bitte versuchen Sie es erneut.",
     "help": "Hilfe nötig?",
     "viewDocs": "Dokumentation anzeigen",
-    "footer": "Mit ❤️ erstellt von Yudhi Armyndharis und der OpenWA-Community",
+    "footer": "© {{year}} OpenWA · v{{version}} · Alle Rechte vorbehalten.",
     "version": "v{{version}} · {{date}}",
     "title": "Anmelden",
     "subtitle": "Geben Sie Ihre Anmeldedaten ein, um auf das Dashboard zuzugreifen.",
@@ -104,7 +104,15 @@
     "signIn": "Anmelden",
     "phoneRequired": "Telefonnummer erforderlich",
     "passwordRequired": "Passwort erforderlich",
-    "invalidCredentials": "Ungültige Telefonnummer oder Passwort"
+    "invalidCredentials": "Ungültige Telefonnummer oder Passwort",
+    "heroTag": "WhatsApp-Gateway",
+    "heroLine1": "Verwalten Sie Ihre",
+    "heroBrand": "WhatsApp",
+    "heroLine2": "Sitzungen ganz einfach.",
+    "heroDescription": "Ein selbst gehostetes Gateway zur Automatisierung, Überwachung und Skalierung Ihrer WhatsApp-Integrationen mit voller Kontrolle.",
+    "feature1": "Verwaltung mehrerer WhatsApp-Sitzungen",
+    "feature2": "Webhook- & API-Automatisierung",
+    "feature3": "Selbst gehostet — Ihre Daten bleiben Ihre"
   },
   "dashboard": {
     "title": "Dashboard",
@@ -113,24 +121,45 @@
       "activeSessions": "Aktive Sitzungen",
       "messagesToday": "Nachrichten heute",
       "webhooksConfigured": "Webhooks konfiguriert",
-      "apiCalls": "API-Aufrufe (24h)"
+      "apiCalls": "API-Aufrufe (24h)",
+      "contacts": "Kontakte",
+      "activeCampaigns": "Aktive Kampagnen"
     },
-    "sessionsOverview": "Sitzungsübersicht",
-    "showingSessions": "Zeige {{shown}} von {{total}} Sitzungen",
-    "columns": {
-      "sessionId": "Sitzungs-ID",
-      "phone": "Telefonnummer",
-      "status": "Status",
-      "lastActive": "Zuletzt aktiv",
-      "actions": "Aktionen"
-    },
-    "noSessions": "Keine Sitzungen gefunden. Erstellen Sie eine, um zu starten.",
-    "view": "Anzeigen",
-    "disconnect": "Trennen",
     "errorPrefix": "Fehler: {{message}}",
     "loadError": "Daten konnten nicht geladen werden",
-    "statActive": "{{count}} aktiv",
-    "statNoData": "Noch keine Daten"
+    "statsHints": {
+      "ofTotal": "von {{total}} insgesamt"
+    },
+    "charts": {
+      "messageVolume": {
+        "title": "Nachrichtenvolumen",
+        "subtitle": "Eingehend vs. ausgehend in den letzten 14 Tagen",
+        "incoming": "Eingehend",
+        "outgoing": "Ausgehend"
+      },
+      "messageStatus": {
+        "title": "Nachrichtenstatus",
+        "subtitle": "Aufschlüsselung der letzten {{count}} Nachrichten"
+      },
+      "campaignPerformance": {
+        "title": "Kampagnenleistung",
+        "subtitle": "Gesendet vs. fehlgeschlagen für Ihre neuesten Kampagnen",
+        "sent": "Gesendet",
+        "failed": "Fehlgeschlagen",
+        "empty": "Noch keine Kampagnen"
+      }
+    },
+    "activeDevices": {
+      "title": "Aktive Geräte",
+      "subtitle": "Aktuell verbundene Sitzungen",
+      "empty": "Keine Geräte verbunden"
+    },
+    "recentMessages": {
+      "title": "Neueste Nachrichten",
+      "subtitle": "Neueste Aktivität über alle Sitzungen",
+      "empty": "Noch keine Nachrichten"
+    },
+    "noChartData": "Noch nicht genügend Daten"
   },
   "sessionStatus": {
     "created": "Neu",
@@ -1053,5 +1082,12 @@
       "webhook_triggered": "Webhook ausgelöst",
       "webhook_failed": "Webhook fehlgeschlagen"
     }
+  },
+  "messageStatus": {
+    "pending": "Ausstehend",
+    "sent": "Gesendet",
+    "delivered": "Zugestellt",
+    "read": "Gelesen",
+    "failed": "Fehlgeschlagen"
   }
 }

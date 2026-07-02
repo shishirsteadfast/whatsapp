@@ -27,6 +27,12 @@
   --color-success:       #22c55e;
   --color-warning:       #f59e0b;
 
+  /* Fixed-dark surface for permanently-dark UI (e.g. the login brand panel).
+     Intentionally NOT overridden in [data-theme='dark'] — unlike --color-ink,
+     which flips to near-white for dark-mode text and must never be used as
+     a background that's paired with hardcoded light text/foreground. */
+  --color-onyx: #0d1117;
+
   --font-family-sans: "Plus Jakarta Sans", system-ui, Avenir, Helvetica, Arial, sans-serif;
   --font-family-heebo:"Heebo", "Rubik", "Noto Sans Hebrew", "Segoe UI", Arial, sans-serif;
   --font-family-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;

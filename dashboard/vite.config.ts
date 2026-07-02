@@ -7,7 +7,7 @@ export default defineConfig({
   plugins: [tailwindcss(), react()],
   appType: 'spa', // Enable SPA fallback for client-side routing
   define: {
-    __APP_VERSION__: JSON.stringify(process.env.APP_VERSION || '0.2.1'),
+    __APP_VERSION__: JSON.stringify(process.env.APP_VERSION || '1.0.0'),
     __BUILD_TIME__: JSON.stringify(new Date().toISOString()),
   },
   server: {

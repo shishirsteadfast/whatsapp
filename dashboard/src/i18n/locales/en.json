@@ -98,7 +98,7 @@
     "connectionError": "Unable to connect to server. Please try again.",
     "help": "Need help?",
     "viewDocs": "View Documentation",
-    "footer": "Made with ❤️ by Yudhi Armyndharis and the OpenWA Community",
+    "footer": "© {{year}} OpenWA · v{{version}} · All rights reserved.",
     "version": "v{{version}} · {{date}}",
     "title": "Sign in",
     "subtitle": "Enter your credentials to access the dashboard.",
@@ -109,7 +109,15 @@
     "signIn": "Sign In",
     "phoneRequired": "Phone number is required",
     "passwordRequired": "Password is required",
-    "invalidCredentials": "Invalid phone or password"
+    "invalidCredentials": "Invalid phone or password",
+    "heroTag": "WhatsApp Gateway",
+    "heroLine1": "Manage your",
+    "heroBrand": "WhatsApp",
+    "heroLine2": "sessions easily.",
+    "heroDescription": "A self-hosted gateway to automate, monitor and scale your WhatsApp integrations with full control.",
+    "feature1": "Multi-session WhatsApp management",
+    "feature2": "Webhook & API automation",
+    "feature3": "Self-hosted — your data stays yours"
   },
   "dashboard": {
     "title": "Dashboard",
@@ -118,24 +126,45 @@
       "activeSessions": "Active Sessions",
       "messagesToday": "Messages Today",
       "webhooksConfigured": "Webhooks Configured",
-      "apiCalls": "API Calls (24h)"
+      "apiCalls": "API Calls (24h)",
+      "contacts": "Contacts",
+      "activeCampaigns": "Active Campaigns"
     },
-    "sessionsOverview": "Sessions Overview",
-    "showingSessions": "Showing {{shown}} of {{total}} sessions",
-    "columns": {
-      "sessionId": "Session ID",
-      "phone": "Phone Number",
-      "status": "Status",
-      "lastActive": "Last Active",
-      "actions": "Actions"
-    },
-    "noSessions": "No sessions found. Create one to get started.",
-    "view": "View",
-    "disconnect": "Disconnect",
     "errorPrefix": "Error: {{message}}",
     "loadError": "Failed to load data",
-    "statActive": "{{count}} active",
-    "statNoData": "No data yet"
+    "statsHints": {
+      "ofTotal": "of {{total}} total"
+    },
+    "charts": {
+      "messageVolume": {
+        "title": "Message Volume",
+        "subtitle": "Incoming vs outgoing over the last 14 days",
+        "incoming": "Incoming",
+        "outgoing": "Outgoing"
+      },
+      "messageStatus": {
+        "title": "Message Status",
+        "subtitle": "Breakdown of the {{count}} most recent messages"
+      },
+      "campaignPerformance": {
+        "title": "Campaign Performance",
+        "subtitle": "Sent vs failed for your most recent campaigns",
+        "sent": "Sent",
+        "failed": "Failed",
+        "empty": "No campaigns yet"
+      }
+    },
+    "activeDevices": {
+      "title": "Active Devices",
+      "subtitle": "Sessions connected right now",
+      "empty": "No devices connected"
+    },
+    "recentMessages": {
+      "title": "Recent Messages",
+      "subtitle": "Latest activity across all sessions",
+      "empty": "No messages yet"
+    },
+    "noChartData": "Not enough data yet"
   },
   "sessionStatus": {
     "created": "New",
@@ -1117,5 +1146,12 @@
       "webhook_triggered": "Webhook Triggered",
       "webhook_failed": "Webhook Failed"
     }
+  },
+  "messageStatus": {
+    "pending": "Pending",
+    "sent": "Sent",
+    "delivered": "Delivered",
+    "read": "Read",
+    "failed": "Failed"
   }
 }
