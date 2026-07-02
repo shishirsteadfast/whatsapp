@@ -11,7 +11,7 @@ const Login = lazy(() => import('./pages/Login').then(m => ({ default: m.Login }
 const Dashboard = lazy(() => import('./pages/Dashboard').then(m => ({ default: m.Dashboard })));
 const Sessions = lazy(() => import('./pages/Sessions').then(m => ({ default: m.Sessions })));
 const Webhooks = lazy(() => import('./pages/Webhooks').then(m => ({ default: m.Webhooks })));
-const Logs = lazy(() => import('./pages/Logs').then(m => ({ default: m.Logs })));
+const ActivityLog = lazy(() => import('./pages/ActivityLog').then(m => ({ default: m.ActivityLog })));
 const Composer = lazy(() => import('./pages/Composer').then(m => ({ default: m.Composer })));
 const Contacts = lazy(() => import('./pages/Contacts').then(m => ({ default: m.Contacts })));
 const Groups = lazy(() => import('./pages/Groups').then(m => ({ default: m.Groups })));
@@ -168,7 +168,7 @@ function AppContent() {
               <Route index element={<Dashboard />} />
               <Route path="sessions" element={<Sessions />} />
               <Route path="webhooks" element={<Webhooks />} />
-              <Route path="logs" element={<Logs />} />
+              <Route path="activity-log" element={<ActivityLog />} />
               <Route path="composer" element={<Composer />} />
               <Route path="contacts" element={<Contacts />} />
               <Route path="groups" element={<Groups />} />

@@ -7,6 +7,7 @@ import { ShutdownService } from './common/services/shutdown.service';
 import * as dotenv from 'dotenv';
 import * as fs from 'fs';
 import * as path from 'path';
+import * as crypto from 'crypto';
 
 // Configuration loading order (later sources do NOT override earlier ones):
 //   1. Process env (Docker, shell, systemd) — highest priority
@@ -37,6 +38,7 @@ if (fs.existsSync(generatedEnvPath)) {
   dotenv.config({ path: generatedEnvPath, override: false });
 } else {
   console.log('[Bootstrap] First run detected, creating default configuration...');
+  const generatedJwtSecret = crypto.randomBytes(32).toString('hex');
   const minimalConfig = `# OpenWA Configuration
 # Generated automatically on first run
 
@@ -49,8 +51,8 @@ REDIS_HOST=localhost
 REDIS_PORT=6379
 # REDIS_PASSWORD=
 
-# JWT
-# JWT_SECRET=change-this-in-production
+# JWT — randomly generated on first run, unique to this installation
+JWT_SECRET=${generatedJwtSecret}
 JWT_EXPIRES_IN=24h
 
 # Storage (local filesystem only)
@@ -150,7 +152,7 @@ async function bootstrap() {
     await dataSource.query('PRAGMA synchronous = NORMAL');
     await dataSource.query('PRAGMA busy_timeout = 5000');
     await dataSource.query('PRAGMA foreign_keys = ON');
-    await dataSource.query('PRAGMA cache_size = -8000');          // 8 MB page cache
+    await dataSource.query('PRAGMA cache_size = -8000'); // 8 MB page cache
     await dataSource.query('PRAGMA temp_store = MEMORY');
     console.log('[Bootstrap] SQLite PRAGMAs applied (WAL, synchronous=NORMAL, busy_timeout=5000, foreign_keys=ON)');
   } catch (pragmaError) {

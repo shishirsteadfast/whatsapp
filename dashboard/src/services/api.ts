@@ -45,9 +45,11 @@ export interface AuditLog {
   sessionId?: string;
   sessionName?: string;
   ipAddress?: string;
+  userAgent?: string;
   method?: string;
   path?: string;
   statusCode?: number;
+  metadata?: Record<string, unknown>;
   errorMessage?: string;
   createdAt: string;
 }
@@ -162,12 +164,28 @@ export const webhookApi = {
 // Audit/Logs API
 // =============================================================================
 
+export interface AuditLogFilters {
+  action?: string;
+  severity?: string;
+  userId?: string;
+  sessionId?: string;
+  startDate?: string;
+  endDate?: string;
+  search?: string;
+  limit?: number;
+  offset?: number;
+}
+
 export const auditApi = {
-  list: (params?: { action?: string; severity?: string; userId?: string; limit?: number; offset?: number }) => {
+  list: (params?: AuditLogFilters) => {
     const query = new URLSearchParams();
     if (params?.action) query.set('action', params.action);
     if (params?.severity) query.set('severity', params.severity);
     if (params?.userId) query.set('userId', params.userId);
+    if (params?.sessionId) query.set('sessionId', params.sessionId);
+    if (params?.startDate) query.set('startDate', params.startDate);
+    if (params?.endDate) query.set('endDate', params.endDate);
+    if (params?.search) query.set('search', params.search);
     if (params?.limit) query.set('limit', String(params.limit));
     if (params?.offset) query.set('offset', String(params.offset));
     const queryStr = query.toString();
@@ -596,6 +614,62 @@ export const systemSettingsApi = {
     request<SystemSettingsData>('/system-settings', {
       method: 'PUT',
       body: JSON.stringify(data),
+    }),
+};
+
+// =============================================================================
+// System Check Types & API
+// =============================================================================
+
+export type SystemCheckStatus = 'ok' | 'fail';
+
+export interface SystemCheckItem {
+  key: string;
+  status: SystemCheckStatus;
+  detail?: string;
+}
+
+export interface SystemCheckResult {
+  checks: SystemCheckItem[];
+  hasIssues: boolean;
+  checkedAt: string;
+}
+
+export const systemCheckApi = {
+  get: () => request<SystemCheckResult>('/system-check'),
+};
+
+// =============================================================================
+// Message Health Types & API
+// =============================================================================
+
+export type SessionConnectivity = 'connected' | 'degraded' | 'unreachable' | 'not_connected';
+
+export interface SessionHealth {
+  id: string;
+  name: string;
+  phone: string | null;
+  status: string;
+  connectivity: SessionConnectivity;
+}
+
+export interface MessageHealthResult {
+  sessions: SessionHealth[];
+  checkedAt: string;
+}
+
+export interface TestSendResult {
+  messageId: string;
+  timestamp: number;
+  chatId: string;
+}
+
+export const messageHealthApi = {
+  get: () => request<MessageHealthResult>('/message-health'),
+  testSend: (sessionId: string) =>
+    request<TestSendResult>('/message-health/test-send', {
+      method: 'POST',
+      body: JSON.stringify({ sessionId }),
     }),
 };
 

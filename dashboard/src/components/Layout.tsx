@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { NavLink, Outlet } from 'react-router-dom';
+import { NavLink, Outlet, useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import {
   LayoutDashboard,
@@ -20,6 +20,8 @@ import {
 import { type UserRole } from '../hooks/useRole';
 import { type SupportedLanguage, rtlLanguages } from '../i18n';
 import { AuthHeader } from './AuthHeader';
+import { SystemCheckModal } from './SystemCheck';
+import { useSystemCheckQuery } from '../hooks/queries';
 
 interface LayoutProps {
   onLogout: () => void;
@@ -36,14 +38,20 @@ const allNavItems = [
   { to: '/webhooks',       icon: Webhook,         key: 'webhooks'       as const, adminOnly: false },
   { to: '/composer',       icon: Send,            key: 'composer'       as const, adminOnly: false },
   { to: '/api-keys',       icon: KeyRound,        key: 'apiKeys'        as const, adminOnly: false },
-  { to: '/logs',           icon: FileText,        key: 'logs'           as const, adminOnly: false },
+  { to: '/activity-log',   icon: FileText,        key: 'activityLog'    as const, adminOnly: false },
   { to: '/settings',       icon: Settings,        key: 'settings'       as const, adminOnly: false },
 ];
 
 export function Layout({ onLogout, userRole }: LayoutProps) {
   const { t, i18n } = useTranslation();
+  const navigate = useNavigate();
 
   const navItems = allNavItems.filter(item => !item.adminOnly || userRole === 'admin');
+
+  const isAdmin = userRole === 'admin';
+  const { data: systemCheck } = useSystemCheckQuery(isAdmin);
+  const [systemCheckDismissed, setSystemCheckDismissed] = useState(false);
+  const showSystemCheckModal = isAdmin && !systemCheckDismissed && !!systemCheck?.hasIssues;
 
   const [isCollapsed,   setIsCollapsed]   = useState(false);
   const [isMobileOpen,  setIsMobileOpen]  = useState(false);
@@ -202,6 +210,17 @@ export function Layout({ onLogout, userRole }: LayoutProps) {
           <Outlet />
         </div>
       </main>
+
+      {showSystemCheckModal && systemCheck && (
+        <SystemCheckModal
+          checks={systemCheck.checks}
+          onClose={() => setSystemCheckDismissed(true)}
+          onViewDetails={() => {
+            setSystemCheckDismissed(true);
+            navigate('/settings?tab=systemRequirements');
+          }}
+        />
+      )}
     </div>
   );
 }

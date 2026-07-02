@@ -12,6 +12,9 @@ export class AuditController {
     @Query('severity') severity?: AuditSeverity,
     @Query('sessionId') sessionId?: string,
     @Query('userId') userId?: string,
+    @Query('startDate') startDate?: string,
+    @Query('endDate') endDate?: string,
+    @Query('search') search?: string,
     @Query('limit') limit?: string,
     @Query('offset') offset?: string,
   ): Promise<{ data: AuditLog[]; total: number }> {
@@ -20,6 +23,9 @@ export class AuditController {
     if (severity) options.severity = severity;
     if (sessionId) options.sessionId = sessionId;
     if (userId) options.userId = userId;
+    if (startDate) options.startDate = new Date(startDate);
+    if (endDate) options.endDate = new Date(endDate);
+    if (search) options.search = search;
     if (limit) options.limit = parseInt(limit, 10);
     if (offset) options.offset = parseInt(offset, 10);
     return this.auditService.findAll(options);

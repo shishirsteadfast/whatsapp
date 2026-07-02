@@ -74,7 +74,9 @@
     "settings": "Settings",
     "messageTester": "Message Tester",
     "campaigns": "Campaigns",
-    "logs": "Logs"
+    "logs": "Logs",
+    "activityLog": "Activity Log",
+    "systemRequirements": "Server Requirements"
   },
   "errorBoundary": {
     "title": "Something went wrong",
@@ -888,7 +890,10 @@
       "profile": "Profile",
       "password": "Password",
       "language": "Language",
-      "system": "System Settings"
+      "system": "System Settings",
+      "healthCheck": "Health Check",
+      "logs": "Logs",
+      "systemRequirements": "Server Requirements"
     },
     "language": {
       "title": "Language",
@@ -949,6 +954,104 @@
         "updateSuccess": "System settings updated",
         "updateError": "Failed to update system settings"
       }
+    }
+  },
+  "systemCheck": {
+    "modal": {
+      "title": "Server configuration needs attention",
+      "subtitle": "{{count}} configuration issue(s) may affect reliability.",
+      "dismiss": "Dismiss for now",
+      "viewDetails": "View Details"
+    },
+    "panel": {
+      "title": "Server Requirements",
+      "subtitle": "Live checklist of configuration items required to run OpenWA reliably.",
+      "refresh": "Re-check",
+      "allPassed": "All required checks passed",
+      "issuesFound": "{{count}} check(s) need attention",
+      "howToFix": "How to fix"
+    },
+    "items": {
+      "jwtSecret": {
+        "label": "JWT secret is configured securely",
+        "fix": "Set a strong, random JWT_SECRET (at least 32 characters) in your .env file, then restart the server. Never use the default placeholder value in production."
+      },
+      "database": {
+        "label": "Database is accessible",
+        "fix": "Ensure the SQLite database file and its folder (DATABASE_NAME) exist and are writable by the process running OpenWA."
+      },
+      "sessionStorage": {
+        "label": "WhatsApp session storage is writable",
+        "fix": "Ensure SESSION_DATA_PATH points to a folder that exists and is writable, so WhatsApp sessions can be saved."
+      },
+      "fileStorage": {
+        "label": "File storage is configured and reachable",
+        "fix": "For local storage, ensure STORAGE_LOCAL_PATH is writable. For S3/MinIO storage, set S3_ENDPOINT, S3_ACCESS_KEY, S3_SECRET_KEY and S3_BUCKET correctly."
+      },
+      "redis": {
+        "label": "Redis is reachable",
+        "fix": "Check that REDIS_HOST/REDIS_PORT point to a running Redis instance, and REDIS_PASSWORD (if any) is correct. You can also set REDIS_BUILTIN=true to let OpenWA start one automatically via Docker."
+      },
+      "queueRedis": {
+        "label": "Queue configuration is consistent",
+        "fix": "QUEUE_ENABLED=true requires REDIS_ENABLED=true. Either enable Redis or disable the queue."
+      },
+      "dockerSocket": {
+        "label": "Docker is accessible for built-in services",
+        "fix": "REDIS_BUILTIN/MINIO_BUILTIN require access to the Docker socket. Mount /var/run/docker.sock into the container, install Docker on the host, or disable these built-in options and run Redis/MinIO yourself."
+      },
+      "diskSpace": {
+        "label": "Sufficient disk space is available",
+        "fix": "Free up disk space on the volume storing OpenWA's data (database, sessions, media). At least 500MB free is recommended."
+      },
+      "cors": {
+        "label": "CORS origins are configured for production",
+        "fix": "Set CORS_ORIGINS to a comma-separated list of allowed dashboard/API origins before running in production."
+      }
+    }
+  },
+  "messageHealth": {
+    "title": "Message Sending Health",
+    "subtitle": "Checks whether your WhatsApp sessions can actually send messages right now.",
+    "refresh": "Re-check",
+    "noSessions": "No WhatsApp sessions found. Create one in Sessions to get started.",
+    "noPhone": "No phone number",
+    "testSend": "Send Test Message",
+    "testSendDisabledHint": "Only available when the session is fully connected",
+    "connectivity": {
+      "connected": "Connected",
+      "degraded": "Degraded",
+      "unreachable": "Unreachable",
+      "not_connected": "Not Connected"
+    },
+    "toasts": {
+      "testSendSuccess": "Test message sent successfully",
+      "testSendError": "Failed to send test message"
+    }
+  },
+  "activityLog": {
+    "title": "Activity Log",
+    "subtitle": "A complete, filterable history of everything that happens in OpenWA.",
+    "searchPlaceholder": "Search activity...",
+    "filters": {
+      "allActions": "All Actions",
+      "allSessions": "All Sessions",
+      "clear": "Clear Filters"
+    },
+    "actions": {
+      "user_login": "User Login",
+      "user_login_failed": "Login Failed",
+      "session_created": "Session Created",
+      "session_started": "Session Started",
+      "session_stopped": "Session Stopped",
+      "session_deleted": "Session Deleted",
+      "session_qr_generated": "QR Code Generated",
+      "session_connected": "Session Connected",
+      "session_disconnected": "Session Disconnected",
+      "webhook_created": "Webhook Created",
+      "webhook_deleted": "Webhook Deleted",
+      "webhook_triggered": "Webhook Triggered",
+      "webhook_failed": "Webhook Failed"
     }
   }
 }

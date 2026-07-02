@@ -76,7 +76,9 @@
     "settings": "الإعدادات",
     "messageTester": "اختبار الرسائل",
     "campaigns": "الحملات",
-    "logs": "السجلات"
+    "logs": "السجلات",
+    "systemRequirements": "متطلبات الخادم",
+    "activityLog": "سجل النشاط"
   },
   "errorBoundary": {
     "title": "حدث خطأ ما",
@@ -911,7 +913,10 @@
       "profile": "الملف الشخصي",
       "password": "كلمة المرور",
       "language": "اللغة",
-      "system": "إعدادات النظام"
+      "system": "إعدادات النظام",
+      "healthCheck": "فحص الصحة",
+      "logs": "السجلات",
+      "systemRequirements": "متطلبات الخادم"
     },
     "language": {
       "title": "اللغة",
@@ -972,6 +977,104 @@
         "updateSuccess": "تم تحديث إعدادات النظام",
         "updateError": "فشل تحديث إعدادات النظام"
       }
+    }
+  },
+  "systemCheck": {
+    "modal": {
+      "title": "إعدادات الخادم تحتاج إلى مراجعة",
+      "subtitle": "قد تؤثر {{count}} مشكلة (مشاكل) في الإعدادات على استقرار النظام.",
+      "dismiss": "تجاهل الآن",
+      "viewDetails": "عرض التفاصيل"
+    },
+    "panel": {
+      "title": "متطلبات الخادم",
+      "subtitle": "قائمة تحقق مباشرة لعناصر الإعداد المطلوبة لتشغيل OpenWA بشكل موثوق.",
+      "refresh": "إعادة الفحص",
+      "allPassed": "تم اجتياز جميع الفحوصات المطلوبة",
+      "issuesFound": "{{count}} فحص (فحوصات) تحتاج إلى مراجعة",
+      "howToFix": "كيفية الإصلاح"
+    },
+    "items": {
+      "jwtSecret": {
+        "label": "تم تكوين JWT_SECRET بشكل آمن",
+        "fix": "قم بتعيين قيمة قوية وعشوائية لـ JWT_SECRET (32 حرفاً على الأقل) في ملف .env، ثم أعد تشغيل الخادم. لا تستخدم القيمة الافتراضية المؤقتة في بيئة الإنتاج مطلقاً."
+      },
+      "database": {
+        "label": "قاعدة البيانات قابلة للوصول",
+        "fix": "تأكد من وجود ملف قاعدة بيانات SQLite والمجلد الخاص به (DATABASE_NAME)، وأنهما قابلان للكتابة من قِبل العملية التي تُشغّل OpenWA."
+      },
+      "sessionStorage": {
+        "label": "مساحة تخزين جلسات WhatsApp قابلة للكتابة",
+        "fix": "تأكد من أن SESSION_DATA_PATH تشير إلى مجلد موجود وقابل للكتابة، حتى يتم حفظ جلسات WhatsApp بشكل صحيح."
+      },
+      "fileStorage": {
+        "label": "تخزين الملفات مُهيّأ وقابل للوصول",
+        "fix": "بالنسبة للتخزين المحلي، تأكد من أن STORAGE_LOCAL_PATH قابل للكتابة. وبالنسبة للتخزين عبر S3/MinIO، قم بتعيين S3_ENDPOINT و S3_ACCESS_KEY و S3_SECRET_KEY و S3_BUCKET بشكل صحيح."
+      },
+      "redis": {
+        "label": "Redis قابل للوصول",
+        "fix": "تحقق من أن REDIS_HOST/REDIS_PORT تشير إلى نسخة Redis قيد التشغيل، وأن REDIS_PASSWORD (إن وُجدت) صحيحة. يمكنك أيضاً تعيين REDIS_BUILTIN=true للسماح لـ OpenWA بتشغيل نسخة تلقائياً عبر Docker."
+      },
+      "queueRedis": {
+        "label": "إعدادات قائمة الانتظار متسقة",
+        "fix": "يتطلب QUEUE_ENABLED=true أن يكون REDIS_ENABLED=true. قم بتفعيل Redis أو تعطيل قائمة الانتظار."
+      },
+      "dockerSocket": {
+        "label": "Docker قابل للوصول للخدمات المدمجة",
+        "fix": "تتطلب REDIS_BUILTIN/MINIO_BUILTIN الوصول إلى مقبس Docker. قم بربط /var/run/docker.sock داخل الحاوية، أو قم بتثبيت Docker على المضيف، أو عطّل هذه الخيارات المدمجة وشغّل Redis/MinIO بنفسك."
+      },
+      "diskSpace": {
+        "label": "مساحة القرص المتاحة كافية",
+        "fix": "قم بتحرير مساحة على القرص الذي يخزن بيانات OpenWA (قاعدة البيانات، الجلسات، الوسائط). يُنصح بتوفر 500 ميجابايت كحد أدنى."
+      },
+      "cors": {
+        "label": "أصول CORS مُهيّأة لبيئة الإنتاج",
+        "fix": "قم بتعيين CORS_ORIGINS إلى قائمة مفصولة بفواصل من أصول لوحة التحكم/API المسموح بها قبل التشغيل في بيئة الإنتاج."
+      }
+    }
+  },
+  "messageHealth": {
+    "title": "صحة إرسال الرسائل",
+    "subtitle": "يتحقق مما إذا كانت جلسات WhatsApp قادرة فعلياً على إرسال الرسائل الآن.",
+    "refresh": "إعادة الفحص",
+    "noSessions": "لم يتم العثور على جلسات WhatsApp. أنشئ جلسة من قسم الجلسات للبدء.",
+    "noPhone": "لا يوجد رقم هاتف",
+    "testSend": "إرسال رسالة تجريبية",
+    "testSendDisabledHint": "متاح فقط عندما تكون الجلسة متصلة بالكامل",
+    "connectivity": {
+      "connected": "متصل",
+      "degraded": "متدهور",
+      "unreachable": "غير قابل للوصول",
+      "not_connected": "غير متصل"
+    },
+    "toasts": {
+      "testSendSuccess": "تم إرسال الرسالة التجريبية بنجاح",
+      "testSendError": "فشل إرسال الرسالة التجريبية"
+    }
+  },
+  "activityLog": {
+    "title": "سجل النشاط",
+    "subtitle": "سجل كامل وقابل للتصفية لكل ما يحدث في OpenWA.",
+    "searchPlaceholder": "بحث في النشاط...",
+    "filters": {
+      "allActions": "جميع الإجراءات",
+      "allSessions": "جميع الجلسات",
+      "clear": "مسح المرشحات"
+    },
+    "actions": {
+      "user_login": "تسجيل دخول المستخدم",
+      "user_login_failed": "فشل تسجيل الدخول",
+      "session_created": "إنشاء الجلسة",
+      "session_started": "تشغيل الجلسة",
+      "session_stopped": "إيقاف الجلسة",
+      "session_deleted": "حذف الجلسة",
+      "session_qr_generated": "إنشاء رمز QR",
+      "session_connected": "اتصال الجلسة",
+      "session_disconnected": "انقطاع الجلسة",
+      "webhook_created": "إنشاء Webhook",
+      "webhook_deleted": "حذف Webhook",
+      "webhook_triggered": "تشغيل Webhook",
+      "webhook_failed": "فشل Webhook"
     }
   }
 }

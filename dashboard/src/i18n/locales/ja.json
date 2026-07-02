@@ -74,7 +74,9 @@
     "settings": "設定",
     "messageTester": "メッセージテスト",
     "campaigns": "キャンペーン",
-    "logs": "ログ"
+    "logs": "ログ",
+    "systemRequirements": "サーバー要件",
+    "activityLog": "アクティビティログ"
   },
   "errorBoundary": {
     "title": "問題が発生しました",
@@ -888,7 +890,10 @@
       "profile": "プロフィール",
       "password": "パスワード",
       "language": "言語",
-      "system": "システム"
+      "system": "システム",
+      "healthCheck": "ヘルスチェック",
+      "logs": "ログ",
+      "systemRequirements": "サーバー要件"
     },
     "language": {
       "title": "言語",
@@ -949,6 +954,104 @@
         "updateSuccess": "システム設定を更新しました",
         "updateError": "システム設定の更新に失敗"
       }
+    }
+  },
+  "systemCheck": {
+    "modal": {
+      "title": "サーバー設定に確認が必要な項目があります",
+      "subtitle": "{{count}} 件の設定に問題があり、信頼性に影響する可能性があります。",
+      "dismiss": "今は表示しない",
+      "viewDetails": "詳細を表示"
+    },
+    "panel": {
+      "title": "サーバー要件",
+      "subtitle": "OpenWA を安定稼働させるために必要な設定項目のチェックリストです。",
+      "refresh": "再チェック",
+      "allPassed": "必須項目はすべて確認済みです",
+      "issuesFound": "{{count}} 件の項目に確認が必要です",
+      "howToFix": "対処方法"
+    },
+    "items": {
+      "jwtSecret": {
+        "label": "JWT シークレットが安全に設定されています",
+        "fix": ".env ファイルに強力でランダムな JWT_SECRET（32文字以上）を設定し、サーバーを再起動してください。本番環境ではデフォルトの初期値を絶対に使用しないでください。"
+      },
+      "database": {
+        "label": "データベースにアクセスできます",
+        "fix": "SQLite データベースファイルとそのフォルダ（DATABASE_NAME）が存在し、OpenWA を実行しているプロセスから書き込み可能であることを確認してください。"
+      },
+      "sessionStorage": {
+        "label": "WhatsApp セッションストレージに書き込み可能です",
+        "fix": "SESSION_DATA_PATH が存在し書き込み可能なフォルダを指していることを確認してください。これにより WhatsApp セッションを保存できます。"
+      },
+      "fileStorage": {
+        "label": "ファイルストレージが設定され、接続可能です",
+        "fix": "ローカルストレージを使用する場合は STORAGE_LOCAL_PATH が書き込み可能であることを確認してください。S3/MinIO ストレージを使用する場合は S3_ENDPOINT、S3_ACCESS_KEY、S3_SECRET_KEY、S3_BUCKET を正しく設定してください。"
+      },
+      "redis": {
+        "label": "Redis に接続できます",
+        "fix": "REDIS_HOST/REDIS_PORT が稼働中の Redis インスタンスを指していること、また REDIS_PASSWORD（設定している場合）が正しいことを確認してください。REDIS_BUILTIN=true を設定すると、OpenWA が Docker 経由で自動的に起動することもできます。"
+      },
+      "queueRedis": {
+        "label": "キューの設定に一貫性があります",
+        "fix": "QUEUE_ENABLED=true を使用する場合は REDIS_ENABLED=true が必要です。Redis を有効にするか、キューを無効にしてください。"
+      },
+      "dockerSocket": {
+        "label": "組み込みサービス用に Docker にアクセスできます",
+        "fix": "REDIS_BUILTIN/MINIO_BUILTIN を使用するには Docker ソケットへのアクセスが必要です。/var/run/docker.sock をコンテナにマウントする、ホストに Docker をインストールする、またはこれらの組み込みオプションを無効にして Redis/MinIO を別途運用してください。"
+      },
+      "diskSpace": {
+        "label": "十分な空きディスク容量があります",
+        "fix": "OpenWA のデータ（データベース、セッション、メディア）を保存しているボリュームの空き容量を確保してください。500MB 以上の空き容量を推奨します。"
+      },
+      "cors": {
+        "label": "本番環境向けに CORS オリジンが設定されています",
+        "fix": "本番環境で実行する前に、CORS_ORIGINS に許可するダッシュボード/API のオリジンをカンマ区切りで設定してください。"
+      }
+    }
+  },
+  "messageHealth": {
+    "title": "メッセージ送信ヘルスチェック",
+    "subtitle": "WhatsAppセッションが現在実際にメッセージを送信できるかを確認します。",
+    "refresh": "再チェック",
+    "noSessions": "WhatsAppセッションが見つかりません。開始するには「セッション」で作成してください。",
+    "noPhone": "電話番号なし",
+    "testSend": "テストメッセージを送信",
+    "testSendDisabledHint": "セッションが完全に接続されている場合のみ利用可能です",
+    "connectivity": {
+      "connected": "接続済み",
+      "degraded": "低下",
+      "unreachable": "到達不能",
+      "not_connected": "未接続"
+    },
+    "toasts": {
+      "testSendSuccess": "テストメッセージを送信しました",
+      "testSendError": "テストメッセージの送信に失敗しました"
+    }
+  },
+  "activityLog": {
+    "title": "アクティビティログ",
+    "subtitle": "OpenWA内で発生するすべての操作を記録した、フィルターで絞り込める完全な履歴です。",
+    "searchPlaceholder": "アクティビティを検索...",
+    "filters": {
+      "allActions": "すべてのアクション",
+      "allSessions": "すべてのセッション",
+      "clear": "フィルターをクリア"
+    },
+    "actions": {
+      "user_login": "ユーザーログイン",
+      "user_login_failed": "ログイン失敗",
+      "session_created": "セッション作成",
+      "session_started": "セッション開始",
+      "session_stopped": "セッション停止",
+      "session_deleted": "セッション削除",
+      "session_qr_generated": "QRコード生成",
+      "session_connected": "セッション接続",
+      "session_disconnected": "セッション切断",
+      "webhook_created": "Webhook作成",
+      "webhook_deleted": "Webhook削除",
+      "webhook_triggered": "Webhookトリガー",
+      "webhook_failed": "Webhook失敗"
     }
   }
 }
