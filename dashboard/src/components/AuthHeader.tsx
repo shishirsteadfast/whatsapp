@@ -31,27 +31,24 @@ export function AuthHeader({ onLogout }: AuthHeaderProps) {
   const roleLabel = role ? t(`apiKeys.roles.${role}`, { defaultValue: role }) : '—';
   const roleName  = role ? role.charAt(0).toUpperCase() + role.slice(1) : '—';
 
-  const currentLang = (i18n.resolvedLanguage || i18n.language || 'en').split('-')[0] as SupportedLanguage;
-  const cycleLanguage = () => {
-    const idx = supportedLanguages.indexOf(currentLang);
-    void i18n.changeLanguage(supportedLanguages[(idx + 1) % supportedLanguages.length]);
-  };
-  const langLabels: Record<string, string> = {
-    en: 'EN',
-    he: 'עב',
-    zh: '中文',
-    es: 'ES',
-    ar: 'العربية',
-    bn: 'বাংলা',
-    pt: 'PT',
-    id: 'ID',
-    ur: 'اردو',
-    ru: 'RU',
-    de: 'DE',
-    ja: '日本語',
-    it: 'IT',
-  };
-  const langLabel = langLabels[currentLang] || currentLang.toUpperCase();
+  const rawLang = (i18n.resolvedLanguage || i18n.language || 'en').split('-')[0] as SupportedLanguage;
+  const currentLang = supportedLanguages.includes(rawLang) ? rawLang : 'en';
+
+  const languages = [
+    { code: 'en', label: 'EN', native: 'English' },
+    { code: 'he', label: 'עב', native: 'עברית' },
+    { code: 'zh', label: '中文', native: '中文' },
+    { code: 'es', label: 'ES', native: 'Español' },
+    { code: 'ar', label: 'العربية', native: 'العربية' },
+    { code: 'bn', label: 'বাংলা', native: 'বাংলা' },
+    { code: 'pt', label: 'PT', native: 'Português' },
+    { code: 'id', label: 'ID', native: 'Bahasa Indonesia' },
+    { code: 'ur', label: 'اردو', native: 'اردو' },
+    { code: 'ru', label: 'RU', native: 'Русский' },
+    { code: 'de', label: 'DE', native: 'Deutsch' },
+    { code: 'ja', label: '日本語', native: '日本語' },
+    { code: 'it', label: 'IT', native: 'Italiano' },
+  ] as const;
 
   /* Shared icon-button style */
   const iconBtn = 'flex h-8 w-8 cursor-pointer items-center justify-center rounded-[var(--radius)] border-none bg-transparent text-[var(--color-ink-muted)] transition-all hover:bg-[var(--color-muted)] hover:text-[var(--color-ink)]';
@@ -65,15 +62,25 @@ export function AuthHeader({ onLogout }: AuthHeaderProps) {
       {/* ── Right controls ── */}
       <div className="flex items-center gap-1">
 
-        {/* Language */}
-        <button
-          onClick={cycleLanguage}
-          aria-label={t('common.language')}
-          title={t('common.language')}
-          className="flex h-8 cursor-pointer items-center justify-center rounded-[var(--radius)] border-none bg-transparent px-2.5 text-[0.75rem] font-bold tracking-wide text-[var(--color-ink-muted)] transition-all hover:bg-[var(--color-muted)] hover:text-[var(--color-ink)]"
-        >
-          {langLabel}
-        </button>
+        {/* Language dropdown */}
+        <div className="relative">
+          <select
+            value={currentLang}
+            onChange={e => void i18n.changeLanguage(e.target.value)}
+            aria-label={t('common.language')}
+            className="flex h-8 cursor-pointer appearance-none items-center justify-center rounded-[var(--radius)] border-none bg-transparent px-2.5 pr-6 text-[0.75rem] font-bold tracking-wide text-[var(--color-ink-muted)] transition-all hover:bg-[var(--color-muted)] hover:text-[var(--color-ink)] focus:outline-none focus:ring-2 focus:ring-[var(--color-primary)]"
+          >
+            {languages.map(lang => (
+              <option key={lang.code} value={lang.code}>
+                {lang.label} — {lang.native}
+              </option>
+            ))}
+          </select>
+          <ChevronDown
+            size={11}
+            className="pointer-events-none absolute right-1.5 top-1/2 -translate-y-1/2 text-[var(--color-ink-muted)]"
+          />
+        </div>
 
         {/* Theme */}
         <button

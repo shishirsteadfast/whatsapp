@@ -25,7 +25,6 @@ import { StatusModule } from './modules/status/status.module';
 import { CatalogModule } from './modules/catalog/catalog.module';
 import { HooksModule } from './core/hooks';
 import { PluginsModule } from './core/plugins';
-import { PluginsApiModule } from './modules/plugins/plugins.module';
 import { QueueModule } from './modules/queue/queue.module';
 import { ContactsModule } from './modules/contacts/contacts.module';
 import { GroupsModule } from './modules/groups/groups.module';
@@ -107,7 +106,6 @@ import { CampaignModule } from './modules/campaign/campaign.module';
     StatusModule,
     CatalogModule,
     CampaignModule.register(process.env.REDIS_ENABLED === 'true'),
-    PluginsApiModule,
   ],
 })
 export class AppModule {}

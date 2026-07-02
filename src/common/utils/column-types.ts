@@ -1,22 +1,17 @@
 /**
- * Cross-database column type helpers.
+ * SQLite column type helpers.
  *
  * SQLite lacks native JSON and timestamp types, so we use `simple-json`
  * (JSON.stringify stored as TEXT) and `text` with DateTransformer.
- *
- * PostgreSQL has native `jsonb` and `timestamp` types with better
- * indexing and query performance.
  */
 
-const isPostgres = (): boolean => process.env.DATABASE_TYPE === 'postgres';
-
 /**
- * Returns 'jsonb' for PostgreSQL, 'simple-json' for SQLite.
+ * Returns 'simple-json', the SQLite column type for JSON data.
  */
-export const jsonColumnType = (): 'jsonb' | 'simple-json' => (isPostgres() ? 'jsonb' : 'simple-json');
+export const jsonColumnType = (): 'simple-json' => 'simple-json';
 
 /**
- * Returns 'timestamp' for PostgreSQL, 'text' for SQLite.
+ * Returns 'text', the SQLite column type for timestamps.
  * Use with DateTransformer for SQLite compatibility.
  */
-export const dateColumnType = (): 'timestamp' | 'text' => (isPostgres() ? 'timestamp' : 'text');
+export const dateColumnType = (): 'text' => 'text';

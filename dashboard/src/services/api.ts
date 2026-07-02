@@ -82,19 +82,6 @@ export interface HealthStatus {
   };
 }
 
-export interface InfraStatus {
-  database: { connected: boolean; type: string };
-  redis: { connected: boolean; host: string; port: number };
-  queue: {
-    enabled: boolean;
-    messageSend: { pending: number; completed: number; failed: number };
-    messageBulk: { pending: number; completed: number; failed: number };
-    webhooks: { pending: number; completed: number; failed: number };
-  };
-  storage: { type: 'local'; path: string };
-  engine: { type: string; headless: boolean };
-}
-
 export interface Settings {
   general: { apiBaseUrl: string; sessionTimeout: number; autoReconnect: boolean; debugMode: boolean };
   api: { rateLimit: number; rateLimitWindow: number; enableDocs: boolean };
@@ -247,24 +234,12 @@ export const messageApi = {
 };
 
 // =============================================================================
-// Health & Infrastructure API
+// Health API
 // =============================================================================
 
 export const healthApi = {
   check: () => request<HealthStatus>('/health'),
   ready: () => request<HealthStatus>('/health/ready'),
-};
-
-export const infraApi = {
-  getStatus: () => request<InfraStatus>('/infra/status'),
-  saveConfig: (config: Record<string, unknown>) =>
-    request<{ message: string; saved: boolean }>('/infra/config', {
-      method: 'PUT',
-      body: JSON.stringify(config),
-    }),
-  restart: () =>
-    request<{ message: string; restarting: boolean }>('/infra/restart', { method: 'POST' }),
-  healthCheck: () => request<{ status: string; timestamp: string }>('/infra/health'),
 };
 
 // =============================================================================
@@ -276,33 +251,6 @@ export const settingsApi = {
   update: (settings: Partial<Settings>) =>
     request<Settings>('/settings', { method: 'PUT', body: JSON.stringify(settings) }),
 };
-
-// =============================================================================
-// Plugin Types
-// =============================================================================
-
-export interface Plugin {
-  id: string;
-  name: string;
-  version: string;
-  type: 'engine' | 'storage' | 'queue' | 'auth' | 'extension';
-  description?: string;
-  author?: string;
-  status: 'installed' | 'enabled' | 'disabled' | 'error';
-  config: Record<string, unknown>;
-  builtIn: boolean;
-  provides: string[];
-  loadedAt?: string;
-  enabledAt?: string;
-  error?: string;
-}
-
-export interface Engine {
-  id: string;
-  name: string;
-  enabled: boolean;
-  features: string[];
-}
 
 // =============================================================================
 // Location Types & API
@@ -597,21 +545,6 @@ export const groupApi = {
       '/groups/bulk-create-with-group',
       { method: 'POST', body: JSON.stringify(data) },
     ),
-};
-
-export const pluginsApi = {
-  list: () => request<Plugin[]>('/plugins'),
-  get: (id: string) => request<Plugin>(`/plugins/${id}`),
-  enable: (id: string) => request<{ success: boolean; message: string }>(`/plugins/${id}/enable`, { method: 'POST' }),
-  disable: (id: string) => request<{ success: boolean; message: string }>(`/plugins/${id}/disable`, { method: 'POST' }),
-  updateConfig: (id: string, config: Record<string, unknown>) =>
-    request<{ success: boolean; message: string }>(`/plugins/${id}/config`, {
-      method: 'PUT',
-      body: JSON.stringify({ config }),
-    }),
-  healthCheck: (id: string) => request<{ healthy: boolean; message?: string }>(`/plugins/${id}/health`),
-  getEngines: () => request<Engine[]>('/infra/engines'),
-  getCurrentEngine: () => request<{ engineType: string }>('/infra/engines/current'),
 };
 
 // =============================================================================

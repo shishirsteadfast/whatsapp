@@ -47,9 +47,6 @@ export class DockerService implements OnModuleInit {
     if (process.env.REDIS_BUILTIN === 'true') {
       profiles.push('redis');
     }
-    if (process.env.POSTGRES_BUILTIN === 'true') {
-      profiles.push('postgres');
-    }
     if (process.env.MINIO_BUILTIN === 'true') {
       profiles.push('minio');
     }
@@ -185,24 +182,6 @@ export class DockerService implements OnModuleInit {
         },
         labels: {
           'com.openwa.service': 'cache',
-          'com.openwa.builtin': 'true',
-        },
-      },
-      postgres: {
-        image: 'postgres:16-alpine',
-        name: 'openwa-postgres',
-        alias: 'postgres',
-        // Use hardcoded defaults for built-in container (don't inherit SQLite paths)
-        env: ['POSTGRES_USER=openwa', 'POSTGRES_PASSWORD=openwa', 'POSTGRES_DB=openwa'],
-        volumes: [{ name: 'openwa_postgres-data', path: '/var/lib/postgresql/data' }],
-        healthcheck: {
-          test: ['CMD-SHELL', 'pg_isready -U openwa'],
-          interval: 5000000000,
-          timeout: 3000000000,
-          retries: 5,
-        },
-        labels: {
-          'com.openwa.service': 'database',
           'com.openwa.builtin': 'true',
         },
       },
@@ -349,10 +328,8 @@ export class DockerService implements OnModuleInit {
 
       // Map service names to docker-compose profiles
       const serviceToProfile: Record<string, string> = {
-        database: 'postgres',
         cache: 'redis',
         storage: 'minio',
-        postgres: 'postgres',
         redis: 'redis',
         minio: 'minio',
       };
@@ -375,43 +352,6 @@ export class DockerService implements OnModuleInit {
       this.logger.error(`Failed to start service: ${service}`, error);
       return false;
     }
-  }
-
-  /**
-   * Stop and remove a container by service name to save space
-   */
-  async removeService(profile: string): Promise<boolean> {
-    this.logger.log(`Removing service with profile: ${profile}`);
-
-    // First try to get the container and remove via dockerode
-    const serviceMap: Record<string, string> = {
-      postgres: 'database',
-      redis: 'cache',
-      minio: 'storage',
-    };
-
-    const service = serviceMap[profile] || profile;
-    const container = await this.getContainerByService(service);
-
-    if (container) {
-      try {
-        const info = await container.inspect();
-        if (info.State.Running) {
-          await container.stop();
-          this.logger.log(`Stopped container: ${profile}`);
-        }
-        await container.remove({ v: true }); // v: true removes volumes too
-        this.logger.log(`Removed container: ${profile}`);
-        return true;
-      } catch (error) {
-        this.logger.error(`Failed to remove container: ${error instanceof Error ? error.message : error}`);
-        return false;
-      }
-    }
-
-    // Container doesn't exist - that's fine for removal
-    this.logger.log(`Container for service '${profile}' not found, nothing to remove`);
-    return true;
   }
 
   /**
@@ -448,7 +388,6 @@ export class DockerService implements OnModuleInit {
     // Calculate estimated time based on profiles
     // Base: 15 seconds for core restart (increased for reliability)
     let estimatedTime = 15;
-    if (profiles.includes('postgres')) estimatedTime += 20; // PostgreSQL takes longer
     if (profiles.includes('redis')) estimatedTime += 13;
     if (profiles.includes('minio')) estimatedTime += 15;
 
@@ -472,7 +411,6 @@ export class DockerService implements OnModuleInit {
 
     // Map profiles to service names
     const profileToService: Record<string, string> = {
-      postgres: 'database',
       redis: 'cache',
       minio: 'storage',
     };

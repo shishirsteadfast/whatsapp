@@ -13,8 +13,6 @@ const Sessions = lazy(() => import('./pages/Sessions').then(m => ({ default: m.S
 const Webhooks = lazy(() => import('./pages/Webhooks').then(m => ({ default: m.Webhooks })));
 const Logs = lazy(() => import('./pages/Logs').then(m => ({ default: m.Logs })));
 const Composer = lazy(() => import('./pages/Composer').then(m => ({ default: m.Composer })));
-const Infrastructure = lazy(() => import('./pages/Infrastructure').then(m => ({ default: m.Infrastructure })));
-const Plugins = lazy(() => import('./pages/Plugins'));
 const Contacts = lazy(() => import('./pages/Contacts').then(m => ({ default: m.Contacts })));
 const Groups = lazy(() => import('./pages/Groups').then(m => ({ default: m.Groups })));
 const Messages = lazy(() => import('./pages/Messages').then(m => ({ default: m.Messages })));
@@ -172,7 +170,6 @@ function AppContent() {
               <Route path="webhooks" element={<Webhooks />} />
               <Route path="logs" element={<Logs />} />
               <Route path="composer" element={<Composer />} />
-              <Route path="infrastructure" element={<Infrastructure />} />
               <Route path="contacts" element={<Contacts />} />
               <Route path="groups" element={<Groups />} />
               <Route path="messages" element={<Messages />} />
@@ -182,7 +179,6 @@ function AppContent() {
               <Route path="campaigns/:id/edit" element={<CampaignNew />} />
               <Route path="api-keys" element={<ApiKeys />} />
               <Route path="settings" element={<SettingsPage />} />
-              {role === 'admin' && <Route path="plugins" element={<Plugins />} />}
               <Route path="*" element={<Navigate to="/" replace />} />
             </Route>
           </Routes>

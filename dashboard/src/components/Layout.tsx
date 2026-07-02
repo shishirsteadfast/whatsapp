@@ -7,8 +7,6 @@ import {
   Webhook,
   FileText,
   Send,
-  Server,
-  Puzzle,
   Users,
   UserPlus,
   Settings,
@@ -38,8 +36,6 @@ const allNavItems = [
   { to: '/webhooks',       icon: Webhook,         key: 'webhooks'       as const, adminOnly: false },
   { to: '/composer',       icon: Send,            key: 'composer'       as const, adminOnly: false },
   { to: '/api-keys',       icon: KeyRound,        key: 'apiKeys'        as const, adminOnly: false },
-  { to: '/infrastructure', icon: Server,          key: 'infrastructure' as const, adminOnly: false },
-  { to: '/plugins',        icon: Puzzle,          key: 'plugins'        as const, adminOnly: true  },
   { to: '/logs',           icon: FileText,        key: 'logs'           as const, adminOnly: false },
   { to: '/settings',       icon: Settings,        key: 'settings'       as const, adminOnly: false },
 ];

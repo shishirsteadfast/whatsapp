@@ -3,8 +3,6 @@ import {
   sessionApi,
   webhookApi,
   auditApi,
-  infraApi,
-  pluginsApi,
   contactApi,
   groupApi,
   messageApi,
@@ -31,10 +29,6 @@ export const queryKeys = {
   webhooks: ['webhooks'] as const,
   logs: (params: { severity?: string; page: number; limit: number }) =>
     ['logs', params] as const,
-  infraStatus: ['infra', 'status'] as const,
-  plugins: ['plugins'] as const,
-  engines: ['engines'] as const,
-  currentEngine: ['engines', 'current'] as const,
   contacts: ['contacts'] as const,
   contactGroups: ['groups'] as const,
   contactGroup: (id: string) => ['groups', id] as const,
@@ -167,42 +161,6 @@ export function useLogsQuery(params: { severity?: string; page: number; limit: n
         offset: (params.page - 1) * params.limit,
       }),
     staleTime: 15_000,
-  });
-}
-
-// ── Infrastructure Queries ────────────────────────────────────────────
-
-export function useInfraStatusQuery() {
-  return useQuery({
-    queryKey: queryKeys.infraStatus,
-    queryFn: infraApi.getStatus,
-    staleTime: 30_000,
-  });
-}
-
-// ── Plugin Queries ────────────────────────────────────────────────────
-
-export function usePluginsQuery() {
-  return useQuery({
-    queryKey: queryKeys.plugins,
-    queryFn: pluginsApi.list,
-    staleTime: 30_000,
-  });
-}
-
-export function useEnginesQuery() {
-  return useQuery({
-    queryKey: queryKeys.engines,
-    queryFn: pluginsApi.getEngines,
-    staleTime: 60_000,
-  });
-}
-
-export function useCurrentEngineQuery() {
-  return useQuery({
-    queryKey: queryKeys.currentEngine,
-    queryFn: pluginsApi.getCurrentEngine,
-    staleTime: 60_000,
   });
 }
 
