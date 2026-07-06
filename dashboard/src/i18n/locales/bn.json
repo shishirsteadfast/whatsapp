@@ -54,7 +54,16 @@
     "lightMode": "হালকা মোড",
     "darkMode": "গাঢ় মোড",
     "viewAll": "সব দেখুন",
-    "copied": "কপি হয়েছে!"
+    "copy": "কপি",
+    "copied": "কপি হয়েছে!",
+    "sessionsActive": "সক্রিয় সেশন",
+    "social": {
+      "email": "ইমেইল",
+      "whatsapp": "WhatsApp",
+      "facebook": "Facebook",
+      "youtube": "YouTube",
+      "website": "ওয়েবসাইট"
+    }
   },
   "theme": {
     "light": "হালকা",
@@ -68,15 +77,18 @@
     "webhooks": "Webhooks",
     "apiKeys": "API কী",
     "contacts": "কন্টাক্ট",
-    "composer": "কম্পোজার",
     "groups": "গ্রুপ",
-    "messages": "বার্তা",
+    "messages": "বার্তা লগ",
     "settings": "সেটিংস",
     "messageTester": "বার্তা পরীক্ষক",
     "campaigns": "ক্যাম্পেইন",
     "logs": "লগ",
     "systemRequirements": "সার্ভার প্রয়োজনীয়তা",
-    "activityLog": "কার্যকলাপ লগ"
+    "activityLog": "কার্যকলাপ লগ",
+    "compose": "রচনা করুন",
+    "groupAudience": "শ্রোতা",
+    "groupMessaging": "মেসেজিং",
+    "groupAccess": "অ্যাক্সেস"
   },
   "errorBoundary": {
     "title": "কিছু একটা ভুল হয়েছে",
@@ -248,6 +260,10 @@
       "phone": "ফোন",
       "sessionId": "সেশন ID",
       "lastActive": "সর্বশেষ সক্রিয়"
+    },
+    "stats": {
+      "total": "মোট সেশন",
+      "connecting": "সংযোগ হচ্ছে"
     }
   },
   "webhooks": {
@@ -300,13 +316,9 @@
     }
   },
   "apiKeys": {
-    "title": "API ব্যবস্থাপনা",
-    "subtitle": "API কী, credentials এবং API ডকুমেন্টেশন পরিচালনা করুন",
-    "tabs": {
-      "overview": "ওভারভিউ",
-      "keys": "API কী",
-      "docs": "ডকুমেন্টেশন"
-    },
+    "title": "API রেফারেন্স",
+    "subtitle": "প্রমাণীকরণ করুন, প্রতিটি endpoint অন্বেষণ করুন এবং আপনার পছন্দের ভাষায় OpenWA API সংহত করুন।",
+    "manageHint": "আপনার API অনুরোধ প্রমাণীকরণের জন্য ব্যবহৃত কী তৈরি, রোটেট এবং বাতিল করুন।",
     "stats": {
       "totalKeys": "মোট কী",
       "activeKeys": "সক্রিয় কী",
@@ -314,17 +326,8 @@
       "rateLimit": "আজকের কল"
     },
     "credentials": {
-      "baseUrl": "API বেস URL",
-      "baseUrlHint": "সব API অনুরোধের জন্য বেস endpoint হিসেবে এই URL ব্যবহার করুন।"
-    },
-    "quickLinks": {
-      "title": "দ্রুত লিংক",
-      "manageKeys": "API কী পরিচালনা করুন",
-      "manageKeysDesc": "আপনার API কী দেখুন, তৈরি, বাতিল ও মুছুন",
-      "viewDocs": "API ডকুমেন্টেশন",
-      "viewDocsDesc": "উদাহরণ সহ বিস্তারিত endpoint রেফারেন্স ব্রাউজ করুন",
-      "createKey": "নতুন কী তৈরি করুন",
-      "createKeyDesc": "একটি নির্দিষ্ট ভূমিকা সহ নতুন API কী তৈরি করুন"
+      "baseUrl": "বেস URL",
+      "baseUrlHint": "এই রেফারেন্সের সব endpoint পাথ এই URL-এর সাপেক্ষে।"
     },
     "createBtn": "API কী তৈরি করুন",
     "modalTitle": "API কী তৈরি করুন",
@@ -374,13 +377,42 @@
     }
   },
   "apiDocs": {
+    "nav": {
+      "introduction": "সূচনা",
+      "authentication": "প্রমাণীকরণ",
+      "yourKeys": "আপনার API কী",
+      "errors": "ত্রুটি ও রেট লিমিট",
+      "endpoints": "এন্ডপয়েন্ট",
+      "sdks": "SDK ও লাইব্রেরি"
+    },
+    "intro": {
+      "title": "সূচনা",
+      "description": "OpenWA API আপনাকে WhatsApp সেশন প্রোগ্রামগতভাবে পরিচালনা করতে, বার্তা পাঠাতে এবং আপনার ওয়ার্কফ্লো স্বয়ংক্রিয় করতে দেয়। এটি REST-কে ঘিরে সংগঠিত — প্রতিটি endpoint JSON রিকোয়েস্ট বডি গ্রহণ করে, JSON প্রতিক্রিয়া ফেরত দেয় এবং স্ট্যান্ডার্ড HTTP রেসপন্স কোড ব্যবহার করে।",
+      "quickStart": "দ্রুত শুরু",
+      "quickStartHint": "আপনার সক্রিয় সেশন তালিকাভুক্ত করার জন্য এখানে একটি ন্যূনতম অনুরোধ দেওয়া হলো।"
+    },
+    "languages": {
+      "curl": "cURL",
+      "javascript": "JavaScript",
+      "python": "Python",
+      "php": "PHP",
+      "go": "Go"
+    },
     "auth": {
       "title": "প্রমাণীকরণ",
-      "description": "সব API অনুরোধে প্রমাণীকরণ প্রয়োজন। <code>X-API-Key</code> হেডারে আপনার API কী অন্তর্ভুক্ত করুন। আপনি API কী ট্যাবে আপনার কীগুলি পরিচালনা করতে পারেন।",
-      "example": "প্রমাণীকরণ সহ অনুরোধের উদাহরণ",
+      "description": "সব API অনুরোধে প্রমাণীকরণ প্রয়োজন। <code>X-API-Key</code> রিকোয়েস্ট হেডারে আপনার API কী অন্তর্ভুক্ত করুন। আপনি নিচে আপনার API কী তৈরি ও পরিচালনা করতে পারেন।",
       "none": "প্রমাণীকরণের প্রয়োজন নেই",
       "apiKey": "API কী প্রয়োজন",
       "admin": "অ্যাডমিন প্রবেশাধিকার প্রয়োজন"
+    },
+    "groups": {
+      "general": "সাধারণ",
+      "sessions": "সেশন",
+      "messages": "বার্তা",
+      "contacts": "কন্টাক্ট",
+      "webhooks": "Webhook",
+      "campaigns": "ক্যাম্পেইন",
+      "settings": "সেটিংস"
     },
     "sdks": {
       "title": "SDK ও লাইব্রেরি",
@@ -388,6 +420,7 @@
     },
     "endpoints": {
       "title": "API এন্ডপয়েন্ট",
+      "hint": "রিসোর্স অনুযায়ী গ্রুপ করা প্রতিটি উপলব্ধ endpoint ব্রাউজ করুন।",
       "health": {
         "desc": "API সার্ভারের স্বাস্থ্য অবস্থা পরীক্ষা করুন"
       },
@@ -419,8 +452,21 @@
       }
     },
     "requestBody": "অনুরোধের বডি",
-    "example": "উদাহরণ",
+    "example": "উদাহরণ অনুরোধ",
     "response": "প্রতিক্রিয়া",
+    "errors": {
+      "title": "ত্রুটি ও রেট লিমিট",
+      "description": "OpenWA একটি অনুরোধের সফলতা বা ব্যর্থতা নির্দেশ করতে প্রচলিত HTTP রেসপন্স কোড ব্যবহার করে। 2xx রেঞ্জের কোড সফলতা বোঝায়, 4xx রেঞ্জ বোঝায় অনুরোধে ত্রুটি আছে, এবং 5xx রেঞ্জ বোঝায় আমাদের প্রান্তে কিছু ভুল হয়েছে।",
+      "codes": {
+        "200": "Success — অনুরোধটি প্রত্যাশিত অনুযায়ী সম্পন্ন হয়েছে।",
+        "400": "Bad Request — অনুরোধটি সঠিকভাবে গঠিত ছিল না বা প্রয়োজনীয় প্যারামিটার অনুপস্থিত ছিল।",
+        "401": "Unauthorized — API কী অনুপস্থিত বা অকার্যকর।",
+        "403": "Forbidden — API কী-র এই কাজের জন্য অনুমতি নেই।",
+        "404": "Not Found — অনুরোধ করা রিসোর্সটি বিদ্যমান নেই।",
+        "429": "Too Many Requests — আপনি রেট লিমিট অতিক্রম করেছেন।",
+        "500": "Server Error — OpenWA-র প্রান্তে কিছু ভুল হয়েছে।"
+      }
+    },
     "rateLimit": {
       "title": "রেট লিমিটিং",
       "description": "ন্যায্য ব্যবহার নিশ্চিত করতে API অনুরোধের হার সীমিত। ডিফল্ট সীমা প্রতি API কী প্রতি ৬০ সেকেন্ডের উইন্ডোতে ১০০টি অনুরোধ। এই সীমা অতিক্রম করলে 429 Too Many Requests প্রতিক্রিয়া হবে। উচ্চতর সীমার প্রয়োজন হলে সমর্থনের সাথে যোগাযোগ করুন।"
@@ -508,7 +554,11 @@
     "charCount": "{{count}} / ৪০৯৬ অক্ষর",
     "livePreview": "লাইভ প্রিভিউ",
     "noMessages": "এখনো কোনো বার্তা নেই",
-    "noMessagesHint": "কথোপকথন শুরু করতে একটি বার্তা পাঠান"
+    "noMessagesHint": "কথোপকথন শুরু করতে একটি বার্তা পাঠান",
+    "addRecipients": "প্রাপক যুক্ত করুন",
+    "loadMore": "আরও দেখুন",
+    "showPreview": "প্রিভিউ দেখান",
+    "hidePreview": "প্রিভিউ লুকান"
   },
   "campaigns": {
     "title": "ক্যাম্পেইন",
@@ -1085,5 +1135,46 @@
     "delivered": "পৌঁছেছে",
     "read": "পঠিত",
     "failed": "ব্যর্থ"
+  },
+  "roles": {
+    "title": "ভূমিকা ও অনুমতি",
+    "subtitle": "ভূমিকা নির্ধারণ করুন এবং সূক্ষ্ম অনুমতি বরাদ্দ করুন",
+    "createRole": "ভূমিকা তৈরি করুন",
+    "createTitle": "নতুন ভূমিকা তৈরি করুন",
+    "editTitle": "ভূমিকা সম্পাদনা করুন",
+    "name": "ভূমিকার নাম",
+    "namePlaceholder": "যেমন: সাপোর্ট এজেন্ট",
+    "description": "বিবরণ",
+    "descriptionPlaceholder": "ঐচ্ছিক বিবরণ",
+    "type": "ধরন",
+    "system": "সিস্টেম",
+    "custom": "কাস্টম",
+    "permissions": "অনুমতি",
+    "searchPlaceholder": "ভূমিকা খুঁজুন...",
+    "deleteConfirm": "ভূমিকা মুছুন",
+    "deleteWarning": "আপনি কি নিশ্চিত যে এই ভূমিকাটি মুছতে চান? এই কাজটি পূর্বাবস্থায় ফেরানো যাবে না।",
+    "emptyTitle": "কোনো ভূমিকা পাওয়া যায়নি",
+    "emptyDescription": "ভূমিকাগুলো এখানে প্রদর্শিত হবে",
+    "toasts": {
+      "createSuccess": "ভূমিকা সফলভাবে তৈরি হয়েছে",
+      "createError": "ভূমিকা তৈরি করতে ব্যর্থ হয়েছে",
+      "updateSuccess": "ভূমিকা সফলভাবে আপডেট হয়েছে",
+      "updateError": "ভূমিকা আপডেট করতে ব্যর্থ হয়েছে",
+      "deleteSuccess": "ভূমিকা সফলভাবে মুছে ফেলা হয়েছে",
+      "deleteError": "ভূমিকা মুছতে ব্যর্থ হয়েছে"
+    },
+    "stats": {
+      "total": "মোট রোল",
+      "system": "সিস্টেম রোল",
+      "custom": "কাস্টম রোল"
+    },
+    "noPermissions": "কোনো অনুমতি নির্ধারিত নেই",
+    "permissionCount": "{{count}}টি অনুমতি",
+    "acrossGroups": "{{count}}টি গ্রুপ জুড়ে",
+    "searchPermissionsPlaceholder": "অনুমতি খুঁজুন...",
+    "selectAllPermissions": "সব নির্বাচন করুন",
+    "clearAllPermissions": "সব সাফ করুন",
+    "noPermissionsMatch": "আপনার অনুসন্ধানের সাথে মিলে এমন কোনো অনুমতি নেই",
+    "permissionsSummary": "{{total}} এর মধ্যে {{selected}}টি নির্বাচিত"
   }
 }

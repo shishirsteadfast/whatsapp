@@ -54,7 +54,16 @@
     "lightMode": "Modalità chiara",
     "darkMode": "Modalità scura",
     "viewAll": "Vedi tutto",
-    "copied": "Copiato!"
+    "copy": "Copia",
+    "copied": "Copiato!",
+    "sessionsActive": "Sessioni attive",
+    "social": {
+      "email": "Email",
+      "whatsapp": "WhatsApp",
+      "facebook": "Facebook",
+      "youtube": "YouTube",
+      "website": "Sito web"
+    }
   },
   "theme": {
     "light": "Chiara",
@@ -68,15 +77,18 @@
     "webhooks": "Webhook",
     "apiKeys": "Chiavi API",
     "contacts": "Contatti",
-    "composer": "Compositore",
     "groups": "Gruppi",
-    "messages": "Messaggi",
+    "messages": "Registro messaggi",
     "settings": "Impostazioni",
     "messageTester": "Test messaggi",
     "campaigns": "Campagne",
     "logs": "Log",
     "systemRequirements": "Requisiti del Server",
-    "activityLog": "Registro attività"
+    "activityLog": "Registro attività",
+    "compose": "Scrivi",
+    "groupAudience": "Pubblico",
+    "groupMessaging": "Messaggistica",
+    "groupAccess": "Accesso"
   },
   "errorBoundary": {
     "title": "Qualcosa è andato storto",
@@ -249,6 +261,10 @@
       "phone": "Telefono",
       "sessionId": "ID sessione",
       "lastActive": "Ultima attività"
+    },
+    "stats": {
+      "total": "Sessioni totali",
+      "connecting": "Connessione in corso"
     }
   },
   "webhooks": {
@@ -301,13 +317,9 @@
     }
   },
   "apiKeys": {
-    "title": "Gestione API",
-    "subtitle": "Gestisci chiavi API, credenziali e documentazione API",
-    "tabs": {
-      "overview": "Panoramica",
-      "keys": "Chiavi API",
-      "docs": "Documentazione"
-    },
+    "title": "Riferimento API",
+    "subtitle": "Autenticati, esplora ogni endpoint e integra l'API di OpenWA nel linguaggio di programmazione che preferisci.",
+    "manageHint": "Crea, ruota e revoca le chiavi utilizzate per autenticare le tue richieste API.",
     "stats": {
       "totalKeys": "Totale chiavi",
       "activeKeys": "Chiavi attive",
@@ -315,17 +327,8 @@
       "rateLimit": "Chiamate oggi"
     },
     "credentials": {
-      "baseUrl": "URL base API",
-      "baseUrlHint": "Usa questo URL come endpoint base per tutte le richieste API."
-    },
-    "quickLinks": {
-      "title": "Collegamenti veloci",
-      "manageKeys": "Gestisci chiavi API",
-      "manageKeysDesc": "Vedi, crea, revoca ed elimina le tue chiavi API",
-      "viewDocs": "Documentazione API",
-      "viewDocsDesc": "Sfoglia il reference degli endpoint con esempi",
-      "createKey": "Crea nuova chiave",
-      "createKeyDesc": "Genera una nuova chiave API con un ruolo specifico"
+      "baseUrl": "URL base",
+      "baseUrlHint": "Tutti i percorsi degli endpoint in questo riferimento sono relativi a questo URL."
     },
     "createBtn": "Crea chiave API",
     "modalTitle": "Crea chiave API",
@@ -375,13 +378,42 @@
     }
   },
   "apiDocs": {
+    "nav": {
+      "introduction": "Introduzione",
+      "authentication": "Autenticazione",
+      "yourKeys": "Le tue chiavi API",
+      "errors": "Errori e limiti di frequenza",
+      "endpoints": "Endpoint",
+      "sdks": "SDK e librerie"
+    },
+    "intro": {
+      "title": "Introduzione",
+      "description": "L'API di OpenWA ti permette di gestire in modo programmatico le sessioni WhatsApp, inviare messaggi e automatizzare i tuoi flussi di lavoro. È organizzata secondo il paradigma REST: ogni endpoint accetta corpi di richiesta JSON, restituisce risposte JSON e utilizza i codici di risposta HTTP standard.",
+      "quickStart": "Guida rapida",
+      "quickStartHint": "Ecco una richiesta minima per elencare le tue sessioni attive."
+    },
+    "languages": {
+      "curl": "cURL",
+      "javascript": "JavaScript",
+      "python": "Python",
+      "php": "PHP",
+      "go": "Go"
+    },
     "auth": {
       "title": "Autenticazione",
-      "description": "Tutte le richieste API richiedono autenticazione. Includi la tua chiave API nell'header <code>X-API-Key</code>. Puoi gestire le chiavi nella scheda Chiavi API.",
-      "example": "Esempio di richiesta con autenticazione",
+      "description": "Tutte le richieste API richiedono l'autenticazione. Includi la tua chiave API nell'header di richiesta <code>X-API-Key</code>. Puoi generare e gestire le tue chiavi API qui sotto.",
       "none": "Nessuna autenticazione richiesta",
       "apiKey": "Chiave API richiesta",
       "admin": "Accesso admin richiesto"
+    },
+    "groups": {
+      "general": "Generale",
+      "sessions": "Sessioni",
+      "messages": "Messaggi",
+      "contacts": "Contatti",
+      "webhooks": "Webhook",
+      "campaigns": "Campagne",
+      "settings": "Impostazioni"
     },
     "sdks": {
       "title": "SDK e librerie",
@@ -389,6 +421,7 @@
     },
     "endpoints": {
       "title": "Endpoint API",
+      "hint": "Sfoglia tutti gli endpoint disponibili, raggruppati per risorsa.",
       "health": {
         "desc": "Verifica stato del server API"
       },
@@ -420,8 +453,21 @@
       }
     },
     "requestBody": "Corpo della richiesta",
-    "example": "Esempio",
+    "example": "Esempio di richiesta",
     "response": "Risposta",
+    "errors": {
+      "title": "Errori e limiti di frequenza",
+      "description": "OpenWA utilizza i codici di risposta HTTP convenzionali per indicare il successo o il fallimento di una richiesta. I codici nell'intervallo 2xx indicano successo, l'intervallo 4xx indica un errore nella richiesta, mentre l'intervallo 5xx indica che qualcosa è andato storto dal nostro lato.",
+      "codes": {
+        "200": "Success — la richiesta è stata completata come previsto.",
+        "400": "Bad Request — la richiesta era malformata o priva di parametri obbligatori.",
+        "401": "Unauthorized — la chiave API è assente o non valida.",
+        "403": "Forbidden — la chiave API non dispone dei permessi necessari per questa azione.",
+        "404": "Not Found — la risorsa richiesta non esiste.",
+        "429": "Too Many Requests — hai superato il limite di frequenza.",
+        "500": "Server Error — qualcosa è andato storto dal lato di OpenWA."
+      }
+    },
     "rateLimit": {
       "title": "Limite di frequenza",
       "description": "Le richieste API hanno un limite di frequenza per garantire un uso equo. Il limite predefinito è di 100 richieste per finestra di 60 secondi per chiave API. Il superamento comporta una risposta 429 Too Many Requests. Contatta il supporto se serve un limite maggiore."
@@ -513,7 +559,11 @@
     "charCount": "{{count}} / 4096 caratteri",
     "livePreview": "Anteprima live",
     "noMessages": "Ancora nessun messaggio",
-    "noMessagesHint": "Invia un messaggio per iniziare la conversazione"
+    "noMessagesHint": "Invia un messaggio per iniziare la conversazione",
+    "addRecipients": "Aggiungi destinatari",
+    "loadMore": "Carica altro",
+    "showPreview": "Mostra anteprima",
+    "hidePreview": "Nascondi anteprima"
   },
   "campaigns": {
     "title": "Campagne",
@@ -1090,5 +1140,46 @@
     "delivered": "Consegnato",
     "read": "Letto",
     "failed": "Fallito"
+  },
+  "roles": {
+    "title": "Ruoli e permessi",
+    "subtitle": "Definisci i ruoli e assegna permessi granulari",
+    "createRole": "Crea ruolo",
+    "createTitle": "Crea nuovo ruolo",
+    "editTitle": "Modifica ruolo",
+    "name": "Nome del ruolo",
+    "namePlaceholder": "es. Agente di supporto",
+    "description": "Descrizione",
+    "descriptionPlaceholder": "Descrizione facoltativa",
+    "type": "Tipo",
+    "system": "Sistema",
+    "custom": "Personalizzato",
+    "permissions": "Permessi",
+    "searchPlaceholder": "Cerca ruoli...",
+    "deleteConfirm": "Elimina ruolo",
+    "deleteWarning": "Sei sicuro di voler eliminare questo ruolo? Questa azione non può essere annullata.",
+    "emptyTitle": "Nessun ruolo trovato",
+    "emptyDescription": "I ruoli appariranno qui",
+    "toasts": {
+      "createSuccess": "Ruolo creato con successo",
+      "createError": "Impossibile creare il ruolo",
+      "updateSuccess": "Ruolo aggiornato con successo",
+      "updateError": "Impossibile aggiornare il ruolo",
+      "deleteSuccess": "Ruolo eliminato con successo",
+      "deleteError": "Impossibile eliminare il ruolo"
+    },
+    "stats": {
+      "total": "Ruoli totali",
+      "system": "Ruoli di sistema",
+      "custom": "Ruoli personalizzati"
+    },
+    "noPermissions": "Nessun permesso assegnato",
+    "permissionCount": "{{count}} permessi",
+    "acrossGroups": "in {{count}} gruppi",
+    "searchPermissionsPlaceholder": "Cerca permessi...",
+    "selectAllPermissions": "Seleziona tutto",
+    "clearAllPermissions": "Deseleziona tutto",
+    "noPermissionsMatch": "Nessun permesso corrisponde alla tua ricerca",
+    "permissionsSummary": "{{selected}} di {{total}} selezionati"
   }
 }

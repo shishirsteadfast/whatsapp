@@ -54,7 +54,16 @@
     "lightMode": "Modo claro",
     "darkMode": "Modo escuro",
     "viewAll": "Ver tudo",
-    "copied": "Copiado!"
+    "copy": "Copiar",
+    "copied": "Copiado!",
+    "sessionsActive": "Sessões ativas",
+    "social": {
+      "email": "E-mail",
+      "whatsapp": "WhatsApp",
+      "facebook": "Facebook",
+      "youtube": "YouTube",
+      "website": "Site"
+    }
   },
   "theme": {
     "light": "Claro",
@@ -68,15 +77,18 @@
     "webhooks": "Webhooks",
     "apiKeys": "Chaves API",
     "contacts": "Contatos",
-    "composer": "Compositor",
     "groups": "Grupos",
-    "messages": "Mensagens",
+    "messages": "Registro de mensagens",
     "settings": "Config.",
     "messageTester": "Testador",
     "campaigns": "Campanhas",
     "logs": "Registros",
     "systemRequirements": "Requisitos do Servidor",
-    "activityLog": "Registro de Atividades"
+    "activityLog": "Registro de Atividades",
+    "compose": "Escrever",
+    "groupAudience": "Público",
+    "groupMessaging": "Mensagens",
+    "groupAccess": "Acesso"
   },
   "errorBoundary": {
     "title": "Algo deu errado",
@@ -249,6 +261,10 @@
       "phone": "Telefone",
       "sessionId": "ID da sessão",
       "lastActive": "Última atividade"
+    },
+    "stats": {
+      "total": "Total de sessões",
+      "connecting": "Conectando"
     }
   },
   "webhooks": {
@@ -301,13 +317,9 @@
     }
   },
   "apiKeys": {
-    "title": "Gerenciamento de API",
-    "subtitle": "Gerencie chaves API, credenciais e documentação da API",
-    "tabs": {
-      "overview": "Visão geral",
-      "keys": "Chaves API",
-      "docs": "Documentação"
-    },
+    "title": "Referência da API",
+    "subtitle": "Autentique-se, explore todos os endpoints e integre a API OpenWA na linguagem de sua escolha.",
+    "manageHint": "Crie, renove e revogue as chaves usadas para autenticar suas requisições à API.",
     "stats": {
       "totalKeys": "Total de chaves",
       "activeKeys": "Chaves ativas",
@@ -315,17 +327,8 @@
       "rateLimit": "Chamadas hoje"
     },
     "credentials": {
-      "baseUrl": "URL base da API",
-      "baseUrlHint": "Use esta URL como endpoint base para todas as requisições à API."
-    },
-    "quickLinks": {
-      "title": "Links rápidos",
-      "manageKeys": "Gerenciar chaves API",
-      "manageKeysDesc": "Ver, criar, revogar e excluir suas chaves API",
-      "viewDocs": "Documentação da API",
-      "viewDocsDesc": "Navegue pela referência de endpoints com exemplos",
-      "createKey": "Criar nova chave",
-      "createKeyDesc": "Gere uma nova chave API com uma função específica"
+      "baseUrl": "URL base",
+      "baseUrlHint": "Todos os caminhos de endpoint nesta referência são relativos a esta URL."
     },
     "createBtn": "Criar chave API",
     "modalTitle": "Criar chave API",
@@ -375,13 +378,42 @@
     }
   },
   "apiDocs": {
+    "nav": {
+      "introduction": "Introdução",
+      "authentication": "Autenticação",
+      "yourKeys": "Suas chaves API",
+      "errors": "Erros e limites de taxa",
+      "endpoints": "Endpoints",
+      "sdks": "SDKs e bibliotecas"
+    },
+    "intro": {
+      "title": "Introdução",
+      "description": "A API OpenWA permite gerenciar programaticamente sessões do WhatsApp, enviar mensagens e automatizar seus fluxos de trabalho. Ela é organizada em torno do REST — todos os endpoints aceitam corpos de requisição em JSON, retornam respostas em JSON e usam códigos de resposta HTTP padrão.",
+      "quickStart": "Início rápido",
+      "quickStartHint": "Veja abaixo uma requisição mínima para listar suas sessões ativas."
+    },
+    "languages": {
+      "curl": "cURL",
+      "javascript": "JavaScript",
+      "python": "Python",
+      "php": "PHP",
+      "go": "Go"
+    },
     "auth": {
       "title": "Autenticação",
-      "description": "Todas as requisições à API exigem autenticação. Inclua sua chave API no cabeçalho <code>X-API-Key</code>. Você pode gerenciar suas chaves na aba Chaves API.",
-      "example": "Exemplo de requisição com autenticação",
+      "description": "Todas as requisições à API exigem autenticação. Inclua sua chave API no cabeçalho de requisição <code>X-API-Key</code>. Você pode gerar e gerenciar suas chaves API abaixo.",
       "none": "Nenhuma autenticação necessária",
       "apiKey": "Chave API necessária",
       "admin": "Acesso de administrador necessário"
+    },
+    "groups": {
+      "general": "Geral",
+      "sessions": "Sessões",
+      "messages": "Mensagens",
+      "contacts": "Contatos",
+      "webhooks": "Webhooks",
+      "campaigns": "Campanhas",
+      "settings": "Configurações"
     },
     "sdks": {
       "title": "SDKs e bibliotecas",
@@ -389,6 +421,7 @@
     },
     "endpoints": {
       "title": "Endpoints da API",
+      "hint": "Navegue por todos os endpoints disponíveis, agrupados por recurso.",
       "health": {
         "desc": "Verificar status de saúde do servidor"
       },
@@ -420,8 +453,21 @@
       }
     },
     "requestBody": "Corpo da requisição",
-    "example": "Exemplo",
+    "example": "Exemplo de requisição",
     "response": "Resposta",
+    "errors": {
+      "title": "Erros e limites de taxa",
+      "description": "O OpenWA usa códigos de resposta HTTP convencionais para indicar o sucesso ou a falha de uma requisição. Códigos na faixa 2xx indicam sucesso, a faixa 4xx indica que a requisição contém um erro, e a faixa 5xx indica que algo deu errado do nosso lado.",
+      "codes": {
+        "200": "Success — a requisição foi concluída conforme o esperado.",
+        "400": "Bad Request — a requisição estava malformada ou está faltando parâmetros obrigatórios.",
+        "401": "Unauthorized — a chave API está ausente ou é inválida.",
+        "403": "Forbidden — a chave API não tem permissão para esta ação.",
+        "404": "Not Found — o recurso solicitado não existe.",
+        "429": "Too Many Requests — você excedeu o limite de taxa.",
+        "500": "Server Error — algo deu errado do lado do OpenWA."
+      }
+    },
     "rateLimit": {
       "title": "Limite de taxa",
       "description": "As requisições à API têm limite de taxa para garantir uso justo. O limite padrão é de 100 requisições por janela de 60 segundos por chave API. Exceder este limite resultará em uma resposta 429 Too Many Requests. Entre em contato com o suporte se precisar de um limite maior."
@@ -513,7 +559,11 @@
     "charCount": "{{count}} / 4096 caracteres",
     "livePreview": "Visualização ao vivo",
     "noMessages": "Nenhuma mensagem ainda",
-    "noMessagesHint": "Envie uma mensagem para iniciar a conversa"
+    "noMessagesHint": "Envie uma mensagem para iniciar a conversa",
+    "addRecipients": "Adicionar destinatários",
+    "loadMore": "Carregar mais",
+    "showPreview": "Mostrar pré-visualização",
+    "hidePreview": "Ocultar pré-visualização"
   },
   "campaigns": {
     "title": "Campanhas",
@@ -1090,5 +1140,46 @@
     "delivered": "Entregue",
     "read": "Lida",
     "failed": "Falhou"
+  },
+  "roles": {
+    "title": "Funções e permissões",
+    "subtitle": "Defina funções e atribua permissões granulares",
+    "createRole": "Criar função",
+    "createTitle": "Criar nova função",
+    "editTitle": "Editar função",
+    "name": "Nome da função",
+    "namePlaceholder": "ex.: Agente de suporte",
+    "description": "Descrição",
+    "descriptionPlaceholder": "Descrição opcional",
+    "type": "Tipo",
+    "system": "Sistema",
+    "custom": "Personalizada",
+    "permissions": "Permissões",
+    "searchPlaceholder": "Pesquisar funções...",
+    "deleteConfirm": "Excluir função",
+    "deleteWarning": "Tem certeza de que deseja excluir esta função? Esta ação não pode ser desfeita.",
+    "emptyTitle": "Nenhuma função encontrada",
+    "emptyDescription": "As funções aparecerão aqui",
+    "toasts": {
+      "createSuccess": "Função criada com sucesso",
+      "createError": "Falha ao criar a função",
+      "updateSuccess": "Função atualizada com sucesso",
+      "updateError": "Falha ao atualizar a função",
+      "deleteSuccess": "Função excluída com sucesso",
+      "deleteError": "Falha ao excluir a função"
+    },
+    "stats": {
+      "total": "Total de funções",
+      "system": "Funções do sistema",
+      "custom": "Funções personalizadas"
+    },
+    "noPermissions": "Nenhuma permissão atribuída",
+    "permissionCount": "{{count}} permissões",
+    "acrossGroups": "em {{count}} grupos",
+    "searchPermissionsPlaceholder": "Pesquisar permissões...",
+    "selectAllPermissions": "Selecionar tudo",
+    "clearAllPermissions": "Limpar tudo",
+    "noPermissionsMatch": "Nenhuma permissão corresponde à sua pesquisa",
+    "permissionsSummary": "{{selected}} de {{total}} selecionadas"
   }
 }

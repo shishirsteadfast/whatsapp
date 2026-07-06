@@ -1,6 +1,7 @@
 import { useState, useRef, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Bell, User, Key, Settings, LogOut, Sun, Moon, ChevronDown } from 'lucide-react';
+import { Bell, User, Key, Settings, LogOut, Sun, Moon, ChevronDown, Check } from 'lucide-react';
+import { US, IL, CN, ES, SA, BD, PT, ID, PK, RU, DE, JP, IT } from 'country-flag-icons/react/3x2';
 import { useRole } from '../hooks/useRole';
 import { useTheme } from '../hooks/useTheme';
 import { supportedLanguages, type SupportedLanguage } from '../i18n';
@@ -9,22 +10,49 @@ interface AuthHeaderProps {
   onLogout: () => void;
 }
 
+const LANGUAGES = [
+  { code: 'en', flag: US, native: 'English' },
+  { code: 'he', flag: IL, native: 'עברית' },
+  { code: 'zh', flag: CN, native: '中文' },
+  { code: 'es', flag: ES, native: 'Español' },
+  { code: 'ar', flag: SA, native: 'العربية' },
+  { code: 'bn', flag: BD, native: 'বাংলা' },
+  { code: 'pt', flag: PT, native: 'Português' },
+  { code: 'id', flag: ID, native: 'Bahasa Indonesia' },
+  { code: 'ur', flag: PK, native: 'اردو' },
+  { code: 'ru', flag: RU, native: 'Русский' },
+  { code: 'de', flag: DE, native: 'Deutsch' },
+  { code: 'ja', flag: JP, native: '日本語' },
+  { code: 'it', flag: IT, native: 'Italiano' },
+] as const;
+
 export function AuthHeader({ onLogout }: AuthHeaderProps) {
   const { t, i18n } = useTranslation();
   const { role } = useRole();
   const { resolvedTheme, setTheme } = useTheme();
-  const [notifOpen,   setNotifOpen]   = useState(false);
-  const [profileOpen, setProfileOpen] = useState(false);
+  const [scrolled,     setScrolled]     = useState(false);
+  const [langOpen,     setLangOpen]     = useState(false);
+  const [notifOpen,    setNotifOpen]    = useState(false);
+  const [profileOpen,  setProfileOpen]  = useState(false);
+  const langRef    = useRef<HTMLDivElement>(null);
   const notifRef   = useRef<HTMLDivElement>(null);
   const profileRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const handleClick = (e: MouseEvent) => {
+      if (langRef.current    && !langRef.current.contains(e.target as Node))    setLangOpen(false);
       if (notifRef.current   && !notifRef.current.contains(e.target as Node))   setNotifOpen(false);
       if (profileRef.current && !profileRef.current.contains(e.target as Node)) setProfileOpen(false);
     };
     document.addEventListener('mousedown', handleClick);
     return () => document.removeEventListener('mousedown', handleClick);
+  }, []);
+
+  useEffect(() => {
+    const handleScroll = () => setScrolled(window.scrollY > 4);
+    handleScroll();
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
   const isDark    = resolvedTheme === 'dark';
@@ -33,28 +61,25 @@ export function AuthHeader({ onLogout }: AuthHeaderProps) {
 
   const rawLang = (i18n.resolvedLanguage || i18n.language || 'en').split('-')[0] as SupportedLanguage;
   const currentLang = supportedLanguages.includes(rawLang) ? rawLang : 'en';
+  const currentLanguage = LANGUAGES.find(l => l.code === currentLang) ?? LANGUAGES[0];
 
-  const languages = [
-    { code: 'en', label: 'EN', native: 'English' },
-    { code: 'he', label: 'עב', native: 'עברית' },
-    { code: 'zh', label: '中文', native: '中文' },
-    { code: 'es', label: 'ES', native: 'Español' },
-    { code: 'ar', label: 'العربية', native: 'العربية' },
-    { code: 'bn', label: 'বাংলা', native: 'বাংলা' },
-    { code: 'pt', label: 'PT', native: 'Português' },
-    { code: 'id', label: 'ID', native: 'Bahasa Indonesia' },
-    { code: 'ur', label: 'اردو', native: 'اردو' },
-    { code: 'ru', label: 'RU', native: 'Русский' },
-    { code: 'de', label: 'DE', native: 'Deutsch' },
-    { code: 'ja', label: '日本語', native: '日本語' },
-    { code: 'it', label: 'IT', native: 'Italiano' },
-  ] as const;
+  const closeAllExcept = (which: 'lang' | 'notif' | 'profile') => {
+    if (which !== 'lang')    setLangOpen(false);
+    if (which !== 'notif')   setNotifOpen(false);
+    if (which !== 'profile') setProfileOpen(false);
+  };
 
   /* Shared icon-button style */
   const iconBtn = 'flex h-8 w-8 cursor-pointer items-center justify-center rounded-[var(--radius)] border-none bg-transparent text-[var(--color-ink-muted)] transition-all hover:bg-[var(--color-muted)] hover:text-[var(--color-ink)]';
 
   return (
-    <header className="flex h-14 shrink-0 items-center border-b border-[var(--color-border)] bg-[var(--color-surface)] px-5 rtl:flex-row-reverse">
+    <header
+      className={`sticky top-0 max-md:top-14 z-30 flex h-14 shrink-0 items-center border-b bg-[var(--color-surface)] px-5 transition-shadow duration-200 rtl:flex-row-reverse ${
+        scrolled
+          ? 'border-[var(--color-border)] shadow-[var(--shadow-sm)] backdrop-blur-md bg-[var(--color-surface)]/92'
+          : 'border-transparent'
+      }`}
+    >
 
       {/* Left spacer */}
       <div className="flex-1" />
@@ -62,24 +87,36 @@ export function AuthHeader({ onLogout }: AuthHeaderProps) {
       {/* ── Right controls ── */}
       <div className="flex items-center gap-1">
 
-        {/* Language dropdown */}
-        <div className="relative">
-          <select
-            value={currentLang}
-            onChange={e => void i18n.changeLanguage(e.target.value)}
+        {/* Language switcher */}
+        <div className="relative" ref={langRef}>
+          <button
+            onClick={() => { setLangOpen(v => !v); closeAllExcept('lang'); }}
             aria-label={t('common.language')}
-            className="flex h-8 cursor-pointer appearance-none items-center justify-center rounded-[var(--radius)] border-none bg-transparent px-2.5 pr-6 text-[0.75rem] font-bold tracking-wide text-[var(--color-ink-muted)] transition-all hover:bg-[var(--color-muted)] hover:text-[var(--color-ink)] focus:outline-none focus:ring-2 focus:ring-[var(--color-primary)]"
+            className={`flex h-8 cursor-pointer items-center gap-1.5 rounded-[var(--radius)] border-none bg-transparent px-2 text-[0.8125rem] font-semibold text-[var(--color-ink-secondary)] transition-all hover:bg-[var(--color-muted)] hover:text-[var(--color-ink)] ${langOpen ? 'bg-[var(--color-muted)] text-[var(--color-ink)]' : ''}`}
           >
-            {languages.map(lang => (
-              <option key={lang.code} value={lang.code}>
-                {lang.label} — {lang.native}
-              </option>
-            ))}
-          </select>
-          <ChevronDown
-            size={11}
-            className="pointer-events-none absolute right-1.5 top-1/2 -translate-y-1/2 text-[var(--color-ink-muted)]"
-          />
+            <currentLanguage.flag title={currentLanguage.native} className="h-3.5 w-5 shrink-0 rounded-[2px] object-cover shadow-[0_0_0_1px_var(--color-border)]" />
+            <span className="max-sm:hidden">{currentLanguage.code.toUpperCase()}</span>
+            <ChevronDown size={12} className={`text-[var(--color-ink-muted)] transition-transform duration-150 ${langOpen ? 'rotate-180' : ''}`} />
+          </button>
+
+          {langOpen && (
+            <div className="absolute right-0 top-[calc(100%+6px)] z-50 max-h-[22rem] w-64 overflow-y-auto animate-[dropdown-appear_0.15s_ease] rounded-[var(--radius-lg)] border border-[var(--color-border)] bg-[var(--color-surface)] p-1.5 shadow-[var(--shadow-lg)]">
+              {LANGUAGES.map(lang => {
+                const isActive = lang.code === currentLang;
+                return (
+                  <button
+                    key={lang.code}
+                    onClick={() => { void i18n.changeLanguage(lang.code); setLangOpen(false); }}
+                    className={`flex w-full cursor-pointer items-center gap-2.5 rounded-[var(--radius)] border-none bg-transparent px-3 py-2 text-[0.8125rem] transition-all hover:bg-[var(--color-muted)] ${isActive ? 'font-semibold text-[var(--color-ink)]' : 'font-medium text-[var(--color-ink-secondary)]'}`}
+                  >
+                    <lang.flag title={lang.native} className="h-4 w-[22px] shrink-0 rounded-[2px] object-cover shadow-[0_0_0_1px_var(--color-border)]" />
+                    <span dir="auto" className="flex-1 truncate">{lang.native}</span>
+                    {isActive && <Check size={14} className="shrink-0 text-[var(--color-primary)]" />}
+                  </button>
+                );
+              })}
+            </div>
+          )}
         </div>
 
         {/* Theme */}
@@ -94,7 +131,7 @@ export function AuthHeader({ onLogout }: AuthHeaderProps) {
         {/* Notification bell */}
         <div className="relative" ref={notifRef}>
           <button
-            onClick={() => { setNotifOpen(v => !v); setProfileOpen(false); }}
+            onClick={() => { setNotifOpen(v => !v); closeAllExcept('notif'); }}
             aria-label={t('common.notifications')}
             className={`${iconBtn} relative ${notifOpen ? 'bg-[var(--color-muted)] text-[var(--color-ink)]' : ''}`}
           >
@@ -122,7 +159,7 @@ export function AuthHeader({ onLogout }: AuthHeaderProps) {
         {/* Profile */}
         <div className="relative" ref={profileRef}>
           <button
-            onClick={() => { setProfileOpen(v => !v); setNotifOpen(false); }}
+            onClick={() => { setProfileOpen(v => !v); closeAllExcept('profile'); }}
             aria-label={t('common.profile')}
             className="flex cursor-pointer items-center gap-2 rounded-[var(--radius)] border-none bg-transparent px-2 py-1.5 transition-all hover:bg-[var(--color-muted)]"
           >

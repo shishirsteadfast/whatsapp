@@ -54,10 +54,19 @@
     "lightMode": "Light mode",
     "darkMode": "Dark mode",
     "viewAll": "View All",
+    "copy": "Copy",
     "copied": "Copied!",
     "accessDenied": "You do not have permission to access this page.",
     "selectAll": "Select All",
-    "deselectAll": "Deselect All"
+    "deselectAll": "Deselect All",
+    "sessionsActive": "Sessions Active",
+    "social": {
+      "email": "Email",
+      "whatsapp": "WhatsApp",
+      "facebook": "Facebook",
+      "youtube": "YouTube",
+      "website": "Website"
+    }
   },
   "theme": {
     "light": "Light",
@@ -71,9 +80,8 @@
     "webhooks": "Webhooks",
     "apiKeys": "API Keys",
     "contacts": "Contacts",
-    "composer": "Composer",
     "groups": "Groups",
-    "messages": "Messages",
+    "messages": "Message Log",
     "settings": "Settings",
     "messageTester": "Message Tester",
     "campaigns": "Campaigns",
@@ -81,7 +89,11 @@
     "activityLog": "Activity Log",
     "systemRequirements": "Server Requirements",
     "usersNav": "Users",
-    "rolesNav": "Roles"
+    "rolesNav": "Roles",
+    "compose": "Compose",
+    "groupAudience": "Audience",
+    "groupMessaging": "Messaging",
+    "groupAccess": "Access"
   },
   "errorBoundary": {
     "title": "Something went wrong",
@@ -253,6 +265,10 @@
       "phone": "Phone",
       "sessionId": "Session ID",
       "lastActive": "Last Active"
+    },
+    "stats": {
+      "total": "Total Sessions",
+      "connecting": "Connecting"
     }
   },
   "webhooks": {
@@ -305,13 +321,9 @@
     }
   },
   "apiKeys": {
-    "title": "API Management",
-    "subtitle": "Manage API keys, view credentials, and browse API documentation",
-    "tabs": {
-      "overview": "Overview",
-      "keys": "API Keys",
-      "docs": "Documentation"
-    },
+    "title": "API Reference",
+    "subtitle": "Authenticate, explore every endpoint, and integrate the OpenWA API in the language of your choice.",
+    "manageHint": "Create, rotate, and revoke the keys used to authenticate your API requests.",
     "stats": {
       "totalKeys": "Total Keys",
       "activeKeys": "Active Keys",
@@ -319,17 +331,8 @@
       "rateLimit": "Calls Today"
     },
     "credentials": {
-      "baseUrl": "API Base URL",
-      "baseUrlHint": "Use this URL as the base endpoint for all API requests."
-    },
-    "quickLinks": {
-      "title": "Quick Links",
-      "manageKeys": "Manage API Keys",
-      "manageKeysDesc": "View, create, revoke, and delete your API keys",
-      "viewDocs": "API Documentation",
-      "viewDocsDesc": "Browse detailed endpoint reference with examples",
-      "createKey": "Create New Key",
-      "createKeyDesc": "Generate a new API key with a specific role"
+      "baseUrl": "Base URL",
+      "baseUrlHint": "All endpoint paths in this reference are relative to this URL."
     },
     "createBtn": "Create API Key",
     "modalTitle": "Create API Key",
@@ -379,13 +382,42 @@
     }
   },
   "apiDocs": {
+    "nav": {
+      "introduction": "Introduction",
+      "authentication": "Authentication",
+      "yourKeys": "Your API Keys",
+      "errors": "Errors & Rate Limits",
+      "endpoints": "Endpoints",
+      "sdks": "SDKs & Libraries"
+    },
+    "intro": {
+      "title": "Introduction",
+      "description": "The OpenWA API lets you programmatically manage WhatsApp sessions, send messages, and automate your workflows. It's organized around REST — every endpoint accepts JSON request bodies, returns JSON responses, and uses standard HTTP response codes.",
+      "quickStart": "Quick Start",
+      "quickStartHint": "Here's a minimal request to list your active sessions."
+    },
+    "languages": {
+      "curl": "cURL",
+      "javascript": "JavaScript",
+      "python": "Python",
+      "php": "PHP",
+      "go": "Go"
+    },
     "auth": {
       "title": "Authentication",
-      "description": "All API requests require authentication. Include your API key in the <code>X-API-Key</code> request header. You can manage your API keys in the API Keys tab.",
-      "example": "Example request with authentication",
+      "description": "All API requests require authentication. Include your API key in the <code>X-API-Key</code> request header. You can generate and manage your API keys below.",
       "none": "No authentication required",
       "apiKey": "API Key required",
       "admin": "Admin access required"
+    },
+    "groups": {
+      "general": "General",
+      "sessions": "Sessions",
+      "messages": "Messages",
+      "contacts": "Contacts",
+      "webhooks": "Webhooks",
+      "campaigns": "Campaigns",
+      "settings": "Settings"
     },
     "sdks": {
       "title": "SDKs & Libraries",
@@ -393,6 +425,7 @@
     },
     "endpoints": {
       "title": "API Endpoints",
+      "hint": "Browse every available endpoint, grouped by resource.",
       "health": {
         "desc": "Check API server health status"
       },
@@ -424,8 +457,21 @@
       }
     },
     "requestBody": "Request Body",
-    "example": "Example",
+    "example": "Example Request",
     "response": "Response",
+    "errors": {
+      "title": "Errors & Rate Limits",
+      "description": "OpenWA uses conventional HTTP response codes to indicate the success or failure of a request. Codes in the 2xx range mean success, the 4xx range means the request has an error, and the 5xx range means something went wrong on our end.",
+      "codes": {
+        "200": "Success — the request completed as expected.",
+        "400": "Bad Request — the request was malformed or missing required parameters.",
+        "401": "Unauthorized — the API key is missing or invalid.",
+        "403": "Forbidden — the API key doesn't have permission for this action.",
+        "404": "Not Found — the requested resource doesn't exist.",
+        "429": "Too Many Requests — you've exceeded the rate limit.",
+        "500": "Server Error — something went wrong on OpenWA's end."
+      }
+    },
     "rateLimit": {
       "title": "Rate Limiting",
       "description": "API requests are rate-limited to ensure fair usage. The default limit is 100 requests per 60-second window per API key. Exceeding this limit will result in a 429 Too Many Requests response. Contact support if you need a higher limit."
@@ -517,7 +563,11 @@
     "charCount": "{{count}} / 4096 characters",
     "livePreview": "Live Preview",
     "noMessages": "No messages yet",
-    "noMessagesHint": "Send a message to start the conversation"
+    "noMessagesHint": "Send a message to start the conversation",
+    "addRecipients": "Add recipients",
+    "loadMore": "Load more",
+    "showPreview": "Show preview",
+    "hidePreview": "Hide preview"
   },
   "campaigns": {
     "title": "Campaigns",
@@ -1088,7 +1138,6 @@
     "system": "System",
     "custom": "Custom",
     "permissions": "Permissions",
-    "permissionsSelected": "permissions selected",
     "searchPlaceholder": "Search roles...",
     "deleteConfirm": "Delete Role",
     "deleteWarning": "Are you sure you want to delete this role? This action cannot be undone.",
@@ -1101,7 +1150,20 @@
       "updateError": "Failed to update role",
       "deleteSuccess": "Role deleted successfully",
       "deleteError": "Failed to delete role"
-    }
+    },
+    "stats": {
+      "total": "Total Roles",
+      "system": "System Roles",
+      "custom": "Custom Roles"
+    },
+    "noPermissions": "No permissions assigned",
+    "permissionCount": "{{count}} permissions",
+    "acrossGroups": "across {{count}} groups",
+    "searchPermissionsPlaceholder": "Search permissions...",
+    "selectAllPermissions": "Select all",
+    "clearAllPermissions": "Clear all",
+    "noPermissionsMatch": "No permissions match your search",
+    "permissionsSummary": "{{selected}} of {{total}} selected"
   },
   "messageHealth": {
     "title": "Message Sending Health",

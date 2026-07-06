@@ -198,40 +198,44 @@ export const messageApi = {
     const qs = query.toString();
     return request<Message[]>(`/messages${qs ? `?${qs}` : ''}`);
   },
+  // "chatId" here is a full WhatsApp JID (e.g. "628...@c.us" or a "...@g.us"
+  // group id) built by callers like Composer. It's sent under the
+  // "phoneNumber" key because that's what the backend DTOs expect now — the
+  // backend passes JID-shaped values straight through unchanged.
   sendText: (sessionId: string, chatId: string, text: string) =>
     request<MessageResponse>(`/sessions/${sessionId}/messages/send-text`, {
       method: 'POST',
-      body: JSON.stringify({ chatId, text }),
+      body: JSON.stringify({ phoneNumber: chatId, text }),
     }),
   sendImage: (sessionId: string, chatId: string, url: string, caption?: string) =>
     request<MessageResponse>(`/sessions/${sessionId}/messages/send-image`, {
       method: 'POST',
-      body: JSON.stringify({ chatId, url, caption }),
+      body: JSON.stringify({ phoneNumber: chatId, url, caption }),
     }),
   sendVideo: (sessionId: string, chatId: string, url: string, caption?: string) =>
     request<MessageResponse>(`/sessions/${sessionId}/messages/send-video`, {
       method: 'POST',
-      body: JSON.stringify({ chatId, url, caption }),
+      body: JSON.stringify({ phoneNumber: chatId, url, caption }),
     }),
   sendAudio: (sessionId: string, chatId: string, url: string) =>
     request<MessageResponse>(`/sessions/${sessionId}/messages/send-audio`, {
       method: 'POST',
-      body: JSON.stringify({ chatId, url }),
+      body: JSON.stringify({ phoneNumber: chatId, url }),
     }),
   sendDocument: (sessionId: string, chatId: string, url: string, filename?: string) =>
     request<MessageResponse>(`/sessions/${sessionId}/messages/send-document`, {
       method: 'POST',
-      body: JSON.stringify({ chatId, url, filename }),
+      body: JSON.stringify({ phoneNumber: chatId, url, filename }),
     }),
   sendLocation: (sessionId: string, chatId: string, latitude: number, longitude: number, description?: string) =>
     request<MessageResponse>(`/sessions/${sessionId}/messages/send-location`, {
       method: 'POST',
-      body: JSON.stringify({ chatId, latitude, longitude, description }),
+      body: JSON.stringify({ phoneNumber: chatId, latitude, longitude, description }),
     }),
   sendContact: (sessionId: string, chatId: string, contactName: string, contactNumber: string) =>
     request<MessageResponse>(`/sessions/${sessionId}/messages/send-contact`, {
       method: 'POST',
-      body: JSON.stringify({ chatId, contactName, contactNumber }),
+      body: JSON.stringify({ phoneNumber: chatId, contactName, contactNumber }),
     }),
 };
 

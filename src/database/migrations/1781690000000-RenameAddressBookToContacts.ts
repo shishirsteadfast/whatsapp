@@ -4,6 +4,12 @@ export class RenameAddressBookToContacts1781690000000 implements MigrationInterf
   name = 'RenameAddressBookToContacts1781690000000';
 
   public async up(queryRunner: QueryRunner): Promise<void> {
+    // Databases built from the baseline migration (or already-migrated ones)
+    // never had "address_book" — "contacts" is created directly. Only rename
+    // on older databases that still have the pre-rename table.
+    const hasAddressBook = await queryRunner.hasTable('address_book');
+    if (!hasAddressBook) return;
+
     // SQLite's ALTER TABLE RENAME also updates index references automatically.
     await queryRunner.query(`ALTER TABLE "address_book" RENAME TO "contacts"`);
   }

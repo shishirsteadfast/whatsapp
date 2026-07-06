@@ -32,7 +32,10 @@
     "migration:revert": "npm run typeorm -- migration:revert -d src/database/data-source.ts",
     "migration:revert:prod": "npm run typeorm:prod -- migration:revert -d dist/database/data-source.js",
     "migration:show": "npm run typeorm -- migration:show -d src/database/data-source.ts",
-    "migration:show:prod": "npm run typeorm:prod -- migration:show -d dist/database/data-source.js"
+    "migration:show:prod": "npm run typeorm:prod -- migration:show -d dist/database/data-source.js",
+    "migrate:fresh": "ts-node -r tsconfig-paths/register src/database/migrate-fresh.ts",
+    "migrate:fresh:seed": "npm run migrate:fresh -- --seed",
+    "db:seed": "ts-node -r tsconfig-paths/register src/database/migrate-fresh.ts --seed-only"
   },
   "dependencies": {
     "@aws-sdk/client-s3": "^3.1045.0",

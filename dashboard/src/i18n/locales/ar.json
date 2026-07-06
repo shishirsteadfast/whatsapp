@@ -56,7 +56,16 @@
     "lightMode": "الوضع النهاري",
     "darkMode": "الوضع الليلي",
     "viewAll": "عرض الكل",
-    "copied": "تم النسخ!"
+    "copy": "نسخ",
+    "copied": "تم النسخ!",
+    "sessionsActive": "الجلسات النشطة",
+    "social": {
+      "email": "البريد الإلكتروني",
+      "whatsapp": "WhatsApp",
+      "facebook": "Facebook",
+      "youtube": "YouTube",
+      "website": "الموقع الإلكتروني"
+    }
   },
   "theme": {
     "light": "نهاري",
@@ -70,15 +79,18 @@
     "webhooks": "Webhooks",
     "apiKeys": "مفاتيح API",
     "contacts": "جهات الاتصال",
-    "composer": "المحرر",
     "groups": "المجموعات",
-    "messages": "الرسائل",
+    "messages": "سجل الرسائل",
     "settings": "الإعدادات",
     "messageTester": "اختبار الرسائل",
     "campaigns": "الحملات",
     "logs": "السجلات",
     "systemRequirements": "متطلبات الخادم",
-    "activityLog": "سجل النشاط"
+    "activityLog": "سجل النشاط",
+    "compose": "إنشاء",
+    "groupAudience": "الجمهور",
+    "groupMessaging": "المراسلة",
+    "groupAccess": "الوصول"
   },
   "errorBoundary": {
     "title": "حدث خطأ ما",
@@ -251,6 +263,10 @@
       "phone": "الهاتف",
       "sessionId": "معرّف الجلسة",
       "lastActive": "آخر نشاط"
+    },
+    "stats": {
+      "total": "إجمالي الجلسات",
+      "connecting": "جارٍ الاتصال"
     }
   },
   "webhooks": {
@@ -303,13 +319,9 @@
     }
   },
   "apiKeys": {
-    "title": "إدارة API",
-    "subtitle": "إدارة مفاتيح API وبيانات الاعتماد وتوثيق API",
-    "tabs": {
-      "overview": "نظرة عامة",
-      "keys": "مفاتيح API",
-      "docs": "التوثيق"
-    },
+    "title": "مرجع API",
+    "subtitle": "تحقق من هويتك، واستكشف كل نقطة نهاية، وادمج واجهة برمجة تطبيقات OpenWA بلغة البرمجة التي تختارها.",
+    "manageHint": "أنشئ مفاتيح API الخاصة بك، وجدّدها، وألغِها — وهي المفاتيح المستخدمة للمصادقة على طلبات API التي ترسلها.",
     "stats": {
       "totalKeys": "إجمالي المفاتيح",
       "activeKeys": "المفاتيح النشطة",
@@ -317,17 +329,8 @@
       "rateLimit": "استدعاءات اليوم"
     },
     "credentials": {
-      "baseUrl": "الرابط الأساسي لـ API",
-      "baseUrlHint": "استخدم هذا الرابط كنقطة نهاية أساسية لجميع طلبات API."
-    },
-    "quickLinks": {
-      "title": "روابط سريعة",
-      "manageKeys": "إدارة مفاتيح API",
-      "manageKeysDesc": "عرض وإنشاء وإلغاء وحذف مفاتيح API",
-      "viewDocs": "توثيق API",
-      "viewDocsDesc": "تصفح مرجع النقاط النهائية مع أمثلة",
-      "createKey": "إنشاء مفتاح جديد",
-      "createKeyDesc": "إنشاء مفتاح API جديد بدور محدد"
+      "baseUrl": "الرابط الأساسي",
+      "baseUrlHint": "جميع مسارات نقاط النهاية في هذا المرجع نسبية إلى هذا الرابط."
     },
     "createBtn": "إنشاء مفتاح API",
     "modalTitle": "إنشاء مفتاح API",
@@ -377,13 +380,42 @@
     }
   },
   "apiDocs": {
+    "nav": {
+      "introduction": "مقدمة",
+      "authentication": "المصادقة",
+      "yourKeys": "مفاتيح API الخاصة بك",
+      "errors": "الأخطاء وتحديد المعدل",
+      "endpoints": "نقاط النهاية",
+      "sdks": "SDK والمكتبات"
+    },
+    "intro": {
+      "title": "مقدمة",
+      "description": "تتيح لك واجهة OpenWA API إدارة جلسات WhatsApp وإرسال الرسائل وأتمتة مهام عملك برمجياً. وهي مبنية على أسلوب REST — تقبل كل نقطة نهاية محتوى الطلب بصيغة JSON، وتُرجع الردود بصيغة JSON، وتستخدم رموز استجابة HTTP القياسية.",
+      "quickStart": "بداية سريعة",
+      "quickStartHint": "هذا مثال بسيط لطلب يعرض جلساتك النشطة."
+    },
+    "languages": {
+      "curl": "cURL",
+      "javascript": "JavaScript",
+      "python": "Python",
+      "php": "PHP",
+      "go": "Go"
+    },
     "auth": {
       "title": "المصادقة",
-      "description": "جميع طلبات API تتطلب مصادقة. أضف مفتاح API في رأس الطلب <code>X-API-Key</code>. يمكنك إدارة مفاتيح API في علامة تبويب مفاتيح API.",
-      "example": "مثال لطلب مع مصادقة",
+      "description": "تتطلب جميع طلبات API مصادقة. أضف مفتاح API في رأس الطلب <code>X-API-Key</code>. يمكنك إنشاء مفاتيح API وإدارتها أدناه.",
       "none": "لا يتطلب مصادقة",
       "apiKey": "مطلوب مفتاح API",
       "admin": "مطلوب صلاحية مدير"
+    },
+    "groups": {
+      "general": "عام",
+      "sessions": "الجلسات",
+      "messages": "الرسائل",
+      "contacts": "جهات الاتصال",
+      "webhooks": "Webhooks",
+      "campaigns": "الحملات",
+      "settings": "الإعدادات"
     },
     "sdks": {
       "title": "SDK والمكتبات",
@@ -391,6 +423,7 @@
     },
     "endpoints": {
       "title": "نقاط نهاية API",
+      "hint": "استعرض جميع نقاط النهاية المتاحة، مصنّفة حسب المورد.",
       "health": {
         "desc": "التحقق من صحة الخادم"
       },
@@ -422,8 +455,21 @@
       }
     },
     "requestBody": "جسم الطلب",
-    "example": "مثال",
+    "example": "مثال على الطلب",
     "response": "الرد",
+    "errors": {
+      "title": "الأخطاء وتحديد المعدل",
+      "description": "تستخدم OpenWA رموز استجابة HTTP التقليدية للإشارة إلى نجاح الطلب أو فشله. الرموز في نطاق 2xx تعني النجاح، ونطاق 4xx يعني أن الطلب يحتوي على خطأ، ونطاق 5xx يعني حدوث خطأ من جانبنا.",
+      "codes": {
+        "200": "نجاح — تم تنفيذ الطلب كما هو متوقع.",
+        "400": "طلب غير صالح — الطلب مشوّه أو ينقصه معطيات مطلوبة.",
+        "401": "غير مصرَّح — مفتاح API مفقود أو غير صالح.",
+        "403": "ممنوع — لا يملك مفتاح API الصلاحية اللازمة لهذا الإجراء.",
+        "404": "غير موجود — المورد المطلوب غير موجود.",
+        "429": "طلبات كثيرة جداً — لقد تجاوزت الحد المسموح به من الطلبات.",
+        "500": "خطأ في الخادم — حدث خطأ من جانب OpenWA."
+      }
+    },
     "rateLimit": {
       "title": "تحديد المعدل",
       "description": "طلبات API محدودة المعدل لضمان الاستخدام العادل. الحد الافتراضي هو 100 طلب لكل نافذة 60 ثانية لكل مفتاح API. تجاوز هذا الحد سيؤدي إلى رد 429 Too Many Requests. اتصل بالدعم إذا كنت بحاجة إلى حد أعلى."
@@ -515,7 +561,11 @@
     "charCount": "{{count}} / 4096 حرفاً",
     "livePreview": "معاينة حية",
     "noMessages": "لا توجد رسائل بعد",
-    "noMessagesHint": "أرسل رسالة لبدء المحادثة"
+    "noMessagesHint": "أرسل رسالة لبدء المحادثة",
+    "addRecipients": "إضافة مستلمين",
+    "loadMore": "تحميل المزيد",
+    "showPreview": "عرض المعاينة",
+    "hidePreview": "إخفاء المعاينة"
   },
   "campaigns": {
     "title": "الحملات",
@@ -1112,5 +1162,46 @@
     "delivered": "تم التسليم",
     "read": "مقروءة",
     "failed": "فشلت"
+  },
+  "roles": {
+    "title": "الأدوار والصلاحيات",
+    "subtitle": "حدد الأدوار وخصص صلاحيات دقيقة",
+    "createRole": "إنشاء دور",
+    "createTitle": "إنشاء دور جديد",
+    "editTitle": "تعديل الدور",
+    "name": "اسم الدور",
+    "namePlaceholder": "مثال: موظف الدعم",
+    "description": "الوصف",
+    "descriptionPlaceholder": "وصف اختياري",
+    "type": "النوع",
+    "system": "نظام",
+    "custom": "مخصص",
+    "permissions": "الصلاحيات",
+    "searchPlaceholder": "البحث عن الأدوار...",
+    "deleteConfirm": "حذف الدور",
+    "deleteWarning": "هل أنت متأكد أنك تريد حذف هذا الدور؟ لا يمكن التراجع عن هذا الإجراء.",
+    "emptyTitle": "لم يتم العثور على أدوار",
+    "emptyDescription": "ستظهر الأدوار هنا",
+    "toasts": {
+      "createSuccess": "تم إنشاء الدور بنجاح",
+      "createError": "فشل إنشاء الدور",
+      "updateSuccess": "تم تحديث الدور بنجاح",
+      "updateError": "فشل تحديث الدور",
+      "deleteSuccess": "تم حذف الدور بنجاح",
+      "deleteError": "فشل حذف الدور"
+    },
+    "stats": {
+      "total": "إجمالي الأدوار",
+      "system": "أدوار النظام",
+      "custom": "أدوار مخصصة"
+    },
+    "noPermissions": "لم يتم تعيين أي صلاحيات",
+    "permissionCount": "{{count}} صلاحية",
+    "acrossGroups": "عبر {{count}} مجموعات",
+    "searchPermissionsPlaceholder": "البحث في الصلاحيات...",
+    "selectAllPermissions": "تحديد الكل",
+    "clearAllPermissions": "إلغاء التحديد",
+    "noPermissionsMatch": "لا توجد صلاحيات مطابقة لبحثك",
+    "permissionsSummary": "تم تحديد {{selected}} من {{total}}"
   }
 }

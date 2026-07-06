@@ -1,200 +1,29 @@
 import { useState, useMemo } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import {
-  Plus, Search, Pencil, Trash2, Loader2, Shield, X, Save, Check,
+  Plus, Search, Pencil, Trash2, Loader2, Shield, ShieldCheck, ShieldPlus, X,
 } from 'lucide-react';
 import { useDocumentTitle } from '../hooks/useDocumentTitle';
 import { PageHeader } from '../components/PageHeader';
 import { useToast } from '../components/Toast';
 import { useRole } from '../hooks/useRole';
-import { useRolesQuery, useCreateRoleMutation, useUpdateRoleMutation, useDeleteRoleMutation, usePermissionsQuery } from '../hooks/queries';
-import type { PermissionItem } from '../services/api';
-
-// ─── Role Form Modal ────────────────────────────────────────────────────────
-
-function RoleModal({
-  edit,
-  onClose,
-  onSave,
-}: {
-  edit?: { id: string; name: string; description: string | null; permissionIds: string[] };
-  onClose: () => void;
-  onSave: (data: { name: string; description?: string; permissionIds: string[] }) => Promise<void>;
-}) {
-  const { t } = useTranslation();
-  const { data: permissions, isLoading: permLoading } = usePermissionsQuery();
-  const [name, setName] = useState(edit?.name ?? '');
-  const [description, setDescription] = useState(edit?.description ?? '');
-  const [selectedPerms, setSelectedPerms] = useState<string[]>(edit?.permissionIds ?? []);
-  const [saving, setSaving] = useState(false);
-
-  const grouped = useMemo(() => {
-    if (!permissions) return {};
-    const map: Record<string, PermissionItem[]> = {};
-    for (const p of permissions) {
-      if (!map[p.group]) map[p.group] = [];
-      map[p.group].push(p);
-    }
-    return map;
-  }, [permissions]);
-
-  const togglePerm = (permId: string) => {
-    setSelectedPerms(prev =>
-      prev.includes(permId)
-        ? prev.filter(id => id !== permId)
-        : [...prev, permId],
-    );
-  };
-
-  const selectGroup = (groupPerms: PermissionItem[], select: boolean) => {
-    const ids = groupPerms.map(p => p.id);
-    setSelectedPerms(prev => {
-      const without = prev.filter(id => !ids.includes(id));
-      return select ? [...without, ...ids] : without;
-    });
-  };
-
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!name.trim()) return;
-    setSaving(true);
-    try {
-      await onSave({ name: name.trim(), description: description.trim() || undefined, permissionIds: selectedPerms });
-    } finally {
-      setSaving(false);
-    }
-  };
-
-  return (
-    <div className="modal-overlay" onClick={e => { if (e.target === e.currentTarget) onClose(); }}>
-      <div className="modal-box !max-w-[640px]" onClick={e => e.stopPropagation()}>
-        <div className="modal-header">
-          <h2 className="m-0 text-[1.125rem] font-bold text-[var(--color-ink)]">
-            {edit ? t('roles.editTitle') : t('roles.createTitle')}
-          </h2>
-          <button onClick={onClose} className="icon-btn !border-none !bg-transparent !text-[var(--color-ink-muted)] hover:!text-[var(--color-ink)]">
-            <X size={18} />
-          </button>
-        </div>
-
-        <form onSubmit={handleSubmit}>
-          <div className="modal-body space-y-4">
-            {/* Name */}
-            <div className="flex flex-col gap-1.5">
-              <span className="text-[0.7875rem] font-semibold text-[var(--color-ink-secondary)]">{t('roles.name')}</span>
-              <input
-                className="input-base"
-                value={name}
-                onChange={e => setName(e.target.value)}
-                placeholder={t('roles.namePlaceholder')}
-                required
-              />
-            </div>
-
-            {/* Description */}
-            <div className="flex flex-col gap-1.5">
-              <span className="text-[0.7875rem] font-semibold text-[var(--color-ink-secondary)]">{t('roles.description')}</span>
-              <input
-                className="input-base"
-                value={description}
-                onChange={e => setDescription(e.target.value)}
-                placeholder={t('roles.descriptionPlaceholder')}
-              />
-            </div>
-
-            {/* Permissions */}
-            <div className="flex flex-col gap-1.5">
-              <span className="text-[0.7875rem] font-semibold text-[var(--color-ink-secondary)]">{t('roles.permissions')}</span>
-
-              {permLoading ? (
-                <div className="flex items-center justify-center py-6">
-                  <Loader2 className="animate-spin text-[var(--color-primary)]" size={20} />
-                </div>
-              ) : (
-                <div className="max-h-[360px] overflow-y-auto space-y-2 rounded-[var(--radius)] border border-[var(--color-border)] p-3">
-                  {Object.entries(grouped).map(([group, perms]) => (
-                    <div key={group}>
-                      <div className="flex items-center justify-between mb-1">
-                        <span className="text-[0.75rem] font-bold uppercase tracking-wider text-[var(--color-ink-muted)]">{group}</span>
-                        <div className="flex gap-1">
-                          <button
-                            type="button"
-                            className="text-[0.65rem] text-[var(--color-ink-muted)] hover:text-[var(--color-primary)] cursor-pointer bg-transparent border-none"
-                            onClick={() => selectGroup(perms, true)}
-                          >
-                            {t('common.selectAll')}
-                          </button>
-                          <span className="text-[0.65rem] text-[var(--color-ink-muted)]">|</span>
-                          <button
-                            type="button"
-                            className="text-[0.65rem] text-[var(--color-ink-muted)] hover:text-[var(--color-error)] cursor-pointer bg-transparent border-none"
-                            onClick={() => selectGroup(perms, false)}
-                          >
-                            {t('common.deselectAll')}
-                          </button>
-                        </div>
-                      </div>
-                      <div className="flex flex-wrap gap-1.5 mb-3">
-                        {perms.map(perm => {
-                          const isSelected = selectedPerms.includes(perm.id);
-                          return (
-                            <button
-                              key={perm.id}
-                              type="button"
-                              onClick={() => togglePerm(perm.id)}
-                              className={`inline-flex cursor-pointer items-center gap-1 rounded-full px-2.5 py-1 text-[0.6875rem] font-medium border transition-all ${
-                                isSelected
-                                  ? 'border-[var(--color-primary)] bg-[var(--color-primary-dim)] text-[var(--color-primary)]'
-                                  : 'border-[var(--color-border)] bg-transparent text-[var(--color-ink-muted)] hover:border-[var(--color-border-strong)] hover:text-[var(--color-ink-secondary)]'
-                              }`}
-                              title={perm.description ?? perm.name}
-                            >
-                              {isSelected && <Check size={10} />}
-                              {perm.name}
-                            </button>
-                          );
-                        })}
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              )}
-
-              <span className="text-[0.6875rem] text-[var(--color-ink-muted)]">
-                {selectedPerms.length} {t('roles.permissionsSelected')}
-              </span>
-            </div>
-          </div>
-
-          <div className="modal-footer">
-            <button type="button" onClick={onClose} className="btn-secondary">{t('common.cancel')}</button>
-            <button type="submit" className="btn-primary" disabled={saving || !name.trim()}>
-              {saving ? <Loader2 size={15} className="animate-spin" /> : <Save size={15} />}
-              {edit ? t('common.save') : t('roles.createRole')}
-            </button>
-          </div>
-        </form>
-      </div>
-    </div>
-  );
-}
+import { useRolesQuery, useDeleteRoleMutation } from '../hooks/queries';
+import { StatCard } from '../components/dashboard/StatCard';
 
 // ─── Main Roles Page ────────────────────────────────────────────────────────
 
 export function RolesPage() {
   const { t } = useTranslation();
+  const navigate = useNavigate();
   const toast = useToast();
   const { isAdmin } = useRole();
   useDocumentTitle(t('roles.title'));
 
-  const { data: roles, isLoading, refetch } = useRolesQuery();
-  const createMutation = useCreateRoleMutation();
-  const updateMutation = useUpdateRoleMutation();
+  const { data: roles, isLoading } = useRolesQuery();
   const deleteMutation = useDeleteRoleMutation();
 
   const [search, setSearch] = useState('');
-  const [modalEdit, setModalEdit] = useState<{ id: string; name: string; description: string | null; permissionIds: string[] } | null>(null);
-  const [showCreate, setShowCreate] = useState(false);
   const [deleteConfirm, setDeleteConfirm] = useState<string | null>(null);
 
   const filtered = useMemo(() => {
@@ -204,35 +33,17 @@ export function RolesPage() {
     return roles.filter(r => r.name.toLowerCase().includes(q) || (r.description ?? '').toLowerCase().includes(q));
   }, [roles, search]);
 
-  const handleCreate = async (data: { name: string; description?: string; permissionIds: string[] }) => {
-    try {
-      await createMutation.mutateAsync(data);
-      toast.success(t('roles.toasts.createSuccess'));
-      setShowCreate(false);
-      void refetch();
-    } catch (err) {
-      toast.error(t('roles.toasts.createError'), err instanceof Error ? err.message : '');
-    }
-  };
-
-  const handleUpdate = async (data: { name: string; description?: string; permissionIds: string[] }) => {
-    if (!modalEdit) return;
-    try {
-      await updateMutation.mutateAsync({ id: modalEdit.id, data });
-      toast.success(t('roles.toasts.updateSuccess'));
-      setModalEdit(null);
-      void refetch();
-    } catch (err) {
-      toast.error(t('roles.toasts.updateError'), err instanceof Error ? err.message : '');
-    }
-  };
+  const roleStats = useMemo(() => {
+    const total = roles?.length ?? 0;
+    const system = roles?.filter(r => r.isSystem).length ?? 0;
+    return { total, system, custom: total - system };
+  }, [roles]);
 
   const handleDelete = async (id: string) => {
     try {
       await deleteMutation.mutateAsync(id);
       toast.success(t('roles.toasts.deleteSuccess'));
       setDeleteConfirm(null);
-      void refetch();
     } catch (err) {
       toast.error(t('roles.toasts.deleteError'), err instanceof Error ? err.message : '');
     }
@@ -252,12 +63,37 @@ export function RolesPage() {
         title={t('roles.title')}
         subtitle={t('roles.subtitle')}
         actions={
-          <button className="btn-primary" onClick={() => setShowCreate(true)}>
+          <button className="btn-primary" onClick={() => navigate('/roles/new')}>
             <Plus size={16} />
             {t('roles.createRole')}
           </button>
         }
       />
+
+      {/* Stat cards */}
+      <div className="mb-6 grid grid-cols-3 gap-4 max-sm:grid-cols-1">
+        <StatCard
+          label={t('roles.stats.total')}
+          value={roleStats.total}
+          icon={Shield}
+          accent="var(--color-ink)"
+          bg="var(--color-muted)"
+        />
+        <StatCard
+          label={t('roles.stats.system')}
+          value={roleStats.system}
+          icon={ShieldCheck}
+          accent="var(--color-primary)"
+          bg="var(--color-primary-dim)"
+        />
+        <StatCard
+          label={t('roles.stats.custom')}
+          value={roleStats.custom}
+          icon={ShieldPlus}
+          accent="#6366f1"
+          bg="rgba(99,102,241,0.1)"
+        />
+      </div>
 
       {/* Search */}
       <div className="mb-5">
@@ -313,34 +149,28 @@ export function RolesPage() {
                     {role.isSystem ? t('roles.system') : t('roles.custom')}
                   </span>
                 </div>
-                <div className="flex flex-wrap gap-1">
-                  {role.permissions.slice(0, 5).map(p => (
-                    <span
-                      key={p.id}
-                      className="pill text-[0.625rem]"
-                      style={{ background: 'var(--color-muted)', color: 'var(--color-ink-secondary)' }}
-                    >
-                      {p.name}
-                    </span>
-                  ))}
-                  {role.permissions.length > 5 && (
-                    <span className="pill text-[0.625rem] text-[var(--color-ink-muted)]">
-                      +{role.permissions.length - 5}
-                    </span>
+                <div className="flex flex-col gap-0.5">
+                  {role.permissions.length === 0 ? (
+                    <span className="text-[0.75rem] italic text-[var(--color-ink-muted)]">{t('roles.noPermissions')}</span>
+                  ) : (
+                    <>
+                      <span
+                        className="pill w-fit text-[0.6875rem]"
+                        style={{ background: 'var(--color-muted)', color: 'var(--color-ink-secondary)' }}
+                      >
+                        {t('roles.permissionCount', { count: role.permissions.length })}
+                      </span>
+                      <span className="text-[0.6875rem] text-[var(--color-ink-muted)]">
+                        {t('roles.acrossGroups', { count: new Set(role.permissions.map(p => p.group)).size })}
+                      </span>
+                    </>
                   )}
                 </div>
                 <div className="flex items-center justify-end gap-1">
                   <button
                     className="icon-btn"
                     title={t('common.edit')}
-                    onClick={() =>
-                      setModalEdit({
-                        id: role.id,
-                        name: role.name,
-                        description: role.description,
-                        permissionIds: role.permissions.map(p => p.id),
-                      })
-                    }
+                    onClick={() => navigate(`/roles/${role.id}/edit`)}
                   >
                     <Pencil size={14} />
                   </button>
@@ -360,23 +190,6 @@ export function RolesPage() {
           </div>
         )}
       </div>
-
-      {/* Create Modal */}
-      {showCreate && (
-        <RoleModal
-          onClose={() => setShowCreate(false)}
-          onSave={handleCreate}
-        />
-      )}
-
-      {/* Edit Modal */}
-      {modalEdit && (
-        <RoleModal
-          edit={modalEdit}
-          onClose={() => setModalEdit(null)}
-          onSave={handleUpdate}
-        />
-      )}
 
       {/* Delete Confirm */}
       {deleteConfirm && (

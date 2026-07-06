@@ -49,7 +49,7 @@ export class MessageHealthService {
     const chatId = `${session.phone}@c.us`;
     const text = `✅ OpenWA health check — test message sent at ${new Date().toISOString()}`;
 
-    const result = await this.messageService.sendText(sessionId, { chatId, text });
+    const result = await this.messageService.sendText(sessionId, { phoneNumber: session.phone, text });
 
     return { ...result, chatId };
   }

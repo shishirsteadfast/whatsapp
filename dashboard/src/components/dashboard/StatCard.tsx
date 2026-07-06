@@ -8,11 +8,19 @@ interface StatCardProps {
   accent: string;
   bg: string;
   hint?: string;
+  onClick?: () => void;
+  active?: boolean;
 }
 
-export function StatCard({ label, value, icon: Icon, accent, bg, hint }: StatCardProps) {
+export function StatCard({ label, value, icon: Icon, accent, bg, hint, onClick, active }: StatCardProps) {
+  const Tag = onClick ? 'button' : 'div';
   return (
-    <div className="card group relative overflow-hidden p-5 transition-all duration-200 hover:-translate-y-0.5 hover:shadow-[var(--shadow-md)]">
+    <Tag
+      onClick={onClick}
+      className={`card group relative overflow-hidden p-5 text-left transition-all duration-200 hover:-translate-y-0.5 hover:shadow-[var(--shadow-md)] ${
+        onClick ? 'cursor-pointer' : ''
+      } ${active ? 'ring-2 ring-[var(--color-primary)] ring-offset-2 ring-offset-[var(--color-muted)]' : ''}`}
+    >
       <div
         className="pointer-events-none absolute -bottom-4 -right-4 h-20 w-20 rounded-full opacity-60 transition-all duration-300 group-hover:opacity-100 group-hover:scale-110"
         style={{ background: bg }}
@@ -34,6 +42,6 @@ export function StatCard({ label, value, icon: Icon, accent, bg, hint }: StatCar
           </div>
         )}
       </div>
-    </div>
+    </Tag>
   );
 }

@@ -54,7 +54,16 @@
     "lightMode": "Mode terang",
     "darkMode": "Mode gelap",
     "viewAll": "Lihat Semua",
-    "copied": "Tersalin!"
+    "copy": "Salin",
+    "copied": "Tersalin!",
+    "sessionsActive": "Sesi Aktif",
+    "social": {
+      "email": "Email",
+      "whatsapp": "WhatsApp",
+      "facebook": "Facebook",
+      "youtube": "YouTube",
+      "website": "Situs Web"
+    }
   },
   "theme": {
     "light": "Terang",
@@ -68,15 +77,18 @@
     "webhooks": "Webhook",
     "apiKeys": "Kunci API",
     "contacts": "Kontak",
-    "composer": "Komposer",
     "groups": "Grup",
-    "messages": "Pesan",
+    "messages": "Log Pesan",
     "settings": "Pengaturan",
     "messageTester": "Penguji Pesan",
     "campaigns": "Kampanye",
     "logs": "Log",
     "systemRequirements": "Persyaratan Server",
-    "activityLog": "Log Aktivitas"
+    "activityLog": "Log Aktivitas",
+    "compose": "Tulis",
+    "groupAudience": "Audiens",
+    "groupMessaging": "Perpesanan",
+    "groupAccess": "Akses"
   },
   "errorBoundary": {
     "title": "Ada yang salah",
@@ -248,6 +260,10 @@
       "phone": "Telepon",
       "sessionId": "ID Sesi",
       "lastActive": "Terakhir Aktif"
+    },
+    "stats": {
+      "total": "Total Sesi",
+      "connecting": "Menghubungkan"
     }
   },
   "webhooks": {
@@ -300,13 +316,9 @@
     }
   },
   "apiKeys": {
-    "title": "Manajemen API",
-    "subtitle": "Kelola kunci API, lihat kredensial, dan dokumentasi API",
-    "tabs": {
-      "overview": "Ikhtisar",
-      "keys": "Kunci API",
-      "docs": "Dokumentasi"
-    },
+    "title": "Referensi API",
+    "subtitle": "Autentikasi, jelajahi setiap endpoint, dan integrasikan API OpenWA dalam bahasa pilihan Anda.",
+    "manageHint": "Buat, perbarui, dan cabut kunci yang digunakan untuk mengautentikasi permintaan API Anda.",
     "stats": {
       "totalKeys": "Total Kunci",
       "activeKeys": "Kunci Aktif",
@@ -314,17 +326,8 @@
       "rateLimit": "Panggilan Hari Ini"
     },
     "credentials": {
-      "baseUrl": "URL Dasar API",
-      "baseUrlHint": "Gunakan URL ini sebagai endpoint dasar untuk semua permintaan API."
-    },
-    "quickLinks": {
-      "title": "Tautan Cepat",
-      "manageKeys": "Kelola Kunci API",
-      "manageKeysDesc": "Lihat, buat, cabut, dan hapus kunci API Anda",
-      "viewDocs": "Dokumentasi API",
-      "viewDocsDesc": "Jelajahi referensi endpoint lengkap dengan contoh",
-      "createKey": "Buat Kunci Baru",
-      "createKeyDesc": "Hasilkan kunci API baru dengan peran tertentu"
+      "baseUrl": "URL Dasar",
+      "baseUrlHint": "Semua jalur endpoint dalam referensi ini bersifat relatif terhadap URL ini."
     },
     "createBtn": "Buat Kunci API",
     "modalTitle": "Buat Kunci API",
@@ -374,13 +377,42 @@
     }
   },
   "apiDocs": {
+    "nav": {
+      "introduction": "Pendahuluan",
+      "authentication": "Autentikasi",
+      "yourKeys": "Kunci API Anda",
+      "errors": "Error & Batasan Kecepatan",
+      "endpoints": "Endpoint",
+      "sdks": "SDK & Pustaka"
+    },
+    "intro": {
+      "title": "Pendahuluan",
+      "description": "API OpenWA memungkinkan Anda mengelola sesi WhatsApp, mengirim pesan, dan mengotomatiskan alur kerja Anda secara terprogram. API ini disusun berdasarkan REST — setiap endpoint menerima badan permintaan JSON, mengembalikan respons JSON, dan menggunakan kode respons HTTP standar.",
+      "quickStart": "Mulai Cepat",
+      "quickStartHint": "Berikut permintaan minimal untuk menampilkan daftar sesi aktif Anda."
+    },
+    "languages": {
+      "curl": "cURL",
+      "javascript": "JavaScript",
+      "python": "Python",
+      "php": "PHP",
+      "go": "Go"
+    },
     "auth": {
       "title": "Autentikasi",
-      "description": "Semua permintaan API memerlukan autentikasi. Sertakan kunci API Anda di header <code>X-API-Key</code>. Anda dapat mengelola kunci API di tab Kunci API.",
-      "example": "Contoh permintaan dengan autentikasi",
+      "description": "Semua permintaan API memerlukan autentikasi. Sertakan kunci API Anda di header permintaan <code>X-API-Key</code>. Anda dapat membuat dan mengelola kunci API Anda di bawah ini.",
       "none": "Tidak perlu autentikasi",
       "apiKey": "Kunci API diperlukan",
       "admin": "Akses admin diperlukan"
+    },
+    "groups": {
+      "general": "Umum",
+      "sessions": "Sesi",
+      "messages": "Pesan",
+      "contacts": "Kontak",
+      "webhooks": "Webhook",
+      "campaigns": "Kampanye",
+      "settings": "Pengaturan"
     },
     "sdks": {
       "title": "SDK & Pustaka",
@@ -388,6 +420,7 @@
     },
     "endpoints": {
       "title": "Endpoint API",
+      "hint": "Jelajahi semua endpoint yang tersedia, dikelompokkan berdasarkan sumber daya.",
       "health": {
         "desc": "Periksa status kesehatan server API"
       },
@@ -419,8 +452,21 @@
       }
     },
     "requestBody": "Badan Permintaan",
-    "example": "Contoh",
+    "example": "Contoh Permintaan",
     "response": "Respons",
+    "errors": {
+      "title": "Error & Batasan Kecepatan",
+      "description": "OpenWA menggunakan kode respons HTTP standar untuk menunjukkan keberhasilan atau kegagalan suatu permintaan. Kode pada rentang 2xx berarti berhasil, rentang 4xx berarti permintaan mengandung kesalahan, dan rentang 5xx berarti terjadi masalah di sisi kami.",
+      "codes": {
+        "200": "Success — permintaan berhasil diselesaikan sebagaimana mestinya.",
+        "400": "Bad Request — permintaan tidak valid atau parameter yang wajib diisi tidak ada.",
+        "401": "Unauthorized — kunci API tidak ada atau tidak valid.",
+        "403": "Forbidden — kunci API tidak memiliki izin untuk aksi ini.",
+        "404": "Not Found — sumber daya yang diminta tidak ditemukan.",
+        "429": "Too Many Requests — Anda telah melampaui batasan kecepatan.",
+        "500": "Server Error — terjadi masalah di sisi OpenWA."
+      }
+    },
     "rateLimit": {
       "title": "Batasan Kecepatan",
       "description": "Permintaan API dibatasi kecepatannya untuk memastikan penggunaan yang adil. Batas default adalah 100 permintaan per jendela 60 detik per kunci API. Melebihi batas ini akan menghasilkan respons 429 Too Many Requests. Hubungi dukungan jika Anda membutuhkan batas yang lebih tinggi."
@@ -512,7 +558,11 @@
     "charCount": "{{count}} / 4096 karakter",
     "livePreview": "Pratinjau Langsung",
     "noMessages": "Belum ada pesan",
-    "noMessagesHint": "Kirim pesan untuk memulai percakapan"
+    "noMessagesHint": "Kirim pesan untuk memulai percakapan",
+    "addRecipients": "Tambah penerima",
+    "loadMore": "Muat lebih banyak",
+    "showPreview": "Tampilkan pratinjau",
+    "hidePreview": "Sembunyikan pratinjau"
   },
   "campaigns": {
     "title": "Kampanye",
@@ -1089,5 +1139,46 @@
     "delivered": "Sampai",
     "read": "Dibaca",
     "failed": "Gagal"
+  },
+  "roles": {
+    "title": "Peran & Izin",
+    "subtitle": "Tentukan peran dan berikan izin secara terperinci",
+    "createRole": "Buat Peran",
+    "createTitle": "Buat Peran Baru",
+    "editTitle": "Edit Peran",
+    "name": "Nama Peran",
+    "namePlaceholder": "mis. Agen Dukungan",
+    "description": "Deskripsi",
+    "descriptionPlaceholder": "Deskripsi opsional",
+    "type": "Tipe",
+    "system": "Sistem",
+    "custom": "Kustom",
+    "permissions": "Izin",
+    "searchPlaceholder": "Cari peran...",
+    "deleteConfirm": "Hapus Peran",
+    "deleteWarning": "Apakah Anda yakin ingin menghapus peran ini? Tindakan ini tidak dapat dibatalkan.",
+    "emptyTitle": "Tidak ada peran ditemukan",
+    "emptyDescription": "Peran akan muncul di sini",
+    "toasts": {
+      "createSuccess": "Peran berhasil dibuat",
+      "createError": "Gagal membuat peran",
+      "updateSuccess": "Peran berhasil diperbarui",
+      "updateError": "Gagal memperbarui peran",
+      "deleteSuccess": "Peran berhasil dihapus",
+      "deleteError": "Gagal menghapus peran"
+    },
+    "stats": {
+      "total": "Total Peran",
+      "system": "Peran Sistem",
+      "custom": "Peran Kustom"
+    },
+    "noPermissions": "Belum ada izin diberikan",
+    "permissionCount": "{{count}} izin",
+    "acrossGroups": "di {{count}} grup",
+    "searchPermissionsPlaceholder": "Cari izin...",
+    "selectAllPermissions": "Pilih semua",
+    "clearAllPermissions": "Hapus semua",
+    "noPermissionsMatch": "Tidak ada izin yang cocok dengan pencarian Anda",
+    "permissionsSummary": "{{selected}} dari {{total}} dipilih"
   }
 }

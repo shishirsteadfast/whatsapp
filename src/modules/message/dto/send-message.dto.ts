@@ -1,9 +1,10 @@
 import { IsString, IsNotEmpty, IsOptional, MaxLength, IsUrl, ValidateIf } from 'class-validator';
 
 export class SendTextMessageDto {
+  /** Recipient's phone number, e.g. "+8801712345678". */
   @IsString()
   @IsNotEmpty()
-  chatId: string;
+  phoneNumber: string;
 
   @IsString()
   @IsNotEmpty()
@@ -12,9 +13,10 @@ export class SendTextMessageDto {
 }
 
 export class SendMediaMessageDto {
+  /** Recipient's phone number, e.g. "+8801712345678". */
   @IsString()
   @IsNotEmpty()
-  chatId: string;
+  phoneNumber: string;
 
   @IsOptional()
   @IsUrl()

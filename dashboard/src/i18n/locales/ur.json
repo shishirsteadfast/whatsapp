@@ -54,7 +54,16 @@
     "lightMode": "روشن وضع",
     "darkMode": "اندھیرا وضع",
     "viewAll": "سب دیکھیں",
-    "copied": "نقل ہو گیا!"
+    "copy": "کاپی کریں",
+    "copied": "نقل ہو گیا!",
+    "sessionsActive": "فعال سیشنز",
+    "social": {
+      "email": "ای میل",
+      "whatsapp": "WhatsApp",
+      "facebook": "Facebook",
+      "youtube": "YouTube",
+      "website": "ویب سائٹ"
+    }
   },
   "theme": {
     "light": "روشن",
@@ -68,15 +77,18 @@
     "webhooks": "ویب ہکس",
     "apiKeys": "API کی چابیاں",
     "contacts": "رابطے",
-    "composer": "کمپوزر",
     "groups": "گروپس",
-    "messages": "پیغامات",
+    "messages": "پیغام لاگ",
     "settings": "ترتیبات",
     "messageTester": "پیغام ٹیسٹر",
     "campaigns": "مہمات",
     "logs": "لاگز",
     "systemRequirements": "سرور کی ضروریات",
-    "activityLog": "سرگرمی لاگ"
+    "activityLog": "سرگرمی لاگ",
+    "compose": "تحریر کریں",
+    "groupAudience": "سامعین",
+    "groupMessaging": "پیغام رسانی",
+    "groupAccess": "رسائی"
   },
   "errorBoundary": {
     "title": "کچھ غلط ہو گیا",
@@ -248,6 +260,10 @@
       "phone": "فون",
       "sessionId": "سیشن ID",
       "lastActive": "آخری سرگرمی"
+    },
+    "stats": {
+      "total": "کل سیشنز",
+      "connecting": "مربوط ہو رہا ہے"
     }
   },
   "webhooks": {
@@ -300,13 +316,9 @@
     }
   },
   "apiKeys": {
-    "title": "API کا نظم",
-    "subtitle": "API چابیاں، اسناد اور API دستاویزات کا نظم کریں",
-    "tabs": {
-      "overview": "جائزہ",
-      "keys": "API چابیاں",
-      "docs": "دستاویزات"
-    },
+    "title": "API حوالہ",
+    "subtitle": "تصدیق کریں، ہر اختتامی نقطہ دیکھیں، اور اپنی پسند کی زبان میں OpenWA API کو مربوط کریں۔",
+    "manageHint": "اپنی API درخواستوں کی تصدیق کے لیے استعمال ہونے والی چابیاں بنائیں، تبدیل کریں اور منسوخ کریں۔",
     "stats": {
       "totalKeys": "کل چابیاں",
       "activeKeys": "فعال چابیاں",
@@ -314,17 +326,8 @@
       "rateLimit": "آج کی کالیں"
     },
     "credentials": {
-      "baseUrl": "API بنیادی URL",
-      "baseUrlHint": "تمام API درخواستوں کے لیے اس URL کو بنیادی اختتامی نقطہ کے طور پر استعمال کریں۔"
-    },
-    "quickLinks": {
-      "title": "فوری روابط",
-      "manageKeys": "API چابیاں منظم کریں",
-      "manageKeysDesc": "اپنی API چابیاں دیکھیں، بنائیں، منسوخ کریں اور حذف کریں",
-      "viewDocs": "API دستاویزات",
-      "viewDocsDesc": "مثالوں کے ساتھ تفصیلی اختتامی نکاتی حوالہ دیکھیں",
-      "createKey": "نئی چابی بنائیں",
-      "createKeyDesc": "مخصوص کردار کے ساتھ نئی API چابی بنائیں"
+      "baseUrl": "بنیادی URL",
+      "baseUrlHint": "اس حوالے میں دیے گئے تمام اختتامی نکات کے راستے اسی URL سے متعلق ہیں۔"
     },
     "createBtn": "API چابی بنائیں",
     "modalTitle": "API چابی بنائیں",
@@ -374,13 +377,42 @@
     }
   },
   "apiDocs": {
+    "nav": {
+      "introduction": "تعارف",
+      "authentication": "تصدیق",
+      "yourKeys": "آپ کی API چابیاں",
+      "errors": "خرابیاں اور شرح کی حدیں",
+      "endpoints": "اختتامی نکات",
+      "sdks": "SDKs اور لائبریریاں"
+    },
+    "intro": {
+      "title": "تعارف",
+      "description": "OpenWA API آپ کو WhatsApp سیشنز کا پروگرام کے ذریعے نظم کرنے، پیغامات بھیجنے اور اپنے ورک فلوز کو خودکار بنانے کی سہولت دیتا ہے۔ یہ REST کے اصولوں پر مبنی ہے — ہر اختتامی نقطہ JSON درخواست باڈیز قبول کرتا ہے، JSON جوابات دیتا ہے، اور معیاری HTTP رسپانس کوڈز استعمال کرتا ہے۔",
+      "quickStart": "فوری آغاز",
+      "quickStartHint": "یہ آپ کے فعال سیشنز کی فہرست حاصل کرنے کے لیے ایک کم از کم درخواست ہے۔"
+    },
+    "languages": {
+      "curl": "cURL",
+      "javascript": "JavaScript",
+      "python": "Python",
+      "php": "PHP",
+      "go": "Go"
+    },
     "auth": {
       "title": "تصدیق",
-      "description": "تمام API درخواستوں کے لیے تصدیق ضروری ہے۔ اپنی API کلید کو <code>X-API-Key</code> ہیڈر میں شامل کریں۔ آپ API چابیاں والے ٹیب میں اپنی چابیاں منظم کر سکتے ہیں۔",
-      "example": "تصدیق کے ساتھ درخواست کی مثال",
+      "description": "تمام API درخواستوں کے لیے تصدیق ضروری ہے۔ اپنی API کلید کو <code>X-API-Key</code> درخواست ہیڈر میں شامل کریں۔ آپ ذیل میں اپنی API چابیاں بنا اور منظم کر سکتے ہیں۔",
       "none": "کسی تصدیق کی ضرورت نہیں",
       "apiKey": "API کلید ضروری",
       "admin": "منتظم رسائی ضروری"
+    },
+    "groups": {
+      "general": "عام",
+      "sessions": "سیشنز",
+      "messages": "پیغامات",
+      "contacts": "رابطے",
+      "webhooks": "ویب ہکس",
+      "campaigns": "مہمات",
+      "settings": "ترتیبات"
     },
     "sdks": {
       "title": "SDKs اور لائبریریاں",
@@ -388,6 +420,7 @@
     },
     "endpoints": {
       "title": "API اختتامی نکات",
+      "hint": "وسیلے کے لحاظ سے گروپ کردہ، دستیاب تمام اختتامی نکات ملاحظہ کریں۔",
       "health": {
         "desc": "API سرور کی صحت کی حیثیت چیک کریں"
       },
@@ -419,8 +452,21 @@
       }
     },
     "requestBody": "درخواست کا جسم",
-    "example": "مثال",
+    "example": "درخواست کی مثال",
     "response": "جواب",
+    "errors": {
+      "title": "خرابیاں اور شرح کی حدیں",
+      "description": "OpenWA درخواست کی کامیابی یا ناکامی ظاہر کرنے کے لیے روایتی HTTP رسپانس کوڈز استعمال کرتا ہے۔ 2xx رینج کے کوڈز کامیابی ظاہر کرتے ہیں، 4xx رینج کا مطلب ہے کہ درخواست میں کوئی خرابی ہے، اور 5xx رینج کا مطلب ہے کہ ہماری طرف سے کچھ غلط ہوا ہے۔",
+      "codes": {
+        "200": "Success — درخواست متوقع طور پر مکمل ہوئی۔",
+        "400": "Bad Request — درخواست غلط طریقے سے تشکیل دی گئی تھی یا اس میں مطلوبہ پیرامیٹرز موجود نہیں تھے۔",
+        "401": "Unauthorized — API کلید موجود نہیں یا غلط ہے۔",
+        "403": "Forbidden — API کلید کو یہ کارروائی کرنے کی اجازت نہیں ہے۔",
+        "404": "Not Found — مطلوبہ وسیلہ موجود نہیں ہے۔",
+        "429": "Too Many Requests — آپ شرح کی حد سے تجاوز کر گئے ہیں۔",
+        "500": "Server Error — OpenWA کی جانب سے کچھ غلط ہو گیا۔"
+      }
+    },
     "rateLimit": {
       "title": "شرح کی حد",
       "description": "منصفانہ استعمال کو یقینی بنانے کے لیے API درخواستوں کی شرح محدود ہے۔ ڈیفالٹ حد 100 درخواستیں فی 60 سیکنڈ ونڈو فی API کلید ہے۔ اس حد سے تجاوز کرنے پر 429 Too Many Requests کا جواب ملے گا۔ اگر آپ کو زیادہ حد درکار ہو تو سپورٹ سے رابطہ کریں۔"
@@ -512,7 +558,11 @@
     "charCount": "{{count}} / 4096 حروف",
     "livePreview": "لائیو پیش نظارہ",
     "noMessages": "ابھی تک کوئی پیغام نہیں",
-    "noMessagesHint": "بات چیت شروع کرنے کے لیے پیغام بھیجیں"
+    "noMessagesHint": "بات چیت شروع کرنے کے لیے پیغام بھیجیں",
+    "addRecipients": "وصول کنندگان شامل کریں",
+    "loadMore": "مزید لوڈ کریں",
+    "showPreview": "پیش نظارہ دکھائیں",
+    "hidePreview": "پیش نظارہ چھپائیں"
   },
   "campaigns": {
     "title": "مہمات",
@@ -1090,5 +1140,46 @@
     "delivered": "موصول شدہ",
     "read": "پڑھا گیا",
     "failed": "ناکام"
+  },
+  "roles": {
+    "title": "کردار اور اجازتیں",
+    "subtitle": "کردار متعین کریں اور تفصیلی اجازتیں تفویض کریں",
+    "createRole": "کردار بنائیں",
+    "createTitle": "نیا کردار بنائیں",
+    "editTitle": "کردار میں ترمیم کریں",
+    "name": "کردار کا نام",
+    "namePlaceholder": "مثلاً: سپورٹ ایجنٹ",
+    "description": "تفصیل",
+    "descriptionPlaceholder": "اختیاری تفصیل",
+    "type": "قسم",
+    "system": "سسٹم",
+    "custom": "مخصوص",
+    "permissions": "اجازتیں",
+    "searchPlaceholder": "کردار تلاش کریں...",
+    "deleteConfirm": "کردار حذف کریں",
+    "deleteWarning": "کیا آپ واقعی اس کردار کو حذف کرنا چاہتے ہیں؟ اس عمل کو واپس نہیں لیا جا سکتا۔",
+    "emptyTitle": "کوئی کردار نہیں ملا",
+    "emptyDescription": "کردار یہاں ظاہر ہوں گے",
+    "toasts": {
+      "createSuccess": "کردار کامیابی سے بن گیا",
+      "createError": "کردار بنانے میں ناکامی",
+      "updateSuccess": "کردار کامیابی سے اپ ڈیٹ ہو گیا",
+      "updateError": "کردار اپ ڈیٹ کرنے میں ناکامی",
+      "deleteSuccess": "کردار کامیابی سے حذف ہو گیا",
+      "deleteError": "کردار حذف کرنے میں ناکامی"
+    },
+    "stats": {
+      "total": "کل کردار",
+      "system": "سسٹم کردار",
+      "custom": "مخصوص کردار"
+    },
+    "noPermissions": "کوئی اجازت تفویض نہیں کی گئی",
+    "permissionCount": "{{count}} اجازتیں",
+    "acrossGroups": "{{count}} گروپس میں",
+    "searchPermissionsPlaceholder": "اجازتیں تلاش کریں...",
+    "selectAllPermissions": "سب منتخب کریں",
+    "clearAllPermissions": "سب صاف کریں",
+    "noPermissionsMatch": "آپ کی تلاش سے مماثل کوئی اجازت نہیں",
+    "permissionsSummary": "{{total}} میں سے {{selected}} منتخب"
   }
 }
