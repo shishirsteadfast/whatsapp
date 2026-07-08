@@ -54,7 +54,10 @@
     "lightMode": "Light mode",
     "darkMode": "Dark mode",
     "viewAll": "View All",
-    "copied": "Copied!"
+    "copied": "Copied!",
+    "accessDenied": "You do not have permission to access this page.",
+    "selectAll": "Select All",
+    "deselectAll": "Deselect All"
   },
   "theme": {
     "light": "Light",
@@ -76,7 +79,9 @@
     "campaigns": "Campaigns",
     "logs": "Logs",
     "activityLog": "Activity Log",
-    "systemRequirements": "Server Requirements"
+    "systemRequirements": "Server Requirements",
+    "usersNav": "Users",
+    "rolesNav": "Roles"
   },
   "errorBoundary": {
     "title": "Something went wrong",
@@ -1008,6 +1013,65 @@
         "label": "CORS origins are configured for production",
         "fix": "Set CORS_ORIGINS to a comma-separated list of allowed dashboard/API origins before running in production."
       }
+    }
+  },
+  "users": {
+    "title": "Users",
+    "subtitle": "Manage user accounts and role assignments",
+    "createUser": "Create User",
+    "createTitle": "Create New User",
+    "editTitle": "Edit User",
+    "name": "Name",
+    "namePlaceholder": "e.g. John Doe",
+    "phone": "Phone",
+    "phonePlaceholder": "e.g. 01712345678",
+    "password": "Password",
+    "passwordPlaceholder": "Min. 6 characters",
+    "role": "Role",
+    "assignedRoles": "Assigned Roles",
+    "assignRoles": "Assign Roles",
+    "isActive": "Account Active",
+    "searchPlaceholder": "Search by name or phone...",
+    "deleteConfirm": "Delete User",
+    "deleteWarning": "Are you sure you want to delete this user? This action cannot be undone.",
+    "emptyTitle": "No users found",
+    "emptyDescription": "User accounts will appear here",
+    "toasts": {
+      "createSuccess": "User created successfully",
+      "createError": "Failed to create user",
+      "updateSuccess": "User updated successfully",
+      "updateError": "Failed to update user",
+      "deleteSuccess": "User deleted successfully",
+      "deleteError": "Failed to delete user"
+    }
+  },
+  "roles": {
+    "title": "Roles & Permissions",
+    "subtitle": "Define roles and assign granular permissions",
+    "createRole": "Create Role",
+    "createTitle": "Create New Role",
+    "editTitle": "Edit Role",
+    "name": "Role Name",
+    "namePlaceholder": "e.g. Support Agent",
+    "description": "Description",
+    "descriptionPlaceholder": "Optional description",
+    "type": "Type",
+    "system": "System",
+    "custom": "Custom",
+    "permissions": "Permissions",
+    "permissionsSelected": "permissions selected",
+    "searchPlaceholder": "Search roles...",
+    "deleteConfirm": "Delete Role",
+    "deleteWarning": "Are you sure you want to delete this role? This action cannot be undone.",
+    "emptyTitle": "No roles found",
+    "emptyDescription": "Roles will appear here",
+    "toasts": {
+      "createSuccess": "Role created successfully",
+      "createError": "Failed to create role",
+      "updateSuccess": "Role updated successfully",
+      "updateError": "Failed to update role",
+      "deleteSuccess": "Role deleted successfully",
+      "deleteError": "Failed to delete role"
     }
   },
   "messageHealth": {

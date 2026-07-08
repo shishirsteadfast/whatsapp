@@ -13,6 +13,9 @@ import {
   messageHealthApi,
   campaignApi,
   apiKeysApi,
+  userApi,
+  roleApi,
+  permissionApi,
   type Webhook,
   type ContactPayload,
   type ContactGroupPayload,
@@ -21,6 +24,10 @@ import {
   type CampaignUpdatePayload,
   type CreateApiKeyPayload,
   type AuditLogFilters,
+  type CreateUserPayload,
+  type UpdateUserPayload,
+  type CreateRolePayload,
+  type UpdateRolePayload,
 } from '../services/api';
 
 // ── Query Keys ────────────────────────────────────────────────────────
@@ -522,6 +529,126 @@ export function useMessagesQuery(params?: {
     queryKey: ['messages', params],
     queryFn: () => messageApi.list(params),
     staleTime: 10_000,
+  });
+}
+
+// ── RBAC: Users, Roles & Permissions Queries ───────────────────────
+
+export const userQueryKeys = {
+  all: ['users'] as const,
+  detail: (id: string) => ['users', id] as const,
+};
+
+export const roleQueryKeys = {
+  all: ['roles'] as const,
+  detail: (id: string) => ['roles', id] as const,
+};
+
+export const permissionQueryKeys = {
+  all: ['permissions'] as const,
+};
+
+export function useUsersQuery() {
+  return useQuery({
+    queryKey: userQueryKeys.all,
+    queryFn: userApi.list,
+    staleTime: 15_000,
+  });
+}
+
+export function useUserQuery(id: string, enabled = true) {
+  return useQuery({
+    queryKey: userQueryKeys.detail(id),
+    queryFn: () => userApi.get(id),
+    enabled: enabled && !!id,
+    staleTime: 15_000,
+  });
+}
+
+export function useCreateUserMutation() {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: (data: CreateUserPayload) => userApi.create(data),
+    onSuccess: () => {
+      void queryClient.invalidateQueries({ queryKey: userQueryKeys.all });
+    },
+  });
+}
+
+export function useUpdateUserMutation() {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: ({ id, data }: { id: string; data: UpdateUserPayload }) => userApi.update(id, data),
+    onSuccess: (_data, variables) => {
+      void queryClient.invalidateQueries({ queryKey: userQueryKeys.all });
+      void queryClient.invalidateQueries({ queryKey: userQueryKeys.detail(variables.id) });
+    },
+  });
+}
+
+export function useDeleteUserMutation() {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: (id: string) => userApi.delete(id),
+    onSuccess: () => {
+      void queryClient.invalidateQueries({ queryKey: userQueryKeys.all });
+    },
+  });
+}
+
+export function useRolesQuery() {
+  return useQuery({
+    queryKey: roleQueryKeys.all,
+    queryFn: roleApi.list,
+    staleTime: 30_000,
+  });
+}
+
+export function useRoleQuery(id: string, enabled = true) {
+  return useQuery({
+    queryKey: roleQueryKeys.detail(id),
+    queryFn: () => roleApi.get(id),
+    enabled: enabled && !!id,
+    staleTime: 30_000,
+  });
+}
+
+export function useCreateRoleMutation() {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: (data: CreateRolePayload) => roleApi.create(data),
+    onSuccess: () => {
+      void queryClient.invalidateQueries({ queryKey: roleQueryKeys.all });
+    },
+  });
+}
+
+export function useUpdateRoleMutation() {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: ({ id, data }: { id: string; data: UpdateRolePayload }) => roleApi.update(id, data),
+    onSuccess: (_data, variables) => {
+      void queryClient.invalidateQueries({ queryKey: roleQueryKeys.all });
+      void queryClient.invalidateQueries({ queryKey: roleQueryKeys.detail(variables.id) });
+    },
+  });
+}
+
+export function useDeleteRoleMutation() {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: (id: string) => roleApi.delete(id),
+    onSuccess: () => {
+      void queryClient.invalidateQueries({ queryKey: roleQueryKeys.all });
+    },
+  });
+}
+
+export function usePermissionsQuery() {
+  return useQuery({
+    queryKey: permissionQueryKeys.all,
+    queryFn: permissionApi.list,
+    staleTime: Infinity,
   });
 }
 
