@@ -1,0 +1,950 @@
+{
+  "common": {
+    "appName": "OpenWA",
+    "appSubtitle": "WhatsApp API",
+    "loading": "লোড হচ্ছে...",
+    "save": "সংরক্ষণ",
+    "cancel": "বাতিল",
+    "delete": "মুছুন",
+    "edit": "সম্পাদনা",
+    "create": "তৈরি করুন",
+    "close": "বন্ধ করুন",
+    "submit": "জমা দিন",
+    "confirm": "নিশ্চিত করুন",
+    "search": "অনুসন্ধান",
+    "filter": "ফিল্টার",
+    "actions": "কাজসমূহ",
+    "status": "অবস্থা",
+    "name": "নাম",
+    "role": "ভূমিকা",
+    "type": "ধরন",
+    "url": "URL",
+    "port": "পোর্ট",
+    "host": "হোস্ট",
+    "username": "ব্যবহারকারীর নাম",
+    "password": "পাসওয়ার্ড",
+    "active": "সক্রিয়",
+    "inactive": "নিষ্ক্রিয়",
+    "enabled": "সচল",
+    "disabled": "অচল",
+    "connected": "সংযুক্ত",
+    "disconnected": "বিচ্ছিন্ন",
+    "never": "কখনো নয়",
+    "justNow": "এইমাত্র",
+    "minAgo": "{{count}} মিনিট আগে",
+    "hoursAgo": "{{count}} ঘন্টা আগে",
+    "optional": "ঐচ্ছিক",
+    "language": "ভাষা",
+    "english": "English",
+    "hebrew": "עברית",
+    "back": "পেছনে",
+    "next": "পরবর্তী",
+    "previous": "পূর্ববর্তী",
+    "expand": "প্রসারিত",
+    "collapse": "সংকুচিত",
+    "logout": "প্রস্থান",
+    "refresh": "রিফ্রেশ",
+    "notifications": "বিজ্ঞপ্তি",
+    "noNotifications": "কোনো নতুন বিজ্ঞপ্তি নেই",
+    "profile": "প্রোফাইল",
+    "changePassword": "পাসওয়ার্ড পরিবর্তন",
+    "settings": "সেটিংস",
+    "errorGeneric": "একটি ত্রুটি ঘটেছে",
+    "unknownError": "অজানা ত্রুটি",
+    "lightMode": "হালকা মোড",
+    "darkMode": "গাঢ় মোড",
+    "viewAll": "সব দেখুন",
+    "copied": "কপি হয়েছে!"
+  },
+  "theme": {
+    "light": "হালকা",
+    "dark": "গাঢ়",
+    "system": "সিস্টেম",
+    "label": "থিম: {{value}}"
+  },
+  "nav": {
+    "dashboard": "ড্যাশবোর্ড",
+    "sessions": "সেশন",
+    "webhooks": "Webhooks",
+    "apiKeys": "API কী",
+    "contacts": "কন্টাক্ট",
+    "composer": "কম্পোজার",
+    "groups": "গ্রুপ",
+    "messages": "বার্তা",
+    "settings": "সেটিংস",
+    "messageTester": "বার্তা পরীক্ষক",
+    "campaigns": "ক্যাম্পেইন",
+    "logs": "লগ"
+  },
+  "errorBoundary": {
+    "title": "কিছু একটা ভুল হয়েছে",
+    "description": "ড্যাশবোর্ডে একটি অপ্রত্যাশিত ত্রুটি দেখা দিয়েছে।",
+    "reload": "ড্যাশবোর্ড রিলোড"
+  },
+  "login": {
+    "apiKey": "API কী",
+    "apiKeyPlaceholder": "আপনার API কী লিখুন",
+    "apiKeyRequired": "API কী আবশ্যক",
+    "connect": "সংযোগ",
+    "connecting": "সংযুক্ত হচ্ছে...",
+    "invalidKey": "API কী ভুল",
+    "connectionError": "সার্ভারে সংযোগ করা যায়নি। আবার চেষ্টা করুন।",
+    "help": "সাহায্য প্রয়োজন?",
+    "viewDocs": "ডকুমেন্টেশন দেখুন",
+    "footer": "Yudhi Armyndharis এবং OpenWA কমিউনিটি ❤️ দিয়ে তৈরি করেছেন",
+    "version": "v{{version}} · {{date}}",
+    "title": "সাইন ইন",
+    "subtitle": "ড্যাশবোর্ডে প্রবেশের জন্য আপনার credentials দিন।",
+    "phoneLabel": "ফোন নম্বর",
+    "phonePlaceholder": "যেমন: 01712345678",
+    "passwordLabel": "পাসওয়ার্ড",
+    "passwordPlaceholder": "পাসওয়ার্ড লিখুন",
+    "signIn": "সাইন ইন",
+    "phoneRequired": "ফোন নম্বর আবশ্যক",
+    "passwordRequired": "পাসওয়ার্ড আবশ্যক",
+    "invalidCredentials": "ফোন বা পাসওয়ার্ড ভুল"
+  },
+  "dashboard": {
+    "title": "ড্যাশবোর্ড",
+    "subtitle": "আপনার WhatsApp সেশন ও কার্যকলাপের সংক্ষিপ্ত বিবরণ",
+    "stats": {
+      "activeSessions": "সক্রিয় সেশন",
+      "messagesToday": "আজকের বার্তা",
+      "webhooksConfigured": "কনফিগার করা Webhooks",
+      "apiCalls": "API কল (২৪ ঘন্টা)"
+    },
+    "sessionsOverview": "সেশন ওভারভিউ",
+    "showingSessions": "{{total}}টি সেশনের মধ্যে {{shown}}টি দেখানো হচ্ছে",
+    "columns": {
+      "sessionId": "সেশন ID",
+      "phone": "ফোন নম্বর",
+      "status": "অবস্থা",
+      "lastActive": "সর্বশেষ সক্রিয়",
+      "actions": "কাজসমূহ"
+    },
+    "noSessions": "কোনো সেশন পাওয়া যায়নি। শুরু করতে একটি তৈরি করুন।",
+    "view": "দেখুন",
+    "disconnect": "সংযোগ বিচ্ছিন্ন",
+    "errorPrefix": "ত্রুটি: {{message}}",
+    "loadError": "ডেটা লোড করতে ব্যর্থ",
+    "statActive": "{{count}}টি সক্রিয়",
+    "statNoData": "এখনো কোনো ডেটা নেই"
+  },
+  "sessionStatus": {
+    "created": "নতুন",
+    "idle": "নিষ্ক্রিয়",
+    "initializing": "শুরু হচ্ছে...",
+    "connecting": "সংযুক্ত হচ্ছে...",
+    "qr_ready": "QR স্ক্যান",
+    "ready": "সংযুক্ত",
+    "disconnected": "বিচ্ছিন্ন"
+  },
+  "sessions": {
+    "title": "সেশন",
+    "subtitle": "আপনার WhatsApp সেশন ও QR কোড সংযোগ পরিচালনা করুন",
+    "newSession": "নতুন সেশন",
+    "searchPlaceholder": "সেশন অনুসন্ধান...",
+    "filter": {
+      "all": "সব অবস্থা",
+      "active": "সক্রিয় (সংযুক্ত)",
+      "inactive": "নিষ্ক্রিয়",
+      "connecting": "সংযুক্ত হচ্ছে"
+    },
+    "empty": {
+      "title": "কোনো সেশন পাওয়া যায়নি",
+      "description": "শুরু করতে একটি নতুন সেশন তৈরি করুন"
+    },
+    "create": {
+      "title": "নতুন সেশন তৈরি করুন",
+      "label": "সেশনের নাম",
+      "placeholder": "যেমন: marketing-bot",
+      "hint": "শুধুমাত্র ছোট হাতের অক্ষর, সংখ্যা এবং হাইফেন ব্যবহার করুন। উদাহরণ: <code>customer-support</code>",
+      "invalidChars": "অবৈধ অক্ষর। শুধুমাত্র ছোট হাতের অক্ষর, সংখ্যা এবং হাইফেন অনুমোদিত।",
+      "tooLong": "নাম ৫০ অক্ষরের কম হতে হবে ({{length}}/৫০)।",
+      "duplicate": "এই নামে ইতিমধ্যে একটি সেশন আছে।",
+      "successTitle": "সেশন তৈরি হয়েছে",
+      "successDesc": "সেশন «{{name}}» সফলভাবে তৈরি হয়েছে",
+      "errorTitle": "তৈরি করতে ব্যর্থ",
+      "errorDefault": "সেশন তৈরি করতে ব্যর্থ"
+    },
+    "delete": {
+      "title": "মুছে ফেলার নিশ্চিতকরণ",
+      "message": "আপনি কি সেশন <strong>«{{name}}»</strong> মুছে ফেলতে চান?",
+      "warning": "এই কাজটি পূর্বাবস্থায় ফেরানো যাবে না।",
+      "successTitle": "সেশন মুছে ফেলা হয়েছে",
+      "successDescNamed": "সেশন «{{name}}» মুছে ফেলা হয়েছে",
+      "successDescGeneric": "সেশন মুছে ফেলা হয়েছে",
+      "errorTitle": "মুছতে ব্যর্থ",
+      "errorDefault": "সেশন মুছে ফেলতে ব্যর্থ"
+    },
+    "qr": {
+      "title": "QR কোড স্ক্যান করুন",
+      "step1": "<strong>১.</strong> আপনার ফোনে WhatsApp খুলুন",
+      "step2": "<strong>২.</strong> <strong>মেনু</strong> → <strong>লিঙ্কযুক্ত ডিভাইস</strong> এ ট্যাপ করুন",
+      "step3": "<strong>৩.</strong> <strong>একটি ডিভাইস লিঙ্ক করুন</strong> এ ট্যাপ করুন এবং এই QR স্ক্যান করুন",
+      "autoRefresh": "QR প্রতি ৫ সেকেন্ডে স্বয়ংক্রিয়ভাবে আপডেট হয়",
+      "generating": "QR কোড তৈরি হচ্ছে...",
+      "unavailable": "QR কোড এখনও উপলব্ধ নয়। একটু পরে আবার চেষ্টা করুন।",
+      "preparing": "QR কোড প্রস্তুত হচ্ছে...",
+      "showQr": "QR দেখান",
+      "loading": "লোড হচ্ছে...",
+      "scanToConnect": "সংযোগ করতে QR স্ক্যান করুন"
+    },
+    "details": {
+      "title": "সেশনের বিবরণ",
+      "name": "নাম",
+      "status": "অবস্থা",
+      "sessionId": "সেশন ID",
+      "phone": "ফোন নম্বর",
+      "phoneNone": "সংযুক্ত নয়",
+      "created": "তৈরির তারিখ",
+      "lastActive": "সর্বশেষ সক্রিয়"
+    },
+    "actions": {
+      "view": "দেখুন",
+      "start": "শুরু",
+      "stop": "বন্ধ",
+      "reconnect": "পুনরায় সংযোগ",
+      "delete": "মুছুন"
+    },
+    "toasts": {
+      "readyTitle": "সেশন প্রস্তুত",
+      "readyDesc": "WhatsApp সেশন এখন সংযুক্ত",
+      "disconnectedTitle": "সেশন বিচ্ছিন্ন",
+      "disconnectedDesc": "WhatsApp সেশন বিচ্ছিন্ন হয়েছে"
+    },
+    "card": {
+      "phone": "ফোন",
+      "sessionId": "সেশন ID",
+      "lastActive": "সর্বশেষ সক্রিয়"
+    }
+  },
+  "webhooks": {
+    "title": "Webhooks",
+    "subtitle": "রিয়েল-টাইম ইভেন্ট বিজ্ঞপ্তির জন্য HTTP কলব্যাক কনফিগার করুন",
+    "addWebhook": "Webhook যোগ করুন",
+    "createTitle": "Webhook তৈরি করুন",
+    "editTitle": "Webhook সম্পাদনা করুন",
+    "deleteTitle": "Webhook মুছুন",
+    "deleteConfirm": "আপনি কি এই Webhook মুছে ফেলতে চান?",
+    "selectSession": "সেশন নির্বাচন...",
+    "session": "সেশন",
+    "events": "ইভেন্ট",
+    "available": "উপলব্ধ ইভেন্ট",
+    "saveChanges": "পরিবর্তন সংরক্ষণ",
+    "columns": {
+      "url": "URL",
+      "events": "ইভেন্ট",
+      "session": "সেশন",
+      "status": "অবস্থা",
+      "actions": "কাজসমূহ"
+    },
+    "empty": {
+      "title": "কোনো Webhook কনফিগার করা নেই",
+      "description": "রিয়েল-টাইম ইভেন্ট বিজ্ঞপ্তি পেতে একটি Webhook যোগ করুন"
+    },
+    "toasts": {
+      "created": "Webhook সফলভাবে তৈরি হয়েছে",
+      "createFailed": "Webhook তৈরি করতে ব্যর্থ: {{message}}",
+      "deleted": "Webhook সফলভাবে মুছে ফেলা হয়েছে",
+      "deleteFailed": "Webhook মুছতে ব্যর্থ: {{message}}",
+      "updated": "Webhook সফলভাবে আপডেট হয়েছে",
+      "updateFailed": "Webhook আপডেট করতে ব্যর্থ: {{message}}",
+      "testOk": "Webhook পরীক্ষা সফল! অবস্থা: {{status}}",
+      "testFailed": "Webhook পরীক্ষা ব্যর্থ: {{message}}",
+      "testError": "Webhook পরীক্ষা করতে ব্যর্থ: {{message}}"
+    },
+    "actions": {
+      "test": "পরীক্ষা",
+      "edit": "সম্পাদনা",
+      "delete": "মুছুন"
+    },
+    "eventDescriptions": {
+      "message.received": "যখন একটি বার্তা পাওয়া যায়",
+      "message.sent": "যখন একটি বার্তা পাঠানো হয়",
+      "session.connected": "যখন একটি সেশন সংযুক্ত হয়",
+      "session.disconnected": "যখন একটি সেশন বিচ্ছিন্ন হয়",
+      "session.qr": "যখন QR কোড তৈরি হয়",
+      "all": "সব ইভেন্ট"
+    }
+  },
+  "apiKeys": {
+    "title": "API ব্যবস্থাপনা",
+    "subtitle": "API কী, credentials এবং API ডকুমেন্টেশন পরিচালনা করুন",
+    "tabs": {
+      "overview": "ওভারভিউ",
+      "keys": "API কী",
+      "docs": "ডকুমেন্টেশন"
+    },
+    "stats": {
+      "totalKeys": "মোট কী",
+      "activeKeys": "সক্রিয় কী",
+      "totalCalls": "মোট কল",
+      "rateLimit": "আজকের কল"
+    },
+    "credentials": {
+      "baseUrl": "API বেস URL",
+      "baseUrlHint": "সব API অনুরোধের জন্য বেস endpoint হিসেবে এই URL ব্যবহার করুন।"
+    },
+    "quickLinks": {
+      "title": "দ্রুত লিংক",
+      "manageKeys": "API কী পরিচালনা করুন",
+      "manageKeysDesc": "আপনার API কী দেখুন, তৈরি, বাতিল ও মুছুন",
+      "viewDocs": "API ডকুমেন্টেশন",
+      "viewDocsDesc": "উদাহরণ সহ বিস্তারিত endpoint রেফারেন্স ব্রাউজ করুন",
+      "createKey": "নতুন কী তৈরি করুন",
+      "createKeyDesc": "একটি নির্দিষ্ট ভূমিকা সহ নতুন API কী তৈরি করুন"
+    },
+    "createBtn": "API কী তৈরি করুন",
+    "modalTitle": "API কী তৈরি করুন",
+    "createdTitle": "API কী তৈরি হয়েছে",
+    "createdHint": "এই কী এখনই কপি করুন। আপনি এটি আবার দেখতে পাবেন না।",
+    "createdHintExtra": "এই গোপন কী আর দেখানো হবে না। নিরাপদে সংরক্ষণ করুন।",
+    "namePlaceholder": "যেমন: প্রোডাকশন কী",
+    "rolesTitle": "ভূমিকা রেফারেন্স",
+    "roles": {
+      "admin": "অ্যাডমিন",
+      "operator": "অপারেটর",
+      "viewer": "দর্শক"
+    },
+    "roleDescriptions": {
+      "admin": "সব রিসোর্সে পূর্ণ প্রবেশাধিকার",
+      "operator": "সেশন ও বার্তা ব্যবস্থাপনা",
+      "viewer": "শুধু পড়ার প্রবেশাধিকার"
+    },
+    "columns": {
+      "name": "নাম",
+      "key": "কী",
+      "role": "ভূমিকা",
+      "status": "অবস্থা",
+      "lastUsed": "সর্বশেষ ব্যবহার",
+      "actions": "কাজসমূহ"
+    },
+    "statuses": {
+      "active": "সক্রিয়",
+      "revoked": "বাতিল"
+    },
+    "empty": {
+      "title": "কোনো API কী তৈরি করা হয়নি",
+      "description": "আপনার অনুরোধ প্রমাণীকরণের জন্য একটি API কী তৈরি করুন"
+    },
+    "confirm": {
+      "deleteTitle": "API কী মুছুন",
+      "revokeTitle": "API কী বাতিল করুন",
+      "deleteMessage": "আপনি কি স্থায়ীভাবে <strong>{{name}}</strong> মুছে ফেলতে চান? এটি পূর্বাবস্থায় ফেরানো যাবে না।",
+      "revokeMessage": "আপনি কি <strong>{{name}}</strong> বাতিল করতে চান? এটি আর কাজ করবে না।",
+      "delete": "মুছুন",
+      "revoke": "বাতিল"
+    },
+    "actions": {
+      "copy": "কপি",
+      "revoke": "বাতিল",
+      "delete": "মুছুন"
+    }
+  },
+  "apiDocs": {
+    "auth": {
+      "title": "প্রমাণীকরণ",
+      "description": "সব API অনুরোধে প্রমাণীকরণ প্রয়োজন। <code>X-API-Key</code> হেডারে আপনার API কী অন্তর্ভুক্ত করুন। আপনি API কী ট্যাবে আপনার কীগুলি পরিচালনা করতে পারেন।",
+      "example": "প্রমাণীকরণ সহ অনুরোধের উদাহরণ",
+      "none": "প্রমাণীকরণের প্রয়োজন নেই",
+      "apiKey": "API কী প্রয়োজন",
+      "admin": "অ্যাডমিন প্রবেশাধিকার প্রয়োজন"
+    },
+    "sdks": {
+      "title": "SDK ও লাইব্রেরি",
+      "description": "আপনার অ্যাপ্লিকেশনের সাথে OpenWA নির্বিঘ্নে সংহত করতে আমাদের অফিসিয়াল SDK ব্যবহার করুন।"
+    },
+    "endpoints": {
+      "title": "API এন্ডপয়েন্ট",
+      "health": {
+        "desc": "API সার্ভারের স্বাস্থ্য অবস্থা পরীক্ষা করুন"
+      },
+      "sessions": {
+        "list": "সব WhatsApp সেশন তালিকাভুক্ত করুন",
+        "create": "নতুন WhatsApp সেশন তৈরি করুন",
+        "qr": "একটি সেশনের QR কোড পান",
+        "delete": "একটি WhatsApp সেশন মুছুন"
+      },
+      "messages": {
+        "sendText": "একটি টেক্সট বার্তা পাঠান",
+        "sendImage": "একটি ইমেজ বার্তা পাঠান",
+        "sendLocation": "একটি অবস্থান বার্তা পাঠান",
+        "list": "ঐচ্ছিক ফিল্টার সহ বার্তা তালিকাভুক্ত করুন"
+      },
+      "contacts": {
+        "list": "সব সংরক্ষিত কন্টাক্ট তালিকাভুক্ত করুন",
+        "create": "নতুন কন্টাক্ট তৈরি করুন"
+      },
+      "webhooks": {
+        "list": "সব কনফিগার করা Webhook তালিকাভুক্ত করুন"
+      },
+      "campaigns": {
+        "list": "সব ব্রডকাস্ট ক্যাম্পেইন তালিকাভুক্ত করুন",
+        "create": "নতুন ব্রডকাস্ট ক্যাম্পেইন তৈরি করুন"
+      },
+      "settings": {
+        "get": "সিস্টেম সেটিংস পান (শুধু অ্যাডমিন)"
+      }
+    },
+    "requestBody": "অনুরোধের বডি",
+    "example": "উদাহরণ",
+    "response": "প্রতিক্রিয়া",
+    "rateLimit": {
+      "title": "রেট লিমিটিং",
+      "description": "ন্যায্য ব্যবহার নিশ্চিত করতে API অনুরোধের হার সীমিত। ডিফল্ট সীমা প্রতি API কী প্রতি ৬০ সেকেন্ডের উইন্ডোতে ১০০টি অনুরোধ। এই সীমা অতিক্রম করলে 429 Too Many Requests প্রতিক্রিয়া হবে। উচ্চতর সীমার প্রয়োজন হলে সমর্থনের সাথে যোগাযোগ করুন।"
+    }
+  },
+  "logs": {
+    "title": "অডিট লগ",
+    "subtitle": "সব API কার্যকলাপ এবং সিস্টেম ইভেন্ট ট্র্যাক ও পর্যালোচনা করুন",
+    "exportCsv": "CSV এক্সপোর্ট",
+    "searchPlaceholder": "লগ অনুসন্ধান...",
+    "severity": {
+      "all": "সব স্তর",
+      "info": "তথ্য",
+      "warn": "সতর্কতা",
+      "error": "ত্রুটি"
+    },
+    "columns": {
+      "timestamp": "সময়",
+      "action": "কাজ",
+      "session": "সেশন",
+      "apiKey": "API কী",
+      "user": "ব্যবহারকারী",
+      "ip": "IP ঠিকানা",
+      "severity": "স্তর"
+    },
+    "pagination": "পৃষ্ঠা {{page}} / {{total}} (মোট {{count}}টি)",
+    "empty": {
+      "title": "কোনো লগ পাওয়া যায়নি",
+      "description": "কাজ সম্পাদন করার সাথে সাথে অডিট লগ এখানে প্রদর্শিত হবে"
+    }
+  },
+  "composer": {
+    "title": "কম্পোজার",
+    "subtitle": "WhatsApp-এর মতো বার্তা তৈরি এবং পাঠান",
+    "session": "WhatsApp সেশন",
+    "noReadySessions": "কোনো প্রস্তুত সেশন নেই",
+    "contactType": "কন্টাক্টের ধরন",
+    "recipients": "প্রাপক",
+    "selected": "{{count}}টি নির্বাচিত",
+    "savedContacts": "কন্টাক্ট",
+    "waContacts": "WA কন্টাক্ট",
+    "groups": "গ্রুপ",
+    "newNumber": "নতুন নম্বর",
+    "searchContacts": "কন্টাক্ট অনুসন্ধান...",
+    "searchGroups": "গ্রুপ অনুসন্ধান...",
+    "noContacts": "কোনো সংরক্ষিত কন্টাক্ট নেই",
+    "noGroups": "কোনো গ্রুপ পাওয়া যায়নি",
+    "noResults": "কোনো ফলাফল পাওয়া যায়নি",
+    "schedule": "শিডিউল",
+    "messageType": "বার্তার ধরন",
+    "types": {
+      "text": "টেক্সট",
+      "image": "ছবি",
+      "video": "ভিডিও",
+      "audio": "অডিও",
+      "document": "ডকুমেন্ট",
+      "location": "অবস্থান",
+      "contact": "কন্টাক্ট"
+    },
+    "message": "বার্তা",
+    "messagePlaceholder": "এখানে আপনার বার্তা লিখুন...",
+    "mediaUrl": "মিডিয়া URL",
+    "mediaUrlPlaceholder": "https://example.com/file.jpg",
+    "caption": "ক্যাপশন",
+    "captionPlaceholder": "একটি ক্যাপশন যোগ করুন...",
+    "fileName": "ফাইলের নাম",
+    "fileNamePlaceholder": "document.pdf",
+    "latitude": "অক্ষাংশ",
+    "latitudePlaceholder": "23.6850",
+    "longitude": "দ্রাঘিমাংশ",
+    "longitudePlaceholder": "90.3563",
+    "locationDescription": "বিবরণ",
+    "locationDescriptionPlaceholder": "যেমন: আমাদের মিলনস্থল",
+    "contactName": "কন্টাক্টের নাম",
+    "contactNamePlaceholder": "করিম হোসেন",
+    "contactPhone": "কন্টাক্টের ফোন",
+    "contactPhonePlaceholder": "+8801712345678",
+    "send": "বার্তা পাঠান",
+    "sending": "পাঠানো হচ্ছে...",
+    "sendTo": "{{count}} জন প্রাপককে পাঠান",
+    "sendingTo": "{{count}} জন প্রাপককে পাঠানো হচ্ছে...",
+    "sentSuccess": "{{count}} জন প্রাপককে বার্তা পাঠানো হয়েছে",
+    "sentPartial": "{{sent}} জনকে পাঠানো হয়েছে, {{failed}} জনের জন্য ব্যর্থ",
+    "progress": "অগ্রগতি",
+    "charCount": "{{count}} / ৪০৯৬ অক্ষর",
+    "livePreview": "লাইভ প্রিভিউ",
+    "noMessages": "এখনো কোনো বার্তা নেই",
+    "noMessagesHint": "কথোপকথন শুরু করতে একটি বার্তা পাঠান"
+  },
+  "campaigns": {
+    "title": "ক্যাম্পেইন",
+    "subtitle": "ব্রডকাস্ট ক্যাম্পেইন তৈরি এবং পরিচালনা করুন",
+    "newCampaign": "নতুন ক্যাম্পেইন",
+    "editCampaign": "ক্যাম্পেইন সম্পাদনা",
+    "duplicate": "নকল",
+    "searchPlaceholder": "ক্যাম্পেইন অনুসন্ধান...",
+    "filterStatus": "সব অবস্থা",
+    "statuses": {
+      "draft": "খসড়া",
+      "scheduled": "নির্ধারিত",
+      "sending": "পাঠানো হচ্ছে",
+      "completed": "সম্পন্ন",
+      "paused": "বিরাম দেওয়া",
+      "cancelled": "বাতিল",
+      "failed": "ব্যর্থ"
+    },
+    "recipientType": {
+      "contacts": "কন্টাক্ট",
+      "groups": "গ্রুপ"
+    },
+    "stats": {
+      "total": "মোট ক্যাম্পেইন",
+      "active": "সক্রিয়",
+      "completed": "সম্পন্ন",
+      "failed": "ব্যর্থ",
+      "totalRecipients": "মোট প্রাপক",
+      "totalSent": "মোট পাঠানো",
+      "totalFailed": "মোট ব্যর্থ"
+    },
+    "columns": {
+      "name": "নাম",
+      "status": "অবস্থা",
+      "recipients": "প্রাপক",
+      "sent": "পাঠানো",
+      "failed": "ব্যর্থ",
+      "schedule": "শিডিউল",
+      "created": "তৈরির তারিখ",
+      "actions": "কাজসমূহ"
+    },
+    "empty": {
+      "title": "এখনো কোনো ক্যাম্পেইন নেই",
+      "description": "বার্তা সম্প্রচার শুরু করতে আপনার প্রথম ক্যাম্পেইন তৈরি করুন"
+    },
+    "wizard": {
+      "step1": "বিবরণ",
+      "step2": "বার্তা",
+      "step3": "প্রাপক",
+      "step4": "শিডিউল",
+      "step5": "পর্যালোচনা",
+      "name": "ক্যাম্পেইনের নাম",
+      "namePlaceholder": "যেমন: ঈদ অফার",
+      "description": "বিবরণ",
+      "descriptionPlaceholder": "এই ক্যাম্পেইনের জন্য ঐচ্ছিক বিবরণ",
+      "session": "WhatsApp সেশন",
+      "noSessions": "কোনো প্রস্তুত সেশন নেই",
+      "messageType": "বার্তার ধরন",
+      "text": "টেক্সট",
+      "image": "ছবি",
+      "video": "ভিডিও",
+      "audio": "অডিও",
+      "document": "ডকুমেন্ট",
+      "location": "অবস্থান",
+      "contact": "কন্টাক্ট",
+      "textPlaceholder": "আপনার বার্তা লিখুন...",
+      "mediaUrl": "মিডিয়া URL",
+      "mediaUrlPlaceholder": "https://example.com/file.jpg",
+      "caption": "ক্যাপশন",
+      "captionPlaceholder": "একটি ক্যাপশন যোগ করুন...",
+      "fileName": "ফাইলের নাম",
+      "fileNamePlaceholder": "document.pdf",
+      "latitude": "অক্ষাংশ",
+      "latitudePlaceholder": "23.6850",
+      "longitude": "দ্রাঘিমাংশ",
+      "longitudePlaceholder": "90.3563",
+      "contactName": "কন্টাক্টের নাম",
+      "contactNamePlaceholder": "করিম হোসেন",
+      "contactPhone": "কন্টাক্টের ফোন",
+      "contactPhonePlaceholder": "+8801712345678",
+      "selectRecipients": "প্রাপক নির্বাচন",
+      "contacts": "সংরক্ষিত কন্টাক্ট",
+      "groups": "কন্টাক্ট গ্রুপ",
+      "searchContacts": "কন্টাক্ট অনুসন্ধান...",
+      "searchGroups": "গ্রুপ অনুসন্ধান...",
+      "noContacts": "কোনো কন্টাক্ট পাওয়া যায়নি",
+      "noGroups": "কোনো গ্রুপ পাওয়া যায়নি",
+      "selected": "{{count}}টি নির্বাচিত",
+      "scheduleNow": "এখনই পাঠান",
+      "scheduleLater": "পরে পাঠানোর জন্য নির্ধারণ",
+      "scheduleDate": "শিডিউলের তারিখ",
+      "scheduleTime": "শিডিউলের সময়",
+      "reviewTitle": "ক্যাম্পেইন পর্যালোচনা",
+      "reviewName": "নাম",
+      "reviewSession": "সেশন",
+      "reviewMessageType": "বার্তার ধরন",
+      "reviewMessagePreview": "বার্তার প্রিভিউ",
+      "reviewRecipients": "প্রাপক",
+      "reviewRecipientCount": "{{count}} জন প্রাপক",
+      "reviewSchedule": "শিডিউল",
+      "reviewScheduleNow": "এখনই পাঠান",
+      "reviewScheduleDate": "{{date}}-এর জন্য নির্ধারিত",
+      "createBtn": "ক্যাম্পেইন তৈরি",
+      "creating": "তৈরি হচ্ছে...",
+      "saveBtn": "পরিবর্তন সংরক্ষণ",
+      "saving": "সংরক্ষণ হচ্ছে..."
+    },
+    "detail": {
+      "title": "ক্যাম্পেইনের বিবরণ",
+      "overview": "ওভারভিউ",
+      "recipients": "প্রাপক",
+      "stats": {
+        "total": "মোট প্রাপক",
+        "sent": "পাঠানো",
+        "failed": "ব্যর্থ",
+        "pending": "মুলতুবি",
+        "progress": "অগ্রগতি"
+      },
+      "actions": {
+        "start": "ক্যাম্পেইন শুরু",
+        "pause": "বিরাম",
+        "cancel": "বাতিল",
+        "resendFailed": "ব্যর্থ পুনরায় পাঠান",
+        "edit": "সম্পাদনা",
+        "delete": "মুছুন",
+        "back": "ক্যাম্পেইনে ফিরুন"
+      },
+      "confirmDelete": "আপনি কি এই ক্যাম্পেইন মুছে ফেলতে চান?",
+      "confirmStart": "আপনি কি এই ক্যাম্পেইন শুরু করতে চান?",
+      "noRecipients": "কোনো প্রাপক পাওয়া যায়নি",
+      "searchRecipients": "প্রাপক অনুসন্ধান...",
+      "filterStatus": "অবস্থা অনুসারে ফিল্টার"
+    },
+    "toasts": {
+      "createSuccess": "ক্যাম্পেইন তৈরি হয়েছে",
+      "createError": "ক্যাম্পেইন তৈরি করতে ব্যর্থ",
+      "updateSuccess": "ক্যাম্পেইন আপডেট হয়েছে",
+      "updateError": "ক্যাম্পেইন আপডেট করতে ব্যর্থ",
+      "deleteSuccess": "ক্যাম্পেইন মুছে ফেলা হয়েছে",
+      "deleteError": "ক্যাম্পেইন মুছতে ব্যর্থ",
+      "startSuccess": "ক্যাম্পেইন শুরু হয়েছে",
+      "startError": "ক্যাম্পেইন শুরু করতে ব্যর্থ",
+      "pauseSuccess": "ক্যাম্পেইন বিরাম দেওয়া হয়েছে",
+      "pauseError": "ক্যাম্পেইন বিরাম দিতে ব্যর্থ",
+      "cancelSuccess": "ক্যাম্পেইন বাতিল হয়েছে",
+      "cancelError": "ক্যাম্পেইন বাতিল করতে ব্যর্থ",
+      "resendSuccess": "ব্যর্থ বার্তা পুনরায় পাঠানো হচ্ছে",
+      "resendError": "বার্তা পুনরায় পাঠাতে ব্যর্থ"
+    }
+  },
+  "contacts": {
+    "title": "কন্টাক্ট",
+    "subtitle": "আপনার WhatsApp কন্টাক্ট পরিচালনা করুন",
+    "newContact": "নতুন কন্টাক্ট",
+    "searchPlaceholder": "নাম বা ফোন দ্বারা অনুসন্ধান...",
+    "selected": "{{count}}টি নির্বাচিত",
+    "bulkDelete": "নির্বাচিত মুছুন",
+    "importBtn": "CSV ইম্পোর্ট",
+    "exportBtn": "CSV এক্সপোর্ট",
+    "downloadTemplate": "নমুনা CSV ডাউনলোড",
+    "empty": {
+      "title": "এখনো কোনো কন্টাক্ট নেই",
+      "description": "আপনার প্রথম কন্টাক্ট যোগ করুন বা CSV ফাইল থেকে ইম্পোর্ট করুন"
+    },
+    "columns": {
+      "name": "নাম",
+      "phone": "ফোন",
+      "country": "দেশ",
+      "city": "শহর",
+      "note": "নোট",
+      "actions": "কাজসমূহ"
+    },
+    "form": {
+      "createTitle": "নতুন কন্টাক্ট",
+      "editTitle": "কন্টাক্ট সম্পাদনা",
+      "fullName": "পূর্ণ নাম",
+      "fullNamePlaceholder": "যেমন: করিম হোসেন",
+      "countryCode": "দেশের কোড",
+      "phone": "WhatsApp ফোন",
+      "phonePlaceholder": "যেমন: 1712345678",
+      "phoneHint": "দেশের কোড ছাড়া নম্বর লিখুন — এটি স্বয়ংক্রিয়ভাবে যুক্ত হবে",
+      "country": "দেশ",
+      "countryPlaceholder": "যেমন: বাংলাদেশ",
+      "state": "রাজ্য / বিভাগ",
+      "statePlaceholder": "যেমন: ঢাকা",
+      "city": "শহর",
+      "cityPlaceholder": "যেমন: ঢাকা",
+      "address": "ঠিকানা",
+      "addressPlaceholder": "যেমন: ১২৩ গুলশান এভিনিউ",
+      "note": "নোট",
+      "notePlaceholder": "যেকোনো অতিরিক্ত নোট...",
+      "phoneRequired": "ফোন নম্বর আবশ্যক",
+      "phoneDuplicate": "এই ফোন নম্বর ইতিমধ্যে আছে",
+      "phoneInvalid": "ফোন নম্বরে শুধু সংখ্যা থাকতে হবে"
+    },
+    "delete": {
+      "title": "কন্টাক্ট মুছুন",
+      "message": "আপনি কি <strong>{{name}}</strong> মুছে ফেলতে চান? এটি পূর্বাবস্থায় ফেরানো যাবে না।",
+      "messagePhone": "আপনি কি কন্টাক্ট <strong>{{phone}}</strong> মুছে ফেলতে চান? এটি পূর্বাবস্থায় ফেরানো যাবে না।",
+      "successTitle": "কন্টাক্ট মুছে ফেলা হয়েছে",
+      "successDesc": "কন্টাক্ট মুছে ফেলা হয়েছে"
+    },
+    "bulkDeleteModal": {
+      "title": "{{count}}টি কন্টাক্ট মুছুন",
+      "message": "আপনি কি {{count}}টি নির্বাচিত কন্টাক্ট মুছে ফেলতে চান? এটি পূর্বাবস্থায় ফেরানো যাবে না।",
+      "successTitle": "কন্টাক্ট মুছে ফেলা হয়েছে",
+      "successDesc": "{{count}}টি কন্টাক্ট মুছে ফেলা হয়েছে"
+    },
+    "import": {
+      "title": "কন্টাক্ট ইম্পোর্ট",
+      "step1Title": "CSV ফাইল আপলোড",
+      "step1Desc": "আপনার কন্টাক্ট সহ একটি CSV ফাইল আপলোড করুন। ফোন কলামে দেশের কোড অন্তর্ভুক্ত থাকতে হবে (যেমন: +8801712345678)।",
+      "step2Title": "প্রিভিউ ও ভ্যালিডেট",
+      "step2Desc": "ইম্পোর্ট করার আগে আপনার কন্টাক্ট পর্যালোচনা করুন। অবৈধ সারিগুলি হাইলাইট করা হবে।",
+      "step3Title": "ইম্পোর্ট সম্পন্ন",
+      "dropzone": "আপনার CSV ফাইল এখানে ফেলে দিন, বা ব্রাউজ করতে ক্লিক করুন",
+      "dropzoneHint": "সমর্থিত ফরম্যাট: .csv",
+      "validRows": "{{count}}টি বৈধ",
+      "invalidRows": "{{count}}টি অবৈধ",
+      "importValid": "শুধু বৈধ ইম্পোর্ট",
+      "importAll": "সব ইম্পোর্ট",
+      "importBtn": "{{count}}টি কন্টাক্ট ইম্পোর্ট",
+      "importing": "ইম্পোর্ট করা হচ্ছে...",
+      "successTitle": "ইম্পোর্ট সফল",
+      "successDesc": "{{created}}টি কন্টাক্ট ইম্পোর্ট করা হয়েছে, {{skipped}}টি বাদ দেওয়া হয়েছে",
+      "errorPhone": "ফোন নম্বর খালি",
+      "errorNoCountryCode": "ফোনে দেশের কোড থাকতে হবে (যেমন: +8801712345678)",
+      "errorDuplicate": "ফাইলে ডুপ্লিকেট ফোন",
+      "previewColumns": {
+        "row": "#",
+        "status": "অবস্থা",
+        "name": "পূর্ণ নাম",
+        "phone": "ফোন",
+        "country": "দেশ",
+        "city": "শহর",
+        "note": "নোট",
+        "error": "সমস্যা"
+      }
+    },
+    "detail": {
+      "title": "কন্টাক্টের বিবরণ",
+      "phone": "ফোন",
+      "country": "দেশ",
+      "state": "রাজ্য",
+      "city": "শহর",
+      "address": "ঠিকানা",
+      "note": "নোট",
+      "created": "তৈরির তারিখ",
+      "messages": "বার্তার ইতিহাস",
+      "noMessages": "এই কন্টাক্টের জন্য কোনো বার্তা পাওয়া যায়নি।",
+      "incoming": " incoming",
+      "outgoing": "outgoing",
+      "loadMore": "আরও লোড",
+      "loadingMessages": "বার্তা লোড হচ্ছে...",
+      "totalMessages": "মোট {{count}}টি বার্তা",
+      "session": "সেশন",
+      "type": "ধরন",
+      "direction": "দিক",
+      "messageBody": "বার্তা",
+      "timestamp": "তারিখ",
+      "status": "অবস্থা"
+    },
+    "pagination": {
+      "showing": "{{total}}টি এন্ট্রির মধ্যে {{from}} থেকে {{to}} দেখানো হচ্ছে",
+      "perPage": "প্রতি পৃষ্ঠায়"
+    },
+    "toasts": {
+      "createSuccess": "কন্টাক্ট তৈরি হয়েছে",
+      "createError": "কন্টাক্ট তৈরি করতে ব্যর্থ",
+      "updateSuccess": "কন্টাক্ট আপডেট হয়েছে",
+      "updateError": "কন্টাক্ট আপডেট করতে ব্যর্থ",
+      "deleteSuccess": "কন্টাক্ট মুছে ফেলা হয়েছে",
+      "deleteError": "কন্টাক্ট মুছতে ব্যর্থ",
+      "bulkDeleteSuccess": "{{count}}টি কন্টাক্ট মুছে ফেলা হয়েছে",
+      "bulkDeleteError": "কন্টাক্ট মুছতে ব্যর্থ",
+      "importSuccess": "{{created}}টি কন্টাক্ট ইম্পোর্ট করা হয়েছে",
+      "importError": "ইম্পোর্ট ব্যর্থ",
+      "exportSuccess": "{{count}}টি কন্টাক্ট এক্সপোর্ট করা হয়েছে",
+      "exportError": "এক্সপোর্ট ব্যর্থ"
+    }
+  },
+  "groups": {
+    "title": "কন্টাক্ট গ্রুপ",
+    "subtitle": "টার্গেটেড বার্তার জন্য আপনার কন্টাক্ট গ্রুপে সংগঠিত করুন",
+    "newGroup": "নতুন গ্রুপ",
+    "searchPlaceholder": "গ্রুপ অনুসন্ধান...",
+    "empty": {
+      "title": "এখনো কোনো গ্রুপ নেই",
+      "description": "আপনার কন্টাক্ট সংগঠিত করতে একটি গ্রুপ তৈরি করুন"
+    },
+    "columns": {
+      "name": "নাম",
+      "description": "বিবরণ",
+      "members": "সদস্য",
+      "created": "তৈরির তারিখ",
+      "actions": "কাজসমূহ"
+    },
+    "form": {
+      "createTitle": "নতুন গ্রুপ তৈরি",
+      "editTitle": "গ্রুপ সম্পাদনা",
+      "name": "গ্রুপের নাম",
+      "namePlaceholder": "যেমন: VIP গ্রাহক",
+      "description": "বিবরণ",
+      "descriptionPlaceholder": "এই গ্রুপের জন্য ঐচ্ছিক বিবরণ",
+      "nameRequired": "গ্রুপের নাম আবশ্যক"
+    },
+    "create": {
+      "step1Title": "গ্রুপের বিবরণ",
+      "step2Title": "সদস্য যোগ করুন",
+      "step3Title": "পর্যালোচনা ও তৈরি",
+      "method": "কিভাবে কন্টাক্ট যোগ করতে চান?",
+      "csvImport": "CSV থেকে ইম্পোর্ট",
+      "csvImportDesc": "কন্টাক্ট তৈরি করতে এবং এই গ্রুপে যোগ করতে একটি CSV ফাইল আপলোড করুন",
+      "filterSelect": "ফিল্টার ও নির্বাচন",
+      "filterSelectDesc": "এই গ্রুপে যোগ করতে বিদ্যমান কন্টাক্ট অনুসন্ধান ও ফিল্টার করুন",
+      "csv": {
+        "title": "CSV থেকে কন্টাক্ট ইম্পোর্ট",
+        "dropzone": "আপনার CSV ফাইল এখানে ফেলে দিন, বা ব্রাউজ করতে ক্লিক করুন",
+        "dropzoneHint": "সমর্থিত ফরম্যাট: .csv। ফোন নম্বরে দেশের কোড অন্তর্ভুক্ত থাকতে হবে (যেমন: +8801712345678)",
+        "validRows": "{{count}}টি বৈধ",
+        "invalidRows": "{{count}}টি অবৈধ",
+        "importBtn": "{{count}}টি কন্টাক্ট ইম্পোর্ট",
+        "importing": "ইম্পোর্ট করা হচ্ছে...",
+        "step2Title": "প্রিভিউ ও ভ্যালিডেট",
+        "step2Desc": "ইম্পোর্ট করার আগে আপনার কন্টাক্ট পর্যালোচনা করুন। অবৈধ সারিগুলি হাইলাইট করা হবে।",
+        "step3Title": "ইম্পোর্ট সম্পন্ন",
+        "successDesc": "{{created}}টি কন্টাক্ট তৈরি এবং গ্রুপে যোগ করা হয়েছে, {{skipped}}টি বাদ দেওয়া হয়েছে",
+        "errorPhone": "ফোন নম্বর খালি",
+        "errorNoCountryCode": "ফোনে দেশের কোড থাকতে হবে (যেমন: +8801712345678)",
+        "errorDuplicate": "ফাইলে ডুপ্লিকেট ফোন",
+        "previewColumns": {
+          "row": "#",
+          "status": "অবস্থা",
+          "name": "পূর্ণ নাম",
+          "phone": "ফোন",
+          "country": "দেশ",
+          "city": "শহর",
+          "note": "নোট",
+          "error": "সমস্যা"
+        }
+      },
+      "filter": {
+        "title": "কন্টাক্ট নির্বাচন",
+        "searchPlaceholder": "নাম বা ফোন দ্বারা অনুসন্ধান...",
+        "country": "দেশ",
+        "allCountries": "সব দেশ",
+        "state": "রাজ্য",
+        "allStates": "সব রাজ্য",
+        "city": "শহর",
+        "allCities": "সব শহর",
+        "namePlaceholder": "নাম দ্বারা ফিল্টার...",
+        "phonePlaceholder": "ফোন উপসর্গ দ্বারা ফিল্টার...",
+        "selected": "{{count}}টি কন্টাক্ট নির্বাচিত",
+        "noResults": "কোনো কন্টাক্ট আপনার ফিল্টারের সাথে মেলে না",
+        "clearFilters": "ফিল্টার মুছুন"
+      },
+      "review": {
+        "title": "গ্রুপ পর্যালোচনা",
+        "nameLabel": "গ্রুপের নাম",
+        "descriptionLabel": "বিবরণ",
+        "membersLabel": "সদস্য",
+        "noMembers": "এখনো কোনো সদস্য যোগ করা হয়নি",
+        "addMore": "আরও কন্টাক্ট যোগ করুন"
+      }
+    },
+    "detail": {
+      "title": "গ্রুপের বিবরণ",
+      "members": "সদস্য",
+      "noMembers": "এই গ্রুপে কোনো সদস্য নেই",
+      "addMembers": "সদস্য যোগ করুন",
+      "removeSelected": "নির্বাচিত সরান",
+      "searchPlaceholder": "সদস্য অনুসন্ধান...",
+      "removeConfirm": "এই গ্রুপ থেকে {{count}}টি কন্টাক্ট সরাবেন?",
+      "empty": {
+        "title": "কোনো সদস্য নেই",
+        "description": "এই গ্রুপে কন্টাক্ট যোগ করুন"
+      }
+    },
+    "delete": {
+      "title": "গ্রুপ মুছুন",
+      "message": "আপনি কি গ্রুপ <strong>«{{name}}»</strong> মুছে ফেলতে চান? এটি পূর্বাবস্থায় ফেরানো যাবে না।",
+      "successTitle": "গ্রুপ মুছে ফেলা হয়েছে",
+      "successDesc": "গ্রুপ মুছে ফেলা হয়েছে"
+    },
+    "toasts": {
+      "createSuccess": "গ্রুপ তৈরি হয়েছে",
+      "createError": "গ্রুপ তৈরি করতে ব্যর্থ",
+      "updateSuccess": "গ্রুপ আপডেট হয়েছে",
+      "updateError": "গ্রুপ আপডেট করতে ব্যর্থ",
+      "deleteSuccess": "গ্রুপ মুছে ফেলা হয়েছে",
+      "deleteError": "গ্রুপ মুছতে ব্যর্থ",
+      "addMembersSuccess": "{{count}}টি কন্টাক্ট গ্রুপে যোগ করা হয়েছে",
+      "addMembersError": "সদস্য যোগ করতে ব্যর্থ",
+      "removeMembersSuccess": "{{count}}টি কন্টাক্ট গ্রুপ থেকে সরানো হয়েছে",
+      "removeMembersError": "সদস্য সরাতে ব্যর্থ",
+      "importSuccess": "{{created}}টি কন্টাক্ট ইম্পোর্ট এবং গ্রুপে যোগ করা হয়েছে",
+      "importError": "ইম্পোর্ট ব্যর্থ"
+    }
+  },
+  "settings": {
+    "title": "সেটিংস",
+    "subtitle": "আপনার প্রোফাইল, পাসওয়ার্ড এবং সিস্টেম সেটিংস পরিচালনা করুন",
+    "tabs": {
+      "profile": "প্রোফাইল",
+      "password": "পাসওয়ার্ড",
+      "language": "ভাষা",
+      "system": "সিস্টেম"
+    },
+    "language": {
+      "title": "ভাষা",
+      "subtitle": "ড্যাশবোর্ড ইন্টারফেসের জন্য আপনার পছন্দের ভাষা নির্বাচন করুন"
+    },
+    "profile": {
+      "name": "পূর্ণ নাম",
+      "namePlaceholder": "যেমন: করিম হোসেন",
+      "phone": "ফোন নম্বর",
+      "phonePlaceholder": "যেমন: 01712345678",
+      "profilePic": "প্রোফাইল ছবি",
+      "profilePicHint": "একটি ছবি আপলোড করুন (JPEG, PNG, WebP, GIF)। সর্বোচ্চ ৫MB।",
+      "chooseFile": "ফাইল নির্বাচন",
+      "uploading": "আপলোড হচ্ছে...",
+      "remove": "সরান",
+      "toasts": {
+        "updateSuccess": "প্রোফাইল আপডেট হয়েছে",
+        "updateError": "প্রোফাইল আপডেট করতে ব্যর্থ",
+        "uploadError": "আপলোড ব্যর্থ"
+      }
+    },
+    "password": {
+      "current": "বর্তমান পাসওয়ার্ড",
+      "currentHint": "পরিচয় নিশ্চিত করতে আপনার বর্তমান পাসওয়ার্ড লিখুন",
+      "currentPlaceholder": "বর্তমান পাসওয়ার্ড লিখুন",
+      "newPassword": "নতুন পাসওয়ার্ড",
+      "newPlaceholder": "নতুন পাসওয়ার্ড লিখুন (ন্যূনতম ৬ অক্ষর)",
+      "confirm": "নতুন পাসওয়ার্ড নিশ্চিত করুন",
+      "confirmPlaceholder": "নতুন পাসওয়ার্ড আবার লিখুন",
+      "save": "পাসওয়ার্ড পরিবর্তন",
+      "errors": {
+        "currentRequired": "বর্তমান পাসওয়ার্ড আবশ্যক",
+        "newRequired": "নতুন পাসওয়ার্ড আবশ্যক",
+        "tooShort": "পাসওয়ার্ড কমপক্ষে ৬ অক্ষর হতে হবে",
+        "mismatch": "পাসওয়ার্ড মিলছে না"
+      },
+      "toasts": {
+        "updateSuccess": "পাসওয়ার্ড সফলভাবে পরিবর্তন হয়েছে",
+        "updateError": "পাসওয়ার্ড পরিবর্তন করতে ব্যর্থ"
+      }
+    },
+    "system": {
+      "name": "ব্যবসার নাম",
+      "namePlaceholder": "যেমন: আমার কোম্পানি",
+      "email": "ইমেইল",
+      "emailPlaceholder": "যেমন: info@company.com",
+      "altPhone": "বিকল্প ফোন",
+      "altPhonePlaceholder": "যেমন: +8801712345678",
+      "website": "ওয়েবসাইট",
+      "websitePlaceholder": "যেমন: https://company.com",
+      "address": "ঠিকানা",
+      "addressPlaceholder": "যেমন: ১২৩ গুলশান এভিনিউ, ঢাকা",
+      "googleMapLink": "Google Maps লিংক",
+      "googleMapLinkPlaceholder": "যেমন: https://maps.google.com/...",
+      "businessLogo": "ব্যবসার লোগো",
+      "smallLogo": "ছোট লোগো",
+      "toasts": {
+        "updateSuccess": "সিস্টেম সেটিংস আপডেট হয়েছে",
+        "updateError": "সিস্টেম সেটিংস আপডেট করতে ব্যর্থ"
+      }
+    }
+  }
+}

@@ -25,12 +25,12 @@ import { StatusModule } from './modules/status/status.module';
 import { CatalogModule } from './modules/catalog/catalog.module';
 import { HooksModule } from './core/hooks';
 import { PluginsModule } from './core/plugins';
-import { PluginsApiModule } from './modules/plugins/plugins.module';
 import { QueueModule } from './modules/queue/queue.module';
 import { ContactsModule } from './modules/contacts/contacts.module';
 import { GroupsModule } from './modules/groups/groups.module';
 import { LocationsModule } from './modules/locations/locations.module';
 import { UploadModule } from './modules/upload/upload.module';
+import { CampaignModule } from './modules/campaign/campaign.module';
 
 @Module({
   imports: [
@@ -105,7 +105,7 @@ import { UploadModule } from './modules/upload/upload.module';
     StatsModule,
     StatusModule,
     CatalogModule,
-    PluginsApiModule,
+    CampaignModule.register(process.env.REDIS_ENABLED === 'true'),
   ],
 })
 export class AppModule {}

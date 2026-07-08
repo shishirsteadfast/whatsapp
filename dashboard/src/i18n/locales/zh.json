@@ -1,0 +1,954 @@
+{
+  "common": {
+    "appName": "OpenWA",
+    "appSubtitle": "WhatsApp 接口",
+    "loading": "加载中...",
+    "save": "保存",
+    "cancel": "取消",
+    "delete": "删除",
+    "edit": "编辑",
+    "create": "新建",
+    "close": "关闭",
+    "submit": "提交",
+    "confirm": "确认",
+    "search": "搜索",
+    "filter": "筛选",
+    "actions": "操作",
+    "status": "状态",
+    "name": "名称",
+    "role": "角色",
+    "type": "类型",
+    "url": "网址",
+    "port": "端口",
+    "host": "主机",
+    "username": "用户名",
+    "password": "密码",
+    "active": "启用",
+    "inactive": "停用",
+    "enabled": "已开启",
+    "disabled": "已关闭",
+    "connected": "已连接",
+    "disconnected": "已断开",
+    "never": "从未",
+    "justNow": "刚刚",
+    "minAgo": "{{count}}分钟前",
+    "hoursAgo": "{{count}}小时前",
+    "optional": "选填",
+    "language": "语言",
+    "english": "English",
+    "hebrew": "עברית",
+    "back": "返回",
+    "next": "下一步",
+    "previous": "上一步",
+    "expand": "展开",
+    "collapse": "收起",
+    "logout": "退出登录",
+    "refresh": "刷新",
+    "notifications": "消息通知",
+    "noNotifications": "暂无新通知",
+    "profile": "个人资料",
+    "changePassword": "修改密码",
+    "settings": "系统设置",
+    "errorGeneric": "出了点问题",
+    "unknownError": "未知错误",
+    "lightMode": "浅色模式",
+    "darkMode": "深色模式",
+    "viewAll": "查看全部",
+    "copied": "已复制！"
+  },
+  "theme": {
+    "light": "浅色",
+    "dark": "深色",
+    "system": "跟随系统",
+    "label": "主题：{{value}}"
+  },
+  "nav": {
+    "dashboard": "控制台",
+    "sessions": "会话管理",
+    "webhooks": "Webhooks",
+    "apiKeys": "API 密钥",
+    "contacts": "通讯录",
+    "composer": "消息编辑",
+    "groups": "分组",
+    "messages": "消息记录",
+    "settings": "设置",
+    "messageTester": "消息测试",
+    "campaigns": "群发任务",
+    "logs": "审计日志"
+  },
+  "errorBoundary": {
+    "title": "页面出错了",
+    "description": "控制台遇到了意外错误。",
+    "reload": "重新加载"
+  },
+  "login": {
+    "apiKey": "API 密钥",
+    "apiKeyPlaceholder": "请输入 API 密钥",
+    "apiKeyRequired": "请填写 API 密钥",
+    "connect": "连接",
+    "connecting": "连接中...",
+    "invalidKey": "API 密钥无效",
+    "connectionError": "无法连接到服务器，请重试。",
+    "help": "需要帮助？",
+    "viewDocs": "查看文档",
+    "footer": "由 Yudhi Armyndharis 和 OpenWA 社区用心打造 ❤️",
+    "version": "v{{version}} · {{date}}",
+    "title": "登录",
+    "subtitle": "请输入账号信息以访问控制台。",
+    "phoneLabel": "手机号",
+    "phonePlaceholder": "例如 13800138000",
+    "passwordLabel": "密码",
+    "passwordPlaceholder": "请输入密码",
+    "signIn": "登录",
+    "phoneRequired": "请填写手机号",
+    "passwordRequired": "请填写密码",
+    "invalidCredentials": "手机号或密码错误"
+  },
+  "dashboard": {
+    "title": "控制台",
+    "subtitle": "概览您的 WhatsApp 会话和活动情况",
+    "stats": {
+      "activeSessions": "活跃会话",
+      "messagesToday": "今日消息",
+      "webhooksConfigured": "已配置 Webhooks",
+      "apiCalls": "API 调用（24小时）"
+    },
+    "sessionsOverview": "会话概览",
+    "showingSessions": "显示 {{shown}} / {{total}} 个会话",
+    "columns": {
+      "sessionId": "会话 ID",
+      "phone": "手机号",
+      "status": "状态",
+      "lastActive": "最后活跃",
+      "actions": "操作"
+    },
+    "noSessions": "暂无会话，创建一个开始使用吧。",
+    "view": "查看",
+    "disconnect": "断开",
+    "errorPrefix": "错误：{{message}}",
+    "loadError": "数据加载失败",
+    "statActive": "{{count}} 个活跃",
+    "statNoData": "暂无数据"
+  },
+  "sessionStatus": {
+    "created": "新建",
+    "idle": "待机",
+    "initializing": "启动中...",
+    "connecting": "连接中...",
+    "qr_ready": "扫描二维码",
+    "ready": "已连接",
+    "disconnected": "已断开"
+  },
+  "sessions": {
+    "title": "会话管理",
+    "subtitle": "管理您的 WhatsApp 会话和二维码连接",
+    "newSession": "新建会话",
+    "searchPlaceholder": "搜索会话...",
+    "filter": {
+      "all": "全部状态",
+      "active": "活跃（已连接）",
+      "inactive": "未激活",
+      "connecting": "连接中"
+    },
+    "empty": {
+      "title": "暂无会话",
+      "description": "创建一个新会话开始使用"
+    },
+    "create": {
+      "title": "创建新会话",
+      "label": "会话名称",
+      "placeholder": "例如：marketing-bot",
+      "hint": "仅限小写字母、数字和短横线。示例：<code>customer-support</code>、<code>bot-1</code>",
+      "invalidChars": "含有非法字符，仅限小写字母、数字和短横线。",
+      "tooLong": "名称不能超过 50 个字符（{{length}}/50）。",
+      "duplicate": "该名称已被占用。",
+      "successTitle": "会话已创建",
+      "successDesc": "会话「{{name}}」创建成功",
+      "errorTitle": "创建失败",
+      "errorDefault": "创建会话失败"
+    },
+    "delete": {
+      "title": "确认删除",
+      "message": "确定要删除会话 <strong>「{{name}}」</strong> 吗？",
+      "warning": "该操作不可撤销。",
+      "successTitle": "会话已删除",
+      "successDescNamed": "会话「{{name}}」已删除",
+      "successDescGeneric": "会话已删除",
+      "errorTitle": "删除失败",
+      "errorDefault": "删除会话失败"
+    },
+    "qr": {
+      "title": "扫描二维码",
+      "step1": "<strong>1.</strong> 打开手机上的 WhatsApp",
+      "step2": "<strong>2.</strong> 点击 <strong>菜单</strong> → <strong>已链接设备</strong>",
+      "step3": "<strong>3.</strong> 点击 <strong>链接设备</strong> 并扫描此二维码",
+      "autoRefresh": "二维码每 5 秒自动刷新",
+      "generating": "正在生成二维码...",
+      "unavailable": "二维码暂不可用，请稍后再试。",
+      "preparing": "正在准备二维码...",
+      "showQr": "显示二维码",
+      "loading": "加载中...",
+      "scanToConnect": "扫描二维码以连接"
+    },
+    "details": {
+      "title": "会话详情",
+      "name": "名称",
+      "status": "状态",
+      "sessionId": "会话 ID",
+      "phone": "手机号",
+      "phoneNone": "未连接",
+      "created": "创建时间",
+      "lastActive": "最后活跃"
+    },
+    "actions": {
+      "view": "查看",
+      "start": "启动",
+      "stop": "停止",
+      "reconnect": "重新连接",
+      "delete": "删除"
+    },
+    "toasts": {
+      "readyTitle": "会话就绪",
+      "readyDesc": "WhatsApp 会话已成功连接",
+      "disconnectedTitle": "会话已断开",
+      "disconnectedDesc": "WhatsApp 会话已断开连接"
+    },
+    "card": {
+      "phone": "手机号",
+      "sessionId": "会话 ID",
+      "lastActive": "最后活跃"
+    }
+  },
+  "webhooks": {
+    "title": "Webhooks",
+    "subtitle": "配置 HTTP 回调以接收实时事件通知",
+    "addWebhook": "添加 Webhook",
+    "createTitle": "创建 Webhook",
+    "editTitle": "编辑 Webhook",
+    "deleteTitle": "删除 Webhook",
+    "deleteConfirm": "确定要删除这个 Webhook 吗？",
+    "selectSession": "选择会话...",
+    "session": "会话",
+    "events": "事件",
+    "available": "可用事件",
+    "saveChanges": "保存更改",
+    "columns": {
+      "url": "回调地址",
+      "events": "事件",
+      "session": "会话",
+      "status": "状态",
+      "actions": "操作"
+    },
+    "empty": {
+      "title": "暂未配置 Webhook",
+      "description": "添加一个 Webhook 来接收实时事件通知"
+    },
+    "toasts": {
+      "created": "Webhook 创建成功",
+      "createFailed": "创建 Webhook 失败：{{message}}",
+      "deleted": "Webhook 删除成功",
+      "deleteFailed": "删除 Webhook 失败：{{message}}",
+      "updated": "Webhook 更新成功",
+      "updateFailed": "更新 Webhook 失败：{{message}}",
+      "testOk": "Webhook 测试通过！状态码：{{status}}",
+      "testFailed": "Webhook 测试失败：{{message}}",
+      "testError": "测试 Webhook 时出错：{{message}}"
+    },
+    "actions": {
+      "test": "测试",
+      "edit": "编辑",
+      "delete": "删除"
+    },
+    "eventDescriptions": {
+      "message.received": "收到消息时",
+      "message.sent": "发送消息时",
+      "session.connected": "会话连接时",
+      "session.disconnected": "会话断开时",
+      "session.qr": "生成二维码时",
+      "all": "所有事件"
+    }
+  },
+  "apiKeys": {
+    "title": "API 管理",
+    "subtitle": "管理 API 密钥、查看凭据和浏览 API 文档",
+    "tabs": {
+      "overview": "概览",
+      "keys": "API 密钥",
+      "docs": "文档"
+    },
+    "stats": {
+      "totalKeys": "密钥总数",
+      "activeKeys": "有效密钥",
+      "totalCalls": "调用总数",
+      "rateLimit": "今日调用"
+    },
+    "credentials": {
+      "baseUrl": "API 基础地址",
+      "baseUrlHint": "将此地址作为所有 API 请求的基础端点。"
+    },
+    "quickLinks": {
+      "title": "快捷链接",
+      "manageKeys": "管理 API 密钥",
+      "manageKeysDesc": "查看、创建、撤销和删除您的 API 密钥",
+      "viewDocs": "API 文档",
+      "viewDocsDesc": "浏览详细的接口参考文档及示例",
+      "createKey": "新建密钥",
+      "createKeyDesc": "生成一个指定角色的新 API 密钥"
+    },
+    "createBtn": "新建 API 密钥",
+    "modalTitle": "新建 API 密钥",
+    "createdTitle": "API 密钥已创建",
+    "createdHint": "请立即复制此密钥，关闭后将无法再次查看。",
+    "createdHintExtra": "此密钥不会再次显示，请妥善保管。",
+    "namePlaceholder": "例如：生产环境密钥",
+    "rolesTitle": "角色说明",
+    "roles": {
+      "admin": "管理员",
+      "operator": "操作员",
+      "viewer": "只读用户"
+    },
+    "roleDescriptions": {
+      "admin": "所有资源的完全访问权限",
+      "operator": "会话和消息管理",
+      "viewer": "只读访问"
+    },
+    "columns": {
+      "name": "名称",
+      "key": "密钥",
+      "role": "角色",
+      "status": "状态",
+      "lastUsed": "最后使用",
+      "actions": "操作"
+    },
+    "statuses": {
+      "active": "有效",
+      "revoked": "已撤销"
+    },
+    "empty": {
+      "title": "暂无 API 密钥",
+      "description": "创建一个 API 密钥来认证您的请求"
+    },
+    "confirm": {
+      "deleteTitle": "删除 API 密钥",
+      "revokeTitle": "撤销 API 密钥",
+      "deleteMessage": "确定要永久删除 <strong>{{name}}</strong> 吗？此操作不可撤销。",
+      "revokeMessage": "确定要撤销 <strong>{{name}}</strong> 吗？撤销后将无法继续使用。",
+      "delete": "删除",
+      "revoke": "撤销"
+    },
+    "actions": {
+      "copy": "复制",
+      "revoke": "撤销",
+      "delete": "删除"
+    }
+  },
+  "apiDocs": {
+    "auth": {
+      "title": "身份认证",
+      "description": "所有 API 请求都需要认证。请在请求头 <code>X-API-Key</code> 中传入您的 API 密钥。您可以在「API 密钥」选项卡中管理密钥。",
+      "example": "带认证的请求示例",
+      "none": "无需认证",
+      "apiKey": "需要 API 密钥",
+      "admin": "需要管理员权限"
+    },
+    "sdks": {
+      "title": "SDK 与开发库",
+      "description": "使用我们官方的 SDK 将 OpenWA 无缝集成到您的应用中。"
+    },
+    "endpoints": {
+      "title": "API 接口列表",
+      "health": {
+        "desc": "检查 API 服务器运行状态"
+      },
+      "sessions": {
+        "list": "获取所有 WhatsApp 会话列表",
+        "create": "创建新的 WhatsApp 会话",
+        "qr": "获取会话的二维码",
+        "delete": "删除 WhatsApp 会话"
+      },
+      "messages": {
+        "sendText": "发送文本消息",
+        "sendImage": "发送图片消息",
+        "sendLocation": "发送位置消息",
+        "list": "按条件筛选消息列表"
+      },
+      "contacts": {
+        "list": "获取所有联系人",
+        "create": "新建联系人"
+      },
+      "webhooks": {
+        "list": "获取所有已配置的 Webhook"
+      },
+      "campaigns": {
+        "list": "获取所有群发任务",
+        "create": "新建群发任务"
+      },
+      "settings": {
+        "get": "获取系统设置（仅管理员）"
+      }
+    },
+    "requestBody": "请求体",
+    "example": "示例",
+    "response": "响应",
+    "rateLimit": {
+      "title": "频率限制",
+      "description": "API 请求有频率限制以确保公平使用。默认每个 API 密钥在 60 秒窗口内最多 100 次请求。超出限制将返回 429 Too Many Requests。如需更高配额请联系技术支持。"
+    }
+  },
+  "logs": {
+    "title": "审计日志",
+    "subtitle": "追踪和查看所有 API 操作及系统事件",
+    "exportCsv": "导出 CSV",
+    "searchPlaceholder": "搜索日志...",
+    "severity": {
+      "all": "全部级别",
+      "info": "信息",
+      "warn": "警告",
+      "error": "错误"
+    },
+    "columns": {
+      "timestamp": "时间",
+      "action": "操作",
+      "session": "会话",
+      "apiKey": "API 密钥",
+      "user": "用户",
+      "ip": "IP 地址",
+      "severity": "级别"
+    },
+    "pagination": "第 {{page}} 页，共 {{total}} 页（{{count}} 条）",
+    "empty": {
+      "title": "暂无日志",
+      "description": "执行操作后，审计日志将在此处显示"
+    }
+  },
+  "composer": {
+    "title": "消息编辑",
+    "subtitle": "像在 WhatsApp 上一样编写和发送消息",
+    "session": "WhatsApp 会话",
+    "noReadySessions": "没有就绪的会话",
+    "contactType": "联系人类型",
+    "recipients": "收件人",
+    "selected": "已选 {{count}} 个",
+    "savedContacts": "通讯录",
+    "waContacts": "WA 联系人",
+    "groups": "分组",
+    "newNumber": "新号码",
+    "searchContacts": "搜索联系人...",
+    "searchGroups": "搜索分组...",
+    "noContacts": "暂无保存的联系人",
+    "noGroups": "暂无分组",
+    "noResults": "未找到结果",
+    "schedule": "定时发送",
+    "messageType": "消息类型",
+    "types": {
+      "text": "文本",
+      "image": "图片",
+      "video": "视频",
+      "audio": "音频",
+      "document": "文档",
+      "location": "位置",
+      "contact": "联系人"
+    },
+    "message": "消息内容",
+    "messagePlaceholder": "在此输入消息...",
+    "mediaUrl": "媒体链接",
+    "mediaUrlPlaceholder": "https://example.com/file.jpg",
+    "caption": "描述",
+    "captionPlaceholder": "添加描述...",
+    "fileName": "文件名",
+    "fileNamePlaceholder": "document.pdf",
+    "latitude": "纬度",
+    "latitudePlaceholder": "39.9042",
+    "longitude": "经度",
+    "longitudePlaceholder": "116.4074",
+    "locationDescription": "位置描述",
+    "locationDescriptionPlaceholder": "例如：我们的集合地点",
+    "contactName": "联系人姓名",
+    "contactNamePlaceholder": "张三",
+    "contactPhone": "联系人电话",
+    "contactPhonePlaceholder": "+8613800138000",
+    "send": "发送消息",
+    "sending": "发送中...",
+    "sendTo": "发送给 {{count}} 个收件人",
+    "sendTo_plural": "发送给 {{count}} 个收件人",
+    "sendingTo": "正在发送给 {{count}} 个收件人",
+    "sendingTo_plural": "正在发送给 {{count}} 个收件人...",
+    "sentSuccess": "消息已发送给 {{count}} 个收件人",
+    "sentSuccess_plural": "消息已发送给 {{count}} 个收件人",
+    "sentPartial": "成功发送 {{sent}} 个，{{failed}} 个失败",
+    "sentPartial_plural": "成功发送 {{sent}} 个，{{failed}} 个失败",
+    "progress": "发送进度",
+    "charCount": "{{count}} / 4096 个字符",
+    "livePreview": "实时预览",
+    "noMessages": "暂无消息",
+    "noMessagesHint": "发送一条消息开始对话"
+  },
+  "campaigns": {
+    "title": "群发任务",
+    "subtitle": "创建和管理群发推广任务",
+    "newCampaign": "新建任务",
+    "editCampaign": "编辑任务",
+    "duplicate": "复制",
+    "searchPlaceholder": "搜索任务...",
+    "filterStatus": "全部状态",
+    "statuses": {
+      "draft": "草稿",
+      "scheduled": "已定时",
+      "sending": "发送中",
+      "completed": "已完成",
+      "paused": "已暂停",
+      "cancelled": "已取消",
+      "failed": "失败"
+    },
+    "recipientType": {
+      "contacts": "联系人",
+      "groups": "分组"
+    },
+    "stats": {
+      "total": "任务总数",
+      "active": "进行中",
+      "completed": "已完成",
+      "failed": "失败",
+      "totalRecipients": "收件人总数",
+      "totalSent": "已发送",
+      "totalFailed": "发送失败"
+    },
+    "columns": {
+      "name": "名称",
+      "status": "状态",
+      "recipients": "收件人",
+      "sent": "已发送",
+      "failed": "失败",
+      "schedule": "计划时间",
+      "created": "创建时间",
+      "actions": "操作"
+    },
+    "empty": {
+      "title": "暂无群发任务",
+      "description": "创建第一个任务开始群发消息"
+    },
+    "wizard": {
+      "step1": "基本信息",
+      "step2": "消息内容",
+      "step3": "收件人",
+      "step4": "定时",
+      "step5": "确认发布",
+      "name": "任务名称",
+      "namePlaceholder": "例如：节日促销",
+      "description": "任务描述",
+      "descriptionPlaceholder": "可选的任务说明",
+      "session": "WhatsApp 会话",
+      "noSessions": "暂无可用会话",
+      "messageType": "消息类型",
+      "text": "文本",
+      "image": "图片",
+      "video": "视频",
+      "audio": "音频",
+      "document": "文档",
+      "location": "位置",
+      "contact": "联系人",
+      "textPlaceholder": "请输入消息内容...",
+      "mediaUrl": "媒体链接",
+      "mediaUrlPlaceholder": "https://example.com/file.jpg",
+      "caption": "描述",
+      "captionPlaceholder": "添加描述...",
+      "fileName": "文件名",
+      "fileNamePlaceholder": "document.pdf",
+      "latitude": "纬度",
+      "latitudePlaceholder": "39.9042",
+      "longitude": "经度",
+      "longitudePlaceholder": "116.4074",
+      "contactName": "联系人姓名",
+      "contactNamePlaceholder": "张三",
+      "contactPhone": "联系人电话",
+      "contactPhonePlaceholder": "+8613800138000",
+      "selectRecipients": "选择收件人",
+      "contacts": "已保存的联系人",
+      "groups": "联系人分组",
+      "searchContacts": "搜索联系人...",
+      "searchGroups": "搜索分组...",
+      "noContacts": "没有找到联系人",
+      "noGroups": "没有找到分组",
+      "selected": "已选 {{count}} 个",
+      "scheduleNow": "立即发送",
+      "scheduleLater": "定时发送",
+      "scheduleDate": "选择日期",
+      "scheduleTime": "选择时间",
+      "reviewTitle": "确认任务信息",
+      "reviewName": "任务名称",
+      "reviewSession": "会话",
+      "reviewMessageType": "消息类型",
+      "reviewMessagePreview": "消息预览",
+      "reviewRecipients": "收件人",
+      "reviewRecipientCount": "{{count}} 个收件人",
+      "reviewSchedule": "发送时间",
+      "reviewScheduleNow": "立即发送",
+      "reviewScheduleDate": "定时于 {{date}} 发送",
+      "createBtn": "创建任务",
+      "creating": "创建中...",
+      "saveBtn": "保存更改",
+      "saving": "保存中..."
+    },
+    "detail": {
+      "title": "任务详情",
+      "overview": "概览",
+      "recipients": "收件人",
+      "stats": {
+        "total": "收件人总数",
+        "sent": "已发送",
+        "failed": "失败",
+        "pending": "待发送",
+        "progress": "进度"
+      },
+      "actions": {
+        "start": "开始发送",
+        "pause": "暂停",
+        "cancel": "取消",
+        "resendFailed": "重发失败项",
+        "edit": "编辑",
+        "delete": "删除",
+        "back": "返回任务列表"
+      },
+      "confirmDelete": "确定要删除此任务吗？",
+      "confirmStart": "确定要开始此任务吗？",
+      "noRecipients": "暂无收件人",
+      "searchRecipients": "搜索收件人...",
+      "filterStatus": "按状态筛选"
+    },
+    "toasts": {
+      "createSuccess": "任务已创建",
+      "createError": "创建任务失败",
+      "updateSuccess": "任务已更新",
+      "updateError": "更新任务失败",
+      "deleteSuccess": "任务已删除",
+      "deleteError": "删除任务失败",
+      "startSuccess": "任务已启动",
+      "startError": "启动任务失败",
+      "pauseSuccess": "任务已暂停",
+      "pauseError": "暂停任务失败",
+      "cancelSuccess": "任务已取消",
+      "cancelError": "取消任务失败",
+      "resendSuccess": "正在重新发送失败的消息",
+      "resendError": "重新发送失败"
+    }
+  },
+  "contacts": {
+    "title": "通讯录",
+    "subtitle": "管理您的 WhatsApp 联系人",
+    "newContact": "新建联系人",
+    "searchPlaceholder": "按姓名或电话搜索...",
+    "selected": "已选 {{count}} 个",
+    "bulkDelete": "批量删除",
+    "importBtn": "导入 CSV",
+    "exportBtn": "导出 CSV",
+    "downloadTemplate": "下载 CSV 模板",
+    "empty": {
+      "title": "暂无联系人",
+      "description": "添加第一个联系人，或从 CSV 文件导入"
+    },
+    "columns": {
+      "name": "姓名",
+      "phone": "电话",
+      "country": "国家",
+      "city": "城市",
+      "note": "备注",
+      "actions": "操作"
+    },
+    "form": {
+      "createTitle": "新建联系人",
+      "editTitle": "编辑联系人",
+      "fullName": "全名",
+      "fullNamePlaceholder": "例如：张三",
+      "countryCode": "国家区号",
+      "phone": "WhatsApp 号码",
+      "phonePlaceholder": "例如：13800138000",
+      "phoneHint": "输入号码时不包含国家区号——系统将自动添加",
+      "country": "国家",
+      "countryPlaceholder": "例如：中国",
+      "state": "省/州",
+      "statePlaceholder": "例如：广东省",
+      "city": "城市",
+      "cityPlaceholder": "例如：深圳市",
+      "address": "地址",
+      "addressPlaceholder": "例如：科技南路 100 号",
+      "note": "备注",
+      "notePlaceholder": "添加备注...",
+      "phoneRequired": "请填写手机号",
+      "phoneDuplicate": "该手机号已存在",
+      "phoneInvalid": "手机号只能包含数字"
+    },
+    "delete": {
+      "title": "删除联系人",
+      "message": "确定要删除 <strong>{{name}}</strong> 吗？此操作不可撤销。",
+      "messagePhone": "确定要删除联系人 <strong>{{phone}}</strong> 吗？此操作不可撤销。",
+      "successTitle": "联系人已删除",
+      "successDesc": "联系人已成功删除"
+    },
+    "bulkDeleteModal": {
+      "title": "删除 {{count}} 个联系人",
+      "message": "确定要删除选中的 {{count}} 个联系人吗？此操作不可撤销。",
+      "successTitle": "联系人已批量删除",
+      "successDesc": "已删除 {{count}} 个联系人"
+    },
+    "import": {
+      "title": "导入联系人",
+      "step1Title": "上传 CSV 文件",
+      "step1Desc": "上传包含联系人的 CSV 文件。电话列必须包含国家区号（例如 +8613800138000）。",
+      "step2Title": "预览与校验",
+      "step2Desc": "导入前请预览联系人信息，无效行将被高亮显示。",
+      "step3Title": "导入完成",
+      "dropzone": "将 CSV 文件拖到此处，或点击浏览",
+      "dropzoneHint": "支持格式：.csv",
+      "validRows": "{{count}} 条有效",
+      "invalidRows": "{{count}} 条无效",
+      "importValid": "仅导入有效行",
+      "importAll": "全部导入",
+      "importBtn": "导入 {{count}} 个联系人",
+      "importing": "导入中...",
+      "successTitle": "导入成功",
+      "successDesc": "成功导入 {{created}} 个联系人，跳过 {{skipped}} 个",
+      "errorPhone": "手机号为空",
+      "errorNoCountryCode": "手机号必须包含国家区号（例如 +8613800138000）",
+      "errorDuplicate": "文件中存在重复手机号",
+      "previewColumns": {
+        "row": "#",
+        "status": "状态",
+        "name": "姓名",
+        "phone": "电话",
+        "country": "国家",
+        "city": "城市",
+        "note": "备注",
+        "error": "问题"
+      }
+    },
+    "detail": {
+      "title": "联系人详情",
+      "phone": "电话",
+      "country": "国家",
+      "state": "省/州",
+      "city": "城市",
+      "address": "地址",
+      "note": "备注",
+      "created": "创建时间",
+      "messages": "消息历史",
+      "noMessages": "暂未找到与此联系人的消息记录。",
+      "incoming": "收到的",
+      "outgoing": "发出的",
+      "loadMore": "加载更多",
+      "loadingMessages": "正在加载消息...",
+      "totalMessages": "共 {{count}} 条消息",
+      "session": "会话",
+      "type": "类型",
+      "direction": "方向",
+      "messageBody": "消息内容",
+      "timestamp": "时间",
+      "status": "状态"
+    },
+    "pagination": {
+      "showing": "显示第 {{from}} 到 {{to}} 条，共 {{total}} 条",
+      "perPage": "每页"
+    },
+    "toasts": {
+      "createSuccess": "联系人已创建",
+      "createError": "创建联系人失败",
+      "updateSuccess": "联系人已更新",
+      "updateError": "更新联系人失败",
+      "deleteSuccess": "联系人已删除",
+      "deleteError": "删除联系人失败",
+      "bulkDeleteSuccess": "已删除 {{count}} 个联系人",
+      "bulkDeleteError": "批量删除联系人失败",
+      "importSuccess": "已导入 {{created}} 个联系人",
+      "importError": "导入失败",
+      "exportSuccess": "已导出 {{count}} 个联系人",
+      "exportError": "导出失败"
+    }
+  },
+  "groups": {
+    "title": "联系人分组",
+    "subtitle": "将联系人分组管理，实现定向消息推送",
+    "newGroup": "新建分组",
+    "searchPlaceholder": "搜索分组...",
+    "empty": {
+      "title": "暂无分组",
+      "description": "创建一个分组来整理您的联系人"
+    },
+    "columns": {
+      "name": "名称",
+      "description": "描述",
+      "members": "成员数",
+      "created": "创建时间",
+      "actions": "操作"
+    },
+    "form": {
+      "createTitle": "新建分组",
+      "editTitle": "编辑分组",
+      "name": "分组名称",
+      "namePlaceholder": "例如：VIP 客户",
+      "description": "描述",
+      "descriptionPlaceholder": "选填的分组说明",
+      "nameRequired": "请填写分组名称"
+    },
+    "create": {
+      "step1Title": "分组信息",
+      "step2Title": "添加成员",
+      "step3Title": "确认并创建",
+      "method": "想如何添加联系人？",
+      "csvImport": "从 CSV 导入",
+      "csvImportDesc": "上传 CSV 文件创建联系人并加入此分组",
+      "filterSelect": "筛选选择",
+      "filterSelectDesc": "搜索和筛选已有通讯录来添加到此分组",
+      "csv": {
+        "title": "从 CSV 导入联系人",
+        "dropzone": "将 CSV 文件拖到此处，或点击浏览",
+        "dropzoneHint": "支持格式：.csv，手机号必须包含国家区号（例如 +8613800138000）",
+        "validRows": "{{count}} 条有效",
+        "invalidRows": "{{count}} 条无效",
+        "importBtn": "导入 {{count}} 个联系人",
+        "importing": "导入中...",
+        "step2Title": "预览与校验",
+        "step2Desc": "导入前请预览联系人信息，无效行将被高亮显示。",
+        "step3Title": "导入完成",
+        "successDesc": "成功创建 {{created}} 个联系人并加入分组，跳过 {{skipped}} 个",
+        "errorPhone": "手机号为空",
+        "errorNoCountryCode": "手机号必须包含国家区号（例如 +8613800138000）",
+        "errorDuplicate": "文件中存在重复手机号",
+        "previewColumns": {
+          "row": "#",
+          "status": "状态",
+          "name": "姓名",
+          "phone": "电话",
+          "country": "国家",
+          "city": "城市",
+          "note": "备注",
+          "error": "问题"
+        }
+      },
+      "filter": {
+        "title": "选择联系人",
+        "searchPlaceholder": "按姓名或电话搜索...",
+        "country": "国家",
+        "allCountries": "全部国家",
+        "state": "省/州",
+        "allStates": "全部地区",
+        "city": "城市",
+        "allCities": "全部城市",
+        "namePlaceholder": "按姓名筛选...",
+        "phonePlaceholder": "按电话前缀筛选...",
+        "selected": "已选 {{count}} 个联系人",
+        "noResults": "没有符合条件的联系人",
+        "clearFilters": "清除筛选"
+      },
+      "review": {
+        "title": "确认分组信息",
+        "nameLabel": "分组名称",
+        "descriptionLabel": "描述",
+        "membersLabel": "成员",
+        "noMembers": "暂未添加成员",
+        "addMore": "添加更多联系人"
+      }
+    },
+    "detail": {
+      "title": "分组详情",
+      "members": "成员",
+      "noMembers": "此分组暂无成员",
+      "addMembers": "添加成员",
+      "removeSelected": "移除选中",
+      "searchPlaceholder": "搜索成员...",
+      "removeConfirm": "从该分组中移除 {{count}} 个联系人？",
+      "empty": {
+        "title": "暂无成员",
+        "description": "向此分组添加联系人"
+      }
+    },
+    "delete": {
+      "title": "删除分组",
+      "message": "确定要删除分组 <strong>「{{name}}」</strong> 吗？此操作不可撤销。",
+      "successTitle": "分组已删除",
+      "successDesc": "分组已成功删除"
+    },
+    "toasts": {
+      "createSuccess": "分组已创建",
+      "createError": "创建分组失败",
+      "updateSuccess": "分组已更新",
+      "updateError": "更新分组失败",
+      "deleteSuccess": "分组已删除",
+      "deleteError": "删除分组失败",
+      "addMembersSuccess": "已向分组添加 {{count}} 个联系人",
+      "addMembersError": "添加成员失败",
+      "removeMembersSuccess": "已从分组移除 {{count}} 个联系人",
+      "removeMembersError": "移除成员失败",
+      "importSuccess": "已导入 {{created}} 个联系人并加入分组",
+      "importError": "导入失败"
+    }
+  },
+  "settings": {
+    "title": "设置",
+    "subtitle": "管理您的个人信息、密码和系统设置",
+    "tabs": {
+      "profile": "个人资料",
+      "password": "密码",
+      "language": "语言",
+      "system": "系统设置"
+    },
+    "language": {
+      "title": "语言",
+      "subtitle": "选择您偏好的控制台界面语言"
+    },
+    "profile": {
+      "name": "姓名",
+      "namePlaceholder": "例如：张三",
+      "phone": "手机号",
+      "phonePlaceholder": "例如：13800138000",
+      "profilePic": "头像",
+      "profilePicHint": "上传图片（JPEG、PNG、WebP、GIF），最大 5MB。",
+      "chooseFile": "选择文件",
+      "uploading": "上传中...",
+      "remove": "移除",
+      "toasts": {
+        "updateSuccess": "个人资料已更新",
+        "updateError": "更新个人资料失败",
+        "uploadError": "上传失败"
+      }
+    },
+    "password": {
+      "current": "当前密码",
+      "currentHint": "请输入当前密码以验证身份",
+      "currentPlaceholder": "请输入当前密码",
+      "newPassword": "新密码",
+      "newPlaceholder": "输入新密码（至少6位）",
+      "confirm": "确认新密码",
+      "confirmPlaceholder": "再次输入新密码",
+      "save": "修改密码",
+      "errors": {
+        "currentRequired": "请填写当前密码",
+        "newRequired": "请填写新密码",
+        "tooShort": "密码至少需要6位字符",
+        "mismatch": "两次输入的密码不一致"
+      },
+      "toasts": {
+        "updateSuccess": "密码修改成功",
+        "updateError": "修改密码失败"
+      }
+    },
+    "system": {
+      "name": "企业名称",
+      "namePlaceholder": "例如：我的公司",
+      "email": "邮箱",
+      "emailPlaceholder": "例如：info@company.com",
+      "altPhone": "备用电话",
+      "altPhonePlaceholder": "例如：+8613900139000",
+      "website": "网址",
+      "websitePlaceholder": "例如：https://company.com",
+      "address": "地址",
+      "addressPlaceholder": "例如：北京市朝阳区建国路 100 号",
+      "googleMapLink": "Google 地图链接",
+      "googleMapLinkPlaceholder": "例如：https://maps.google.com/...",
+      "businessLogo": "企业 Logo",
+      "smallLogo": "小 Logo",
+      "toasts": {
+        "updateSuccess": "系统设置已更新",
+        "updateError": "更新系统设置失败"
+      }
+    }
+  }
+}

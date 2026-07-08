@@ -237,6 +237,19 @@ export class EventsGateway implements OnGatewayInit, OnGatewayConnection, OnGate
   }
 
   /**
+   * Emit campaign progress update
+   */
+  emitCampaignProgress(data: {
+    campaignId: string;
+    sentCount: number;
+    failedCount: number;
+    total: number;
+    status: string;
+  }) {
+    this.emitToRooms('*', 'campaign.progress', data);
+  }
+
+  /**
    * Emit webhook delivery status (broadcast to all - no session context)
    */
   emitWebhookStatus(webhookId: string, success: boolean, error?: string) {

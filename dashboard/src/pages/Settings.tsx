@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from 'react';
 import { useTranslation } from 'react-i18next';
 import {
-  User, Key, Settings, Loader2, Save, Upload, X, Camera,
+  User, Key, Settings, Globe, Check, Loader2, Save, Upload, X, Camera,
 } from 'lucide-react';
 import { useDocumentTitle } from '../hooks/useDocumentTitle';
 import { useToast } from '../components/Toast';
@@ -317,6 +317,54 @@ function PasswordTab() {
   );
 }
 
+// ─── Tab: Language ────────────────────────────────────────────────────────────
+
+function LanguageTab() {
+  const { i18n } = useTranslation();
+
+  const languages = [
+    { code: 'en', flag: '🇬🇧', native: 'English' },
+    { code: 'he', flag: '🇮🇱', native: 'עברית' },
+    { code: 'zh', flag: '🇨🇳', native: '中文' },
+    { code: 'es', flag: '🇪🇸', native: 'Español' },
+    { code: 'ar', flag: '🇸🇦', native: 'العربية' },
+    { code: 'bn', flag: '🇧🇩', native: 'বাংলা' },
+    { code: 'pt', flag: '🇧🇷', native: 'Português' },
+    { code: 'id', flag: '🇮🇩', native: 'Bahasa Indonesia' },
+    { code: 'ur', flag: '🇵🇰', native: 'اردو' },
+    { code: 'ru', flag: '🇷🇺', native: 'Русский' },
+    { code: 'de', flag: '🇩🇪', native: 'Deutsch' },
+    { code: 'ja', flag: '🇯🇵', native: '日本語' },
+    { code: 'it', flag: '🇮🇹', native: 'Italiano' },
+  ];
+
+  const currentLang = (i18n.resolvedLanguage || i18n.language || 'en').split('-')[0];
+
+  return (
+    <div className="max-w-[480px]">
+      <div className="grid gap-1">
+        {languages.map(lang => {
+          const isActive = currentLang === lang.code;
+          return (
+            <button
+              key={lang.code}
+              onClick={() => void i18n.changeLanguage(lang.code)}
+              className={`flex w-full cursor-pointer items-center gap-3 rounded-[var(--radius)] border px-4 py-3 text-left text-[0.8375rem] font-medium transition-all ${
+                isActive
+                  ? 'border-[var(--color-primary)] bg-[var(--color-primary-dim)] text-[var(--color-primary)]'
+                  : 'border-transparent bg-transparent text-[var(--color-ink-secondary)] hover:border-[var(--color-border)] hover:bg-[var(--color-muted)] hover:text-[var(--color-ink)]'
+              }`}
+            >
+              <span className="flex-1"><span className="mr-2">{lang.flag}</span>{lang.native}</span>
+              {isActive && <Check size={16} className="shrink-0" />}
+            </button>
+          );
+        })}
+      </div>
+    </div>
+  );
+}
+
 // ─── Tab: System Settings ────────────────────────────────────────────────────
 
 function SystemTab() {
@@ -462,6 +510,7 @@ function SystemTab() {
 const TABS = [
   { key: 'profile', icon: User },
   { key: 'password', icon: Key },
+  { key: 'language', icon: Globe },
   { key: 'system', icon: Settings },
 ] as const;
 
@@ -469,7 +518,7 @@ export function SettingsPage() {
   const { t } = useTranslation();
   useDocumentTitle(t('settings.title'));
 
-  const [activeTab, setActiveTab] = useState<'profile' | 'password' | 'system'>('profile');
+  const [activeTab, setActiveTab] = useState<'profile' | 'password' | 'language' | 'system'>('profile');
 
   return (
     <div className="w-full p-7 max-sm:p-4">
@@ -504,6 +553,7 @@ export function SettingsPage() {
           <div className="card p-6">
             {activeTab === 'profile' && <ProfileTab />}
             {activeTab === 'password' && <PasswordTab />}
+            {activeTab === 'language' && <LanguageTab />}
             {activeTab === 'system' && <SystemTab />}
           </div>
         </div>

@@ -1,0 +1,954 @@
+{
+  "common": {
+    "appName": "OpenWA",
+    "appSubtitle": "WhatsApp API",
+    "loading": "Загрузка...",
+    "save": "Сохранить",
+    "cancel": "Отмена",
+    "delete": "Удалить",
+    "edit": "Редактировать",
+    "create": "Создать",
+    "close": "Закрыть",
+    "submit": "Отправить",
+    "confirm": "Подтвердить",
+    "search": "Поиск",
+    "filter": "Фильтр",
+    "actions": "Действия",
+    "status": "Статус",
+    "name": "Имя",
+    "role": "Роль",
+    "type": "Тип",
+    "url": "URL",
+    "port": "Порт",
+    "host": "Хост",
+    "username": "Имя пользователя",
+    "password": "Пароль",
+    "active": "Активно",
+    "inactive": "Неактивно",
+    "enabled": "Включено",
+    "disabled": "Отключено",
+    "connected": "Подключено",
+    "disconnected": "Отключено",
+    "never": "Никогда",
+    "justNow": "Только что",
+    "minAgo": "{{count}} мин. назад",
+    "hoursAgo": "{{count}} ч. назад",
+    "optional": "опционально",
+    "language": "Язык",
+    "english": "English",
+    "hebrew": "עברית",
+    "back": "Назад",
+    "next": "Далее",
+    "previous": "Назад",
+    "expand": "Развернуть",
+    "collapse": "Свернуть",
+    "logout": "Выйти",
+    "refresh": "Обновить",
+    "notifications": "Уведомления",
+    "noNotifications": "Новых уведомлений нет",
+    "profile": "Профиль",
+    "changePassword": "Сменить пароль",
+    "settings": "Настройки",
+    "errorGeneric": "Произошла ошибка",
+    "unknownError": "Неизвестная ошибка",
+    "lightMode": "Светлая тема",
+    "darkMode": "Тёмная тема",
+    "viewAll": "Смотреть всё",
+    "copied": "Скопировано!"
+  },
+  "theme": {
+    "light": "Светлая",
+    "dark": "Тёмная",
+    "system": "Системная",
+    "label": "Тема: {{value}}"
+  },
+  "nav": {
+    "dashboard": "Дашборд",
+    "sessions": "Сессии",
+    "webhooks": "Вебхуки",
+    "apiKeys": "API-ключи",
+    "contacts": "Контакты",
+    "composer": "Редактор",
+    "groups": "Группы",
+    "messages": "Сообщения",
+    "settings": "Настройки",
+    "messageTester": "Тестер",
+    "campaigns": "Кампании",
+    "logs": "Логи"
+  },
+  "errorBoundary": {
+    "title": "Что-то пошло не так",
+    "description": "Дашборд столкнулся с неожиданной ошибкой.",
+    "reload": "Перезагрузить дашборд"
+  },
+  "login": {
+    "apiKey": "API-ключ",
+    "apiKeyPlaceholder": "Введите ваш API-ключ",
+    "apiKeyRequired": "API-ключ обязателен",
+    "connect": "Подключиться",
+    "connecting": "Подключение...",
+    "invalidKey": "Неверный API-ключ",
+    "connectionError": "Не удалось подключиться к серверу. Попробуйте снова.",
+    "help": "Нужна помощь?",
+    "viewDocs": "Документация",
+    "footer": "Сделано с ❤️ Yudhi Armyndharis и сообществом OpenWA",
+    "version": "v{{version}} · {{date}}",
+    "title": "Вход",
+    "subtitle": "Введите учётные данные для доступа к дашборду.",
+    "phoneLabel": "Номер телефона",
+    "phonePlaceholder": "напр. 79123456789",
+    "passwordLabel": "Пароль",
+    "passwordPlaceholder": "Введите пароль",
+    "signIn": "Войти",
+    "phoneRequired": "Номер телефона обязателен",
+    "passwordRequired": "Пароль обязателен",
+    "invalidCredentials": "Неверный телефон или пароль"
+  },
+  "dashboard": {
+    "title": "Дашборд",
+    "subtitle": "Обзор ваших WhatsApp-сессий и активности",
+    "stats": {
+      "activeSessions": "Активных сессий",
+      "messagesToday": "Сообщений сегодня",
+      "webhooksConfigured": "Вебхуков настроено",
+      "apiCalls": "API-вызовов (24ч)"
+    },
+    "sessionsOverview": "Обзор сессий",
+    "showingSessions": "Показано {{shown}} из {{total}} сессий",
+    "columns": {
+      "sessionId": "ID сессии",
+      "phone": "Номер телефона",
+      "status": "Статус",
+      "lastActive": "Посл. активность",
+      "actions": "Действия"
+    },
+    "noSessions": "Сессии не найдены. Создайте первую.",
+    "view": "Просмотр",
+    "disconnect": "Отключить",
+    "errorPrefix": "Ошибка: {{message}}",
+    "loadError": "Не удалось загрузить данные",
+    "statActive": "{{count}} активн.",
+    "statNoData": "Данных пока нет"
+  },
+  "sessionStatus": {
+    "created": "Новая",
+    "idle": "Ожидание",
+    "initializing": "Запуск...",
+    "connecting": "Подключение...",
+    "qr_ready": "Сканировать QR",
+    "ready": "Подключено",
+    "disconnected": "Отключено"
+  },
+  "sessions": {
+    "title": "Сессии",
+    "subtitle": "Управление WhatsApp-сессиями и QR-подключениями",
+    "newSession": "Новая сессия",
+    "searchPlaceholder": "Поиск сессий...",
+    "filter": {
+      "all": "Все статусы",
+      "active": "Активные (подключ.)",
+      "inactive": "Неактивные",
+      "connecting": "Подключаются"
+    },
+    "empty": {
+      "title": "Сессии не найдены",
+      "description": "Создайте новую сессию, чтобы начать"
+    },
+    "create": {
+      "title": "Создать новую сессию",
+      "label": "Имя сессии",
+      "placeholder": "напр. marketing-bot",
+      "hint": "Только строчные буквы, цифры и дефисы. Пример: <code>customer-support</code>",
+      "invalidChars": "Недопустимые символы. Разрешены только строчные буквы, цифры и дефисы.",
+      "tooLong": "Имя должно быть не длиннее 50 символов ({{length}}/50).",
+      "duplicate": "Сессия с таким именем уже существует.",
+      "successTitle": "Сессия создана",
+      "successDesc": "Сессия «{{name}}» успешно создана",
+      "errorTitle": "Ошибка создания",
+      "errorDefault": "Не удалось создать сессию"
+    },
+    "delete": {
+      "title": "Подтверждение удаления",
+      "message": "Вы уверены, что хотите удалить сессию <strong>«{{name}}»</strong>?",
+      "warning": "Это действие нельзя отменить.",
+      "successTitle": "Сессия удалена",
+      "successDescNamed": "Сессия «{{name}}» удалена",
+      "successDescGeneric": "Сессия удалена",
+      "errorTitle": "Ошибка удаления",
+      "errorDefault": "Не удалось удалить сессию"
+    },
+    "qr": {
+      "title": "Сканируйте QR-код",
+      "step1": "<strong>1.</strong> Откройте WhatsApp на телефоне",
+      "step2": "<strong>2.</strong> Нажмите <strong>Меню</strong> → <strong>Связанные устройства</strong>",
+      "step3": "<strong>3.</strong> Нажмите <strong>Привязать устройство</strong> и отсканируйте QR",
+      "autoRefresh": "QR обновляется каждые 5 секунд",
+      "generating": "Генерация QR-кода...",
+      "unavailable": "QR-код пока недоступен. Попробуйте через момент.",
+      "preparing": "Подготовка QR-кода...",
+      "showQr": "Показать QR",
+      "loading": "Загрузка...",
+      "scanToConnect": "Отсканируйте QR для подключения"
+    },
+    "details": {
+      "title": "Детали сессии",
+      "name": "Имя",
+      "status": "Статус",
+      "sessionId": "ID сессии",
+      "phone": "Номер телефона",
+      "phoneNone": "Не подключено",
+      "created": "Создана",
+      "lastActive": "Последняя активность"
+    },
+    "actions": {
+      "view": "Просмотр",
+      "start": "Запустить",
+      "stop": "Остановить",
+      "reconnect": "Переподключиться",
+      "delete": "Удалить"
+    },
+    "toasts": {
+      "readyTitle": "Сессия готова",
+      "readyDesc": "WhatsApp-сессия подключена",
+      "disconnectedTitle": "Сессия отключена",
+      "disconnectedDesc": "WhatsApp-сессия отключена"
+    },
+    "card": {
+      "phone": "Телефон",
+      "sessionId": "ID сессии",
+      "lastActive": "Посл. активность"
+    }
+  },
+  "webhooks": {
+    "title": "Вебхуки",
+    "subtitle": "Настройте HTTP-колбэки для уведомлений в реальном времени",
+    "addWebhook": "Добавить вебхук",
+    "createTitle": "Создать вебхук",
+    "editTitle": "Редактировать вебхук",
+    "deleteTitle": "Удалить вебхук",
+    "deleteConfirm": "Вы уверены, что хотите удалить этот вебхук?",
+    "selectSession": "Выберите сессию...",
+    "session": "Сессия",
+    "events": "События",
+    "available": "Доступные события",
+    "saveChanges": "Сохранить изменения",
+    "columns": {
+      "url": "URL",
+      "events": "События",
+      "session": "Сессия",
+      "status": "Статус",
+      "actions": "Действия"
+    },
+    "empty": {
+      "title": "Вебхуки не настроены",
+      "description": "Добавьте вебхук для получения уведомлений в реальном времени"
+    },
+    "toasts": {
+      "created": "Вебхук успешно создан",
+      "createFailed": "Ошибка создания вебхука: {{message}}",
+      "deleted": "Вебхук успешно удалён",
+      "deleteFailed": "Ошибка удаления вебхука: {{message}}",
+      "updated": "Вебхук успешно обновлён",
+      "updateFailed": "Ошибка обновления вебхука: {{message}}",
+      "testOk": "Тест вебхука успешен! Статус: {{status}}",
+      "testFailed": "Тест вебхука не удался: {{message}}",
+      "testError": "Ошибка тестирования вебхука: {{message}}"
+    },
+    "actions": {
+      "test": "Тест",
+      "edit": "Редакт.",
+      "delete": "Удалить"
+    },
+    "eventDescriptions": {
+      "message.received": "При получении сообщения",
+      "message.sent": "При отправке сообщения",
+      "session.connected": "При подключении сессии",
+      "session.disconnected": "При отключении сессии",
+      "session.qr": "При генерации QR-кода",
+      "all": "Все события"
+    }
+  },
+  "apiKeys": {
+    "title": "Управление API",
+    "subtitle": "Управляйте API-ключами, учётными данными и документацией API",
+    "tabs": {
+      "overview": "Обзор",
+      "keys": "API-ключи",
+      "docs": "Документация"
+    },
+    "stats": {
+      "totalKeys": "Всего ключей",
+      "activeKeys": "Активных ключей",
+      "totalCalls": "Всего вызовов",
+      "rateLimit": "Вызовов сегодня"
+    },
+    "credentials": {
+      "baseUrl": "Базовый URL API",
+      "baseUrlHint": "Используйте этот URL как базовый endpoint для всех API-запросов."
+    },
+    "quickLinks": {
+      "title": "Быстрые ссылки",
+      "manageKeys": "Управление API-ключами",
+      "manageKeysDesc": "Просмотр, создание, отзыв и удаление API-ключей",
+      "viewDocs": "Документация API",
+      "viewDocsDesc": "Справочник endpoint'ов с примерами",
+      "createKey": "Создать новый ключ",
+      "createKeyDesc": "Сгенерировать новый API-ключ с определённой ролью"
+    },
+    "createBtn": "Создать API-ключ",
+    "modalTitle": "Создать API-ключ",
+    "createdTitle": "API-ключ создан",
+    "createdHint": "Скопируйте ключ сейчас. Вы больше не сможете его увидеть.",
+    "createdHintExtra": "Этот секретный ключ больше не будет показан. Храните его в безопасности.",
+    "namePlaceholder": "напр. Production Key",
+    "rolesTitle": "Справочник ролей",
+    "roles": {
+      "admin": "Админ",
+      "operator": "Оператор",
+      "viewer": "Наблюдатель"
+    },
+    "roleDescriptions": {
+      "admin": "Полный доступ ко всем ресурсам",
+      "operator": "Управление сессиями и сообщениями",
+      "viewer": "Только чтение"
+    },
+    "columns": {
+      "name": "Имя",
+      "key": "Ключ",
+      "role": "Роль",
+      "status": "Статус",
+      "lastUsed": "Посл. использование",
+      "actions": "Действия"
+    },
+    "statuses": {
+      "active": "Активен",
+      "revoked": "Отозван"
+    },
+    "empty": {
+      "title": "API-ключи не созданы",
+      "description": "Создайте API-ключ для аутентификации запросов"
+    },
+    "confirm": {
+      "deleteTitle": "Удалить API-ключ",
+      "revokeTitle": "Отозвать API-ключ",
+      "deleteMessage": "Вы уверены, что хотите навсегда удалить <strong>{{name}}</strong>? Это действие нельзя отменить.",
+      "revokeMessage": "Вы уверены, что хотите отозвать <strong>{{name}}</strong>? Ключ перестанет работать.",
+      "delete": "Удалить",
+      "revoke": "Отозвать"
+    },
+    "actions": {
+      "copy": "Копировать",
+      "revoke": "Отозвать",
+      "delete": "Удалить"
+    }
+  },
+  "apiDocs": {
+    "auth": {
+      "title": "Аутентификация",
+      "description": "Все API-запросы требуют аутентификации. Укажите ваш API-ключ в заголовке <code>X-API-Key</code>. Управлять ключами можно на вкладке API-ключи.",
+      "example": "Пример запроса с аутентификацией",
+      "none": "Аутентификация не требуется",
+      "apiKey": "Требуется API-ключ",
+      "admin": "Требуется доступ администратора"
+    },
+    "sdks": {
+      "title": "SDK и библиотеки",
+      "description": "Используйте наши официальные SDK для бесшовной интеграции OpenWA в ваше приложение."
+    },
+    "endpoints": {
+      "title": "API Endpoint'ы",
+      "health": {
+        "desc": "Проверка состояния сервера"
+      },
+      "sessions": {
+        "list": "Список всех WhatsApp-сессий",
+        "create": "Создать новую WhatsApp-сессию",
+        "qr": "Получить QR-код для сессии",
+        "delete": "Удалить WhatsApp-сессию"
+      },
+      "messages": {
+        "sendText": "Отправить текстовое сообщение",
+        "sendImage": "Отправить изображение",
+        "sendLocation": "Отправить местоположение",
+        "list": "Список сообщений с опциональными фильтрами"
+      },
+      "contacts": {
+        "list": "Список всех сохранённых контактов",
+        "create": "Создать новый контакт"
+      },
+      "webhooks": {
+        "list": "Список всех настроенных вебхуков"
+      },
+      "campaigns": {
+        "list": "Список всех кампаний",
+        "create": "Создать новую кампанию"
+      },
+      "settings": {
+        "get": "Получить настройки системы (только админ)"
+      }
+    },
+    "requestBody": "Тело запроса",
+    "example": "Пример",
+    "response": "Ответ",
+    "rateLimit": {
+      "title": "Лимитирование запросов",
+      "description": "API-запросы лимитируются для обеспечения честного использования. Стандартный лимит — 100 запросов за 60 секунд на один API-ключ. Превышение лимита приведёт к ответу 429 Too Many Requests. Обратитесь в поддержку, если нужен больший лимит."
+    }
+  },
+  "logs": {
+    "title": "Журналы аудита",
+    "subtitle": "Отслеживайте и просматривайте все API-действия и системные события",
+    "exportCsv": "Экспорт CSV",
+    "searchPlaceholder": "Поиск по логам...",
+    "severity": {
+      "all": "Все уровни",
+      "info": "Инфо",
+      "warn": "Предупреждение",
+      "error": "Ошибка"
+    },
+    "columns": {
+      "timestamp": "Время",
+      "action": "Действие",
+      "session": "Сессия",
+      "apiKey": "API-ключ",
+      "user": "Пользователь",
+      "ip": "IP-адрес",
+      "severity": "Уровень"
+    },
+    "pagination": "Стр. {{page}} из {{total}} ({{count}} записей)",
+    "empty": {
+      "title": "Логи не найдены",
+      "description": "Журналы аудита появятся здесь по мере выполнения действий"
+    }
+  },
+  "composer": {
+    "title": "Редактор",
+    "subtitle": "Составляйте и отправляйте сообщения как в WhatsApp",
+    "session": "WhatsApp-сессия",
+    "noReadySessions": "Нет готовых сессий",
+    "contactType": "Тип контакта",
+    "recipients": "Получатели",
+    "selected": "Выбрано: {{count}}",
+    "savedContacts": "Контакты",
+    "waContacts": "Контакты WA",
+    "groups": "Группы",
+    "newNumber": "Новый номер",
+    "searchContacts": "Поиск контактов...",
+    "searchGroups": "Поиск групп...",
+    "noContacts": "Нет сохранённых контактов",
+    "noGroups": "Группы не найдены",
+    "noResults": "Ничего не найдено",
+    "schedule": "Отложить",
+    "messageType": "Тип сообщения",
+    "types": {
+      "text": "Текст",
+      "image": "Изображение",
+      "video": "Видео",
+      "audio": "Аудио",
+      "document": "Документ",
+      "location": "Местоположение",
+      "contact": "Контакт"
+    },
+    "message": "Сообщение",
+    "messagePlaceholder": "Введите ваше сообщение...",
+    "mediaUrl": "URL медиафайла",
+    "mediaUrlPlaceholder": "https://example.com/file.jpg",
+    "caption": "Подпись",
+    "captionPlaceholder": "Добавьте подпись...",
+    "fileName": "Имя файла",
+    "fileNamePlaceholder": "document.pdf",
+    "latitude": "Широта",
+    "latitudePlaceholder": "55.7558",
+    "longitude": "Долгота",
+    "longitudePlaceholder": "37.6173",
+    "locationDescription": "Описание",
+    "locationDescriptionPlaceholder": "напр. место встречи",
+    "contactName": "Имя контакта",
+    "contactNamePlaceholder": "Иван Петров",
+    "contactPhone": "Телефон контакта",
+    "contactPhonePlaceholder": "+79123456789",
+    "send": "Отправить",
+    "sending": "Отправка...",
+    "sendTo": "Отправить {{count}} получателю",
+    "sendTo_plural": "Отправить {{count}} получателям",
+    "sendingTo": "Отправка {{count}} получателю",
+    "sendingTo_plural": "Отправка {{count}} получателям...",
+    "sentSuccess": "Сообщение отправлено {{count}} получателю",
+    "sentSuccess_plural": "Сообщение отправлено {{count}} получателям",
+    "sentPartial": "Отправлено {{sent}}, не удалось {{failed}} получателю",
+    "sentPartial_plural": "Отправлено {{sent}}, не удалось {{failed}} получателям",
+    "progress": "Прогресс",
+    "charCount": "{{count}} / 4096 символов",
+    "livePreview": "Предпросмотр",
+    "noMessages": "Сообщений пока нет",
+    "noMessagesHint": "Отправьте сообщение, чтобы начать разговор"
+  },
+  "campaigns": {
+    "title": "Кампании",
+    "subtitle": "Создавайте и управляйте рассылками",
+    "newCampaign": "Новая кампания",
+    "editCampaign": "Редактировать",
+    "duplicate": "Дублировать",
+    "searchPlaceholder": "Поиск кампаний...",
+    "filterStatus": "Все статусы",
+    "statuses": {
+      "draft": "Черновик",
+      "scheduled": "Запланирована",
+      "sending": "Отправляется",
+      "completed": "Завершена",
+      "paused": "Приостановлена",
+      "cancelled": "Отменена",
+      "failed": "Ошибка"
+    },
+    "recipientType": {
+      "contacts": "Контакты",
+      "groups": "Группы"
+    },
+    "stats": {
+      "total": "Всего кампаний",
+      "active": "Активных",
+      "completed": "Завершено",
+      "failed": "С ошибками",
+      "totalRecipients": "Всего получателей",
+      "totalSent": "Всего отправлено",
+      "totalFailed": "Всего ошибок"
+    },
+    "columns": {
+      "name": "Название",
+      "status": "Статус",
+      "recipients": "Получатели",
+      "sent": "Отправлено",
+      "failed": "Ошибок",
+      "schedule": "Запланировано",
+      "created": "Создана",
+      "actions": "Действия"
+    },
+    "empty": {
+      "title": "Кампаний пока нет",
+      "description": "Создайте первую кампанию для запуска рассылки"
+    },
+    "wizard": {
+      "step1": "Детали",
+      "step2": "Сообщение",
+      "step3": "Получатели",
+      "step4": "Расписание",
+      "step5": "Проверка",
+      "name": "Название кампании",
+      "namePlaceholder": "напр. Новогодняя акция",
+      "description": "Описание",
+      "descriptionPlaceholder": "Описание кампании (опционально)",
+      "session": "WhatsApp-сессия",
+      "noSessions": "Нет доступных сессий",
+      "messageType": "Тип сообщения",
+      "text": "Текст",
+      "image": "Изображение",
+      "video": "Видео",
+      "audio": "Аудио",
+      "document": "Документ",
+      "location": "Местоположение",
+      "contact": "Контакт",
+      "textPlaceholder": "Введите сообщение...",
+      "mediaUrl": "URL медиа",
+      "mediaUrlPlaceholder": "https://example.com/file.jpg",
+      "caption": "Подпись",
+      "captionPlaceholder": "Добавьте подпись...",
+      "fileName": "Имя файла",
+      "fileNamePlaceholder": "document.pdf",
+      "latitude": "Широта",
+      "latitudePlaceholder": "55.7558",
+      "longitude": "Долгота",
+      "longitudePlaceholder": "37.6173",
+      "contactName": "Имя контакта",
+      "contactNamePlaceholder": "Иван Петров",
+      "contactPhone": "Телефон контакта",
+      "contactPhonePlaceholder": "+79123456789",
+      "selectRecipients": "Выбор получателей",
+      "contacts": "Сохранённые контакты",
+      "groups": "Группы контактов",
+      "searchContacts": "Поиск контактов...",
+      "searchGroups": "Поиск групп...",
+      "noContacts": "Контакты не найдены",
+      "noGroups": "Группы не найдены",
+      "selected": "Выбрано: {{count}}",
+      "scheduleNow": "Отправить сейчас",
+      "scheduleLater": "Запланировать",
+      "scheduleDate": "Дата отправки",
+      "scheduleTime": "Время отправки",
+      "reviewTitle": "Проверка кампании",
+      "reviewName": "Название",
+      "reviewSession": "Сессия",
+      "reviewMessageType": "Тип сообщения",
+      "reviewMessagePreview": "Предпросмотр",
+      "reviewRecipients": "Получатели",
+      "reviewRecipientCount": "{{count}} получат.",
+      "reviewSchedule": "Расписание",
+      "reviewScheduleNow": "Отправить сейчас",
+      "reviewScheduleDate": "Запланировано на {{date}}",
+      "createBtn": "Создать кампанию",
+      "creating": "Создание...",
+      "saveBtn": "Сохранить",
+      "saving": "Сохранение..."
+    },
+    "detail": {
+      "title": "Детали кампании",
+      "overview": "Обзор",
+      "recipients": "Получатели",
+      "stats": {
+        "total": "Всего получателей",
+        "sent": "Отправлено",
+        "failed": "Ошибок",
+        "pending": "В ожидании",
+        "progress": "Прогресс"
+      },
+      "actions": {
+        "start": "Запустить",
+        "pause": "Пауза",
+        "cancel": "Отмена",
+        "resendFailed": "Повтор ошибок",
+        "edit": "Редакт.",
+        "delete": "Удалить",
+        "back": "Назад к кампаниям"
+      },
+      "confirmDelete": "Вы уверены, что хотите удалить эту кампанию?",
+      "confirmStart": "Вы уверены, что хотите запустить эту кампанию?",
+      "noRecipients": "Получатели не найдены",
+      "searchRecipients": "Поиск получателей...",
+      "filterStatus": "Фильтр по статусу"
+    },
+    "toasts": {
+      "createSuccess": "Кампания создана",
+      "createError": "Ошибка создания кампании",
+      "updateSuccess": "Кампания обновлена",
+      "updateError": "Ошибка обновления кампании",
+      "deleteSuccess": "Кампания удалена",
+      "deleteError": "Ошибка удаления кампании",
+      "startSuccess": "Кампания запущена",
+      "startError": "Ошибка запуска кампании",
+      "pauseSuccess": "Кампания приостановлена",
+      "pauseError": "Ошибка приостановки",
+      "cancelSuccess": "Кампания отменена",
+      "cancelError": "Ошибка отмены",
+      "resendSuccess": "Повторная отправка...",
+      "resendError": "Ошибка повторной отправки"
+    }
+  },
+  "contacts": {
+    "title": "Контакты",
+    "subtitle": "Управляйте контактами WhatsApp",
+    "newContact": "Новый контакт",
+    "searchPlaceholder": "Поиск по имени или телефону...",
+    "selected": "Выбрано: {{count}}",
+    "bulkDelete": "Удалить выбранные",
+    "importBtn": "Импорт CSV",
+    "exportBtn": "Экспорт CSV",
+    "downloadTemplate": "Скачать образец CSV",
+    "empty": {
+      "title": "Контактов пока нет",
+      "description": "Добавьте первый контакт или импортируйте из CSV"
+    },
+    "columns": {
+      "name": "Имя",
+      "phone": "Телефон",
+      "country": "Страна",
+      "city": "Город",
+      "note": "Заметка",
+      "actions": "Действия"
+    },
+    "form": {
+      "createTitle": "Новый контакт",
+      "editTitle": "Редактировать контакт",
+      "fullName": "Полное имя",
+      "fullNamePlaceholder": "напр. Иван Петров",
+      "countryCode": "Код страны",
+      "phone": "WhatsApp",
+      "phonePlaceholder": "напр. 9123456789",
+      "phoneHint": "Введите номер без кода страны — он добавится автоматически",
+      "country": "Страна",
+      "countryPlaceholder": "напр. Россия",
+      "state": "Область / Регион",
+      "statePlaceholder": "напр. Московская",
+      "city": "Город",
+      "cityPlaceholder": "напр. Москва",
+      "address": "Адрес",
+      "addressPlaceholder": "напр. ул. Тверская, 1",
+      "note": "Заметка",
+      "notePlaceholder": "Дополнительные заметки...",
+      "phoneRequired": "Номер телефона обязателен",
+      "phoneDuplicate": "Этот номер уже существует",
+      "phoneInvalid": "Номер должен содержать только цифры"
+    },
+    "delete": {
+      "title": "Удалить контакт",
+      "message": "Вы уверены, что хотите удалить <strong>{{name}}</strong>? Это необратимо.",
+      "messagePhone": "Вы уверены, что хотите удалить контакт <strong>{{phone}}</strong>? Это необратимо.",
+      "successTitle": "Контакт удалён",
+      "successDesc": "Контакт удалён"
+    },
+    "bulkDeleteModal": {
+      "title": "Удалить {{count}} конт.",
+      "message": "Вы уверены, что хотите удалить {{count}} выбранных контактов? Это необратимо.",
+      "successTitle": "Контакты удалены",
+      "successDesc": "{{count}} контактов удалено"
+    },
+    "import": {
+      "title": "Импорт контактов",
+      "step1Title": "Загрузите CSV",
+      "step1Desc": "Загрузите CSV-файл с контактами. Колонка телефона должна содержать код страны (напр. +79123456789).",
+      "step2Title": "Предпросмотр",
+      "step2Desc": "Проверьте контакты перед импортом. Невалидные строки будут подсвечены.",
+      "step3Title": "Импорт завершён",
+      "dropzone": "Перетащите CSV или кликните для выбора",
+      "dropzoneHint": "Поддерживается: .csv",
+      "validRows": "{{count}} валидн.",
+      "invalidRows": "{{count}} невалидн.",
+      "importValid": "Только валидные",
+      "importAll": "Все",
+      "importBtn": "Импорт {{count}} конт.",
+      "importing": "Импорт...",
+      "successTitle": "Импорт успешен",
+      "successDesc": "Импортировано {{created}}, пропущено {{skipped}}",
+      "errorPhone": "Телефон пуст",
+      "errorNoCountryCode": "Телефон должен содержать код страны (напр. +79123456789)",
+      "errorDuplicate": "Дубликат телефона",
+      "previewColumns": {
+        "row": "#",
+        "status": "Статус",
+        "name": "Полное имя",
+        "phone": "Телефон",
+        "country": "Страна",
+        "city": "Город",
+        "note": "Заметка",
+        "error": "Проблема"
+      }
+    },
+    "detail": {
+      "title": "Детали контакта",
+      "phone": "Телефон",
+      "country": "Страна",
+      "state": "Регион",
+      "city": "Город",
+      "address": "Адрес",
+      "note": "Заметка",
+      "created": "Создан",
+      "messages": "История сообщений",
+      "noMessages": "Сообщений для этого контакта не найдено.",
+      "incoming": "Входящие",
+      "outgoing": "Исходящие",
+      "loadMore": "Загрузить ещё",
+      "loadingMessages": "Загрузка сообщений...",
+      "totalMessages": "Всего {{count}} сообщ.",
+      "session": "Сессия",
+      "type": "Тип",
+      "direction": "Направление",
+      "messageBody": "Сообщение",
+      "timestamp": "Дата",
+      "status": "Статус"
+    },
+    "pagination": {
+      "showing": "Показано {{from}}–{{to}} из {{total}}",
+      "perPage": "на стр."
+    },
+    "toasts": {
+      "createSuccess": "Контакт создан",
+      "createError": "Ошибка создания",
+      "updateSuccess": "Контакт обновлён",
+      "updateError": "Ошибка обновления",
+      "deleteSuccess": "Контакт удалён",
+      "deleteError": "Ошибка удаления",
+      "bulkDeleteSuccess": "{{count}} контактов удалено",
+      "bulkDeleteError": "Ошибка удаления",
+      "importSuccess": "Импортировано {{created}}",
+      "importError": "Ошибка импорта",
+      "exportSuccess": "Экспортировано {{count}}",
+      "exportError": "Ошибка экспорта"
+    }
+  },
+  "groups": {
+    "title": "Группы контактов",
+    "subtitle": "Группируйте контакты для таргетированной рассылки",
+    "newGroup": "Новая группа",
+    "searchPlaceholder": "Поиск групп...",
+    "empty": {
+      "title": "Групп пока нет",
+      "description": "Создайте группу для организации контактов"
+    },
+    "columns": {
+      "name": "Название",
+      "description": "Описание",
+      "members": "Участников",
+      "created": "Создана",
+      "actions": "Действия"
+    },
+    "form": {
+      "createTitle": "Создать группу",
+      "editTitle": "Редактировать",
+      "name": "Название группы",
+      "namePlaceholder": "напр. VIP-клиенты",
+      "description": "Описание",
+      "descriptionPlaceholder": "Описание (опционально)",
+      "nameRequired": "Название группы обязательно"
+    },
+    "create": {
+      "step1Title": "Детали группы",
+      "step2Title": "Добавить участников",
+      "step3Title": "Проверка и создание",
+      "method": "Как добавить контакты?",
+      "csvImport": "Импорт из CSV",
+      "csvImportDesc": "Загрузите CSV для создания контактов и добавления в группу",
+      "filterSelect": "Фильтр и выбор",
+      "filterSelectDesc": "Найдите существующие контакты для добавления в группу",
+      "csv": {
+        "title": "Импорт из CSV",
+        "dropzone": "Перетащите CSV или кликните",
+        "dropzoneHint": "Формат: .csv. Телефоны с кодом страны (напр. +79123456789)",
+        "validRows": "{{count}} валидн.",
+        "invalidRows": "{{count}} невалидн.",
+        "importBtn": "Импорт {{count}}",
+        "importing": "Импорт...",
+        "step2Title": "Предпросмотр",
+        "step2Desc": "Проверьте данные перед импортом.",
+        "step3Title": "Импорт завершён",
+        "successDesc": "Создано {{created}}, пропущено {{skipped}}",
+        "errorPhone": "Телефон пуст",
+        "errorNoCountryCode": "Нужен код страны",
+        "errorDuplicate": "Дубликат",
+        "previewColumns": {
+          "row": "#",
+          "status": "Статус",
+          "name": "Имя",
+          "phone": "Телефон",
+          "country": "Страна",
+          "city": "Город",
+          "note": "Заметка",
+          "error": "Проблема"
+        }
+      },
+      "filter": {
+        "title": "Выбор контактов",
+        "searchPlaceholder": "Поиск...",
+        "country": "Страна",
+        "allCountries": "Все",
+        "state": "Регион",
+        "allStates": "Все",
+        "city": "Город",
+        "allCities": "Все",
+        "namePlaceholder": "Фильтр по имени...",
+        "phonePlaceholder": "Фильтр по префиксу...",
+        "selected": "Выбрано: {{count}}",
+        "noResults": "Нет совпадений",
+        "clearFilters": "Сбросить"
+      },
+      "review": {
+        "title": "Проверка",
+        "nameLabel": "Название",
+        "descriptionLabel": "Описание",
+        "membersLabel": "Участники",
+        "noMembers": "Нет участников",
+        "addMore": "Добавить ещё"
+      }
+    },
+    "detail": {
+      "title": "Детали группы",
+      "members": "Участники",
+      "noMembers": "Нет участников",
+      "addMembers": "Добавить",
+      "removeSelected": "Удалить",
+      "searchPlaceholder": "Поиск участников...",
+      "removeConfirm": "Удалить {{count}} контактов из группы?",
+      "empty": {
+        "title": "Нет участников",
+        "description": "Добавьте контакты в группу"
+      }
+    },
+    "delete": {
+      "title": "Удалить группу",
+      "message": "Вы уверены, что хотите удалить группу <strong>«{{name}}»</strong>? Это необратимо.",
+      "successTitle": "Группа удалена",
+      "successDesc": "Группа удалена"
+    },
+    "toasts": {
+      "createSuccess": "Группа создана",
+      "createError": "Ошибка создания",
+      "updateSuccess": "Группа обновлена",
+      "updateError": "Ошибка обновления",
+      "deleteSuccess": "Группа удалена",
+      "deleteError": "Ошибка удаления",
+      "addMembersSuccess": "Добавлено {{count}} конт.",
+      "addMembersError": "Ошибка добавления",
+      "removeMembersSuccess": "Удалено {{count}} конт.",
+      "removeMembersError": "Ошибка удаления",
+      "importSuccess": "Импортировано {{created}}",
+      "importError": "Ошибка импорта"
+    }
+  },
+  "settings": {
+    "title": "Настройки",
+    "subtitle": "Управление профилем, паролем и системными настройками",
+    "tabs": {
+      "profile": "Профиль",
+      "password": "Пароль",
+      "language": "Язык",
+      "system": "Система"
+    },
+    "language": {
+      "title": "Язык",
+      "subtitle": "Выберите предпочитаемый язык интерфейса"
+    },
+    "profile": {
+      "name": "Полное имя",
+      "namePlaceholder": "напр. Иван Петров",
+      "phone": "Номер телефона",
+      "phonePlaceholder": "напр. 79123456789",
+      "profilePic": "Фото профиля",
+      "profilePicHint": "Загрузите изображение (JPEG, PNG, WebP, GIF). До 5MB.",
+      "chooseFile": "Выбрать файл",
+      "uploading": "Загрузка...",
+      "remove": "Удалить",
+      "toasts": {
+        "updateSuccess": "Профиль обновлён",
+        "updateError": "Ошибка обновления",
+        "uploadError": "Ошибка загрузки"
+      }
+    },
+    "password": {
+      "current": "Текущий пароль",
+      "currentHint": "Введите текущий пароль для подтверждения",
+      "currentPlaceholder": "Введите текущий пароль",
+      "newPassword": "Новый пароль",
+      "newPlaceholder": "Новый пароль (мин. 6 символов)",
+      "confirm": "Подтвердите пароль",
+      "confirmPlaceholder": "Повторите пароль",
+      "save": "Сменить пароль",
+      "errors": {
+        "currentRequired": "Текущий пароль обязателен",
+        "newRequired": "Новый пароль обязателен",
+        "tooShort": "Пароль должен быть от 6 символов",
+        "mismatch": "Пароли не совпадают"
+      },
+      "toasts": {
+        "updateSuccess": "Пароль изменён",
+        "updateError": "Ошибка смены пароля"
+      }
+    },
+    "system": {
+      "name": "Название компании",
+      "namePlaceholder": "напр. Моя компания",
+      "email": "Email",
+      "emailPlaceholder": "напр. info@company.com",
+      "altPhone": "Альт. телефон",
+      "altPhonePlaceholder": "напр. +79123456789",
+      "website": "Веб-сайт",
+      "websitePlaceholder": "напр. https://company.com",
+      "address": "Адрес",
+      "addressPlaceholder": "напр. ул. Тверская, 1, Москва",
+      "googleMapLink": "Ссылка на Google Maps",
+      "googleMapLinkPlaceholder": "напр. https://maps.google.com/...",
+      "businessLogo": "Логотип",
+      "smallLogo": "Малый логотип",
+      "toasts": {
+        "updateSuccess": "Системные настройки обновлены",
+        "updateError": "Ошибка обновления"
+      }
+    }
+  }
+}

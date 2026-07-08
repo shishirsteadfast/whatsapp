@@ -1,0 +1,954 @@
+{
+  "common": {
+    "appName": "OpenWA",
+    "appSubtitle": "API WhatsApp",
+    "loading": "Memuat...",
+    "save": "Simpan",
+    "cancel": "Batal",
+    "delete": "Hapus",
+    "edit": "Ubah",
+    "create": "Buat",
+    "close": "Tutup",
+    "submit": "Kirim",
+    "confirm": "Konfirmasi",
+    "search": "Cari",
+    "filter": "Saring",
+    "actions": "Aksi",
+    "status": "Status",
+    "name": "Nama",
+    "role": "Peran",
+    "type": "Tipe",
+    "url": "URL",
+    "port": "Port",
+    "host": "Host",
+    "username": "Username",
+    "password": "Kata Sandi",
+    "active": "Aktif",
+    "inactive": "Nonaktif",
+    "enabled": "Diaktifkan",
+    "disabled": "Dinonaktifkan",
+    "connected": "Terhubung",
+    "disconnected": "Terputus",
+    "never": "Tidak pernah",
+    "justNow": "Baru saja",
+    "minAgo": "{{count}} menit lalu",
+    "hoursAgo": "{{count}} jam lalu",
+    "optional": "opsional",
+    "language": "Bahasa",
+    "english": "English",
+    "hebrew": "עברית",
+    "back": "Kembali",
+    "next": "Lanjut",
+    "previous": "Sebelumnya",
+    "expand": "Perluas",
+    "collapse": "Tutup",
+    "logout": "Keluar",
+    "refresh": "Muat ulang",
+    "notifications": "Notifikasi",
+    "noNotifications": "Tidak ada notifikasi baru",
+    "profile": "Profil",
+    "changePassword": "Ganti Kata Sandi",
+    "settings": "Pengaturan",
+    "errorGeneric": "Terjadi kesalahan",
+    "unknownError": "Kesalahan tidak diketahui",
+    "lightMode": "Mode terang",
+    "darkMode": "Mode gelap",
+    "viewAll": "Lihat Semua",
+    "copied": "Tersalin!"
+  },
+  "theme": {
+    "light": "Terang",
+    "dark": "Gelap",
+    "system": "Sistem",
+    "label": "Tema: {{value}}"
+  },
+  "nav": {
+    "dashboard": "Dasbor",
+    "sessions": "Sesi",
+    "webhooks": "Webhook",
+    "apiKeys": "Kunci API",
+    "contacts": "Kontak",
+    "composer": "Komposer",
+    "groups": "Grup",
+    "messages": "Pesan",
+    "settings": "Pengaturan",
+    "messageTester": "Penguji Pesan",
+    "campaigns": "Kampanye",
+    "logs": "Log"
+  },
+  "errorBoundary": {
+    "title": "Ada yang salah",
+    "description": "Dasbor mengalami kesalahan yang tidak terduga.",
+    "reload": "Muat Ulang Dasbor"
+  },
+  "login": {
+    "apiKey": "Kunci API",
+    "apiKeyPlaceholder": "Masukkan kunci API",
+    "apiKeyRequired": "Kunci API wajib diisi",
+    "connect": "Hubungkan",
+    "connecting": "Menghubungkan...",
+    "invalidKey": "Kunci API tidak valid",
+    "connectionError": "Tidak dapat terhubung ke server. Silakan coba lagi.",
+    "help": "Butuh bantuan?",
+    "viewDocs": "Lihat Dokumentasi",
+    "footer": "Dibuat dengan ❤️ oleh Yudhi Armyndharis dan Komunitas OpenWA",
+    "version": "v{{version}} · {{date}}",
+    "title": "Masuk",
+    "subtitle": "Masukkan kredensial Anda untuk mengakses dasbor.",
+    "phoneLabel": "Nomor Telepon",
+    "phonePlaceholder": "mis. 08123456789",
+    "passwordLabel": "Kata Sandi",
+    "passwordPlaceholder": "Masukkan kata sandi",
+    "signIn": "Masuk",
+    "phoneRequired": "Nomor telepon wajib diisi",
+    "passwordRequired": "Kata sandi wajib diisi",
+    "invalidCredentials": "Nomor telepon atau kata sandi salah"
+  },
+  "dashboard": {
+    "title": "Dasbor",
+    "subtitle": "Ikhtisar sesi WhatsApp dan aktivitas Anda",
+    "stats": {
+      "activeSessions": "Sesi Aktif",
+      "messagesToday": "Pesan Hari Ini",
+      "webhooksConfigured": "Webhook Terkonfigurasi",
+      "apiCalls": "Panggilan API (24 jam)"
+    },
+    "sessionsOverview": "Ikhtisar Sesi",
+    "showingSessions": "Menampilkan {{shown}} dari {{total}} sesi",
+    "columns": {
+      "sessionId": "ID Sesi",
+      "phone": "Nomor Telepon",
+      "status": "Status",
+      "lastActive": "Terakhir Aktif",
+      "actions": "Aksi"
+    },
+    "noSessions": "Tidak ada sesi. Buat satu untuk memulai.",
+    "view": "Lihat",
+    "disconnect": "Putuskan",
+    "errorPrefix": "Error: {{message}}",
+    "loadError": "Gagal memuat data",
+    "statActive": "{{count}} aktif",
+    "statNoData": "Belum ada data"
+  },
+  "sessionStatus": {
+    "created": "Baru",
+    "idle": "Diam",
+    "initializing": "Memulai...",
+    "connecting": "Menghubungkan...",
+    "qr_ready": "Pindai QR",
+    "ready": "Terhubung",
+    "disconnected": "Terputus"
+  },
+  "sessions": {
+    "title": "Sesi",
+    "subtitle": "Kelola sesi WhatsApp dan koneksi QR Anda",
+    "newSession": "Sesi Baru",
+    "searchPlaceholder": "Cari sesi...",
+    "filter": {
+      "all": "Semua Status",
+      "active": "Aktif (Terhubung)",
+      "inactive": "Nonaktif",
+      "connecting": "Menghubungkan"
+    },
+    "empty": {
+      "title": "Tidak ada sesi",
+      "description": "Buat sesi baru untuk memulai"
+    },
+    "create": {
+      "title": "Buat Sesi Baru",
+      "label": "Nama Sesi",
+      "placeholder": "mis. marketing-bot",
+      "hint": "Hanya gunakan huruf kecil, angka, dan tanda hubung. Contoh: <code>customer-support</code>",
+      "invalidChars": "Karakter tidak valid. Hanya huruf kecil, angka, dan tanda hubung yang diizinkan.",
+      "tooLong": "Nama maksimal 50 karakter ({{length}}/50).",
+      "duplicate": "Sesi dengan nama ini sudah ada.",
+      "successTitle": "Sesi Dibuat",
+      "successDesc": "Sesi «{{name}}» berhasil dibuat",
+      "errorTitle": "Gagal Membuat",
+      "errorDefault": "Gagal membuat sesi"
+    },
+    "delete": {
+      "title": "Konfirmasi Hapus",
+      "message": "Yakin ingin menghapus sesi <strong>«{{name}}»</strong>?",
+      "warning": "Tindakan ini tidak bisa dibatalkan.",
+      "successTitle": "Sesi Dihapus",
+      "successDescNamed": "Sesi «{{name}}» dihapus",
+      "successDescGeneric": "Sesi dihapus",
+      "errorTitle": "Gagal Hapus",
+      "errorDefault": "Gagal menghapus sesi"
+    },
+    "qr": {
+      "title": "Pindai Kode QR",
+      "step1": "<strong>1.</strong> Buka WhatsApp di ponsel Anda",
+      "step2": "<strong>2.</strong> Ketuk <strong>Menu</strong> → <strong>Perangkat Tertaut</strong>",
+      "step3": "<strong>3.</strong> Ketuk <strong>Tautkan Perangkat</strong> dan pindai QR ini",
+      "autoRefresh": "QR diperbarui otomatis setiap 5 detik",
+      "generating": "Membuat kode QR...",
+      "unavailable": "Kode QR belum tersedia. Coba lagi sebentar.",
+      "preparing": "Menyiapkan kode QR...",
+      "showQr": "Tampilkan QR",
+      "loading": "Memuat...",
+      "scanToConnect": "Pindai QR untuk terhubung"
+    },
+    "details": {
+      "title": "Detail Sesi",
+      "name": "Nama",
+      "status": "Status",
+      "sessionId": "ID Sesi",
+      "phone": "Nomor Telepon",
+      "phoneNone": "Belum terhubung",
+      "created": "Dibuat",
+      "lastActive": "Terakhir Aktif"
+    },
+    "actions": {
+      "view": "Lihat",
+      "start": "Mulai",
+      "stop": "Berhenti",
+      "reconnect": "Hubungkan Ulang",
+      "delete": "Hapus"
+    },
+    "toasts": {
+      "readyTitle": "Sesi Siap",
+      "readyDesc": "Sesi WhatsApp sekarang terhubung",
+      "disconnectedTitle": "Sesi Terputus",
+      "disconnectedDesc": "Sesi WhatsApp terputus"
+    },
+    "card": {
+      "phone": "Telepon",
+      "sessionId": "ID Sesi",
+      "lastActive": "Terakhir Aktif"
+    }
+  },
+  "webhooks": {
+    "title": "Webhook",
+    "subtitle": "Konfigurasikan callback HTTP untuk notifikasi real-time",
+    "addWebhook": "Tambah Webhook",
+    "createTitle": "Buat Webhook",
+    "editTitle": "Ubah Webhook",
+    "deleteTitle": "Hapus Webhook",
+    "deleteConfirm": "Yakin ingin menghapus webhook ini?",
+    "selectSession": "Pilih sesi...",
+    "session": "Sesi",
+    "events": "Event",
+    "available": "Event Tersedia",
+    "saveChanges": "Simpan Perubahan",
+    "columns": {
+      "url": "URL",
+      "events": "Event",
+      "session": "Sesi",
+      "status": "Status",
+      "actions": "Aksi"
+    },
+    "empty": {
+      "title": "Belum ada webhook dikonfigurasi",
+      "description": "Tambahkan webhook untuk menerima notifikasi real-time"
+    },
+    "toasts": {
+      "created": "Webhook berhasil dibuat",
+      "createFailed": "Gagal membuat webhook: {{message}}",
+      "deleted": "Webhook berhasil dihapus",
+      "deleteFailed": "Gagal menghapus webhook: {{message}}",
+      "updated": "Webhook berhasil diperbarui",
+      "updateFailed": "Gagal memperbarui webhook: {{message}}",
+      "testOk": "Tes webhook berhasil! Status: {{status}}",
+      "testFailed": "Tes webhook gagal: {{message}}",
+      "testError": "Gagal menguji webhook: {{message}}"
+    },
+    "actions": {
+      "test": "Uji",
+      "edit": "Ubah",
+      "delete": "Hapus"
+    },
+    "eventDescriptions": {
+      "message.received": "Saat pesan diterima",
+      "message.sent": "Saat pesan dikirim",
+      "session.connected": "Saat sesi terhubung",
+      "session.disconnected": "Saat sesi terputus",
+      "session.qr": "Saat kode QR dibuat",
+      "all": "Semua event"
+    }
+  },
+  "apiKeys": {
+    "title": "Manajemen API",
+    "subtitle": "Kelola kunci API, lihat kredensial, dan dokumentasi API",
+    "tabs": {
+      "overview": "Ikhtisar",
+      "keys": "Kunci API",
+      "docs": "Dokumentasi"
+    },
+    "stats": {
+      "totalKeys": "Total Kunci",
+      "activeKeys": "Kunci Aktif",
+      "totalCalls": "Total Panggilan",
+      "rateLimit": "Panggilan Hari Ini"
+    },
+    "credentials": {
+      "baseUrl": "URL Dasar API",
+      "baseUrlHint": "Gunakan URL ini sebagai endpoint dasar untuk semua permintaan API."
+    },
+    "quickLinks": {
+      "title": "Tautan Cepat",
+      "manageKeys": "Kelola Kunci API",
+      "manageKeysDesc": "Lihat, buat, cabut, dan hapus kunci API Anda",
+      "viewDocs": "Dokumentasi API",
+      "viewDocsDesc": "Jelajahi referensi endpoint lengkap dengan contoh",
+      "createKey": "Buat Kunci Baru",
+      "createKeyDesc": "Hasilkan kunci API baru dengan peran tertentu"
+    },
+    "createBtn": "Buat Kunci API",
+    "modalTitle": "Buat Kunci API",
+    "createdTitle": "Kunci API Dibuat",
+    "createdHint": "Salin kunci ini sekarang. Anda tidak akan bisa melihatnya lagi.",
+    "createdHintExtra": "Kunci rahasia ini tidak akan ditampilkan lagi. Simpan dengan aman.",
+    "namePlaceholder": "mis. Kunci Produksi",
+    "rolesTitle": "Referensi Peran",
+    "roles": {
+      "admin": "Admin",
+      "operator": "Operator",
+      "viewer": "Pengamat"
+    },
+    "roleDescriptions": {
+      "admin": "Akses penuh ke semua sumber daya",
+      "operator": "Manajemen sesi & pesan",
+      "viewer": "Akses baca saja"
+    },
+    "columns": {
+      "name": "Nama",
+      "key": "Kunci",
+      "role": "Peran",
+      "status": "Status",
+      "lastUsed": "Terakhir Digunakan",
+      "actions": "Aksi"
+    },
+    "statuses": {
+      "active": "Aktif",
+      "revoked": "Dicabut"
+    },
+    "empty": {
+      "title": "Belum ada kunci API",
+      "description": "Buat kunci API untuk mengautentikasi permintaan Anda"
+    },
+    "confirm": {
+      "deleteTitle": "Hapus Kunci API",
+      "revokeTitle": "Cabut Kunci API",
+      "deleteMessage": "Yakin ingin menghapus permanen <strong>{{name}}</strong>? Tindakan ini tidak bisa dibatalkan.",
+      "revokeMessage": "Yakin ingin mencabut <strong>{{name}}</strong>? Kunci ini tidak akan berfungsi lagi.",
+      "delete": "Hapus",
+      "revoke": "Cabut"
+    },
+    "actions": {
+      "copy": "Salin",
+      "revoke": "Cabut",
+      "delete": "Hapus"
+    }
+  },
+  "apiDocs": {
+    "auth": {
+      "title": "Autentikasi",
+      "description": "Semua permintaan API memerlukan autentikasi. Sertakan kunci API Anda di header <code>X-API-Key</code>. Anda dapat mengelola kunci API di tab Kunci API.",
+      "example": "Contoh permintaan dengan autentikasi",
+      "none": "Tidak perlu autentikasi",
+      "apiKey": "Kunci API diperlukan",
+      "admin": "Akses admin diperlukan"
+    },
+    "sdks": {
+      "title": "SDK & Pustaka",
+      "description": "Gunakan SDK resmi kami untuk mengintegrasikan OpenWA dengan aplikasi Anda."
+    },
+    "endpoints": {
+      "title": "Endpoint API",
+      "health": {
+        "desc": "Periksa status kesehatan server API"
+      },
+      "sessions": {
+        "list": "Daftar semua sesi WhatsApp",
+        "create": "Buat sesi WhatsApp baru",
+        "qr": "Dapatkan kode QR untuk sesi",
+        "delete": "Hapus sesi WhatsApp"
+      },
+      "messages": {
+        "sendText": "Kirim pesan teks",
+        "sendImage": "Kirim pesan gambar",
+        "sendLocation": "Kirim pesan lokasi",
+        "list": "Daftar pesan dengan filter opsional"
+      },
+      "contacts": {
+        "list": "Daftar semua kontak tersimpan",
+        "create": "Buat kontak baru"
+      },
+      "webhooks": {
+        "list": "Daftar semua webhook yang dikonfigurasi"
+      },
+      "campaigns": {
+        "list": "Daftar semua kampanye",
+        "create": "Buat kampanye baru"
+      },
+      "settings": {
+        "get": "Dapatkan pengaturan sistem (khusus admin)"
+      }
+    },
+    "requestBody": "Badan Permintaan",
+    "example": "Contoh",
+    "response": "Respons",
+    "rateLimit": {
+      "title": "Batasan Kecepatan",
+      "description": "Permintaan API dibatasi kecepatannya untuk memastikan penggunaan yang adil. Batas default adalah 100 permintaan per jendela 60 detik per kunci API. Melebihi batas ini akan menghasilkan respons 429 Too Many Requests. Hubungi dukungan jika Anda membutuhkan batas yang lebih tinggi."
+    }
+  },
+  "logs": {
+    "title": "Log Audit",
+    "subtitle": "Lacak dan tinjau semua aksi API dan event sistem",
+    "exportCsv": "Ekspor CSV",
+    "searchPlaceholder": "Cari log...",
+    "severity": {
+      "all": "Semua Tingkat",
+      "info": "Info",
+      "warn": "Peringatan",
+      "error": "Error"
+    },
+    "columns": {
+      "timestamp": "Waktu",
+      "action": "Aksi",
+      "session": "Sesi",
+      "apiKey": "Kunci API",
+      "user": "Pengguna",
+      "ip": "Alamat IP",
+      "severity": "Tingkat"
+    },
+    "pagination": "Halaman {{page}} dari {{total}} ({{count}} total)",
+    "empty": {
+      "title": "Tidak ada log",
+      "description": "Log audit akan muncul di sini saat aksi dilakukan"
+    }
+  },
+  "composer": {
+    "title": "Komposer",
+    "subtitle": "Tulis dan kirim pesan seperti di WhatsApp",
+    "session": "Sesi WhatsApp",
+    "noReadySessions": "Tidak ada sesi siap",
+    "contactType": "Tipe Kontak",
+    "recipients": "Penerima",
+    "selected": "{{count}} dipilih",
+    "savedContacts": "Kontak",
+    "waContacts": "Kontak WA",
+    "groups": "Grup",
+    "newNumber": "Nomor Baru",
+    "searchContacts": "Cari kontak...",
+    "searchGroups": "Cari grup...",
+    "noContacts": "Belum ada kontak tersimpan",
+    "noGroups": "Tidak ada grup ditemukan",
+    "noResults": "Tidak ada hasil",
+    "schedule": "Jadwalkan",
+    "messageType": "Tipe Pesan",
+    "types": {
+      "text": "Teks",
+      "image": "Gambar",
+      "video": "Video",
+      "audio": "Audio",
+      "document": "Dokumen",
+      "location": "Lokasi",
+      "contact": "Kontak"
+    },
+    "message": "Pesan",
+    "messagePlaceholder": "Ketik pesan Anda di sini...",
+    "mediaUrl": "URL Media",
+    "mediaUrlPlaceholder": "https://example.com/file.jpg",
+    "caption": "Keterangan",
+    "captionPlaceholder": "Tambahkan keterangan...",
+    "fileName": "Nama File",
+    "fileNamePlaceholder": "dokumen.pdf",
+    "latitude": "Lintang",
+    "latitudePlaceholder": "-6.2088",
+    "longitude": "Bujur",
+    "longitudePlaceholder": "106.8456",
+    "locationDescription": "Deskripsi",
+    "locationDescriptionPlaceholder": "mis. Titik temu kami",
+    "contactName": "Nama Kontak",
+    "contactNamePlaceholder": "Budi Santoso",
+    "contactPhone": "Telepon Kontak",
+    "contactPhonePlaceholder": "+62812345678",
+    "send": "Kirim Pesan",
+    "sending": "Mengirim...",
+    "sendTo": "Kirim ke {{count}} penerima",
+    "sendTo_plural": "Kirim ke {{count}} penerima",
+    "sendingTo": "Mengirim ke {{count}} penerima",
+    "sendingTo_plural": "Mengirim ke {{count}} penerima...",
+    "sentSuccess": "Pesan terkirim ke {{count}} penerima",
+    "sentSuccess_plural": "Pesan terkirim ke {{count}} penerima",
+    "sentPartial": "Terkirim ke {{sent}}, gagal untuk {{failed}} penerima",
+    "sentPartial_plural": "Terkirim ke {{sent}}, gagal untuk {{failed}} penerima",
+    "progress": "Progres",
+    "charCount": "{{count}} / 4096 karakter",
+    "livePreview": "Pratinjau Langsung",
+    "noMessages": "Belum ada pesan",
+    "noMessagesHint": "Kirim pesan untuk memulai percakapan"
+  },
+  "campaigns": {
+    "title": "Kampanye",
+    "subtitle": "Buat dan kelola kampanye siaran",
+    "newCampaign": "Kampanye Baru",
+    "editCampaign": "Ubah Kampanye",
+    "duplicate": "Duplikat",
+    "searchPlaceholder": "Cari kampanye...",
+    "filterStatus": "Semua Status",
+    "statuses": {
+      "draft": "Draf",
+      "scheduled": "Terjadwal",
+      "sending": "Mengirim",
+      "completed": "Selesai",
+      "paused": "Dihentikan",
+      "cancelled": "Dibatalkan",
+      "failed": "Gagal"
+    },
+    "recipientType": {
+      "contacts": "Kontak",
+      "groups": "Grup"
+    },
+    "stats": {
+      "total": "Total Kampanye",
+      "active": "Aktif",
+      "completed": "Selesai",
+      "failed": "Gagal",
+      "totalRecipients": "Total Penerima",
+      "totalSent": "Total Terkirim",
+      "totalFailed": "Total Gagal"
+    },
+    "columns": {
+      "name": "Nama",
+      "status": "Status",
+      "recipients": "Penerima",
+      "sent": "Terkirim",
+      "failed": "Gagal",
+      "schedule": "Jadwal",
+      "created": "Dibuat",
+      "actions": "Aksi"
+    },
+    "empty": {
+      "title": "Belum ada kampanye",
+      "description": "Buat kampanye pertama Anda untuk mulai menyiarkan pesan"
+    },
+    "wizard": {
+      "step1": "Detail",
+      "step2": "Pesan",
+      "step3": "Penerima",
+      "step4": "Jadwal",
+      "step5": "Tinjau",
+      "name": "Nama Kampanye",
+      "namePlaceholder": "mis. Promosi Liburan",
+      "description": "Deskripsi",
+      "descriptionPlaceholder": "Deskripsi opsional untuk kampanye ini",
+      "session": "Sesi WhatsApp",
+      "noSessions": "Tidak ada sesi tersedia",
+      "messageType": "Tipe Pesan",
+      "text": "Teks",
+      "image": "Gambar",
+      "video": "Video",
+      "audio": "Audio",
+      "document": "Dokumen",
+      "location": "Lokasi",
+      "contact": "Kontak",
+      "textPlaceholder": "Masukkan pesan Anda...",
+      "mediaUrl": "URL Media",
+      "mediaUrlPlaceholder": "https://example.com/file.jpg",
+      "caption": "Keterangan",
+      "captionPlaceholder": "Tambahkan keterangan...",
+      "fileName": "Nama File",
+      "fileNamePlaceholder": "dokumen.pdf",
+      "latitude": "Lintang",
+      "latitudePlaceholder": "-6.2088",
+      "longitude": "Bujur",
+      "longitudePlaceholder": "106.8456",
+      "contactName": "Nama Kontak",
+      "contactNamePlaceholder": "Budi Santoso",
+      "contactPhone": "Telepon Kontak",
+      "contactPhonePlaceholder": "+62812345678",
+      "selectRecipients": "Pilih Penerima",
+      "contacts": "Kontak Tersimpan",
+      "groups": "Grup Kontak",
+      "searchContacts": "Cari kontak...",
+      "searchGroups": "Cari grup...",
+      "noContacts": "Tidak ada kontak ditemukan",
+      "noGroups": "Tidak ada grup ditemukan",
+      "selected": "{{count}} dipilih",
+      "scheduleNow": "Kirim sekarang",
+      "scheduleLater": "Jadwalkan nanti",
+      "scheduleDate": "Tanggal Jadwal",
+      "scheduleTime": "Waktu Jadwal",
+      "reviewTitle": "Tinjau Kampanye",
+      "reviewName": "Nama",
+      "reviewSession": "Sesi",
+      "reviewMessageType": "Tipe Pesan",
+      "reviewMessagePreview": "Pratinjau Pesan",
+      "reviewRecipients": "Penerima",
+      "reviewRecipientCount": "{{count}} penerima",
+      "reviewSchedule": "Jadwal",
+      "reviewScheduleNow": "Kirim sekarang",
+      "reviewScheduleDate": "Dijadwalkan pada {{date}}",
+      "createBtn": "Buat Kampanye",
+      "creating": "Membuat...",
+      "saveBtn": "Simpan Perubahan",
+      "saving": "Menyimpan..."
+    },
+    "detail": {
+      "title": "Detail Kampanye",
+      "overview": "Ikhtisar",
+      "recipients": "Penerima",
+      "stats": {
+        "total": "Total Penerima",
+        "sent": "Terkirim",
+        "failed": "Gagal",
+        "pending": "Tertunda",
+        "progress": "Progres"
+      },
+      "actions": {
+        "start": "Mulai Kampanye",
+        "pause": "Jeda",
+        "cancel": "Batalkan",
+        "resendFailed": "Kirim Ulang Gagal",
+        "edit": "Ubah",
+        "delete": "Hapus",
+        "back": "Kembali ke Kampanye"
+      },
+      "confirmDelete": "Yakin ingin menghapus kampanye ini?",
+      "confirmStart": "Yakin ingin memulai kampanye ini?",
+      "noRecipients": "Tidak ada penerima ditemukan",
+      "searchRecipients": "Cari penerima...",
+      "filterStatus": "Saring berdasarkan status"
+    },
+    "toasts": {
+      "createSuccess": "Kampanye dibuat",
+      "createError": "Gagal membuat kampanye",
+      "updateSuccess": "Kampanye diperbarui",
+      "updateError": "Gagal memperbarui kampanye",
+      "deleteSuccess": "Kampanye dihapus",
+      "deleteError": "Gagal menghapus kampanye",
+      "startSuccess": "Kampanye dimulai",
+      "startError": "Gagal memulai kampanye",
+      "pauseSuccess": "Kampanye dijeda",
+      "pauseError": "Gagal menjeda kampanye",
+      "cancelSuccess": "Kampanye dibatalkan",
+      "cancelError": "Gagal membatalkan kampanye",
+      "resendSuccess": "Mengirim ulang pesan gagal",
+      "resendError": "Gagal mengirim ulang pesan"
+    }
+  },
+  "contacts": {
+    "title": "Kontak",
+    "subtitle": "Kelola kontak WhatsApp Anda",
+    "newContact": "Kontak Baru",
+    "searchPlaceholder": "Cari berdasarkan nama atau telepon...",
+    "selected": "{{count}} dipilih",
+    "bulkDelete": "Hapus Terpilih",
+    "importBtn": "Impor CSV",
+    "exportBtn": "Ekspor CSV",
+    "downloadTemplate": "Unduh contoh CSV",
+    "empty": {
+      "title": "Belum ada kontak",
+      "description": "Tambahkan kontak pertama Anda atau impor dari file CSV"
+    },
+    "columns": {
+      "name": "Nama",
+      "phone": "Telepon",
+      "country": "Negara",
+      "city": "Kota",
+      "note": "Catatan",
+      "actions": "Aksi"
+    },
+    "form": {
+      "createTitle": "Kontak Baru",
+      "editTitle": "Ubah Kontak",
+      "fullName": "Nama Lengkap",
+      "fullNamePlaceholder": "mis. Budi Santoso",
+      "countryCode": "Kode Negara",
+      "phone": "WhatsApp",
+      "phonePlaceholder": "mis. 8123456789",
+      "phoneHint": "Masukkan nomor tanpa kode negara — akan ditambahkan otomatis",
+      "country": "Negara",
+      "countryPlaceholder": "mis. Indonesia",
+      "state": "Provinsi",
+      "statePlaceholder": "mis. Jawa Barat",
+      "city": "Kota",
+      "cityPlaceholder": "mis. Bandung",
+      "address": "Alamat",
+      "addressPlaceholder": "mis. Jl. Merdeka No. 123",
+      "note": "Catatan",
+      "notePlaceholder": "Catatan tambahan...",
+      "phoneRequired": "Nomor telepon wajib diisi",
+      "phoneDuplicate": "Nomor telepon ini sudah ada",
+      "phoneInvalid": "Nomor telepon hanya boleh berisi angka"
+    },
+    "delete": {
+      "title": "Hapus Kontak",
+      "message": "Yakin ingin menghapus <strong>{{name}}</strong>? Tidak bisa dibatalkan.",
+      "messagePhone": "Yakin ingin menghapus kontak <strong>{{phone}}</strong>? Tidak bisa dibatalkan.",
+      "successTitle": "Kontak Dihapus",
+      "successDesc": "Kontak telah dihapus"
+    },
+    "bulkDeleteModal": {
+      "title": "Hapus {{count}} Kontak",
+      "message": "Yakin ingin menghapus {{count}} kontak terpilih? Tidak bisa dibatalkan.",
+      "successTitle": "Kontak Dihapus",
+      "successDesc": "{{count}} kontak telah dihapus"
+    },
+    "import": {
+      "title": "Impor Kontak",
+      "step1Title": "Unggah File CSV",
+      "step1Desc": "Unggah file CSV dengan kontak Anda. Kolom telepon harus menyertakan kode negara (mis. +62812345678).",
+      "step2Title": "Pratinjau & Validasi",
+      "step2Desc": "Tinjau kontak Anda sebelum mengimpor. Baris yang tidak valid akan disorot.",
+      "step3Title": "Impor Selesai",
+      "dropzone": "Letakkan file CSV Anda di sini, atau klik untuk memilih",
+      "dropzoneHint": "Format yang didukung: .csv",
+      "validRows": "{{count}} valid",
+      "invalidRows": "{{count}} tidak valid",
+      "importValid": "Impor Yang Valid Saja",
+      "importAll": "Impor Semua",
+      "importBtn": "Impor {{count}} Kontak",
+      "importing": "Mengimpor...",
+      "successTitle": "Impor Berhasil",
+      "successDesc": "{{created}} kontak diimpor, {{skipped}} dilewati",
+      "errorPhone": "Nomor telepon kosong",
+      "errorNoCountryCode": "Telepon harus menyertakan kode negara (mis. +62812345678)",
+      "errorDuplicate": "Nomor duplikat dalam file",
+      "previewColumns": {
+        "row": "#",
+        "status": "Status",
+        "name": "Nama Lengkap",
+        "phone": "Telepon",
+        "country": "Negara",
+        "city": "Kota",
+        "note": "Catatan",
+        "error": "Masalah"
+      }
+    },
+    "detail": {
+      "title": "Detail Kontak",
+      "phone": "Telepon",
+      "country": "Negara",
+      "state": "Provinsi",
+      "city": "Kota",
+      "address": "Alamat",
+      "note": "Catatan",
+      "created": "Dibuat",
+      "messages": "Riwayat Pesan",
+      "noMessages": "Tidak ada pesan ditemukan untuk kontak ini.",
+      "incoming": "Masuk",
+      "outgoing": "Keluar",
+      "loadMore": "Muat Lagi",
+      "loadingMessages": "Memuat pesan...",
+      "totalMessages": "{{count}} total pesan",
+      "session": "Sesi",
+      "type": "Tipe",
+      "direction": "Arah",
+      "messageBody": "Pesan",
+      "timestamp": "Tanggal",
+      "status": "Status"
+    },
+    "pagination": {
+      "showing": "Menampilkan {{from}} hingga {{to}} dari {{total}} entri",
+      "perPage": "per halaman"
+    },
+    "toasts": {
+      "createSuccess": "Kontak dibuat",
+      "createError": "Gagal membuat kontak",
+      "updateSuccess": "Kontak diperbarui",
+      "updateError": "Gagal memperbarui kontak",
+      "deleteSuccess": "Kontak dihapus",
+      "deleteError": "Gagal menghapus kontak",
+      "bulkDeleteSuccess": "{{count}} kontak dihapus",
+      "bulkDeleteError": "Gagal menghapus kontak",
+      "importSuccess": "{{created}} kontak diimpor",
+      "importError": "Impor gagal",
+      "exportSuccess": "{{count}} kontak diekspor",
+      "exportError": "Ekspor gagal"
+    }
+  },
+  "groups": {
+    "title": "Grup Kontak",
+    "subtitle": "Atur kontak Anda ke dalam grup untuk pengiriman pesan tertarget",
+    "newGroup": "Grup Baru",
+    "searchPlaceholder": "Cari grup...",
+    "empty": {
+      "title": "Belum ada grup",
+      "description": "Buat grup untuk mengatur kontak Anda"
+    },
+    "columns": {
+      "name": "Nama",
+      "description": "Deskripsi",
+      "members": "Anggota",
+      "created": "Dibuat",
+      "actions": "Aksi"
+    },
+    "form": {
+      "createTitle": "Buat Grup Baru",
+      "editTitle": "Ubah Grup",
+      "name": "Nama Grup",
+      "namePlaceholder": "mis. Pelanggan VIP",
+      "description": "Deskripsi",
+      "descriptionPlaceholder": "Deskripsi opsional untuk grup ini",
+      "nameRequired": "Nama grup wajib diisi"
+    },
+    "create": {
+      "step1Title": "Detail Grup",
+      "step2Title": "Tambah Anggota",
+      "step3Title": "Tinjau & Buat",
+      "method": "Bagaimana Anda ingin menambahkan kontak?",
+      "csvImport": "Impor dari CSV",
+      "csvImportDesc": "Unggah file CSV untuk membuat kontak dan menambahkannya ke grup ini",
+      "filterSelect": "Saring & Pilih",
+      "filterSelectDesc": "Cari dan saring kontak yang ada untuk ditambahkan ke grup ini",
+      "csv": {
+        "title": "Impor Kontak dari CSV",
+        "dropzone": "Letakkan file CSV Anda di sini, atau klik untuk memilih",
+        "dropzoneHint": "Format: .csv. Nomor telepon harus menyertakan kode negara (mis. +62812345678)",
+        "validRows": "{{count}} valid",
+        "invalidRows": "{{count}} tidak valid",
+        "importBtn": "Impor {{count}} Kontak",
+        "importing": "Mengimpor...",
+        "step2Title": "Pratinjau & Validasi",
+        "step2Desc": "Tinjau kontak Anda sebelum mengimpor. Baris yang tidak valid akan disorot.",
+        "step3Title": "Impor Selesai",
+        "successDesc": "{{created}} kontak dibuat & ditambahkan ke grup, {{skipped}} dilewati",
+        "errorPhone": "Nomor telepon kosong",
+        "errorNoCountryCode": "Telepon harus menyertakan kode negara (mis. +62812345678)",
+        "errorDuplicate": "Nomor duplikat dalam file",
+        "previewColumns": {
+          "row": "#",
+          "status": "Status",
+          "name": "Nama Lengkap",
+          "phone": "Telepon",
+          "country": "Negara",
+          "city": "Kota",
+          "note": "Catatan",
+          "error": "Masalah"
+        }
+      },
+      "filter": {
+        "title": "Pilih Kontak",
+        "searchPlaceholder": "Cari berdasarkan nama atau telepon...",
+        "country": "Negara",
+        "allCountries": "Semua Negara",
+        "state": "Provinsi",
+        "allStates": "Semua Provinsi",
+        "city": "Kota",
+        "allCities": "Semua Kota",
+        "namePlaceholder": "Saring berdasarkan nama...",
+        "phonePlaceholder": "Saring berdasarkan awalan telepon...",
+        "selected": "{{count}} kontak dipilih",
+        "noResults": "Tidak ada kontak yang cocok",
+        "clearFilters": "Hapus Saringan"
+      },
+      "review": {
+        "title": "Tinjau Grup",
+        "nameLabel": "Nama Grup",
+        "descriptionLabel": "Deskripsi",
+        "membersLabel": "Anggota",
+        "noMembers": "Belum ada anggota",
+        "addMore": "Tambah Kontak Lain"
+      }
+    },
+    "detail": {
+      "title": "Detail Grup",
+      "members": "Anggota",
+      "noMembers": "Tidak ada anggota dalam grup ini",
+      "addMembers": "Tambah Anggota",
+      "removeSelected": "Hapus Terpilih",
+      "searchPlaceholder": "Cari anggota...",
+      "removeConfirm": "Hapus {{count}} kontak dari grup ini?",
+      "empty": {
+        "title": "Tidak ada anggota",
+        "description": "Tambahkan kontak ke grup ini"
+      }
+    },
+    "delete": {
+      "title": "Hapus Grup",
+      "message": "Yakin ingin menghapus grup <strong>«{{name}}»</strong>? Tidak bisa dibatalkan.",
+      "successTitle": "Grup Dihapus",
+      "successDesc": "Grup telah dihapus"
+    },
+    "toasts": {
+      "createSuccess": "Grup dibuat",
+      "createError": "Gagal membuat grup",
+      "updateSuccess": "Grup diperbarui",
+      "updateError": "Gagal memperbarui grup",
+      "deleteSuccess": "Grup dihapus",
+      "deleteError": "Gagal menghapus grup",
+      "addMembersSuccess": "{{count}} kontak ditambahkan ke grup",
+      "addMembersError": "Gagal menambah anggota",
+      "removeMembersSuccess": "{{count}} kontak dihapus dari grup",
+      "removeMembersError": "Gagal menghapus anggota",
+      "importSuccess": "{{created}} kontak diimpor & ditambahkan ke grup",
+      "importError": "Impor gagal"
+    }
+  },
+  "settings": {
+    "title": "Pengaturan",
+    "subtitle": "Kelola profil, kata sandi, dan pengaturan sistem",
+    "tabs": {
+      "profile": "Profil",
+      "password": "Kata Sandi",
+      "language": "Bahasa",
+      "system": "Sistem"
+    },
+    "language": {
+      "title": "Bahasa",
+      "subtitle": "Pilih bahasa yang Anda inginkan untuk antarmuka dasbor"
+    },
+    "profile": {
+      "name": "Nama Lengkap",
+      "namePlaceholder": "mis. Budi Santoso",
+      "phone": "Nomor Telepon",
+      "phonePlaceholder": "mis. 08123456789",
+      "profilePic": "Foto Profil",
+      "profilePicHint": "Unggah gambar (JPEG, PNG, WebP, GIF). Maks. 5MB.",
+      "chooseFile": "Pilih File",
+      "uploading": "Mengunggah...",
+      "remove": "Hapus",
+      "toasts": {
+        "updateSuccess": "Profil diperbarui",
+        "updateError": "Gagal memperbarui profil",
+        "uploadError": "Gagal mengunggah"
+      }
+    },
+    "password": {
+      "current": "Kata Sandi Saat Ini",
+      "currentHint": "Masukkan kata sandi saat ini untuk verifikasi identitas",
+      "currentPlaceholder": "Masukkan kata sandi saat ini",
+      "newPassword": "Kata Sandi Baru",
+      "newPlaceholder": "Masukkan kata sandi baru (min. 6 karakter)",
+      "confirm": "Konfirmasi Kata Sandi Baru",
+      "confirmPlaceholder": "Masukkan ulang kata sandi baru",
+      "save": "Ganti Kata Sandi",
+      "errors": {
+        "currentRequired": "Kata sandi saat ini wajib diisi",
+        "newRequired": "Kata sandi baru wajib diisi",
+        "tooShort": "Kata sandi minimal 6 karakter",
+        "mismatch": "Kata sandi tidak cocok"
+      },
+      "toasts": {
+        "updateSuccess": "Kata sandi berhasil diubah",
+        "updateError": "Gagal mengubah kata sandi"
+      }
+    },
+    "system": {
+      "name": "Nama Bisnis",
+      "namePlaceholder": "mis. Perusahaan Saya",
+      "email": "Email",
+      "emailPlaceholder": "mis. info@perusahaan.com",
+      "altPhone": "Telepon Alternatif",
+      "altPhonePlaceholder": "mis. +62812345678",
+      "website": "Situs Web",
+      "websitePlaceholder": "mis. https://perusahaan.com",
+      "address": "Alamat",
+      "addressPlaceholder": "mis. Jl. Merdeka No. 123, Jakarta",
+      "googleMapLink": "Tautan Google Maps",
+      "googleMapLinkPlaceholder": "mis. https://maps.google.com/...",
+      "businessLogo": "Logo Bisnis",
+      "smallLogo": "Logo Kecil",
+      "toasts": {
+        "updateSuccess": "Pengaturan sistem diperbarui",
+        "updateError": "Gagal memperbarui pengaturan sistem"
+      }
+    }
+  }
+}

@@ -3,18 +3,21 @@ import {
   sessionApi,
   webhookApi,
   auditApi,
-  infraApi,
-  pluginsApi,
   contactApi,
   groupApi,
   messageApi,
   locationApi,
   authApi,
   systemSettingsApi,
+  campaignApi,
+  apiKeysApi,
   type Webhook,
   type ContactPayload,
   type ContactGroupPayload,
   type FilterParams,
+  type CampaignPayload,
+  type CampaignUpdatePayload,
+  type CreateApiKeyPayload,
 } from '../services/api';
 
 // ── Query Keys ────────────────────────────────────────────────────────
@@ -26,10 +29,6 @@ export const queryKeys = {
   webhooks: ['webhooks'] as const,
   logs: (params: { severity?: string; page: number; limit: number }) =>
     ['logs', params] as const,
-  infraStatus: ['infra', 'status'] as const,
-  plugins: ['plugins'] as const,
-  engines: ['engines'] as const,
-  currentEngine: ['engines', 'current'] as const,
   contacts: ['contacts'] as const,
   contactGroups: ['groups'] as const,
   contactGroup: (id: string) => ['groups', id] as const,
@@ -162,42 +161,6 @@ export function useLogsQuery(params: { severity?: string; page: number; limit: n
         offset: (params.page - 1) * params.limit,
       }),
     staleTime: 15_000,
-  });
-}
-
-// ── Infrastructure Queries ────────────────────────────────────────────
-
-export function useInfraStatusQuery() {
-  return useQuery({
-    queryKey: queryKeys.infraStatus,
-    queryFn: infraApi.getStatus,
-    staleTime: 30_000,
-  });
-}
-
-// ── Plugin Queries ────────────────────────────────────────────────────
-
-export function usePluginsQuery() {
-  return useQuery({
-    queryKey: queryKeys.plugins,
-    queryFn: pluginsApi.list,
-    staleTime: 30_000,
-  });
-}
-
-export function useEnginesQuery() {
-  return useQuery({
-    queryKey: queryKeys.engines,
-    queryFn: pluginsApi.getEngines,
-    staleTime: 60_000,
-  });
-}
-
-export function useCurrentEngineQuery() {
-  return useQuery({
-    queryKey: queryKeys.currentEngine,
-    queryFn: pluginsApi.getCurrentEngine,
-    staleTime: 60_000,
   });
 }
 
@@ -338,6 +301,191 @@ export function useBulkCreateWithGroupMutation() {
       description?: string;
       contacts: ContactPayload[];
     }) => groupApi.bulkCreateWithGroup(data),
+  });
+}
+
+// ── API Key Queries ───────────────────────────────────────────────────
+
+export const apiKeyQueryKeys = {
+  all: ['api-keys'] as const,
+  stats: ['api-keys', 'stats'] as const,
+};
+
+export function useApiKeysQuery() {
+  return useQuery({
+    queryKey: apiKeyQueryKeys.all,
+    queryFn: apiKeysApi.list,
+    staleTime: 30_000,
+  });
+}
+
+export function useApiKeyStatsQuery() {
+  return useQuery({
+    queryKey: apiKeyQueryKeys.stats,
+    queryFn: apiKeysApi.getStats,
+    staleTime: 30_000,
+  });
+}
+
+export function useCreateApiKeyMutation() {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: (data: CreateApiKeyPayload) => apiKeysApi.create(data),
+    onSuccess: () => {
+      void queryClient.invalidateQueries({ queryKey: apiKeyQueryKeys.all });
+      void queryClient.invalidateQueries({ queryKey: apiKeyQueryKeys.stats });
+    },
+  });
+}
+
+export function useDeleteApiKeyMutation() {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: (id: string) => apiKeysApi.delete(id),
+    onSuccess: () => {
+      void queryClient.invalidateQueries({ queryKey: apiKeyQueryKeys.all });
+      void queryClient.invalidateQueries({ queryKey: apiKeyQueryKeys.stats });
+    },
+  });
+}
+
+export function useRevokeApiKeyMutation() {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: (id: string) => apiKeysApi.revoke(id),
+    onSuccess: () => {
+      void queryClient.invalidateQueries({ queryKey: apiKeyQueryKeys.all });
+      void queryClient.invalidateQueries({ queryKey: apiKeyQueryKeys.stats });
+    },
+  });
+}
+
+// ── Campaign Queries ─────────────────────────────────────────────
+
+export const campaignQueryKeys = {
+  all: ['campaigns'] as const,
+  list: (params?: Record<string, unknown>) => ['campaigns', 'list', params] as const,
+  detail: (id: string) => ['campaigns', id] as const,
+  recipients: (id: string, params?: Record<string, unknown>) => ['campaigns', id, 'recipients', params] as const,
+  stats: ['campaigns', 'stats'] as const,
+};
+
+export function useCampaignsQuery(params?: { status?: string; search?: string; page?: number; limit?: number }) {
+  return useQuery({
+    queryKey: campaignQueryKeys.list(params as Record<string, unknown>),
+    queryFn: () => campaignApi.list(params),
+    staleTime: 10_000,
+  });
+}
+
+export function useCampaignQuery(id: string, enabled = true) {
+  return useQuery({
+    queryKey: campaignQueryKeys.detail(id),
+    queryFn: () => campaignApi.get(id),
+    enabled: enabled && !!id,
+    staleTime: 10_000,
+  });
+}
+
+export function useCampaignStatsQuery() {
+  return useQuery({
+    queryKey: campaignQueryKeys.stats,
+    queryFn: campaignApi.getStats,
+    staleTime: 30_000,
+  });
+}
+
+export function useCampaignRecipientsQuery(
+  id: string,
+  params?: { status?: string; search?: string; page?: number; limit?: number },
+  enabled = true,
+) {
+  return useQuery({
+    queryKey: campaignQueryKeys.recipients(id, params as Record<string, unknown>),
+    queryFn: () => campaignApi.getRecipients(id, params),
+    enabled: enabled && !!id,
+    staleTime: 5_000,
+  });
+}
+
+export function useCreateCampaignMutation() {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: (data: CampaignPayload) => campaignApi.create(data),
+    onSuccess: () => {
+      void queryClient.invalidateQueries({ queryKey: campaignQueryKeys.all });
+      void queryClient.invalidateQueries({ queryKey: campaignQueryKeys.stats });
+    },
+  });
+}
+
+export function useUpdateCampaignMutation() {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: ({ id, data }: { id: string; data: CampaignUpdatePayload }) =>
+      campaignApi.update(id, data),
+    onSuccess: (_data, variables) => {
+      void queryClient.invalidateQueries({ queryKey: campaignQueryKeys.detail(variables.id) });
+      void queryClient.invalidateQueries({ queryKey: campaignQueryKeys.all });
+    },
+  });
+}
+
+export function useDeleteCampaignMutation() {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: (id: string) => campaignApi.delete(id),
+    onSuccess: () => {
+      void queryClient.invalidateQueries({ queryKey: campaignQueryKeys.all });
+      void queryClient.invalidateQueries({ queryKey: campaignQueryKeys.stats });
+    },
+  });
+}
+
+export function useStartCampaignMutation() {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: (id: string) => campaignApi.start(id),
+    onSuccess: (_data, id) => {
+      void queryClient.invalidateQueries({ queryKey: campaignQueryKeys.detail(id) });
+      void queryClient.invalidateQueries({ queryKey: campaignQueryKeys.all });
+      void queryClient.invalidateQueries({ queryKey: campaignQueryKeys.stats });
+    },
+  });
+}
+
+export function usePauseCampaignMutation() {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: (id: string) => campaignApi.pause(id),
+    onSuccess: (_data, id) => {
+      void queryClient.invalidateQueries({ queryKey: campaignQueryKeys.detail(id) });
+      void queryClient.invalidateQueries({ queryKey: campaignQueryKeys.all });
+    },
+  });
+}
+
+export function useCancelCampaignMutation() {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: (id: string) => campaignApi.cancel(id),
+    onSuccess: (_data, id) => {
+      void queryClient.invalidateQueries({ queryKey: campaignQueryKeys.detail(id) });
+      void queryClient.invalidateQueries({ queryKey: campaignQueryKeys.all });
+      void queryClient.invalidateQueries({ queryKey: campaignQueryKeys.stats });
+    },
+  });
+}
+
+export function useResendFailedCampaignMutation() {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: (id: string) => campaignApi.resendFailed(id),
+    onSuccess: (_data, id) => {
+      void queryClient.invalidateQueries({ queryKey: campaignQueryKeys.detail(id) });
+      void queryClient.invalidateQueries({ queryKey: campaignQueryKeys.recipients(id) });
+      void queryClient.invalidateQueries({ queryKey: campaignQueryKeys.all });
+    },
   });
 }
 

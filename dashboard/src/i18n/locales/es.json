@@ -1,0 +1,955 @@
+{
+  "common": {
+    "appName": "OpenWA",
+    "appSubtitle": "API de WhatsApp",
+    "loading": "Cargando...",
+    "save": "Guardar",
+    "cancel": "Cancelar",
+    "delete": "Eliminar",
+    "edit": "Editar",
+    "create": "Crear",
+    "close": "Cerrar",
+    "submit": "Enviar",
+    "confirm": "Confirmar",
+    "search": "Buscar",
+    "filter": "Filtrar",
+    "actions": "Acciones",
+    "status": "Estado",
+    "name": "Nombre",
+    "role": "Rol",
+    "type": "Tipo",
+    "url": "URL",
+    "port": "Puerto",
+    "host": "Servidor",
+    "username": "Usuario",
+    "password": "Contraseña",
+    "active": "Activo",
+    "inactive": "Inactivo",
+    "enabled": "Activado",
+    "disabled": "Desactivado",
+    "connected": "Conectado",
+    "disconnected": "Desconectado",
+    "never": "Nunca",
+    "justNow": "Ahora mismo",
+    "minAgo": "hace {{count}} min",
+    "hoursAgo": "hace {{count}} horas",
+    "optional": "opcional",
+    "language": "Idioma",
+    "english": "English",
+    "hebrew": "עברית",
+    "back": "Atrás",
+    "next": "Siguiente",
+    "previous": "Anterior",
+    "expand": "Expandir",
+    "collapse": "Contraer",
+    "logout": "Cerrar sesión",
+    "refresh": "Actualizar",
+    "notifications": "Notificaciones",
+    "noNotifications": "Sin notificaciones nuevas",
+    "profile": "Perfil",
+    "changePassword": "Cambiar contraseña",
+    "settings": "Ajustes",
+    "errorGeneric": "Ocurrió un error",
+    "unknownError": "Error desconocido",
+    "lightMode": "Modo claro",
+    "darkMode": "Modo oscuro",
+    "viewAll": "Ver todo",
+    "copied": "¡Copiado!"
+  },
+  "theme": {
+    "light": "Claro",
+    "dark": "Oscuro",
+    "system": "Sistema",
+    "label": "Tema: {{value}}"
+  },
+  "nav": {
+    "dashboard": "Panel",
+    "sessions": "Sesiones",
+    "webhooks": "Webhooks",
+    "apiKeys": "Claves API",
+    "contacts": "Contactos",
+    "composer": "Redactor",
+    "groups": "Grupos",
+    "messages": "Mensajes",
+    "settings": "Ajustes",
+    "messageTester": "Probador",
+    "campaigns": "Campañas",
+    "logs": "Registros"
+  },
+  "errorBoundary": {
+    "title": "Algo salió mal",
+    "description": "El panel encontró un error inesperado.",
+    "reload": "Recargar panel"
+  },
+  "login": {
+    "apiKey": "Clave API",
+    "apiKeyPlaceholder": "Ingresa tu clave API",
+    "apiKeyRequired": "La clave API es obligatoria",
+    "connect": "Conectar",
+    "connecting": "Conectando...",
+    "invalidKey": "Clave API inválida",
+    "connectionError": "No se pudo conectar al servidor. Intenta de nuevo.",
+    "help": "¿Necesitas ayuda?",
+    "viewDocs": "Ver documentación",
+    "footer": "Hecho con ❤️ por Yudhi Armyndharis y la comunidad OpenWA",
+    "version": "v{{version}} · {{date}}",
+    "title": "Iniciar sesión",
+    "subtitle": "Ingresa tus credenciales para acceder al panel.",
+    "phoneLabel": "Número de teléfono",
+    "phonePlaceholder": "ej. 5512345678",
+    "passwordLabel": "Contraseña",
+    "passwordPlaceholder": "Ingresa tu contraseña",
+    "signIn": "Ingresar",
+    "phoneRequired": "El número de teléfono es obligatorio",
+    "passwordRequired": "La contraseña es obligatoria",
+    "invalidCredentials": "Teléfono o contraseña incorrectos"
+  },
+  "dashboard": {
+    "title": "Panel",
+    "subtitle": "Resumen de tus sesiones y actividad de WhatsApp",
+    "stats": {
+      "activeSessions": "Sesiones activas",
+      "messagesToday": "Mensajes hoy",
+      "webhooksConfigured": "Webhooks configurados",
+      "apiCalls": "Llamadas API (24h)"
+    },
+    "sessionsOverview": "Resumen de sesiones",
+    "showingSessions": "Mostrando {{shown}} de {{total}} sesiones",
+    "columns": {
+      "sessionId": "ID de sesión",
+      "phone": "Teléfono",
+      "status": "Estado",
+      "lastActive": "Última actividad",
+      "actions": "Acciones"
+    },
+    "noSessions": "No hay sesiones. Crea una para comenzar.",
+    "view": "Ver",
+    "disconnect": "Desconectar",
+    "errorPrefix": "Error: {{message}}",
+    "loadError": "Error al cargar datos",
+    "statActive": "{{count}} activa",
+    "statActive_plural": "{{count}} activas",
+    "statNoData": "Sin datos"
+  },
+  "sessionStatus": {
+    "created": "Nueva",
+    "idle": "Inactiva",
+    "initializing": "Iniciando...",
+    "connecting": "Conectando...",
+    "qr_ready": "Escanear QR",
+    "ready": "Conectada",
+    "disconnected": "Desconectada"
+  },
+  "sessions": {
+    "title": "Sesiones",
+    "subtitle": "Administra tus sesiones de WhatsApp y conexiones QR",
+    "newSession": "Nueva sesión",
+    "searchPlaceholder": "Buscar sesiones...",
+    "filter": {
+      "all": "Todos los estados",
+      "active": "Activas (conectadas)",
+      "inactive": "Inactivas",
+      "connecting": "Conectando"
+    },
+    "empty": {
+      "title": "No hay sesiones",
+      "description": "Crea una nueva sesión para comenzar"
+    },
+    "create": {
+      "title": "Crear nueva sesión",
+      "label": "Nombre de la sesión",
+      "placeholder": "ej. marketing-bot",
+      "hint": "Usa solo minúsculas, números y guiones. Ejemplo: <code>customer-support</code>, <code>bot-1</code>",
+      "invalidChars": "Caracteres inválidos. Solo se permiten minúsculas, números y guiones.",
+      "tooLong": "El nombre debe tener 50 caracteres o menos ({{length}}/50).",
+      "duplicate": "Ya existe una sesión con este nombre.",
+      "successTitle": "Sesión creada",
+      "successDesc": "Sesión «{{name}}» creada correctamente",
+      "errorTitle": "Error al crear",
+      "errorDefault": "No se pudo crear la sesión"
+    },
+    "delete": {
+      "title": "Confirmar eliminación",
+      "message": "¿Seguro que quieres eliminar la sesión <strong>«{{name}}»</strong>?",
+      "warning": "Esta acción no se puede deshacer.",
+      "successTitle": "Sesión eliminada",
+      "successDescNamed": "Sesión «{{name}}» eliminada",
+      "successDescGeneric": "Sesión eliminada",
+      "errorTitle": "Error al eliminar",
+      "errorDefault": "No se pudo eliminar la sesión"
+    },
+    "qr": {
+      "title": "Escanear código QR",
+      "step1": "<strong>1.</strong> Abre WhatsApp en tu teléfono",
+      "step2": "<strong>2.</strong> Toca <strong>Menú</strong> → <strong>Dispositivos vinculados</strong>",
+      "step3": "<strong>3.</strong> Toca <strong>Vincular un dispositivo</strong> y escanea este QR",
+      "autoRefresh": "El QR se actualiza automáticamente cada 5 segundos",
+      "generating": "Generando código QR...",
+      "unavailable": "El QR aún no está disponible. Intenta en un momento.",
+      "preparing": "Preparando código QR...",
+      "showQr": "Mostrar QR",
+      "loading": "Cargando...",
+      "scanToConnect": "Escanea el QR para conectarte"
+    },
+    "details": {
+      "title": "Detalles de la sesión",
+      "name": "Nombre",
+      "status": "Estado",
+      "sessionId": "ID de sesión",
+      "phone": "Teléfono",
+      "phoneNone": "No conectado",
+      "created": "Creada",
+      "lastActive": "Última actividad"
+    },
+    "actions": {
+      "view": "Ver",
+      "start": "Iniciar",
+      "stop": "Detener",
+      "reconnect": "Reconectar",
+      "delete": "Eliminar"
+    },
+    "toasts": {
+      "readyTitle": "Sesión lista",
+      "readyDesc": "La sesión de WhatsApp está conectada",
+      "disconnectedTitle": "Sesión desconectada",
+      "disconnectedDesc": "La sesión de WhatsApp se desconectó"
+    },
+    "card": {
+      "phone": "Teléfono",
+      "sessionId": "ID de sesión",
+      "lastActive": "Última actividad"
+    }
+  },
+  "webhooks": {
+    "title": "Webhooks",
+    "subtitle": "Configura llamadas HTTP para notificaciones en tiempo real",
+    "addWebhook": "Agregar webhook",
+    "createTitle": "Crear webhook",
+    "editTitle": "Editar webhook",
+    "deleteTitle": "Eliminar webhook",
+    "deleteConfirm": "¿Seguro que quieres eliminar este webhook?",
+    "selectSession": "Seleccionar sesión...",
+    "session": "Sesión",
+    "events": "Eventos",
+    "available": "Eventos disponibles",
+    "saveChanges": "Guardar cambios",
+    "columns": {
+      "url": "URL",
+      "events": "Eventos",
+      "session": "Sesión",
+      "status": "Estado",
+      "actions": "Acciones"
+    },
+    "empty": {
+      "title": "Sin webhooks configurados",
+      "description": "Agrega un webhook para recibir notificaciones en tiempo real"
+    },
+    "toasts": {
+      "created": "Webhook creado correctamente",
+      "createFailed": "Error al crear webhook: {{message}}",
+      "deleted": "Webhook eliminado correctamente",
+      "deleteFailed": "Error al eliminar webhook: {{message}}",
+      "updated": "Webhook actualizado correctamente",
+      "updateFailed": "Error al actualizar webhook: {{message}}",
+      "testOk": "¡Prueba exitosa! Estado: {{status}}",
+      "testFailed": "Prueba fallida: {{message}}",
+      "testError": "Error al probar webhook: {{message}}"
+    },
+    "actions": {
+      "test": "Probar",
+      "edit": "Editar",
+      "delete": "Eliminar"
+    },
+    "eventDescriptions": {
+      "message.received": "Cuando se recibe un mensaje",
+      "message.sent": "Cuando se envía un mensaje",
+      "session.connected": "Cuando una sesión se conecta",
+      "session.disconnected": "Cuando una sesión se desconecta",
+      "session.qr": "Cuando se genera un código QR",
+      "all": "Todos los eventos"
+    }
+  },
+  "apiKeys": {
+    "title": "Gestión de API",
+    "subtitle": "Administra claves API, credenciales y documentación",
+    "tabs": {
+      "overview": "Resumen",
+      "keys": "Claves API",
+      "docs": "Documentación"
+    },
+    "stats": {
+      "totalKeys": "Total de claves",
+      "activeKeys": "Claves activas",
+      "totalCalls": "Total de llamadas",
+      "rateLimit": "Llamadas hoy"
+    },
+    "credentials": {
+      "baseUrl": "URL base de la API",
+      "baseUrlHint": "Usa esta URL como endpoint base para todas las solicitudes API."
+    },
+    "quickLinks": {
+      "title": "Enlaces rápidos",
+      "manageKeys": "Administrar claves API",
+      "manageKeysDesc": "Ver, crear, revocar y eliminar tus claves API",
+      "viewDocs": "Documentación API",
+      "viewDocsDesc": "Explora la referencia de endpoints con ejemplos",
+      "createKey": "Crear nueva clave",
+      "createKeyDesc": "Genera una nueva clave API con un rol específico"
+    },
+    "createBtn": "Crear clave API",
+    "modalTitle": "Crear clave API",
+    "createdTitle": "Clave API creada",
+    "createdHint": "Copia esta clave ahora. No podrás verla de nuevo.",
+    "createdHintExtra": "Esta clave secreta no se volverá a mostrar. Guárdala de forma segura.",
+    "namePlaceholder": "ej. Clave de producción",
+    "rolesTitle": "Referencia de roles",
+    "roles": {
+      "admin": "Admin",
+      "operator": "Operador",
+      "viewer": "Espectador"
+    },
+    "roleDescriptions": {
+      "admin": "Acceso completo a todos los recursos",
+      "operator": "Gestión de sesiones y mensajes",
+      "viewer": "Solo lectura"
+    },
+    "columns": {
+      "name": "Nombre",
+      "key": "Clave",
+      "role": "Rol",
+      "status": "Estado",
+      "lastUsed": "Último uso",
+      "actions": "Acciones"
+    },
+    "statuses": {
+      "active": "Activa",
+      "revoked": "Revocada"
+    },
+    "empty": {
+      "title": "No hay claves API",
+      "description": "Crea una clave API para autenticar tus solicitudes"
+    },
+    "confirm": {
+      "deleteTitle": "Eliminar clave API",
+      "revokeTitle": "Revocar clave API",
+      "deleteMessage": "¿Seguro que quieres eliminar permanentemente <strong>{{name}}</strong>? No se puede deshacer.",
+      "revokeMessage": "¿Seguro que quieres revocar <strong>{{name}}</strong>? Dejará de funcionar.",
+      "delete": "Eliminar",
+      "revoke": "Revocar"
+    },
+    "actions": {
+      "copy": "Copiar",
+      "revoke": "Revocar",
+      "delete": "Eliminar"
+    }
+  },
+  "apiDocs": {
+    "auth": {
+      "title": "Autenticación",
+      "description": "Todas las solicitudes API requieren autenticación. Incluye tu clave API en el encabezado <code>X-API-Key</code>. Puedes administrar tus claves en la pestaña de Claves API.",
+      "example": "Ejemplo de solicitud autenticada",
+      "none": "Sin autenticación requerida",
+      "apiKey": "Clave API requerida",
+      "admin": "Acceso de administrador requerido"
+    },
+    "sdks": {
+      "title": "SDKs y librerías",
+      "description": "Usa nuestros SDKs oficiales para integrar OpenWA en tu aplicación."
+    },
+    "endpoints": {
+      "title": "Endpoints de la API",
+      "health": {
+        "desc": "Verificar estado del servidor"
+      },
+      "sessions": {
+        "list": "Listar todas las sesiones de WhatsApp",
+        "create": "Crear una nueva sesión de WhatsApp",
+        "qr": "Obtener código QR de una sesión",
+        "delete": "Eliminar una sesión de WhatsApp"
+      },
+      "messages": {
+        "sendText": "Enviar un mensaje de texto",
+        "sendImage": "Enviar una imagen",
+        "sendLocation": "Enviar una ubicación",
+        "list": "Listar mensajes con filtros opcionales"
+      },
+      "contacts": {
+        "list": "Listar todos los contactos guardados",
+        "create": "Crear un nuevo contacto"
+      },
+      "webhooks": {
+        "list": "Listar todos los webhooks configurados"
+      },
+      "campaigns": {
+        "list": "Listar todas las campañas",
+        "create": "Crear una nueva campaña"
+      },
+      "settings": {
+        "get": "Obtener configuración del sistema (solo admin)"
+      }
+    },
+    "requestBody": "Cuerpo de la solicitud",
+    "example": "Ejemplo",
+    "response": "Respuesta",
+    "rateLimit": {
+      "title": "Límite de velocidad",
+      "description": "Las solicitudes API tienen un límite de velocidad para garantizar un uso justo. El límite predeterminado es de 100 solicitudes por ventana de 60 segundos por clave API. Superar este límite resultará en una respuesta 429 Too Many Requests. Contacta al soporte si necesitas un límite mayor."
+    }
+  },
+  "logs": {
+    "title": "Registros de auditoría",
+    "subtitle": "Rastrea y revisa todas las acciones de API y eventos del sistema",
+    "exportCsv": "Exportar CSV",
+    "searchPlaceholder": "Buscar en registros...",
+    "severity": {
+      "all": "Todas las severidades",
+      "info": "Info",
+      "warn": "Advertencia",
+      "error": "Error"
+    },
+    "columns": {
+      "timestamp": "Fecha y hora",
+      "action": "Acción",
+      "session": "Sesión",
+      "apiKey": "Clave API",
+      "user": "Usuario",
+      "ip": "Dirección IP",
+      "severity": "Severidad"
+    },
+    "pagination": "Página {{page}} de {{total}} ({{count}} registros)",
+    "empty": {
+      "title": "No hay registros",
+      "description": "Los registros de auditoría aparecerán aquí a medida que se realicen acciones"
+    }
+  },
+  "composer": {
+    "title": "Redactor",
+    "subtitle": "Redacta y envía mensajes como en WhatsApp",
+    "session": "Sesión de WhatsApp",
+    "noReadySessions": "No hay sesiones listas",
+    "contactType": "Tipo de contacto",
+    "recipients": "Destinatarios",
+    "selected": "{{count}} seleccionados",
+    "savedContacts": "Contactos",
+    "waContacts": "Contactos WA",
+    "groups": "Grupos",
+    "newNumber": "Nuevo número",
+    "searchContacts": "Buscar contactos...",
+    "searchGroups": "Buscar grupos...",
+    "noContacts": "No hay contactos guardados",
+    "noGroups": "No se encontraron grupos",
+    "noResults": "Sin resultados",
+    "schedule": "Programar",
+    "messageType": "Tipo de mensaje",
+    "types": {
+      "text": "Texto",
+      "image": "Imagen",
+      "video": "Video",
+      "audio": "Audio",
+      "document": "Documento",
+      "location": "Ubicación",
+      "contact": "Contacto"
+    },
+    "message": "Mensaje",
+    "messagePlaceholder": "Escribe tu mensaje aquí...",
+    "mediaUrl": "URL del archivo",
+    "mediaUrlPlaceholder": "https://example.com/file.jpg",
+    "caption": "Descripción",
+    "captionPlaceholder": "Añade una descripción...",
+    "fileName": "Nombre del archivo",
+    "fileNamePlaceholder": "documento.pdf",
+    "latitude": "Latitud",
+    "latitudePlaceholder": "-6.2088",
+    "longitude": "Longitud",
+    "longitudePlaceholder": "106.8456",
+    "locationDescription": "Descripción",
+    "locationDescriptionPlaceholder": "ej. Nuestro punto de encuentro",
+    "contactName": "Nombre del contacto",
+    "contactNamePlaceholder": "Juan Pérez",
+    "contactPhone": "Teléfono del contacto",
+    "contactPhonePlaceholder": "+525512345678",
+    "send": "Enviar mensaje",
+    "sending": "Enviando...",
+    "sendTo": "Enviar a {{count}} destinatario",
+    "sendTo_plural": "Enviar a {{count}} destinatarios",
+    "sendingTo": "Enviando a {{count}} destinatario",
+    "sendingTo_plural": "Enviando a {{count}} destinatarios...",
+    "sentSuccess": "Mensaje enviado a {{count}} destinatario",
+    "sentSuccess_plural": "Mensaje enviado a {{count}} destinatarios",
+    "sentPartial": "Enviado a {{sent}}, falló para {{failed}} destinatario",
+    "sentPartial_plural": "Enviado a {{sent}}, falló para {{failed}} destinatarios",
+    "progress": "Progreso",
+    "charCount": "{{count}} / 4096 caracteres",
+    "livePreview": "Vista previa",
+    "noMessages": "No hay mensajes aún",
+    "noMessagesHint": "Envía un mensaje para iniciar la conversación"
+  },
+  "campaigns": {
+    "title": "Campañas",
+    "subtitle": "Crea y administra campañas de difusión",
+    "newCampaign": "Nueva campaña",
+    "editCampaign": "Editar campaña",
+    "duplicate": "Duplicar",
+    "searchPlaceholder": "Buscar campañas...",
+    "filterStatus": "Todos los estados",
+    "statuses": {
+      "draft": "Borrador",
+      "scheduled": "Programada",
+      "sending": "Enviando",
+      "completed": "Completada",
+      "paused": "Pausada",
+      "cancelled": "Cancelada",
+      "failed": "Fallida"
+    },
+    "recipientType": {
+      "contacts": "Contactos",
+      "groups": "Grupos"
+    },
+    "stats": {
+      "total": "Total de campañas",
+      "active": "Activas",
+      "completed": "Completadas",
+      "failed": "Fallidas",
+      "totalRecipients": "Total de destinatarios",
+      "totalSent": "Total enviados",
+      "totalFailed": "Total fallidos"
+    },
+    "columns": {
+      "name": "Nombre",
+      "status": "Estado",
+      "recipients": "Destinatarios",
+      "sent": "Enviados",
+      "failed": "Fallidos",
+      "schedule": "Programación",
+      "created": "Creada",
+      "actions": "Acciones"
+    },
+    "empty": {
+      "title": "No hay campañas",
+      "description": "Crea tu primera campaña para empezar a difundir mensajes"
+    },
+    "wizard": {
+      "step1": "Detalles",
+      "step2": "Mensaje",
+      "step3": "Destinatarios",
+      "step4": "Programación",
+      "step5": "Revisión",
+      "name": "Nombre de la campaña",
+      "namePlaceholder": "ej. Promoción navideña",
+      "description": "Descripción",
+      "descriptionPlaceholder": "Descripción opcional de la campaña",
+      "session": "Sesión de WhatsApp",
+      "noSessions": "No hay sesiones disponibles",
+      "messageType": "Tipo de mensaje",
+      "text": "Texto",
+      "image": "Imagen",
+      "video": "Video",
+      "audio": "Audio",
+      "document": "Documento",
+      "location": "Ubicación",
+      "contact": "Contacto",
+      "textPlaceholder": "Escribe tu mensaje...",
+      "mediaUrl": "URL del archivo",
+      "mediaUrlPlaceholder": "https://example.com/file.jpg",
+      "caption": "Descripción",
+      "captionPlaceholder": "Añade una descripción...",
+      "fileName": "Nombre del archivo",
+      "fileNamePlaceholder": "documento.pdf",
+      "latitude": "Latitud",
+      "latitudePlaceholder": "-6.2088",
+      "longitude": "Longitud",
+      "longitudePlaceholder": "106.8456",
+      "contactName": "Nombre del contacto",
+      "contactNamePlaceholder": "Juan Pérez",
+      "contactPhone": "Teléfono del contacto",
+      "contactPhonePlaceholder": "+525512345678",
+      "selectRecipients": "Seleccionar destinatarios",
+      "contacts": "Contactos guardados",
+      "groups": "Grupos de contacto",
+      "searchContacts": "Buscar contactos...",
+      "searchGroups": "Buscar grupos...",
+      "noContacts": "No se encontraron contactos",
+      "noGroups": "No se encontraron grupos",
+      "selected": "{{count}} seleccionados",
+      "scheduleNow": "Enviar ahora",
+      "scheduleLater": "Programar para después",
+      "scheduleDate": "Fecha de programación",
+      "scheduleTime": "Hora de programación",
+      "reviewTitle": "Revisar campaña",
+      "reviewName": "Nombre",
+      "reviewSession": "Sesión",
+      "reviewMessageType": "Tipo de mensaje",
+      "reviewMessagePreview": "Vista previa del mensaje",
+      "reviewRecipients": "Destinatarios",
+      "reviewRecipientCount": "{{count}} destinatarios",
+      "reviewSchedule": "Programación",
+      "reviewScheduleNow": "Enviar ahora",
+      "reviewScheduleDate": "Programada para el {{date}}",
+      "createBtn": "Crear campaña",
+      "creating": "Creando...",
+      "saveBtn": "Guardar cambios",
+      "saving": "Guardando..."
+    },
+    "detail": {
+      "title": "Detalles de la campaña",
+      "overview": "Resumen",
+      "recipients": "Destinatarios",
+      "stats": {
+        "total": "Total de destinatarios",
+        "sent": "Enviados",
+        "failed": "Fallidos",
+        "pending": "Pendientes",
+        "progress": "Progreso"
+      },
+      "actions": {
+        "start": "Iniciar campaña",
+        "pause": "Pausar",
+        "cancel": "Cancelar",
+        "resendFailed": "Reenviar fallidos",
+        "edit": "Editar",
+        "delete": "Eliminar",
+        "back": "Volver a campañas"
+      },
+      "confirmDelete": "¿Seguro que quieres eliminar esta campaña?",
+      "confirmStart": "¿Seguro que quieres iniciar esta campaña?",
+      "noRecipients": "No se encontraron destinatarios",
+      "searchRecipients": "Buscar destinatarios...",
+      "filterStatus": "Filtrar por estado"
+    },
+    "toasts": {
+      "createSuccess": "Campaña creada",
+      "createError": "Error al crear campaña",
+      "updateSuccess": "Campaña actualizada",
+      "updateError": "Error al actualizar campaña",
+      "deleteSuccess": "Campaña eliminada",
+      "deleteError": "Error al eliminar campaña",
+      "startSuccess": "Campaña iniciada",
+      "startError": "Error al iniciar campaña",
+      "pauseSuccess": "Campaña pausada",
+      "pauseError": "Error al pausar campaña",
+      "cancelSuccess": "Campaña cancelada",
+      "cancelError": "Error al cancelar campaña",
+      "resendSuccess": "Reenviando mensajes fallidos",
+      "resendError": "Error al reenviar mensajes"
+    }
+  },
+  "contacts": {
+    "title": "Contactos",
+    "subtitle": "Administra tus contactos de WhatsApp",
+    "newContact": "Nuevo contacto",
+    "searchPlaceholder": "Buscar por nombre o teléfono...",
+    "selected": "{{count}} seleccionados",
+    "bulkDelete": "Eliminar seleccionados",
+    "importBtn": "Importar CSV",
+    "exportBtn": "Exportar CSV",
+    "downloadTemplate": "Descargar CSV de ejemplo",
+    "empty": {
+      "title": "No hay contactos",
+      "description": "Agrega tu primer contacto o importa desde un archivo CSV"
+    },
+    "columns": {
+      "name": "Nombre",
+      "phone": "Teléfono",
+      "country": "País",
+      "city": "Ciudad",
+      "note": "Nota",
+      "actions": "Acciones"
+    },
+    "form": {
+      "createTitle": "Nuevo contacto",
+      "editTitle": "Editar contacto",
+      "fullName": "Nombre completo",
+      "fullNamePlaceholder": "ej. Juan Pérez",
+      "countryCode": "Código de país",
+      "phone": "Teléfono WhatsApp",
+      "phonePlaceholder": "ej. 5512345678",
+      "phoneHint": "Ingresa el número sin código de país — se agregará automáticamente",
+      "country": "País",
+      "countryPlaceholder": "ej. México",
+      "state": "Estado / Provincia",
+      "statePlaceholder": "ej. Ciudad de México",
+      "city": "Ciudad",
+      "cityPlaceholder": "ej. Ciudad de México",
+      "address": "Dirección",
+      "addressPlaceholder": "ej. Av. Reforma 123",
+      "note": "Nota",
+      "notePlaceholder": "Notas adicionales...",
+      "phoneRequired": "El número de teléfono es obligatorio",
+      "phoneDuplicate": "Este número ya existe",
+      "phoneInvalid": "El teléfono debe contener solo dígitos"
+    },
+    "delete": {
+      "title": "Eliminar contacto",
+      "message": "¿Seguro que quieres eliminar a <strong>{{name}}</strong>? No se puede deshacer.",
+      "messagePhone": "¿Seguro que quieres eliminar el contacto <strong>{{phone}}</strong>? No se puede deshacer.",
+      "successTitle": "Contacto eliminado",
+      "successDesc": "El contacto ha sido eliminado"
+    },
+    "bulkDeleteModal": {
+      "title": "Eliminar {{count}} contactos",
+      "message": "¿Seguro que quieres eliminar {{count}} contactos seleccionados? No se puede deshacer.",
+      "successTitle": "Contactos eliminados",
+      "successDesc": "{{count}} contactos han sido eliminados"
+    },
+    "import": {
+      "title": "Importar contactos",
+      "step1Title": "Subir archivo CSV",
+      "step1Desc": "Sube un archivo CSV con tus contactos. La columna de teléfono debe incluir el código de país (ej. +525512345678).",
+      "step2Title": "Vista previa y validación",
+      "step2Desc": "Revisa tus contactos antes de importar. Las filas inválidas se resaltarán.",
+      "step3Title": "Importación completa",
+      "dropzone": "Arrastra tu archivo CSV aquí, o haz clic para examinar",
+      "dropzoneHint": "Formato soportado: .csv",
+      "validRows": "{{count}} válidas",
+      "invalidRows": "{{count}} inválidas",
+      "importValid": "Importar solo válidas",
+      "importAll": "Importar todo",
+      "importBtn": "Importar {{count}} contactos",
+      "importing": "Importando...",
+      "successTitle": "Importación exitosa",
+      "successDesc": "{{created}} contactos importados, {{skipped}} omitidos",
+      "errorPhone": "El número de teléfono está vacío",
+      "errorNoCountryCode": "El teléfono debe incluir código de país (ej. +525512345678)",
+      "errorDuplicate": "Teléfono duplicado en el archivo",
+      "previewColumns": {
+        "row": "#",
+        "status": "Estado",
+        "name": "Nombre completo",
+        "phone": "Teléfono",
+        "country": "País",
+        "city": "Ciudad",
+        "note": "Nota",
+        "error": "Problema"
+      }
+    },
+    "detail": {
+      "title": "Detalles del contacto",
+      "phone": "Teléfono",
+      "country": "País",
+      "state": "Estado",
+      "city": "Ciudad",
+      "address": "Dirección",
+      "note": "Nota",
+      "created": "Creado",
+      "messages": "Historial de mensajes",
+      "noMessages": "No se encontraron mensajes para este contacto.",
+      "incoming": "Recibido",
+      "outgoing": "Enviado",
+      "loadMore": "Cargar más",
+      "loadingMessages": "Cargando mensajes...",
+      "totalMessages": "{{count}} mensajes en total",
+      "session": "Sesión",
+      "type": "Tipo",
+      "direction": "Dirección",
+      "messageBody": "Mensaje",
+      "timestamp": "Fecha",
+      "status": "Estado"
+    },
+    "pagination": {
+      "showing": "Mostrando {{from}} a {{to}} de {{total}} registros",
+      "perPage": "por página"
+    },
+    "toasts": {
+      "createSuccess": "Contacto creado",
+      "createError": "Error al crear contacto",
+      "updateSuccess": "Contacto actualizado",
+      "updateError": "Error al actualizar contacto",
+      "deleteSuccess": "Contacto eliminado",
+      "deleteError": "Error al eliminar contacto",
+      "bulkDeleteSuccess": "{{count}} contactos eliminados",
+      "bulkDeleteError": "Error al eliminar contactos",
+      "importSuccess": "{{created}} contactos importados",
+      "importError": "Importación fallida",
+      "exportSuccess": "{{count}} contactos exportados",
+      "exportError": "Exportación fallida"
+    }
+  },
+  "groups": {
+    "title": "Grupos de contactos",
+    "subtitle": "Organiza tus contactos en grupos para mensajes dirigidos",
+    "newGroup": "Nuevo grupo",
+    "searchPlaceholder": "Buscar grupos...",
+    "empty": {
+      "title": "No hay grupos",
+      "description": "Crea un grupo para organizar tus contactos"
+    },
+    "columns": {
+      "name": "Nombre",
+      "description": "Descripción",
+      "members": "Miembros",
+      "created": "Creado",
+      "actions": "Acciones"
+    },
+    "form": {
+      "createTitle": "Crear nuevo grupo",
+      "editTitle": "Editar grupo",
+      "name": "Nombre del grupo",
+      "namePlaceholder": "ej. Clientes VIP",
+      "description": "Descripción",
+      "descriptionPlaceholder": "Descripción opcional del grupo",
+      "nameRequired": "El nombre del grupo es obligatorio"
+    },
+    "create": {
+      "step1Title": "Detalles del grupo",
+      "step2Title": "Agregar miembros",
+      "step3Title": "Revisar y crear",
+      "method": "¿Cómo quieres agregar contactos?",
+      "csvImport": "Importar desde CSV",
+      "csvImportDesc": "Sube un archivo CSV para crear contactos y agregarlos al grupo",
+      "filterSelect": "Filtrar y seleccionar",
+      "filterSelectDesc": "Busca y filtra contactos existentes para agregarlos al grupo",
+      "csv": {
+        "title": "Importar contactos desde CSV",
+        "dropzone": "Arrastra tu archivo CSV aquí, o haz clic para examinar",
+        "dropzoneHint": "Formato soportado: .csv. Los teléfonos deben incluir código de país (ej. +525512345678)",
+        "validRows": "{{count}} válidas",
+        "invalidRows": "{{count}} inválidas",
+        "importBtn": "Importar {{count}} contactos",
+        "importing": "Importando...",
+        "step2Title": "Vista previa y validación",
+        "step2Desc": "Revisa tus contactos antes de importar. Las filas inválidas se resaltarán.",
+        "step3Title": "Importación completa",
+        "successDesc": "{{created}} contactos creados y agregados al grupo, {{skipped}} omitidos",
+        "errorPhone": "El número de teléfono está vacío",
+        "errorNoCountryCode": "El teléfono debe incluir código de país (ej. +525512345678)",
+        "errorDuplicate": "Teléfono duplicado en el archivo",
+        "previewColumns": {
+          "row": "#",
+          "status": "Estado",
+          "name": "Nombre completo",
+          "phone": "Teléfono",
+          "country": "País",
+          "city": "Ciudad",
+          "note": "Nota",
+          "error": "Problema"
+        }
+      },
+      "filter": {
+        "title": "Seleccionar contactos",
+        "searchPlaceholder": "Buscar por nombre o teléfono...",
+        "country": "País",
+        "allCountries": "Todos los países",
+        "state": "Estado",
+        "allStates": "Todos los estados",
+        "city": "Ciudad",
+        "allCities": "Todas las ciudades",
+        "namePlaceholder": "Filtrar por nombre...",
+        "phonePlaceholder": "Filtrar por prefijo...",
+        "selected": "{{count}} contactos seleccionados",
+        "noResults": "No hay contactos que coincidan",
+        "clearFilters": "Limpiar filtros"
+      },
+      "review": {
+        "title": "Revisar grupo",
+        "nameLabel": "Nombre del grupo",
+        "descriptionLabel": "Descripción",
+        "membersLabel": "Miembros",
+        "noMembers": "Aún no hay miembros",
+        "addMore": "Agregar más contactos"
+      }
+    },
+    "detail": {
+      "title": "Detalles del grupo",
+      "members": "Miembros",
+      "noMembers": "Este grupo no tiene miembros",
+      "addMembers": "Agregar miembros",
+      "removeSelected": "Eliminar seleccionados",
+      "searchPlaceholder": "Buscar miembros...",
+      "removeConfirm": "¿Eliminar {{count}} contactos de este grupo?",
+      "empty": {
+        "title": "Sin miembros",
+        "description": "Agrega contactos a este grupo"
+      }
+    },
+    "delete": {
+      "title": "Eliminar grupo",
+      "message": "¿Seguro que quieres eliminar el grupo <strong>«{{name}}»</strong>? No se puede deshacer.",
+      "successTitle": "Grupo eliminado",
+      "successDesc": "El grupo ha sido eliminado"
+    },
+    "toasts": {
+      "createSuccess": "Grupo creado",
+      "createError": "Error al crear grupo",
+      "updateSuccess": "Grupo actualizado",
+      "updateError": "Error al actualizar grupo",
+      "deleteSuccess": "Grupo eliminado",
+      "deleteError": "Error al eliminar grupo",
+      "addMembersSuccess": "{{count}} contactos agregados al grupo",
+      "addMembersError": "Error al agregar miembros",
+      "removeMembersSuccess": "{{count}} contactos eliminados del grupo",
+      "removeMembersError": "Error al eliminar miembros",
+      "importSuccess": "{{count}} contactos importados y agregados al grupo",
+      "importError": "Importación fallida"
+    }
+  },
+  "settings": {
+    "title": "Ajustes",
+    "subtitle": "Administra tu perfil, contraseña y configuración del sistema",
+    "tabs": {
+      "profile": "Perfil",
+      "password": "Contraseña",
+      "language": "Idioma",
+      "system": "Sistema"
+    },
+    "language": {
+      "title": "Idioma",
+      "subtitle": "Elige tu idioma preferido para la interfaz del panel"
+    },
+    "profile": {
+      "name": "Nombre completo",
+      "namePlaceholder": "ej. Juan Pérez",
+      "phone": "Número de teléfono",
+      "phonePlaceholder": "ej. 5512345678",
+      "profilePic": "Foto de perfil",
+      "profilePicHint": "Sube una imagen (JPEG, PNG, WebP, GIF). Máx. 5MB.",
+      "chooseFile": "Elegir archivo",
+      "uploading": "Subiendo...",
+      "remove": "Eliminar",
+      "toasts": {
+        "updateSuccess": "Perfil actualizado",
+        "updateError": "Error al actualizar perfil",
+        "uploadError": "Error al subir"
+      }
+    },
+    "password": {
+      "current": "Contraseña actual",
+      "currentHint": "Ingresa tu contraseña actual para verificar tu identidad",
+      "currentPlaceholder": "Ingresa tu contraseña actual",
+      "newPassword": "Nueva contraseña",
+      "newPlaceholder": "Ingresa nueva contraseña (mín. 6 caracteres)",
+      "confirm": "Confirmar nueva contraseña",
+      "confirmPlaceholder": "Vuelve a ingresar la nueva contraseña",
+      "save": "Cambiar contraseña",
+      "errors": {
+        "currentRequired": "La contraseña actual es obligatoria",
+        "newRequired": "La nueva contraseña es obligatoria",
+        "tooShort": "La contraseña debe tener al menos 6 caracteres",
+        "mismatch": "Las contraseñas no coinciden"
+      },
+      "toasts": {
+        "updateSuccess": "Contraseña cambiada correctamente",
+        "updateError": "Error al cambiar la contraseña"
+      }
+    },
+    "system": {
+      "name": "Nombre del negocio",
+      "namePlaceholder": "ej. Mi Empresa",
+      "email": "Correo electrónico",
+      "emailPlaceholder": "ej. info@empresa.com",
+      "altPhone": "Teléfono alternativo",
+      "altPhonePlaceholder": "ej. +525598765432",
+      "website": "Sitio web",
+      "websitePlaceholder": "ej. https://empresa.com",
+      "address": "Dirección",
+      "addressPlaceholder": "ej. Av. Reforma 123, Ciudad de México",
+      "googleMapLink": "Enlace de Google Maps",
+      "googleMapLinkPlaceholder": "ej. https://maps.google.com/...",
+      "businessLogo": "Logo del negocio",
+      "smallLogo": "Logo pequeño",
+      "toasts": {
+        "updateSuccess": "Configuración del sistema actualizada",
+        "updateError": "Error al actualizar la configuración"
+      }
+    }
+  }
+}

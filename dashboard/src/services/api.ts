@@ -82,19 +82,6 @@ export interface HealthStatus {
   };
 }
 
-export interface InfraStatus {
-  database: { connected: boolean; type: string };
-  redis: { connected: boolean; host: string; port: number };
-  queue: {
-    enabled: boolean;
-    messageSend: { pending: number; completed: number; failed: number };
-    messageBulk: { pending: number; completed: number; failed: number };
-    webhooks: { pending: number; completed: number; failed: number };
-  };
-  storage: { type: 'local'; path: string };
-  engine: { type: string; headless: boolean };
-}
-
 export interface Settings {
   general: { apiBaseUrl: string; sessionTimeout: number; autoReconnect: boolean; debugMode: boolean };
   api: { rateLimit: number; rateLimitWindow: number; enableDocs: boolean };
@@ -234,27 +221,25 @@ export const messageApi = {
       method: 'POST',
       body: JSON.stringify({ chatId, url, filename }),
     }),
+  sendLocation: (sessionId: string, chatId: string, latitude: number, longitude: number, description?: string) =>
+    request<MessageResponse>(`/sessions/${sessionId}/messages/send-location`, {
+      method: 'POST',
+      body: JSON.stringify({ chatId, latitude, longitude, description }),
+    }),
+  sendContact: (sessionId: string, chatId: string, contactName: string, contactNumber: string) =>
+    request<MessageResponse>(`/sessions/${sessionId}/messages/send-contact`, {
+      method: 'POST',
+      body: JSON.stringify({ chatId, contactName, contactNumber }),
+    }),
 };
 
 // =============================================================================
-// Health & Infrastructure API
+// Health API
 // =============================================================================
 
 export const healthApi = {
   check: () => request<HealthStatus>('/health'),
   ready: () => request<HealthStatus>('/health/ready'),
-};
-
-export const infraApi = {
-  getStatus: () => request<InfraStatus>('/infra/status'),
-  saveConfig: (config: Record<string, unknown>) =>
-    request<{ message: string; saved: boolean }>('/infra/config', {
-      method: 'PUT',
-      body: JSON.stringify(config),
-    }),
-  restart: () =>
-    request<{ message: string; restarting: boolean }>('/infra/restart', { method: 'POST' }),
-  healthCheck: () => request<{ status: string; timestamp: string }>('/infra/health'),
 };
 
 // =============================================================================
@@ -266,33 +251,6 @@ export const settingsApi = {
   update: (settings: Partial<Settings>) =>
     request<Settings>('/settings', { method: 'PUT', body: JSON.stringify(settings) }),
 };
-
-// =============================================================================
-// Plugin Types
-// =============================================================================
-
-export interface Plugin {
-  id: string;
-  name: string;
-  version: string;
-  type: 'engine' | 'storage' | 'queue' | 'auth' | 'extension';
-  description?: string;
-  author?: string;
-  status: 'installed' | 'enabled' | 'disabled' | 'error';
-  config: Record<string, unknown>;
-  builtIn: boolean;
-  provides: string[];
-  loadedAt?: string;
-  enabledAt?: string;
-  error?: string;
-}
-
-export interface Engine {
-  id: string;
-  name: string;
-  enabled: boolean;
-  features: string[];
-}
 
 // =============================================================================
 // Location Types & API
@@ -328,6 +286,122 @@ export const locationApi = {
   listCountries: () => request<CountryLocation[]>('/locations/countries'),
   listStates: (countryId: number) => request<StateLocation[]>(`/locations/countries/${countryId}/states`),
   listCities: (stateId: number) => request<CityLocation[]>(`/locations/states/${stateId}/cities`),
+};
+
+// =============================================================================
+// Campaign Types & API
+// =============================================================================
+
+export interface Campaign {
+  id: string;
+  name: string;
+  description?: string;
+  sessionId: string;
+  status: 'draft' | 'scheduled' | 'sending' | 'completed' | 'paused' | 'cancelled' | 'failed';
+  recipientType: 'contacts' | 'groups';
+  recipientIds: string[];
+  totalRecipients: number;
+  messageContent: {
+    type: string;
+    text?: string;
+    url?: string;
+    caption?: string;
+    filename?: string;
+    latitude?: number;
+    longitude?: number;
+    contactName?: string;
+    contactPhone?: string;
+  };
+  scheduleAt: string | null;
+  startedAt: string | null;
+  completedAt: string | null;
+  sentCount: number;
+  failedCount: number;
+  currentIndex: number;
+  createdAt: string;
+  updatedAt: string;
+}
+
+export interface CampaignRecipient {
+  id: string;
+  campaignId: string;
+  chatId: string;
+  recipientName: string;
+  contactId?: string;
+  groupId?: string;
+  status: 'pending' | 'sent' | 'failed' | 'cancelled';
+  messageId?: string;
+  errorMessage?: string;
+  sentAt?: string;
+  createdAt: string;
+}
+
+export interface CampaignStats {
+  total: number;
+  draft: number;
+  scheduled: number;
+  sending: number;
+  completed: number;
+  failed: number;
+  paused: number;
+  cancelled: number;
+  totalRecipients: number;
+  totalSent: number;
+  totalFailed: number;
+}
+
+export interface CampaignPayload {
+  name: string;
+  description?: string;
+  sessionId: string;
+  recipientType: 'contacts' | 'groups';
+  recipientIds: string[];
+  messageContent: Campaign['messageContent'];
+  scheduleAt?: string;
+}
+
+export interface CampaignUpdatePayload {
+  name?: string;
+  description?: string;
+  messageContent?: Campaign['messageContent'];
+  scheduleAt?: string;
+}
+
+export const campaignApi = {
+  list: (params?: { status?: string; search?: string; page?: number; limit?: number }) => {
+    const query = new URLSearchParams();
+    if (params?.status) query.set('status', params.status);
+    if (params?.search) query.set('search', params.search);
+    if (params?.page) query.set('page', String(params.page));
+    if (params?.limit) query.set('limit', String(params.limit));
+    const qs = query.toString();
+    return request<{ campaigns: Campaign[]; total: number }>(`/campaigns${qs ? `?${qs}` : ''}`);
+  },
+  get: (id: string) => request<Campaign>(`/campaigns/${id}`),
+  create: (data: CampaignPayload) =>
+    request<Campaign>('/campaigns', { method: 'POST', body: JSON.stringify(data) }),
+  update: (id: string, data: CampaignUpdatePayload) =>
+    request<Campaign>(`/campaigns/${id}`, { method: 'PUT', body: JSON.stringify(data) }),
+  delete: (id: string) =>
+    request<{ success: boolean }>(`/campaigns/${id}`, { method: 'DELETE' }),
+  start: (id: string) =>
+    request<Campaign>(`/campaigns/${id}/start`, { method: 'POST' }),
+  pause: (id: string) =>
+    request<Campaign>(`/campaigns/${id}/pause`, { method: 'POST' }),
+  cancel: (id: string) =>
+    request<Campaign>(`/campaigns/${id}/cancel`, { method: 'POST' }),
+  resendFailed: (id: string) =>
+    request<Campaign>(`/campaigns/${id}/resend-failed`, { method: 'POST' }),
+  getRecipients: (id: string, params?: { status?: string; search?: string; page?: number; limit?: number }) => {
+    const query = new URLSearchParams();
+    if (params?.status) query.set('status', params.status);
+    if (params?.search) query.set('search', params.search);
+    if (params?.page) query.set('page', String(params.page));
+    if (params?.limit) query.set('limit', String(params.limit));
+    const qs = query.toString();
+    return request<{ recipients: CampaignRecipient[]; total: number }>(`/campaigns/${id}/recipients${qs ? `?${qs}` : ''}`);
+  },
+  getStats: () => request<CampaignStats>('/campaigns/stats'),
 };
 
 // =============================================================================
@@ -473,21 +547,6 @@ export const groupApi = {
     ),
 };
 
-export const pluginsApi = {
-  list: () => request<Plugin[]>('/plugins'),
-  get: (id: string) => request<Plugin>(`/plugins/${id}`),
-  enable: (id: string) => request<{ success: boolean; message: string }>(`/plugins/${id}/enable`, { method: 'POST' }),
-  disable: (id: string) => request<{ success: boolean; message: string }>(`/plugins/${id}/disable`, { method: 'POST' }),
-  updateConfig: (id: string, config: Record<string, unknown>) =>
-    request<{ success: boolean; message: string }>(`/plugins/${id}/config`, {
-      method: 'PUT',
-      body: JSON.stringify({ config }),
-    }),
-  healthCheck: (id: string) => request<{ healthy: boolean; message?: string }>(`/plugins/${id}/health`),
-  getEngines: () => request<Engine[]>('/infra/engines'),
-  getCurrentEngine: () => request<{ engineType: string }>('/infra/engines/current'),
-};
-
 // =============================================================================
 // Auth API (Profile & Password)
 // =============================================================================
@@ -543,6 +602,50 @@ export const systemSettingsApi = {
 // =============================================================================
 // Upload API
 // =============================================================================
+
+// =============================================================================
+// API Key Types & API
+// =============================================================================
+
+export interface ApiKey {
+  id: string;
+  name: string;
+  keyPrefix: string;
+  role: string;
+  isActive: boolean;
+  lastUsedAt: string | null;
+  usageCount: number;
+  createdAt: string;
+  updatedAt: string;
+}
+
+export interface CreateApiKeyPayload {
+  name: string;
+  role: string;
+}
+
+export interface ApiKeyWithSecret {
+  apiKey: string;
+  data: ApiKey;
+}
+
+export interface ApiKeyStats {
+  totalKeys: number;
+  activeKeys: number;
+  revokedKeys: number;
+  totalCalls: number;
+  callsToday: number;
+  callsThisMonth: number;
+  topEndpoints: Array<{ path: string; method: string; count: number }>;
+}
+
+export const apiKeysApi = {
+  list: () => request<ApiKey[]>('/api-keys'),
+  create: (data: CreateApiKeyPayload) => request<ApiKeyWithSecret>('/api-keys', { method: 'POST', body: JSON.stringify(data) }),
+  revoke: (id: string) => request<{ success: boolean }>(`/api-keys/${id}/revoke`, { method: 'POST' }),
+  delete: (id: string) => request<void>(`/api-keys/${id}`, { method: 'DELETE' }),
+  getStats: () => request<ApiKeyStats>('/api-keys/stats'),
+};
 
 export const uploadApi = {
   upload: async (folder: string, file: File): Promise<{ url: string; filename: string }> => {

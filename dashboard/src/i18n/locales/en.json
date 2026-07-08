@@ -53,7 +53,8 @@
     "unknownError": "Unknown error",
     "lightMode": "Light mode",
     "darkMode": "Dark mode",
-    "viewAll": "View All"
+    "viewAll": "View All",
+    "copied": "Copied!"
   },
   "theme": {
     "light": "Light",
@@ -67,12 +68,12 @@
     "webhooks": "Webhooks",
     "apiKeys": "API Keys",
     "contacts": "Contacts",
+    "composer": "Composer",
     "groups": "Groups",
     "messages": "Messages",
     "settings": "Settings",
     "messageTester": "Message Tester",
-    "infrastructure": "Infrastructure",
-    "plugins": "Plugins",
+    "campaigns": "Campaigns",
     "logs": "Logs"
   },
   "errorBoundary": {
@@ -268,12 +269,37 @@
     }
   },
   "apiKeys": {
-    "title": "API Keys",
-    "subtitle": "Manage API keys for authentication and access control",
+    "title": "API Management",
+    "subtitle": "Manage API keys, view credentials, and browse API documentation",
+    "tabs": {
+      "overview": "Overview",
+      "keys": "API Keys",
+      "docs": "Documentation"
+    },
+    "stats": {
+      "totalKeys": "Total Keys",
+      "activeKeys": "Active Keys",
+      "totalCalls": "Total Calls",
+      "rateLimit": "Calls Today"
+    },
+    "credentials": {
+      "baseUrl": "API Base URL",
+      "baseUrlHint": "Use this URL as the base endpoint for all API requests."
+    },
+    "quickLinks": {
+      "title": "Quick Links",
+      "manageKeys": "Manage API Keys",
+      "manageKeysDesc": "View, create, revoke, and delete your API keys",
+      "viewDocs": "API Documentation",
+      "viewDocsDesc": "Browse detailed endpoint reference with examples",
+      "createKey": "Create New Key",
+      "createKeyDesc": "Generate a new API key with a specific role"
+    },
     "createBtn": "Create API Key",
     "modalTitle": "Create API Key",
     "createdTitle": "API Key Created",
     "createdHint": "Copy this key now. You won't be able to see it again.",
+    "createdHintExtra": "This secret key will not be shown again. Store it securely.",
     "namePlaceholder": "e.g., Production Key",
     "rolesTitle": "Roles Reference",
     "roles": {
@@ -316,6 +342,59 @@
       "delete": "Delete"
     }
   },
+  "apiDocs": {
+    "auth": {
+      "title": "Authentication",
+      "description": "All API requests require authentication. Include your API key in the <code>X-API-Key</code> request header. You can manage your API keys in the API Keys tab.",
+      "example": "Example request with authentication",
+      "none": "No authentication required",
+      "apiKey": "API Key required",
+      "admin": "Admin access required"
+    },
+    "sdks": {
+      "title": "SDKs & Libraries",
+      "description": "Use our official SDKs to integrate OpenWA with your application seamlessly."
+    },
+    "endpoints": {
+      "title": "API Endpoints",
+      "health": {
+        "desc": "Check API server health status"
+      },
+      "sessions": {
+        "list": "List all WhatsApp sessions",
+        "create": "Create a new WhatsApp session",
+        "qr": "Get QR code for a session",
+        "delete": "Delete a WhatsApp session"
+      },
+      "messages": {
+        "sendText": "Send a text message",
+        "sendImage": "Send an image message",
+        "sendLocation": "Send a location message",
+        "list": "List messages with optional filters"
+      },
+      "contacts": {
+        "list": "List all saved contacts",
+        "create": "Create a new contact"
+      },
+      "webhooks": {
+        "list": "List all configured webhooks"
+      },
+      "campaigns": {
+        "list": "List all broadcast campaigns",
+        "create": "Create a new broadcast campaign"
+      },
+      "settings": {
+        "get": "Get system settings (admin only)"
+      }
+    },
+    "requestBody": "Request Body",
+    "example": "Example",
+    "response": "Response",
+    "rateLimit": {
+      "title": "Rate Limiting",
+      "description": "API requests are rate-limited to ensure fair usage. The default limit is 100 requests per 60-second window per API key. Exceeding this limit will result in a 429 Too Many Requests response. Contact support if you need a higher limit."
+    }
+  },
   "logs": {
     "title": "Audit Logs",
     "subtitle": "Track and review all API actions and system events",
@@ -340,215 +419,217 @@
     "empty": {
       "title": "No logs found",
       "description": "Audit logs will appear here as actions are performed"
-    },
-    "pagination": "Page {{page}} of {{total}} · {{count}} entries"
+    }
   },
-  "messageTester": {
-    "title": "Message Tester",
-    "subtitle": "Send test messages through the API",
-    "compose": "Send Test Message",
-    "responseTitle": "API Response",
-    "session": "Session",
+  "composer": {
+    "title": "Composer",
+    "subtitle": "Compose and send messages like WhatsApp",
+    "session": "WhatsApp Session",
     "noReadySessions": "No ready sessions",
-    "sessionOptionPhoneNone": "No phone",
-    "recipientType": "Recipient Type",
-    "personal": "Personal",
-    "group": "Group",
-    "selectGroup": "Select Group",
-    "recipientPhone": "Recipient Phone Number",
-    "loadingGroups": "Loading groups...",
-    "noGroupsFound": "No groups found",
-    "selectGroupHint": "Select a group from your WhatsApp",
-    "phoneHint": "Use international format without spaces",
+    "contactType": "Contact Type",
+    "recipients": "Recipients",
+    "selected": "{{count}} selected",
+    "savedContacts": "Contacts",
+    "waContacts": "WA Contacts",
+    "groups": "Groups",
+    "newNumber": "New Number",
+    "searchContacts": "Search contacts...",
+    "searchGroups": "Search groups...",
+    "noContacts": "No saved contacts yet",
+    "noGroups": "No groups found",
+    "noResults": "No results found",
+    "schedule": "Schedule",
     "messageType": "Message Type",
     "types": {
       "text": "Text",
       "image": "Image",
       "video": "Video",
       "audio": "Audio",
-      "document": "Document"
+      "document": "Document",
+      "location": "Location",
+      "contact": "Contact"
     },
-    "messageContent": "Message Content",
-    "messagePlaceholder": "Enter your message here...",
+    "message": "Message",
+    "messagePlaceholder": "Type your message here...",
     "mediaUrl": "Media URL",
+    "mediaUrlPlaceholder": "https://example.com/file.jpg",
     "caption": "Caption",
-    "filename": "Filename",
-    "captionPlaceholder": "Enter caption...",
-    "filenamePlaceholder": "document.pdf",
+    "captionPlaceholder": "Add a caption...",
+    "fileName": "File Name",
+    "fileNamePlaceholder": "document.pdf",
+    "latitude": "Latitude",
+    "latitudePlaceholder": "-6.2088",
+    "longitude": "Longitude",
+    "longitudePlaceholder": "106.8456",
+    "locationDescription": "Description",
+    "locationDescriptionPlaceholder": "e.g. Our meeting point",
+    "contactName": "Contact Name",
+    "contactNamePlaceholder": "John Doe",
+    "contactPhone": "Contact Phone",
+    "contactPhonePlaceholder": "+62812345678",
     "send": "Send Message",
     "sending": "Sending...",
-    "viewOnly": "View Only",
-    "responseEmpty": "Send a message to see the API response",
-    "successLabel": "200 OK - Success",
-    "failedLabel": "400 - Failed",
-    "response": {
-      "timestamp": "Timestamp",
-      "messageId": "Message ID",
-      "error": "Error"
-    },
-    "sendFailed": "Failed to send message"
+    "sendTo": "Send to {{count}} recipient",
+    "sendTo_plural": "Send to {{count}} recipients",
+    "sendingTo": "Sending to {{count}} recipient",
+    "sendingTo_plural": "Sending to {{count}} recipients...",
+    "sentSuccess": "Message sent to {{count}} recipient",
+    "sentSuccess_plural": "Message sent to {{count}} recipients",
+    "sentPartial": "Sent to {{sent}}, failed for {{failed}} recipient",
+    "sentPartial_plural": "Sent to {{sent}}, failed for {{failed}} recipients",
+    "progress": "Progress",
+    "charCount": "{{count}} / 4096 characters",
+    "livePreview": "Live Preview",
+    "noMessages": "No messages yet",
+    "noMessagesHint": "Send a message to start the conversation"
   },
-  "infrastructure": {
-    "title": "Infrastructure",
-    "subtitle": "Configure server, database, cache, storage, and engine settings",
-    "saveConfig": "Save Configuration",
-    "saving": "Saving...",
-    "server": {
-      "title": "Server Configuration",
-      "production": "Production",
-      "development": "Development",
-      "environment": "Environment",
-      "domain": "Domain",
-      "apiPort": "API Port",
-      "dashboardPort": "Dashboard Port",
-      "corsOrigins": "CORS Origins",
-      "corsPlaceholder": "* or comma-separated origins",
-      "publicApiUrl": "Public API URL (optional)",
-      "publicDashboardUrl": "Public Dashboard URL (optional)"
+  "campaigns": {
+    "title": "Campaigns",
+    "subtitle": "Create and manage broadcast campaigns",
+    "newCampaign": "New Campaign",
+    "editCampaign": "Edit Campaign",
+    "duplicate": "Duplicate",
+    "searchPlaceholder": "Search campaigns...",
+    "filterStatus": "All Status",
+    "statuses": {
+      "draft": "Draft",
+      "scheduled": "Scheduled",
+      "sending": "Sending",
+      "completed": "Completed",
+      "paused": "Paused",
+      "cancelled": "Cancelled",
+      "failed": "Failed"
     },
-    "webhook": {
-      "title": "Webhook & Rate Limiting",
-      "settings": "Webhook Settings",
-      "timeout": "Timeout (ms)",
-      "maxRetries": "Max Retries",
-      "retryDelay": "Retry Delay (ms)",
-      "rateLimit": "Rate Limiting",
-      "window": "Time Window (seconds)",
-      "maxReq": "Max Requests per Window"
+    "recipientType": {
+      "contacts": "Contacts",
+      "groups": "Groups"
     },
-    "database": {
-      "title": "Database Configuration",
-      "sqlite": "SQLite",
-      "sqliteDesc": "Local file-based database",
-      "postgres": "PostgreSQL",
-      "postgresDesc": "Production-ready database",
-      "useBuiltIn": "Use Built-in PostgreSQL Container",
-      "builtInDesc": "OpenWA will manage a PostgreSQL container for you",
-      "dbName": "Database Name",
-      "poolSize": "Pool Size",
-      "ssl": "SSL Connection",
-      "sslDesc": "Enable TLS/SSL for secure database connections",
-      "migrationsTitle": "Database Migrations",
-      "migrationsStatus": "Schema is auto-synchronized with TypeORM",
-      "migrationsHint": "Migrations are managed automatically. Use CLI for manual migrations."
-    },
-    "redis": {
-      "title": "Redis",
-      "enable": "Enable Redis",
-      "enableDesc": "Required for caching, session storage, and BullMQ queues",
-      "useBuiltIn": "Use Built-in Redis Container",
-      "builtInDesc": "OpenWA will manage a Redis container for you",
-      "queueTitle": "Enable BullMQ Queue System",
-      "queueDesc": "Use message queues for reliable message and webhook delivery",
-      "statsTitle": "Queue Statistics",
-      "messageQueue": "Message Queue",
-      "webhookQueue": "Webhook Queue",
-      "pending": "Pending",
+    "stats": {
+      "total": "Total Campaigns",
+      "active": "Active",
       "completed": "Completed",
       "failed": "Failed",
-      "clearFailed": "Clear Failed Jobs",
-      "viewBullMq": "View Bull MQ Dashboard",
-      "disabledTitle": "Redis is Disabled",
-      "disabledDesc": "Enable Redis for caching, session storage, and BullMQ message queues.",
-      "passwordOptional": "(optional)"
+      "totalRecipients": "Total Recipients",
+      "totalSent": "Total Sent",
+      "totalFailed": "Total Failed"
     },
-    "storage": {
-      "title": "Storage Configuration",
-      "local": "Local Filesystem",
-      "localDesc": "Store media files locally",
-      "s3": "Amazon S3",
-      "s3Desc": "Cloud storage (S3 compatible)",
-      "useBuiltIn": "Use Built-in MinIO Container",
-      "builtInDesc": "OpenWA will manage a MinIO (S3-compatible) container for you",
-      "storagePath": "Storage Path",
-      "bucket": "Bucket Name",
-      "region": "Region",
-      "accessKey": "Access Key",
-      "secretKey": "Secret Key",
-      "endpoint": "Custom Endpoint (optional)",
-      "endpointHint": "For MinIO or other S3-compatible services"
+    "columns": {
+      "name": "Name",
+      "status": "Status",
+      "recipients": "Recipients",
+      "sent": "Sent",
+      "failed": "Failed",
+      "schedule": "Schedule",
+      "created": "Created",
+      "actions": "Actions"
     },
-    "statusLabels": {
-      "connected": "Connected",
-      "disconnected": "Disconnected",
-      "disabled": "Disabled"
-    },
-    "restart": {
-      "idleTitle": "⚙️ Configuration Saved",
-      "restartingTitle": "🔄 Restarting Server...",
-      "waitingTitle": "⏳ Please Wait...",
-      "successTitle": "✅ Server Ready",
-      "errorTitle": "❌ Restart Failed",
-      "idleDesc": "Configuration has been saved to <code>.env.generated</code>.<br/>A server restart is required to apply the changes.",
-      "later": "Restart Later",
-      "now": "Restart Now",
-      "restartingMsg": "Server restarting... {{count}}s",
-      "checking": "Checking server status...",
-      "dontClose": "Please do not close this window",
-      "successMsg": "Server is back online! The page will reload automatically.",
-      "errorMsg": "Server did not respond after 30 seconds. Please check the Docker logs and restart manually.",
-      "reload": "Reload Page"
-    },
-    "toasts": {
-      "saveFailed": "Save Failed",
-      "saveSuccess": "Configuration saved successfully",
-      "saveError": "Failed to save configuration"
-    }
-  },
-  "pluginStatus": {
-    "installed": "Installed",
-    "enabled": "Enabled",
-    "disabled": "Disabled",
-    "error": "Error"
-  },
-  "pluginType": {
-    "engine": "Engine",
-    "storage": "Storage",
-    "queue": "Queue",
-    "auth": "Auth",
-    "extension": "Extension"
-  },
-  "plugins": {
-    "title": "Plugins",
-    "subtitle": "Manage engines, storage backends, and extensions",
-    "refresh": "Refresh",
-    "engineCard": "Active WhatsApp Engine",
-    "running": "Running",
-    "supportedFeatures": "Supported Features:",
-    "more": "+{{count}} more",
-    "builtIn": "Built-in",
-    "noDescription": "No description available",
-    "required": "Required",
-    "active": "Active",
-    "activate": "Activate",
-    "enable": "Enable",
-    "disable": "Disable",
-    "healthCheck": "Health Check",
-    "configure": "Configure",
     "empty": {
-      "title": "No Plugins Found",
-      "description": "Install plugins to extend OpenWA functionality"
+      "title": "No campaigns yet",
+      "description": "Create your first campaign to start broadcasting messages"
     },
-    "config": {
-      "title": "Configure {{name}}",
-      "restartNotice": "Changes require server restart to take effect",
-      "engineType": "Engine Type",
-      "headless": "Headless Mode",
-      "headlessDesc": "Run browser without visible UI (recommended for production)",
-      "sessionDataPath": "Session Data Path",
-      "browserArgs": "Browser Arguments",
-      "noOptions": "No configuration options available for this plugin",
-      "save": "Save Configuration"
+    "wizard": {
+      "step1": "Details",
+      "step2": "Message",
+      "step3": "Recipients",
+      "step4": "Schedule",
+      "step5": "Review",
+      "name": "Campaign Name",
+      "namePlaceholder": "e.g. Holiday Promotion",
+      "description": "Description",
+      "descriptionPlaceholder": "Optional description for this campaign",
+      "session": "WhatsApp Session",
+      "noSessions": "No ready sessions available",
+      "messageType": "Message Type",
+      "text": "Text",
+      "image": "Image",
+      "video": "Video",
+      "audio": "Audio",
+      "document": "Document",
+      "location": "Location",
+      "contact": "Contact",
+      "textPlaceholder": "Enter your message...",
+      "mediaUrl": "Media URL",
+      "mediaUrlPlaceholder": "https://example.com/file.jpg",
+      "caption": "Caption",
+      "captionPlaceholder": "Add a caption...",
+      "fileName": "File Name",
+      "fileNamePlaceholder": "document.pdf",
+      "latitude": "Latitude",
+      "latitudePlaceholder": "-6.2088",
+      "longitude": "Longitude",
+      "longitudePlaceholder": "106.8456",
+      "contactName": "Contact Name",
+      "contactNamePlaceholder": "John Doe",
+      "contactPhone": "Contact Phone",
+      "contactPhonePlaceholder": "+62812345678",
+      "selectRecipients": "Select Recipients",
+      "contacts": "Saved Contacts",
+      "groups": "Contact Groups",
+      "searchContacts": "Search contacts...",
+      "searchGroups": "Search groups...",
+      "noContacts": "No contacts found",
+      "noGroups": "No groups found",
+      "selected": "{{count}} selected",
+      "scheduleNow": "Send immediately",
+      "scheduleLater": "Schedule for later",
+      "scheduleDate": "Schedule Date",
+      "scheduleTime": "Schedule Time",
+      "reviewTitle": "Review Campaign",
+      "reviewName": "Name",
+      "reviewSession": "Session",
+      "reviewMessageType": "Message Type",
+      "reviewMessagePreview": "Message Preview",
+      "reviewRecipients": "Recipients",
+      "reviewRecipientCount": "{{count}} recipient(s)",
+      "reviewSchedule": "Schedule",
+      "reviewScheduleNow": "Send immediately",
+      "reviewScheduleDate": "Scheduled for {{date}}",
+      "createBtn": "Create Campaign",
+      "creating": "Creating...",
+      "saveBtn": "Save Changes",
+      "saving": "Saving..."
+    },
+    "detail": {
+      "title": "Campaign Details",
+      "overview": "Overview",
+      "recipients": "Recipients",
+      "stats": {
+        "total": "Total Recipients",
+        "sent": "Sent",
+        "failed": "Failed",
+        "pending": "Pending",
+        "progress": "Progress"
+      },
+      "actions": {
+        "start": "Start Campaign",
+        "pause": "Pause",
+        "cancel": "Cancel",
+        "resendFailed": "Resend Failed",
+        "edit": "Edit",
+        "delete": "Delete",
+        "back": "Back to Campaigns"
+      },
+      "confirmDelete": "Are you sure you want to delete this campaign?",
+      "confirmStart": "Are you sure you want to start this campaign?",
+      "noRecipients": "No recipients found",
+      "searchRecipients": "Search recipients...",
+      "filterStatus": "Filter by status"
     },
     "toasts": {
-      "errorTitle": "Plugin Error",
-      "errorDefault": "Failed to toggle plugin",
-      "healthOk": "Health Check Passed",
-      "healthFail": "Health Check Failed",
-      "healthError": "Health Check Error",
-      "savedTitle": "Configuration Saved",
-      "savedDesc": "Server restart required to apply changes.",
-      "saveFailed": "Save Failed"
+      "createSuccess": "Campaign created",
+      "createError": "Failed to create campaign",
+      "updateSuccess": "Campaign updated",
+      "updateError": "Failed to update campaign",
+      "deleteSuccess": "Campaign deleted",
+      "deleteError": "Failed to delete campaign",
+      "startSuccess": "Campaign started",
+      "startError": "Failed to start campaign",
+      "pauseSuccess": "Campaign paused",
+      "pauseError": "Failed to pause campaign",
+      "cancelSuccess": "Campaign cancelled",
+      "cancelError": "Failed to cancel campaign",
+      "resendSuccess": "Resending failed messages",
+      "resendError": "Failed to resend messages"
     }
   },
   "contacts": {
@@ -806,7 +887,12 @@
     "tabs": {
       "profile": "Profile",
       "password": "Password",
+      "language": "Language",
       "system": "System Settings"
+    },
+    "language": {
+      "title": "Language",
+      "subtitle": "Choose your preferred language for the dashboard interface"
     },
     "profile": {
       "name": "Full Name",

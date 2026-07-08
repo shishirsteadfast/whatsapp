@@ -144,19 +144,17 @@ async function bootstrap() {
   // ── SQLite PRAGMAs ─────────────────────────────────────────────────────
   // Run on every start to ensure safe concurrent access and data integrity.
   // These are connection-level settings that do NOT persist across restarts.
-  if ((process.env.DATABASE_TYPE || 'sqlite') === 'sqlite') {
-    const dataSource = app.get(DataSource);
-    try {
-      await dataSource.query('PRAGMA journal_mode = WAL');
-      await dataSource.query('PRAGMA synchronous = NORMAL');
-      await dataSource.query('PRAGMA busy_timeout = 5000');
-      await dataSource.query('PRAGMA foreign_keys = ON');
-      await dataSource.query('PRAGMA cache_size = -8000');          // 8 MB page cache
-      await dataSource.query('PRAGMA temp_store = MEMORY');
-      console.log('[Bootstrap] SQLite PRAGMAs applied (WAL, synchronous=NORMAL, busy_timeout=5000, foreign_keys=ON)');
-    } catch (pragmaError) {
-      console.warn('[Bootstrap] Could not apply SQLite PRAGMAs:', String(pragmaError));
-    }
+  const dataSource = app.get(DataSource);
+  try {
+    await dataSource.query('PRAGMA journal_mode = WAL');
+    await dataSource.query('PRAGMA synchronous = NORMAL');
+    await dataSource.query('PRAGMA busy_timeout = 5000');
+    await dataSource.query('PRAGMA foreign_keys = ON');
+    await dataSource.query('PRAGMA cache_size = -8000');          // 8 MB page cache
+    await dataSource.query('PRAGMA temp_store = MEMORY');
+    console.log('[Bootstrap] SQLite PRAGMAs applied (WAL, synchronous=NORMAL, busy_timeout=5000, foreign_keys=ON)');
+  } catch (pragmaError) {
+    console.warn('[Bootstrap] Could not apply SQLite PRAGMAs:', String(pragmaError));
   }
 
   console.log(`🚀 JeishanulWa is running on: http://localhost:${port}`);

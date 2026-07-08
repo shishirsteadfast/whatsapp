@@ -4,8 +4,7 @@ export class RenameAddressBookToContacts1781690000000 implements MigrationInterf
   name = 'RenameAddressBookToContacts1781690000000';
 
   public async up(queryRunner: QueryRunner): Promise<void> {
-    // ALTER TABLE RENAME works identically on SQLite and PostgreSQL.
-    // SQLite also updates index references automatically.
+    // SQLite's ALTER TABLE RENAME also updates index references automatically.
     await queryRunner.query(`ALTER TABLE "address_book" RENAME TO "contacts"`);
   }
 

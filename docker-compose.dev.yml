@@ -13,7 +13,6 @@ services:
     environment:
       - NODE_ENV=development
       - PORT=2785
-      - DATABASE_TYPE=sqlite
       - DATABASE_NAME=/app/data/jeishanulwa.sqlite
       - DATABASE_SYNCHRONIZE=true
       - ENGINE_TYPE=whatsapp-web.js

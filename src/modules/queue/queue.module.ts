@@ -82,9 +82,19 @@ export class QueueModule {
           route: '/admin/queues',
           adapter: ExpressAdapter,
         }),
+        BullModule.registerQueue({
+          name: QUEUE_NAMES.CAMPAIGN_SCHEDULER,
+          defaultJobOptions: {
+            attempts: 1,
+            removeOnComplete: 100,
+            removeOnFail: 50,
+          },
+        }),
+
         BullBoardModule.forFeature({ name: QUEUE_NAMES.MESSAGE_SEND, adapter: BullMQAdapter }),
         BullBoardModule.forFeature({ name: QUEUE_NAMES.MESSAGE_BULK, adapter: BullMQAdapter }),
         BullBoardModule.forFeature({ name: QUEUE_NAMES.WEBHOOK, adapter: BullMQAdapter }),
+        BullBoardModule.forFeature({ name: QUEUE_NAMES.CAMPAIGN_SCHEDULER, adapter: BullMQAdapter }),
       ],
       providers: [WebhookProcessor],
       exports: [BullModule],

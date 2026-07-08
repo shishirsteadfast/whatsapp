@@ -49,15 +49,7 @@ get_profiles() {
         log_info "Proxy (Traefik): enabled"
     fi
 
-    # PostgreSQL (built-in)
-    if [ "${DATABASE_TYPE:-sqlite}" = "postgres" ] && [ "${POSTGRES_BUILTIN:-false}" = "true" ]; then
-        profiles="$profiles --profile postgres"
-        log_info "PostgreSQL: built-in container"
-    elif [ "${DATABASE_TYPE:-sqlite}" = "postgres" ]; then
-        log_info "PostgreSQL: external (${DATABASE_HOST:-localhost}:${DATABASE_PORT:-5432})"
-    else
-        log_info "Database: SQLite"
-    fi
+    log_info "Database: SQLite"
 
     # Redis (built-in)
     if [ "${REDIS_ENABLED:-false}" = "true" ] && [ "${REDIS_BUILTIN:-false}" = "true" ]; then
@@ -127,7 +119,7 @@ cmd_start() {
 cmd_stop() {
     log_info "Stopping JeishanulWa..."
     cd "$PROJECT_DIR"
-    docker compose --profile postgres --profile redis --profile minio --profile with-dashboard --profile with-proxy down
+    docker compose --profile redis --profile minio --profile with-dashboard --profile with-proxy down
     log_success "JeishanulWa stopped"
 }
 
@@ -191,7 +183,6 @@ cmd_help() {
     echo "  help        Show this help"
     echo ""
     echo "Profile activation is automatic based on .env:"
-    echo "  POSTGRES_BUILTIN=true  → activates postgres profile"
     echo "  REDIS_BUILTIN=true     → activates redis profile"
     echo "  MINIO_BUILTIN=true     → activates minio profile"
     echo ""

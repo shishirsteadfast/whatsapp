@@ -53,7 +53,8 @@
     "unknownError": "שגיאה לא ידועה",
     "lightMode": "מצב בהיר",
     "darkMode": "מצב כהה",
-    "viewAll": "הצג הכל"
+    "viewAll": "הצג הכל",
+    "copied": "הועתק!"
   },
   "theme": {
     "light": "בהיר",
@@ -67,9 +68,8 @@
     "webhooks": "Webhooks",
     "apiKeys": "מפתחות API",
     "contacts": "אנשי קשר",
-    "messageTester": "בדיקת הודעות",
-    "infrastructure": "תשתית",
-    "plugins": "תוספים",
+    "composer": "קומפוזר",
+    "campaigns": "קמפיינים",
     "logs": "לוגים"
   },
   "errorBoundary": {
@@ -265,12 +265,37 @@
     }
   },
   "apiKeys": {
-    "title": "מפתחות API",
-    "subtitle": "ניהול מפתחות API לאימות ובקרת גישה",
+    "title": "ניהול API",
+    "subtitle": "ניהול מפתחות API, צפייה בפרטי התחברות ועיון בתיעוד API",
+    "tabs": {
+      "overview": "סקירה",
+      "keys": "מפתחות API",
+      "docs": "תיעוד"
+    },
+    "stats": {
+      "totalKeys": "סה\"כ מפתחות",
+      "activeKeys": "מפתחות פעילים",
+      "totalCalls": "סה\"כ קריאות",
+      "rateLimit": "קריאות היום"
+    },
+    "credentials": {
+      "baseUrl": "כתובת בסיס API",
+      "baseUrlHint": "השתמש בכתובת זו כבסיס לכל בקשות ה-API."
+    },
+    "quickLinks": {
+      "title": "קישורים מהירים",
+      "manageKeys": "ניהול מפתחות API",
+      "manageKeysDesc": "צפייה, יצירה, ביטול ומחיקה של מפתחות API",
+      "viewDocs": "תיעוד API",
+      "viewDocsDesc": "עיון במדריך נקודות הקצה עם דוגמאות",
+      "createKey": "יצירת מפתח חדש",
+      "createKeyDesc": "יצירת מפתח API חדש עם תפקיד ספציפי"
+    },
     "createBtn": "יצירת מפתח API",
     "modalTitle": "יצירת מפתח API",
     "createdTitle": "מפתח ה-API נוצר",
     "createdHint": "יש להעתיק את המפתח כעת. לא ניתן יהיה לצפות בו שוב.",
+    "createdHintExtra": "מפתח סודי זה לא יוצג שוב. יש לשמור אותו במקום בטוח.",
     "namePlaceholder": "לדוגמה: Production Key",
     "rolesTitle": "מדריך תפקידים",
     "roles": {
@@ -313,6 +338,59 @@
       "delete": "מחיקה"
     }
   },
+  "apiDocs": {
+    "auth": {
+      "title": "אימות",
+      "description": "כל בקשות ה-API דורשות אימות. יש להוסיף את מפתח ה-API בכותרת <code>X-API-Key</code>. ניתן לנהל מפתחות API בלשונית מפתחות API.",
+      "example": "דוגמה לבקשה עם אימות",
+      "none": "לא נדרש אימות",
+      "apiKey": "נדרש מפתח API",
+      "admin": "נדרשת גישת מנהל"
+    },
+    "sdks": {
+      "title": "ערכות פיתוח (SDKs)",
+      "description": "השתמש בערכות הפיתוח הרשמיות שלנו לשילוב חלק של OpenWA באפליקציה שלך."
+    },
+    "endpoints": {
+      "title": "נקודות קצה API",
+      "health": {
+        "desc": "בדיקת תקינות השרת"
+      },
+      "sessions": {
+        "list": "רשימת כל ה-Sessions",
+        "create": "יצירת Session חדש",
+        "qr": "קבלת קוד QR ל-Session",
+        "delete": "מחיקת Session"
+      },
+      "messages": {
+        "sendText": "שליחת הודעת טקסט",
+        "sendImage": "שליחת תמונה",
+        "sendLocation": "שליחת מיקום",
+        "list": "רשימת הודעות עם סינון אופציונלי"
+      },
+      "contacts": {
+        "list": "רשימת כל אנשי הקשר",
+        "create": "יצירת איש קשר חדש"
+      },
+      "webhooks": {
+        "list": "רשימת כל ה-Webhooks"
+      },
+      "campaigns": {
+        "list": "רשימת כל הקמפיינים",
+        "create": "יצירת קמפיין חדש"
+      },
+      "settings": {
+        "get": "קבלת הגדרות מערכת (מנהל בלבד)"
+      }
+    },
+    "requestBody": "גוף הבקשה",
+    "example": "דוגמה",
+    "response": "תגובה",
+    "rateLimit": {
+      "title": "הגבלת קצב",
+      "description": "בקשות API מוגבלות בקצב כדי להבטיח שימוש הוגן. המגבלה ברירת המחדל היא 100 בקשות בחלון של 60 שניות לכל מפתח API. חריגה ממגבלה זו תגרור תגובת 429 Too Many Requests. צור קשר עם התמיכה אם יש צורך במגבלה גבוהה יותר."
+    }
+  },
   "logs": {
     "title": "לוגים",
     "subtitle": "מעקב וצפייה בכל פעולות ה-API ואירועי המערכת",
@@ -339,213 +417,215 @@
     },
     "pagination": "עמוד {{page}} מתוך {{total}} · {{count}} רשומות"
   },
-  "messageTester": {
-    "title": "בדיקת הודעות",
-    "subtitle": "שליחת הודעות בדיקה דרך ה-API",
-    "compose": "שליחת הודעת בדיקה",
-    "responseTitle": "תגובת ה-API",
-    "session": "Session",
+  "campaigns": {
+    "title": "קמפיינים",
+    "subtitle": "יצירה וניהול של קמפיינים להעברת הודעות",
+    "newCampaign": "קמפיין חדש",
+    "editCampaign": "עריכת קמפיין",
+    "duplicate": "שכפול",
+    "searchPlaceholder": "חיפוש קמפיינים...",
+    "filterStatus": "כל הסטטוסים",
+    "statuses": {
+      "draft": "טיוטה",
+      "scheduled": "מתוזמן",
+      "sending": "נשלח",
+      "completed": "הושלם",
+      "paused": "מושהה",
+      "cancelled": "בוטל",
+      "failed": "נכשל"
+    },
+    "recipientType": {
+      "contacts": "אנשי קשר",
+      "groups": "קבוצות"
+    },
+    "stats": {
+      "total": "סה\"כ קמפיינים",
+      "active": "פעילים",
+      "completed": "הושלמו",
+      "failed": "נכשלו",
+      "totalRecipients": "סה\"כ נמענים",
+      "totalSent": "סה\"כ נשלחו",
+      "totalFailed": "סה\"כ נכשלו"
+    },
+    "columns": {
+      "name": "שם",
+      "status": "סטטוס",
+      "recipients": "נמענים",
+      "sent": "נשלחו",
+      "failed": "נכשלו",
+      "schedule": "מועד",
+      "created": "נוצר בתאריך",
+      "actions": "פעולות"
+    },
+    "empty": {
+      "title": "אין קמפיינים עדיין",
+      "description": "צור את הקמפיין הראשון שלך כדי להתחיל להעביר הודעות"
+    },
+    "wizard": {
+      "step1": "פרטים",
+      "step2": "הודעה",
+      "step3": "נמענים",
+      "step4": "תזמון",
+      "step5": "סיכום",
+      "name": "שם קמפיין",
+      "namePlaceholder": "לדוגמה: מבצע חג",
+      "description": "תיאור",
+      "descriptionPlaceholder": "תיאור אופציונלי לקמפיין",
+      "session": "WhatsApp Session",
+      "noSessions": "אין Sessions זמינים",
+      "messageType": "סוג הודעה",
+      "text": "טקסט",
+      "image": "תמונה",
+      "video": "וידאו",
+      "audio": "אודיו",
+      "document": "מסמך",
+      "location": "מיקום",
+      "contact": "איש קשר",
+      "textPlaceholder": "הכנס את ההודעה...",
+      "mediaUrl": "כתובת מדיה",
+      "mediaUrlPlaceholder": "https://example.com/file.jpg",
+      "caption": "כיתוב",
+      "captionPlaceholder": "הוסף כיתוב...",
+      "fileName": "שם קובץ",
+      "fileNamePlaceholder": "document.pdf",
+      "latitude": "קו רוחב",
+      "latitudePlaceholder": "-6.2088",
+      "longitude": "קו אורך",
+      "longitudePlaceholder": "106.8456",
+      "contactName": "שם איש קשר",
+      "contactNamePlaceholder": "ישראל ישראלי",
+      "contactPhone": "טלפון איש קשר",
+      "contactPhonePlaceholder": "+972501234567",
+      "selectRecipients": "בחירת נמענים",
+      "contacts": "אנשי קשר שמורים",
+      "groups": "קבוצות קשר",
+      "searchContacts": "חיפוש אנשי קשר...",
+      "searchGroups": "חיפוש קבוצות...",
+      "noContacts": "לא נמצאו אנשי קשר",
+      "noGroups": "לא נמצאו קבוצות",
+      "selected": "{{count}} נבחרו",
+      "scheduleNow": "שליחה מיידית",
+      "scheduleLater": "תזמון למועד מאוחר יותר",
+      "scheduleDate": "תאריך",
+      "scheduleTime": "שעה",
+      "reviewTitle": "סיכום קמפיין",
+      "reviewName": "שם",
+      "reviewSession": "Session",
+      "reviewMessageType": "סוג הודעה",
+      "reviewMessagePreview": "תצוגה מקדימה",
+      "reviewRecipients": "נמענים",
+      "reviewRecipientCount": "{{count}} נמענים",
+      "reviewSchedule": "מועד",
+      "reviewScheduleNow": "שליחה מיידית",
+      "reviewScheduleDate": "מתוזמן ל-{{date}}",
+      "createBtn": "צור קמפיין",
+      "creating": "יוצר...",
+      "saveBtn": "שמור שינויים",
+      "saving": "שומר..."
+    },
+    "detail": {
+      "title": "פרטי קמפיין",
+      "overview": "סקירה",
+      "recipients": "נמענים",
+      "stats": {
+        "total": "סה\"כ נמענים",
+        "sent": "נשלחו",
+        "failed": "נכשלו",
+        "pending": "ממתינים",
+        "progress": "התקדמות"
+      },
+      "actions": {
+        "start": "הפעל קמפיין",
+        "pause": "השהה",
+        "cancel": "בטל",
+        "resendFailed": "שלח שוב שנכשלו",
+        "edit": "ערוך",
+        "delete": "מחק",
+        "back": "חזרה לקמפיינים"
+      },
+      "confirmDelete": "האם למחוק קמפיין זה?",
+      "confirmStart": "האם להפעיל קמפיין זה?",
+      "noRecipients": "לא נמצאו נמענים",
+      "searchRecipients": "חיפוש נמענים...",
+      "filterStatus": "סינון לפי סטטוס"
+    },
+    "toasts": {
+      "createSuccess": "הקמפיין נוצר",
+      "createError": "יצירת הקמפיין נכשלה",
+      "updateSuccess": "הקמפיין עודכן",
+      "updateError": "עדכון הקמפיין נכשל",
+      "deleteSuccess": "הקמפיין נמחק",
+      "deleteError": "מחיקת הקמפיין נכשלה",
+      "startSuccess": "הקמפיין הופעל",
+      "startError": "הפעלת הקמפיין נכשלה",
+      "pauseSuccess": "הקמפיין הושהה",
+      "pauseError": "השהיית הקמפיין נכשלה",
+      "cancelSuccess": "הקמפיין בוטל",
+      "cancelError": "ביטול הקמפיין נכשל",
+      "resendSuccess": "שליחה מחדש להודעות שנכשלו",
+      "resendError": "שליחה מחדש נכשלה"
+    }
+  },
+  "composer": {
+    "title": "קומפוזר",
+    "subtitle": "כתיבה ושליחת הודעות כמו בוואטסאפ",
+    "session": "WhatsApp Session",
     "noReadySessions": "אין Sessions מוכנים",
-    "sessionOptionPhoneNone": "אין טלפון",
-    "recipientType": "סוג נמען",
-    "personal": "אישי",
-    "group": "קבוצה",
-    "selectGroup": "בחירת קבוצה",
-    "recipientPhone": "מספר טלפון של הנמען",
-    "loadingGroups": "טוען קבוצות...",
-    "noGroupsFound": "לא נמצאו קבוצות",
-    "selectGroupHint": "יש לבחור קבוצה מתוך WhatsApp",
-    "phoneHint": "יש להשתמש בפורמט בינלאומי ללא רווחים",
+    "contactType": "סוג איש קשר",
+    "recipients": "נמענים",
+    "selected": "{{count}} נבחרו",
+    "savedContacts": "אנשי קשר",
+    "waContacts": "אנשי קשר ב-WA",
+    "groups": "קבוצות",
+    "newNumber": "מספר חדש",
+    "searchContacts": "חיפוש אנשי קשר...",
+    "searchGroups": "חיפוש קבוצות...",
+    "noContacts": "אין אנשי קשר שמורים",
+    "noGroups": "לא נמצאו קבוצות",
+    "noResults": "לא נמצאו תוצאות",
     "messageType": "סוג הודעה",
     "types": {
       "text": "טקסט",
       "image": "תמונה",
       "video": "וידאו",
       "audio": "אודיו",
-      "document": "מסמך"
+      "document": "מסמך",
+      "location": "מיקום",
+      "contact": "איש קשר"
     },
-    "messageContent": "תוכן ההודעה",
-    "messagePlaceholder": "יש להזין כאן את ההודעה...",
-    "mediaUrl": "כתובת המדיה",
+    "message": "הודעה",
+    "messagePlaceholder": "הקלד את ההודעה כאן...",
+    "mediaUrl": "כתובת מדיה",
+    "mediaUrlPlaceholder": "https://example.com/file.jpg",
     "caption": "כיתוב",
-    "filename": "שם קובץ",
-    "captionPlaceholder": "יש להזין כיתוב...",
-    "filenamePlaceholder": "document.pdf",
+    "captionPlaceholder": "הוסף כיתוב...",
+    "fileName": "שם קובץ",
+    "fileNamePlaceholder": "document.pdf",
+    "latitude": "קו רוחב",
+    "latitudePlaceholder": "-6.2088",
+    "longitude": "קו אורך",
+    "longitudePlaceholder": "106.8456",
+    "locationDescription": "תיאור",
+    "locationDescriptionPlaceholder": "לדוגמה: נקודת המפגש שלנו",
+    "contactName": "שם איש קשר",
+    "contactNamePlaceholder": "ישראל ישראלי",
+    "contactPhone": "טלפון איש קשר",
+    "contactPhonePlaceholder": "+972501234567",
     "send": "שליחת הודעה",
     "sending": "שולח...",
-    "viewOnly": "צפייה בלבד",
-    "responseEmpty": "יש לשלוח הודעה כדי לראות את תגובת ה-API",
-    "successLabel": "200 OK - הצלחה",
-    "failedLabel": "400 - נכשל",
-    "response": {
-      "timestamp": "חותמת זמן",
-      "messageId": "מזהה הודעה",
-      "error": "שגיאה"
-    },
-    "sendFailed": "שליחת ההודעה נכשלה"
-  },
-  "infrastructure": {
-    "title": "תשתית",
-    "subtitle": "הגדרת השרת, מסד נתונים, מטמון, אחסון ומנוע WhatsApp",
-    "saveConfig": "שמירת תצורה",
-    "saving": "שומר...",
-    "server": {
-      "title": "הגדרות שרת",
-      "production": "ייצור",
-      "development": "פיתוח",
-      "environment": "סביבה",
-      "domain": "דומיין",
-      "apiPort": "פורט API",
-      "dashboardPort": "פורט דאשבורד",
-      "corsOrigins": "מקורות CORS",
-      "corsPlaceholder": "* או רשימה מופרדת בפסיקים",
-      "publicApiUrl": "כתובת API ציבורית (אופציונלי)",
-      "publicDashboardUrl": "כתובת דאשבורד ציבורית (אופציונלי)"
-    },
-    "webhook": {
-      "title": "Webhooks והגבלת קצב",
-      "settings": "הגדרות Webhook",
-      "timeout": "זמן קצוב (ms)",
-      "maxRetries": "ניסיונות מקסימליים",
-      "retryDelay": "השהיה בין ניסיונות (ms)",
-      "rateLimit": "הגבלת קצב",
-      "window": "חלון זמן (שניות)",
-      "maxReq": "מקסימום בקשות בחלון"
-    },
-    "database": {
-      "title": "הגדרות מסד נתונים",
-      "sqlite": "SQLite",
-      "sqliteDesc": "מסד נתונים מקומי מבוסס קובץ",
-      "postgres": "PostgreSQL",
-      "postgresDesc": "מסד נתונים מוכן לייצור",
-      "useBuiltIn": "שימוש בקונטיינר PostgreSQL מובנה",
-      "builtInDesc": "OpenWA ינהל עבורך קונטיינר PostgreSQL",
-      "dbName": "שם מסד הנתונים",
-      "poolSize": "גודל Pool",
-      "ssl": "חיבור SSL",
-      "sslDesc": "הפעלת TLS/SSL לחיבור מאובטח למסד הנתונים",
-      "migrationsTitle": "Migrations של מסד הנתונים",
-      "migrationsStatus": "הסכמה מסונכרנת אוטומטית עם TypeORM",
-      "migrationsHint": "ה-Migrations מנוהלים אוטומטית. ניתן להשתמש ב-CLI ל-Migrations ידניים."
-    },
-    "redis": {
-      "title": "Redis",
-      "enable": "הפעלת Redis",
-      "enableDesc": "נדרש למטמון, אחסון Sessions ותורי BullMQ",
-      "useBuiltIn": "שימוש בקונטיינר Redis מובנה",
-      "builtInDesc": "OpenWA ינהל עבורך קונטיינר Redis",
-      "queueTitle": "הפעלת מערכת התורים BullMQ",
-      "queueDesc": "שימוש בתורי הודעות לאספקה אמינה של הודעות ו-Webhooks",
-      "statsTitle": "סטטיסטיקות תור",
-      "messageQueue": "תור הודעות",
-      "webhookQueue": "תור Webhooks",
-      "pending": "בהמתנה",
-      "completed": "הושלמו",
-      "failed": "נכשלו",
-      "clearFailed": "ניקוי משימות שנכשלו",
-      "viewBullMq": "פתיחת Bull MQ Dashboard",
-      "disabledTitle": "Redis מושבת",
-      "disabledDesc": "יש להפעיל את Redis למטמון, אחסון Sessions ותורי הודעות BullMQ.",
-      "passwordOptional": "(אופציונלי)"
-    },
-    "storage": {
-      "title": "הגדרות אחסון",
-      "local": "מערכת קבצים מקומית",
-      "localDesc": "אחסון קבצי מדיה מקומית",
-      "s3": "Amazon S3",
-      "s3Desc": "אחסון ענן (תואם S3)",
-      "useBuiltIn": "שימוש בקונטיינר MinIO מובנה",
-      "builtInDesc": "OpenWA ינהל עבורך קונטיינר MinIO (תואם S3)",
-      "storagePath": "נתיב אחסון",
-      "bucket": "שם Bucket",
-      "region": "אזור (Region)",
-      "accessKey": "Access Key",
-      "secretKey": "Secret Key",
-      "endpoint": "Endpoint מותאם (אופציונלי)",
-      "endpointHint": "עבור MinIO או שירותים אחרים תואמי S3"
-    },
-    "statusLabels": {
-      "connected": "מחובר",
-      "disconnected": "מנותק",
-      "disabled": "מושבת"
-    },
-    "restart": {
-      "idleTitle": "⚙️ התצורה נשמרה",
-      "restartingTitle": "🔄 מאתחל את השרת...",
-      "waitingTitle": "⏳ אנא להמתין...",
-      "successTitle": "✅ השרת מוכן",
-      "errorTitle": "❌ האתחול נכשל",
-      "idleDesc": "התצורה נשמרה ל-<code>.env.generated</code>.<br/>נדרש אתחול שרת כדי להחיל את השינויים.",
-      "later": "אתחול מאוחר יותר",
-      "now": "אתחול עכשיו",
-      "restartingMsg": "השרת מתאתחל... {{count}} שניות",
-      "checking": "בודק את סטטוס השרת...",
-      "dontClose": "אין לסגור חלון זה",
-      "successMsg": "השרת חזר לפעולה! הדף ייטען מחדש אוטומטית.",
-      "errorMsg": "השרת לא הגיב לאחר 30 שניות. יש לבדוק את לוגי Docker ולאתחל ידנית.",
-      "reload": "טעינת הדף מחדש"
-    },
-    "toasts": {
-      "saveFailed": "השמירה נכשלה",
-      "saveSuccess": "התצורה נשמרה בהצלחה",
-      "saveError": "שמירת התצורה נכשלה"
-    }
-  },
-  "pluginStatus": {
-    "installed": "מותקן",
-    "enabled": "מופעל",
-    "disabled": "מושבת",
-    "error": "שגיאה"
-  },
-  "pluginType": {
-    "engine": "מנוע",
-    "storage": "אחסון",
-    "queue": "תור",
-    "auth": "אימות",
-    "extension": "הרחבה"
-  },
-  "plugins": {
-    "title": "תוספים",
-    "subtitle": "ניהול מנועים, יעדי אחסון והרחבות",
-    "refresh": "רענון",
-    "engineCard": "מנוע WhatsApp פעיל",
-    "running": "פועל",
-    "supportedFeatures": "תכונות נתמכות:",
-    "more": "+{{count}} נוספים",
-    "builtIn": "מובנה",
-    "noDescription": "אין תיאור זמין",
-    "required": "נדרש",
-    "active": "פעיל",
-    "activate": "הפעלה",
-    "enable": "הפעלה",
-    "disable": "השבתה",
-    "healthCheck": "בדיקת תקינות",
-    "configure": "הגדרה",
-    "empty": {
-      "title": "לא נמצאו תוספים",
-      "description": "ניתן להתקין תוספים כדי להרחיב את היכולות של OpenWA"
-    },
-    "config": {
-      "title": "הגדרת {{name}}",
-      "restartNotice": "השינויים דורשים אתחול שרת כדי להיכנס לתוקף",
-      "engineType": "סוג מנוע",
-      "headless": "מצב Headless",
-      "headlessDesc": "הרצת דפדפן ללא ממשק גרפי (מומלץ לייצור)",
-      "sessionDataPath": "נתיב נתוני Session",
-      "browserArgs": "ארגומנטים של הדפדפן",
-      "noOptions": "אין אפשרויות הגדרה זמינות עבור תוסף זה",
-      "save": "שמירת תצורה"
-    },
-    "toasts": {
-      "errorTitle": "שגיאת תוסף",
-      "errorDefault": "החלפת מצב התוסף נכשלה",
-      "healthOk": "בדיקת התקינות הצליחה",
-      "healthFail": "בדיקת התקינות נכשלה",
-      "healthError": "שגיאה בבדיקת תקינות",
-      "savedTitle": "התצורה נשמרה",
-      "savedDesc": "נדרש אתחול שרת כדי להחיל את השינויים.",
-      "saveFailed": "השמירה נכשלה"
-    }
+    "sendTo": "שליחה ל-{{count}} נמען",
+    "sendTo_plural": "שליחה ל-{{count}} נמענים",
+    "sendingTo": "שולח ל-{{count}} נמען",
+    "sendingTo_plural": "שולח ל-{{count}} נמענים...",
+    "sentSuccess": "ההודעה נשלחה ל-{{count}} נמען",
+    "sentSuccess_plural": "ההודעה נשלחה ל-{{count}} נמענים",
+    "sentPartial": "נשלח ל-{{sent}}, נכשל ל-{{failed}} נמען",
+    "sentPartial_plural": "נשלח ל-{{sent}}, נכשל ל-{{failed}} נמענים",
+    "progress": "התקדמות",
+    "charCount": "{{count}} / 4096 תווים",
+    "livePreview": "תצוגה מקדימה",
+    "noMessages": "אין הודעות עדיין",
+    "noMessagesHint": "שלח הודעה כדי להתחיל את השיחה"
   },
   "contacts": {
     "title": "אנשי קשר",
@@ -674,8 +754,77 @@
       "bulkDeleteError": "מחיקת אנשי הקשר נכשלה",
       "importSuccess": "{{created}} אנשי קשר יובאו",
       "importError": "הייבוא נכשל",
-      "exportSuccess": "{{count}} אנשי קשר יוצאו",
-      "exportError": "הייצוא נכשל"
+      "exportSuccess": "{{count}} אנשי קשר יוצאו"
+    }
+  },
+  "settings": {
+    "title": "הגדרות",
+    "subtitle": "ניהול פרופיל, סיסמה והגדרות מערכת",
+    "tabs": {
+      "profile": "פרופיל",
+      "password": "סיסמה",
+      "language": "שפה",
+      "system": "הגדרות מערכת"
+    },
+    "language": {
+      "title": "שפה",
+      "subtitle": "בחר את השפה המועדפת שלך לממשק הדאשבורד"
+    },
+    "profile": {
+      "name": "שם מלא",
+      "namePlaceholder": "לדוגמה: ישראל ישראלי",
+      "phone": "מספר טלפון",
+      "phonePlaceholder": "לדוגמה: 0501234567",
+      "profilePic": "תמונת פרופיל",
+      "profilePicHint": "העלה תמונה (JPEG, PNG, WebP, GIF). עד 5MB.",
+      "chooseFile": "בחר קובץ",
+      "uploading": "מעלה...",
+      "remove": "הסר",
+      "toasts": {
+        "updateSuccess": "הפרופיל עודכן",
+        "updateError": "עדכון הפרופיל נכשל",
+        "uploadError": "ההעלאה נכשלה"
+      }
+    },
+    "password": {
+      "current": "סיסמה נוכחית",
+      "currentHint": "הזן את הסיסמה הנוכחית לאימות זהות",
+      "currentPlaceholder": "הזן סיסמה נוכחית",
+      "newPassword": "סיסמה חדשה",
+      "newPlaceholder": "הזן סיסמה חדשה (לפחות 6 תווים)",
+      "confirm": "אשר סיסמה חדשה",
+      "confirmPlaceholder": "הזן שוב את הסיסמה החדשה",
+      "save": "שנה סיסמה",
+      "errors": {
+        "currentRequired": "נדרשת סיסמה נוכחית",
+        "newRequired": "נדרשת סיסמה חדשה",
+        "tooShort": "הסיסמה חייבת להכיל לפחות 6 תווים",
+        "mismatch": "הסיסמאות אינן תואמות"
+      },
+      "toasts": {
+        "updateSuccess": "הסיסמה שונתה בהצלחה",
+        "updateError": "שינוי הסיסמה נכשל"
+      }
+    },
+    "system": {
+      "name": "שם העסק",
+      "namePlaceholder": "לדוגמה: החברה שלי",
+      "email": "אימייל",
+      "emailPlaceholder": "לדוגמה: info@company.com",
+      "altPhone": "טלפון חלופי",
+      "altPhonePlaceholder": "לדוגמה: +972501234567",
+      "website": "אתר אינטרנט",
+      "websitePlaceholder": "לדוגמה: https://company.com",
+      "address": "כתובת",
+      "addressPlaceholder": "לדוגמה: רחוב הרצל 1, תל אביב",
+      "googleMapLink": "קישור Google Maps",
+      "googleMapLinkPlaceholder": "לדוגמה: https://maps.google.com/...",
+      "businessLogo": "לוגו עסקי",
+      "smallLogo": "לוגו קטן",
+      "toasts": {
+        "updateSuccess": "הגדרות המערכת עודכנו",
+        "updateError": "עדכון הגדרות המערכת נכשל"
+      }
     }
   }
 }

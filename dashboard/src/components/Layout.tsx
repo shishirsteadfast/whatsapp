@@ -7,18 +7,18 @@ import {
   Webhook,
   FileText,
   Send,
-  Server,
-  Puzzle,
   Users,
   UserPlus,
   Settings,
+  Megaphone,
+  KeyRound,
   Menu,
   X,
   ChevronLeft,
   ChevronRight,
 } from 'lucide-react';
 import { type UserRole } from '../hooks/useRole';
-import { type SupportedLanguage } from '../i18n';
+import { type SupportedLanguage, rtlLanguages } from '../i18n';
 import { AuthHeader } from './AuthHeader';
 
 interface LayoutProps {
@@ -31,11 +31,11 @@ const allNavItems = [
   { to: '/sessions',       icon: Smartphone,      key: 'sessions'       as const, adminOnly: false },
   { to: '/contacts',       icon: Users,           key: 'contacts'       as const, adminOnly: false },
   { to: '/groups',         icon: UserPlus,        key: 'groups'         as const, adminOnly: false },
+  { to: '/campaigns',      icon: Megaphone,       key: 'campaigns'      as const, adminOnly: false },
   { to: '/messages',       icon: Send,            key: 'messages'       as const, adminOnly: false },
   { to: '/webhooks',       icon: Webhook,         key: 'webhooks'       as const, adminOnly: false },
-  { to: '/message-tester', icon: Send,            key: 'messageTester'  as const, adminOnly: false },
-  { to: '/infrastructure', icon: Server,          key: 'infrastructure' as const, adminOnly: false },
-  { to: '/plugins',        icon: Puzzle,          key: 'plugins'        as const, adminOnly: true  },
+  { to: '/composer',       icon: Send,            key: 'composer'       as const, adminOnly: false },
+  { to: '/api-keys',       icon: KeyRound,        key: 'apiKeys'        as const, adminOnly: false },
   { to: '/logs',           icon: FileText,        key: 'logs'           as const, adminOnly: false },
   { to: '/settings',       icon: Settings,        key: 'settings'       as const, adminOnly: false },
 ];
@@ -67,7 +67,7 @@ export function Layout({ onLogout, userRole }: LayoutProps) {
   const handleNavClick = () => { if (isMobile) setIsMobileOpen(false); };
 
   const currentLang = (i18n.resolvedLanguage || i18n.language || 'en').split('-')[0] as SupportedLanguage;
-  const isRtl = currentLang === 'he';
+  const isRtl = rtlLanguages.includes(currentLang);
 
   const sidebarW = isCollapsed ? 64 : 236;
 

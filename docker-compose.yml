@@ -35,12 +35,7 @@ services:
       - PORT=2785
       - LOG_LEVEL=${LOG_LEVEL:-info}
       # Database
-      - DATABASE_TYPE=${DATABASE_TYPE:-sqlite}
       - DATABASE_NAME=${DATABASE_NAME:-/app/data/jeishanulwa.sqlite}
-      - DATABASE_HOST=${DATABASE_HOST:-postgres}
-      - DATABASE_PORT=${DATABASE_PORT:-5432}
-      - DATABASE_USERNAME=${DATABASE_USERNAME:-jeishanulwa}
-      - DATABASE_PASSWORD=${DATABASE_PASSWORD:-jeishanulwa}
       - DATABASE_SYNCHRONIZE=${DATABASE_SYNCHRONIZE:-false}
       # Engine
       - ENGINE_TYPE=${ENGINE_TYPE:-whatsapp-web.js}
@@ -75,9 +70,6 @@ services:
       - /var/run/docker.sock:/var/run/docker.sock:ro
       - ./docker-compose.yml:/app/docker-compose.yml:ro
     depends_on:
-      postgres:
-        condition: service_healthy
-        required: false
       redis:
         condition: service_healthy
         required: false
@@ -112,27 +104,6 @@ services:
     labels:
       - 'com.jeishanulwa.service=dashboard'
       - 'com.jeishanulwa.core=true'
-
-  # ===== OPTIONAL: Built-in PostgreSQL =====
-  postgres:
-    image: postgres:16-alpine
-    container_name: jeishanulwa-postgres
-    profiles: ['postgres']
-    restart: unless-stopped
-    environment:
-      POSTGRES_USER: ${DATABASE_USERNAME:-jeishanulwa}
-      POSTGRES_PASSWORD: ${DATABASE_PASSWORD:-jeishanulwa}
-      POSTGRES_DB: ${DATABASE_NAME:-jeishanulwa}
-    volumes:
-      - postgres-data:/var/lib/postgresql/data
-    healthcheck:
-      test: ['CMD-SHELL', 'pg_isready -U ${DATABASE_USERNAME:-jeishanulwa}']
-      interval: 5s
-      timeout: 3s
-      retries: 5
-    labels:
-      - 'com.jeishanulwa.service=database'
-      - 'com.jeishanulwa.builtin=true'
 
   # ===== OPTIONAL: Built-in Redis =====
   redis:
@@ -178,8 +149,6 @@ services:
 
 volumes:
   jeishanulwa-data:
-    driver: local
-  postgres-data:
     driver: local
   redis-data:
     driver: local
