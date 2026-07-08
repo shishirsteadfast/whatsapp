@@ -6,6 +6,7 @@ import { SendTextMessageDto, SendMediaMessageDto, MessageResponseDto } from './d
 import { MediaInput } from '../../engine/interfaces/whatsapp-engine.interface';
 import { Message, MessageDirection, MessageStatus } from './entities/message.entity';
 import { HookManager } from '../../core/hooks';
+import { toChatId } from './utils/chat-id.util';
 
 export interface GetMessagesOptions {
   chatId?: string;
@@ -36,18 +37,19 @@ export class MessageService {
 
     // Use potentially modified input
     const finalDto = (hookData as { input: SendTextMessageDto }).input;
+    const chatId = toChatId(finalDto.phoneNumber);
 
     const engine = this.getEngine(sessionId);
 
     // Save message as pending BEFORE sending
     const message = await this.saveOutgoingMessage(sessionId, {
-      chatId: finalDto.chatId,
+      chatId,
       body: finalDto.text,
       type: 'text',
     });
 
     try {
-      const result = await engine.sendTextMessage(finalDto.chatId, finalDto.text);
+      const result = await engine.sendTextMessage(chatId, finalDto.text);
 
       // Update with actual WhatsApp message ID and status
       message.waMessageId = result.id;
@@ -85,16 +87,17 @@ export class MessageService {
   async sendImage(sessionId: string, dto: SendMediaMessageDto): Promise<MessageResponseDto> {
     const engine = this.getEngine(sessionId);
     const media = this.buildMediaInput(dto);
+    const chatId = toChatId(dto.phoneNumber);
 
     // Save message as pending BEFORE sending
     const message = await this.saveOutgoingMessage(sessionId, {
-      chatId: dto.chatId,
+      chatId,
       body: dto.caption || '',
       type: 'image',
     });
 
     try {
-      const result = await engine.sendImageMessage(dto.chatId, media);
+      const result = await engine.sendImageMessage(chatId, media);
 
       // Update with actual WhatsApp message ID and status
       message.waMessageId = result.id;
@@ -116,16 +119,17 @@ export class MessageService {
   async sendVideo(sessionId: string, dto: SendMediaMessageDto): Promise<MessageResponseDto> {
     const engine = this.getEngine(sessionId);
     const media = this.buildMediaInput(dto);
+    const chatId = toChatId(dto.phoneNumber);
 
     // Save message as pending BEFORE sending
     const message = await this.saveOutgoingMessage(sessionId, {
-      chatId: dto.chatId,
+      chatId,
       body: dto.caption || '',
       type: 'video',
     });
 
     try {
-      const result = await engine.sendVideoMessage(dto.chatId, media);
+      const result = await engine.sendVideoMessage(chatId, media);
 
       // Update with actual WhatsApp message ID and status
       message.waMessageId = result.id;
@@ -147,15 +151,16 @@ export class MessageService {
   async sendAudio(sessionId: string, dto: SendMediaMessageDto): Promise<MessageResponseDto> {
     const engine = this.getEngine(sessionId);
     const media = this.buildMediaInput(dto);
+    const chatId = toChatId(dto.phoneNumber);
 
     // Save message as pending BEFORE sending
     const message = await this.saveOutgoingMessage(sessionId, {
-      chatId: dto.chatId,
+      chatId,
       type: 'audio',
     });
 
     try {
-      const result = await engine.sendAudioMessage(dto.chatId, media);
+      const result = await engine.sendAudioMessage(chatId, media);
 
       // Update with actual WhatsApp message ID and status
       message.waMessageId = result.id;
@@ -177,16 +182,17 @@ export class MessageService {
   async sendDocument(sessionId: string, dto: SendMediaMessageDto): Promise<MessageResponseDto> {
     const engine = this.getEngine(sessionId);
     const media = this.buildMediaInput(dto);
+    const chatId = toChatId(dto.phoneNumber);
 
     // Save message as pending BEFORE sending
     const message = await this.saveOutgoingMessage(sessionId, {
-      chatId: dto.chatId,
+      chatId,
       body: dto.filename || '',
       type: 'document',
     });
 
     try {
-      const result = await engine.sendDocumentMessage(dto.chatId, media);
+      const result = await engine.sendDocumentMessage(chatId, media);
 
       // Update with actual WhatsApp message ID and status
       message.waMessageId = result.id;
@@ -233,19 +239,20 @@ export class MessageService {
 
   async sendLocation(
     sessionId: string,
-    dto: { chatId: string; latitude: number; longitude: number; description?: string; address?: string },
+    dto: { phoneNumber: string; latitude: number; longitude: number; description?: string; address?: string },
   ): Promise<MessageResponseDto> {
     const engine = this.getEngine(sessionId);
+    const chatId = toChatId(dto.phoneNumber);
 
     // Save message as pending BEFORE sending
     const message = await this.saveOutgoingMessage(sessionId, {
-      chatId: dto.chatId,
+      chatId,
       body: `📍 ${dto.description || 'Location'}`,
       type: 'location',
     });
 
     try {
-      const result = await engine.sendLocationMessage(dto.chatId, {
+      const result = await engine.sendLocationMessage(chatId, {
         latitude: dto.latitude,
         longitude: dto.longitude,
         description: dto.description,
@@ -271,19 +278,20 @@ export class MessageService {
 
   async sendContact(
     sessionId: string,
-    dto: { chatId: string; contactName: string; contactNumber: string },
+    dto: { phoneNumber: string; contactName: string; contactNumber: string },
   ): Promise<MessageResponseDto> {
     const engine = this.getEngine(sessionId);
+    const chatId = toChatId(dto.phoneNumber);
 
     // Save message as pending BEFORE sending
     const message = await this.saveOutgoingMessage(sessionId, {
-      chatId: dto.chatId,
+      chatId,
       body: `📇 ${dto.contactName}`,
       type: 'contact',
     });
 
     try {
-      const result = await engine.sendContactMessage(dto.chatId, {
+      const result = await engine.sendContactMessage(chatId, {
         name: dto.contactName,
         number: dto.contactNumber,
       });
@@ -308,15 +316,16 @@ export class MessageService {
   async sendSticker(sessionId: string, dto: SendMediaMessageDto): Promise<MessageResponseDto> {
     const engine = this.getEngine(sessionId);
     const media = this.buildMediaInput(dto);
+    const chatId = toChatId(dto.phoneNumber);
 
     // Save message as pending BEFORE sending
     const message = await this.saveOutgoingMessage(sessionId, {
-      chatId: dto.chatId,
+      chatId,
       type: 'sticker',
     });
 
     try {
-      const result = await engine.sendStickerMessage(dto.chatId, media);
+      const result = await engine.sendStickerMessage(chatId, media);
 
       // Update with actual WhatsApp message ID and status
       message.waMessageId = result.id;

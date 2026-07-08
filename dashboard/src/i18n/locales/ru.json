@@ -54,7 +54,16 @@
     "lightMode": "Светлая тема",
     "darkMode": "Тёмная тема",
     "viewAll": "Смотреть всё",
-    "copied": "Скопировано!"
+    "copy": "Копировать",
+    "copied": "Скопировано!",
+    "sessionsActive": "Активные сессии",
+    "social": {
+      "email": "Эл. почта",
+      "whatsapp": "WhatsApp",
+      "facebook": "Facebook",
+      "youtube": "YouTube",
+      "website": "Веб-сайт"
+    }
   },
   "theme": {
     "light": "Светлая",
@@ -68,15 +77,18 @@
     "webhooks": "Вебхуки",
     "apiKeys": "API-ключи",
     "contacts": "Контакты",
-    "composer": "Редактор",
     "groups": "Группы",
-    "messages": "Сообщения",
+    "messages": "Журнал сообщений",
     "settings": "Настройки",
     "messageTester": "Тестер",
     "campaigns": "Кампании",
     "logs": "Логи",
     "systemRequirements": "Требования к серверу",
-    "activityLog": "Журнал активности"
+    "activityLog": "Журнал активности",
+    "compose": "Написать",
+    "groupAudience": "Аудитория",
+    "groupMessaging": "Сообщения",
+    "groupAccess": "Доступ"
   },
   "errorBoundary": {
     "title": "Что-то пошло не так",
@@ -93,7 +105,7 @@
     "connectionError": "Не удалось подключиться к серверу. Попробуйте снова.",
     "help": "Нужна помощь?",
     "viewDocs": "Документация",
-    "footer": "Сделано с ❤️ Yudhi Armyndharis и сообществом OpenWA",
+    "footer": "© {{year}} OpenWA · версия {{version}} · Все права защищены.",
     "version": "v{{version}} · {{date}}",
     "title": "Вход",
     "subtitle": "Введите учётные данные для доступа к дашборду.",
@@ -104,7 +116,15 @@
     "signIn": "Войти",
     "phoneRequired": "Номер телефона обязателен",
     "passwordRequired": "Пароль обязателен",
-    "invalidCredentials": "Неверный телефон или пароль"
+    "invalidCredentials": "Неверный телефон или пароль",
+    "heroTag": "Шлюз WhatsApp",
+    "heroLine1": "Управляйте",
+    "heroBrand": "WhatsApp",
+    "heroLine2": "сессиями легко.",
+    "heroDescription": "Локально размещаемый шлюз для автоматизации, мониторинга и масштабирования ваших интеграций WhatsApp с полным контролем.",
+    "feature1": "Управление несколькими сессиями WhatsApp",
+    "feature2": "Автоматизация Webhook и API",
+    "feature3": "Локальный хостинг — ваши данные остаются вашими"
   },
   "dashboard": {
     "title": "Дашборд",
@@ -113,24 +133,45 @@
       "activeSessions": "Активных сессий",
       "messagesToday": "Сообщений сегодня",
       "webhooksConfigured": "Вебхуков настроено",
-      "apiCalls": "API-вызовов (24ч)"
+      "apiCalls": "API-вызовов (24ч)",
+      "contacts": "Контакты",
+      "activeCampaigns": "Активные кампании"
     },
-    "sessionsOverview": "Обзор сессий",
-    "showingSessions": "Показано {{shown}} из {{total}} сессий",
-    "columns": {
-      "sessionId": "ID сессии",
-      "phone": "Номер телефона",
-      "status": "Статус",
-      "lastActive": "Посл. активность",
-      "actions": "Действия"
-    },
-    "noSessions": "Сессии не найдены. Создайте первую.",
-    "view": "Просмотр",
-    "disconnect": "Отключить",
     "errorPrefix": "Ошибка: {{message}}",
     "loadError": "Не удалось загрузить данные",
-    "statActive": "{{count}} активн.",
-    "statNoData": "Данных пока нет"
+    "statsHints": {
+      "ofTotal": "из {{total}} всего"
+    },
+    "charts": {
+      "messageVolume": {
+        "title": "Объём сообщений",
+        "subtitle": "Входящие и исходящие за последние 14 дней",
+        "incoming": "Входящие",
+        "outgoing": "Исходящие"
+      },
+      "messageStatus": {
+        "title": "Статус сообщений",
+        "subtitle": "Распределение по последним {{count}} сообщениям"
+      },
+      "campaignPerformance": {
+        "title": "Эффективность кампаний",
+        "subtitle": "Отправлено и не доставлено по последним кампаниям",
+        "sent": "Отправлено",
+        "failed": "Ошибки",
+        "empty": "Пока нет кампаний"
+      }
+    },
+    "activeDevices": {
+      "title": "Активные устройства",
+      "subtitle": "Сессии, подключённые прямо сейчас",
+      "empty": "Нет подключённых устройств"
+    },
+    "recentMessages": {
+      "title": "Последние сообщения",
+      "subtitle": "Недавняя активность по всем сессиям",
+      "empty": "Пока нет сообщений"
+    },
+    "noChartData": "Пока недостаточно данных"
   },
   "sessionStatus": {
     "created": "Новая",
@@ -219,6 +260,10 @@
       "phone": "Телефон",
       "sessionId": "ID сессии",
       "lastActive": "Посл. активность"
+    },
+    "stats": {
+      "total": "Всего сессий",
+      "connecting": "Подключение"
     }
   },
   "webhooks": {
@@ -271,13 +316,9 @@
     }
   },
   "apiKeys": {
-    "title": "Управление API",
-    "subtitle": "Управляйте API-ключами, учётными данными и документацией API",
-    "tabs": {
-      "overview": "Обзор",
-      "keys": "API-ключи",
-      "docs": "Документация"
-    },
+    "title": "Справочник API",
+    "subtitle": "Пройдите аутентификацию, изучите все endpoint'ы и интегрируйте API OpenWA на удобном для вас языке программирования.",
+    "manageHint": "Создавайте, обновляйте и отзывайте ключи, которые используются для аутентификации ваших API-запросов.",
     "stats": {
       "totalKeys": "Всего ключей",
       "activeKeys": "Активных ключей",
@@ -285,17 +326,8 @@
       "rateLimit": "Вызовов сегодня"
     },
     "credentials": {
-      "baseUrl": "Базовый URL API",
-      "baseUrlHint": "Используйте этот URL как базовый endpoint для всех API-запросов."
-    },
-    "quickLinks": {
-      "title": "Быстрые ссылки",
-      "manageKeys": "Управление API-ключами",
-      "manageKeysDesc": "Просмотр, создание, отзыв и удаление API-ключей",
-      "viewDocs": "Документация API",
-      "viewDocsDesc": "Справочник endpoint'ов с примерами",
-      "createKey": "Создать новый ключ",
-      "createKeyDesc": "Сгенерировать новый API-ключ с определённой ролью"
+      "baseUrl": "Базовый URL",
+      "baseUrlHint": "Все пути endpoint'ов в этом справочнике указаны относительно этого URL."
     },
     "createBtn": "Создать API-ключ",
     "modalTitle": "Создать API-ключ",
@@ -345,13 +377,42 @@
     }
   },
   "apiDocs": {
+    "nav": {
+      "introduction": "Введение",
+      "authentication": "Аутентификация",
+      "yourKeys": "Ваши API-ключи",
+      "errors": "Ошибки и лимиты запросов",
+      "endpoints": "Endpoint'ы",
+      "sdks": "SDK и библиотеки"
+    },
+    "intro": {
+      "title": "Введение",
+      "description": "OpenWA API позволяет программно управлять WhatsApp-сессиями, отправлять сообщения и автоматизировать ваши рабочие процессы. Он построен по принципам REST — каждый endpoint принимает тело запроса в формате JSON, возвращает ответ в формате JSON и использует стандартные HTTP-коды ответа.",
+      "quickStart": "Быстрый старт",
+      "quickStartHint": "Ниже — минимальный запрос для получения списка ваших активных сессий."
+    },
+    "languages": {
+      "curl": "cURL",
+      "javascript": "JavaScript",
+      "python": "Python",
+      "php": "PHP",
+      "go": "Go"
+    },
     "auth": {
       "title": "Аутентификация",
-      "description": "Все API-запросы требуют аутентификации. Укажите ваш API-ключ в заголовке <code>X-API-Key</code>. Управлять ключами можно на вкладке API-ключи.",
-      "example": "Пример запроса с аутентификацией",
+      "description": "Все API-запросы требуют аутентификации. Укажите ваш API-ключ в заголовке запроса <code>X-API-Key</code>. Сгенерировать и управлять API-ключами можно ниже.",
       "none": "Аутентификация не требуется",
       "apiKey": "Требуется API-ключ",
       "admin": "Требуется доступ администратора"
+    },
+    "groups": {
+      "general": "Общие",
+      "sessions": "Сессии",
+      "messages": "Сообщения",
+      "contacts": "Контакты",
+      "webhooks": "Вебхуки",
+      "campaigns": "Кампании",
+      "settings": "Настройки"
     },
     "sdks": {
       "title": "SDK и библиотеки",
@@ -359,6 +420,7 @@
     },
     "endpoints": {
       "title": "API Endpoint'ы",
+      "hint": "Просмотрите все доступные endpoint'ы, сгруппированные по ресурсам.",
       "health": {
         "desc": "Проверка состояния сервера"
       },
@@ -390,8 +452,21 @@
       }
     },
     "requestBody": "Тело запроса",
-    "example": "Пример",
+    "example": "Пример запроса",
     "response": "Ответ",
+    "errors": {
+      "title": "Ошибки и лимиты запросов",
+      "description": "OpenWA использует стандартные HTTP-коды ответа для обозначения успеха или неудачи запроса. Коды диапазона 2xx означают успех, диапазона 4xx — ошибку в запросе, а диапазона 5xx — то, что проблема возникла на нашей стороне.",
+      "codes": {
+        "200": "Success — запрос выполнен успешно.",
+        "400": "Bad Request — запрос имеет неверный формат или в нём отсутствуют обязательные параметры.",
+        "401": "Unauthorized — отсутствует или недействителен API-ключ.",
+        "403": "Forbidden — у API-ключа нет прав на выполнение этого действия.",
+        "404": "Not Found — запрашиваемый ресурс не существует.",
+        "429": "Too Many Requests — превышен лимит запросов.",
+        "500": "Server Error — на стороне OpenWA произошла ошибка."
+      }
+    },
     "rateLimit": {
       "title": "Лимитирование запросов",
       "description": "API-запросы лимитируются для обеспечения честного использования. Стандартный лимит — 100 запросов за 60 секунд на один API-ключ. Превышение лимита приведёт к ответу 429 Too Many Requests. Обратитесь в поддержку, если нужен больший лимит."
@@ -483,7 +558,11 @@
     "charCount": "{{count}} / 4096 символов",
     "livePreview": "Предпросмотр",
     "noMessages": "Сообщений пока нет",
-    "noMessagesHint": "Отправьте сообщение, чтобы начать разговор"
+    "noMessagesHint": "Отправьте сообщение, чтобы начать разговор",
+    "addRecipients": "Добавить получателей",
+    "loadMore": "Загрузить ещё",
+    "showPreview": "Показать предпросмотр",
+    "hidePreview": "Скрыть предпросмотр"
   },
   "campaigns": {
     "title": "Кампании",
@@ -1053,5 +1132,53 @@
       "webhook_triggered": "Вебхук сработал",
       "webhook_failed": "Ошибка вебхука"
     }
+  },
+  "messageStatus": {
+    "pending": "В ожидании",
+    "sent": "Отправлено",
+    "delivered": "Доставлено",
+    "read": "Прочитано",
+    "failed": "Ошибка"
+  },
+  "roles": {
+    "title": "Роли и права",
+    "subtitle": "Определяйте роли и назначайте детальные права доступа",
+    "createRole": "Создать роль",
+    "createTitle": "Создать новую роль",
+    "editTitle": "Редактировать роль",
+    "name": "Название роли",
+    "namePlaceholder": "напр. Специалист поддержки",
+    "description": "Описание",
+    "descriptionPlaceholder": "Необязательное описание",
+    "type": "Тип",
+    "system": "Системная",
+    "custom": "Пользовательская",
+    "permissions": "Права",
+    "searchPlaceholder": "Поиск ролей...",
+    "deleteConfirm": "Удалить роль",
+    "deleteWarning": "Вы уверены, что хотите удалить эту роль? Это действие нельзя отменить.",
+    "emptyTitle": "Роли не найдены",
+    "emptyDescription": "Роли появятся здесь",
+    "toasts": {
+      "createSuccess": "Роль успешно создана",
+      "createError": "Не удалось создать роль",
+      "updateSuccess": "Роль успешно обновлена",
+      "updateError": "Не удалось обновить роль",
+      "deleteSuccess": "Роль успешно удалена",
+      "deleteError": "Не удалось удалить роль"
+    },
+    "stats": {
+      "total": "Всего ролей",
+      "system": "Системные роли",
+      "custom": "Пользовательские роли"
+    },
+    "noPermissions": "Права не назначены",
+    "permissionCount": "{{count}} прав",
+    "acrossGroups": "в {{count}} группах",
+    "searchPermissionsPlaceholder": "Поиск прав...",
+    "selectAllPermissions": "Выбрать все",
+    "clearAllPermissions": "Очистить все",
+    "noPermissionsMatch": "Нет прав, соответствующих запросу",
+    "permissionsSummary": "Выбрано {{selected}} из {{total}}"
   }
 }

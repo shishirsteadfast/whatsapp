@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Eye, EyeOff, Github, ArrowRight, Wifi } from 'lucide-react';
+import { Eye, EyeOff, Github, ArrowRight, Wifi, Phone, Lock, Zap, Webhook, ShieldCheck } from 'lucide-react';
 
 interface LoginProps {
   onLogin: (token: string, role: string) => void;
@@ -8,6 +8,7 @@ interface LoginProps {
 
 export function Login({ onLogin }: LoginProps) {
   const { t } = useTranslation();
+
   const [phone, setPhone]             = useState('');
   const [password, setPassword]       = useState('');
   const [showPassword, setShowPassword] = useState(false);
@@ -43,11 +44,17 @@ export function Login({ onLogin }: LoginProps) {
     }
   };
 
+  const features = [
+    { icon: Zap,          label: t('login.feature1') },
+    { icon: Webhook,      label: t('login.feature2') },
+    { icon: ShieldCheck,  label: t('login.feature3') },
+  ];
+
   return (
-    <div className="fixed inset-0 flex min-h-screen bg-[var(--color-muted)]">
+    <div className="fixed inset-0 flex min-h-screen animate-[fadeIn_0.25s_ease] bg-[var(--color-muted)]">
 
       {/* ── Left panel – branding (hidden on small screens) ── */}
-      <div className="relative hidden flex-col justify-between overflow-hidden bg-[var(--color-ink)] p-10 lg:flex lg:w-[42%]">
+      <div className="relative hidden flex-col justify-between overflow-hidden bg-[var(--color-onyx)] p-10 lg:flex lg:w-[42%]">
 
         {/* Subtle grid pattern */}
         <div
@@ -74,16 +81,28 @@ export function Login({ onLogin }: LoginProps) {
         <div className="relative">
           <div className="mb-5 flex items-center gap-2">
             <Wifi size={16} className="text-[var(--color-primary)]" />
-            <span className="text-[0.75rem] font-semibold uppercase tracking-widest text-[var(--color-primary)]">WhatsApp Gateway</span>
+            <span className="text-[0.75rem] font-semibold uppercase tracking-widest text-[var(--color-primary)]">{t('login.heroTag')}</span>
           </div>
           <h1 className="m-0 mb-4 text-4xl font-extrabold leading-[1.12] tracking-tight text-white">
-            Manage your<br />
-            <span className="text-[var(--color-primary)]">WhatsApp</span><br />
-            sessions easily.
+            {t('login.heroLine1')}<br />
+            <span className="text-[var(--color-primary)]">{t('login.heroBrand')}</span><br />
+            {t('login.heroLine2')}
           </h1>
-          <p className="m-0 text-[0.9375rem] leading-relaxed text-white/50">
-            A self-hosted gateway to automate, monitor and scale your WhatsApp integrations with full control.
+          <p className="m-0 mb-7 text-[0.9375rem] leading-relaxed text-white/50">
+            {t('login.heroDescription')}
           </p>
+
+          {/* Feature list */}
+          <ul className="m-0 flex list-none flex-col gap-3.5 p-0">
+            {features.map(({ icon: Icon, label }) => (
+              <li key={label} className="flex items-center gap-3">
+                <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-[8px] bg-white/[0.06] text-[var(--color-primary)]">
+                  <Icon size={14} />
+                </span>
+                <span className="text-[0.875rem] font-medium text-white/70">{label}</span>
+              </li>
+            ))}
+          </ul>
         </div>
 
         {/* Footer */}
@@ -103,7 +122,10 @@ export function Login({ onLogin }: LoginProps) {
       </div>
 
       {/* ── Right panel – form ── */}
-      <div className="flex flex-1 flex-col items-center justify-center px-6 py-10">
+      <div className="flex flex-1 flex-col overflow-y-auto bg-[var(--color-surface)] px-6 py-16 dark:bg-[var(--color-muted)]">
+
+        {/* Content – centered as one block in the vertical middle of the panel */}
+        <div className="flex w-full flex-1 flex-col items-center justify-center">
 
         {/* Mobile brand */}
         <div className="mb-8 flex flex-col items-center gap-2 lg:hidden">
@@ -113,28 +135,32 @@ export function Login({ onLogin }: LoginProps) {
           <span className="text-[1.0625rem] font-bold tracking-tight text-[var(--color-ink)]">{t('common.appName')}</span>
         </div>
 
-        <div className="w-full max-w-[380px]">
+        <div className="w-full max-w-[380px] animate-[slideUp_0.35s_ease]">
           <div className="mb-8">
             <h2 className="m-0 mb-1 text-[1.625rem] font-bold tracking-tight text-[var(--color-ink)]">{t('login.title')}</h2>
             <p className="m-0 text-[0.875rem] text-[var(--color-ink-muted)]">{t('login.subtitle')}</p>
           </div>
 
-          <form onSubmit={handleSubmit} className="flex flex-col gap-4">
+          <form onSubmit={handleSubmit} className="flex flex-col gap-4" noValidate>
 
             {/* Phone */}
             <div className="flex flex-col gap-1.5">
               <label htmlFor="phone" className="text-[0.8125rem] font-semibold text-[var(--color-ink-secondary)]">
                 {t('login.phoneLabel')}
               </label>
-              <input
-                id="phone"
-                type="tel"
-                value={phone}
-                onChange={e => setPhone(e.target.value)}
-                placeholder={t('login.phonePlaceholder')}
-                autoComplete="username"
-                className={`input-base ${error ? 'border-[var(--color-error)] focus:shadow-[0_0_0_3px_rgba(239,68,68,0.12)]' : ''}`}
-              />
+              <div className="relative">
+                <Phone size={16} className="pointer-events-none absolute left-3.5 top-1/2 -translate-y-1/2 text-[var(--color-ink-muted)] rtl:left-auto rtl:right-3.5" />
+                <input
+                  id="phone"
+                  type="tel"
+                  value={phone}
+                  onChange={e => setPhone(e.target.value)}
+                  placeholder={t('login.phonePlaceholder')}
+                  autoComplete="username"
+                  autoFocus
+                  className={`input-base pl-10 rtl:pl-3.5 rtl:pr-10 ${error ? 'border-[var(--color-error)] focus:shadow-[0_0_0_3px_rgba(239,68,68,0.12)]' : ''}`}
+                />
+              </div>
             </div>
 
             {/* Password */}
@@ -143,6 +169,7 @@ export function Login({ onLogin }: LoginProps) {
                 {t('login.passwordLabel')}
               </label>
               <div className="relative">
+                <Lock size={16} className="pointer-events-none absolute left-3.5 top-1/2 -translate-y-1/2 text-[var(--color-ink-muted)] rtl:left-auto rtl:right-3.5" />
                 <input
                   id="password"
                   type={showPassword ? 'text' : 'password'}
@@ -150,12 +177,13 @@ export function Login({ onLogin }: LoginProps) {
                   onChange={e => setPassword(e.target.value)}
                   placeholder={t('login.passwordPlaceholder')}
                   autoComplete="current-password"
-                  className={`input-base pr-11 ${error ? 'border-[var(--color-error)] focus:shadow-[0_0_0_3px_rgba(239,68,68,0.12)]' : ''}`}
+                  className={`input-base pl-10 pr-11 rtl:pl-11 rtl:pr-10 ${error ? 'border-[var(--color-error)] focus:shadow-[0_0_0_3px_rgba(239,68,68,0.12)]' : ''}`}
                 />
                 <button
                   type="button"
                   onClick={() => setShowPassword(v => !v)}
-                  className="absolute right-3 top-1/2 -translate-y-1/2 cursor-pointer border-none bg-transparent p-0.5 text-[var(--color-ink-muted)] transition-colors hover:text-[var(--color-ink)]"
+                  aria-label={showPassword ? t('common.hidePassword', { defaultValue: 'Hide password' }) : t('common.showPassword', { defaultValue: 'Show password' })}
+                  className="absolute right-3 top-1/2 -translate-y-1/2 cursor-pointer border-none bg-transparent p-0.5 text-[var(--color-ink-muted)] transition-colors hover:text-[var(--color-ink)] rtl:right-auto rtl:left-3"
                 >
                   {showPassword ? <EyeOff size={17} /> : <Eye size={17} />}
                 </button>
@@ -164,7 +192,15 @@ export function Login({ onLogin }: LoginProps) {
 
             {/* Error */}
             {error && (
-              <div className="flex items-center gap-2 rounded-[var(--radius)] border border-red-200 bg-red-50 px-3.5 py-2.5 text-[0.8125rem] font-medium text-red-600 dark:border-red-800/40 dark:bg-red-900/20 dark:text-red-400">
+              <div
+                role="alert"
+                className="flex items-center gap-2 rounded-[var(--radius)] px-3.5 py-2.5 text-[0.8125rem] font-medium"
+                style={{
+                  color: 'var(--color-error)',
+                  background: 'color-mix(in srgb, var(--color-error) 10%, transparent)',
+                  border: '1px solid color-mix(in srgb, var(--color-error) 25%, transparent)',
+                }}
+              >
                 <span className="h-1.5 w-1.5 shrink-0 rounded-full bg-current" />
                 {error}
               </div>
@@ -184,7 +220,7 @@ export function Login({ onLogin }: LoginProps) {
               ) : (
                 <span className="flex items-center gap-2">
                   {t('login.signIn')}
-                  <ArrowRight size={16} />
+                  <ArrowRight size={16} className="rtl:rotate-180" />
                 </span>
               )}
             </button>
@@ -202,10 +238,11 @@ export function Login({ onLogin }: LoginProps) {
             </a>
           </p>
         </div>
+        </div>
 
         {/* Footer */}
-        <p className="mt-auto pt-10 text-center text-[0.75rem] text-[var(--color-ink-muted)]">
-          {t('login.footer')}
+        <p className="pt-10 text-center text-[0.75rem] text-[var(--color-ink-muted)]">
+          {t('login.footer', { year: new Date().getFullYear(), version: __APP_VERSION__ })}
         </p>
       </div>
     </div>

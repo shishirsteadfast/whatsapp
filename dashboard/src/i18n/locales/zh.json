@@ -54,7 +54,16 @@
     "lightMode": "浅色模式",
     "darkMode": "深色模式",
     "viewAll": "查看全部",
-    "copied": "已复制！"
+    "copy": "复制",
+    "copied": "已复制！",
+    "sessionsActive": "活跃会话",
+    "social": {
+      "email": "电子邮件",
+      "whatsapp": "WhatsApp",
+      "facebook": "Facebook",
+      "youtube": "YouTube",
+      "website": "网站"
+    }
   },
   "theme": {
     "light": "浅色",
@@ -68,7 +77,6 @@
     "webhooks": "Webhooks",
     "apiKeys": "API 密钥",
     "contacts": "通讯录",
-    "composer": "消息编辑",
     "groups": "分组",
     "messages": "消息记录",
     "settings": "设置",
@@ -76,7 +84,11 @@
     "campaigns": "群发任务",
     "logs": "审计日志",
     "systemRequirements": "服务器环境要求",
-    "activityLog": "活动日志"
+    "activityLog": "活动日志",
+    "compose": "撰写",
+    "groupAudience": "受众",
+    "groupMessaging": "通讯",
+    "groupAccess": "权限"
   },
   "errorBoundary": {
     "title": "页面出错了",
@@ -93,7 +105,7 @@
     "connectionError": "无法连接到服务器，请重试。",
     "help": "需要帮助？",
     "viewDocs": "查看文档",
-    "footer": "由 Yudhi Armyndharis 和 OpenWA 社区用心打造 ❤️",
+    "footer": "© {{year}} OpenWA · v{{version}} · 保留所有权利。",
     "version": "v{{version}} · {{date}}",
     "title": "登录",
     "subtitle": "请输入账号信息以访问控制台。",
@@ -104,7 +116,15 @@
     "signIn": "登录",
     "phoneRequired": "请填写手机号",
     "passwordRequired": "请填写密码",
-    "invalidCredentials": "手机号或密码错误"
+    "invalidCredentials": "手机号或密码错误",
+    "heroTag": "WhatsApp 网关",
+    "heroLine1": "轻松管理您的",
+    "heroBrand": "WhatsApp",
+    "heroLine2": "会话",
+    "heroDescription": "一个自托管网关,让您完全掌控地自动化、监控和扩展 WhatsApp 集成。",
+    "feature1": "多会话 WhatsApp 管理",
+    "feature2": "Webhook 与 API 自动化",
+    "feature3": "自托管 — 数据始终由您掌控"
   },
   "dashboard": {
     "title": "控制台",
@@ -113,24 +133,45 @@
       "activeSessions": "活跃会话",
       "messagesToday": "今日消息",
       "webhooksConfigured": "已配置 Webhooks",
-      "apiCalls": "API 调用（24小时）"
+      "apiCalls": "API 调用（24小时）",
+      "contacts": "联系人",
+      "activeCampaigns": "进行中的活动"
     },
-    "sessionsOverview": "会话概览",
-    "showingSessions": "显示 {{shown}} / {{total}} 个会话",
-    "columns": {
-      "sessionId": "会话 ID",
-      "phone": "手机号",
-      "status": "状态",
-      "lastActive": "最后活跃",
-      "actions": "操作"
-    },
-    "noSessions": "暂无会话，创建一个开始使用吧。",
-    "view": "查看",
-    "disconnect": "断开",
     "errorPrefix": "错误：{{message}}",
     "loadError": "数据加载失败",
-    "statActive": "{{count}} 个活跃",
-    "statNoData": "暂无数据"
+    "statsHints": {
+      "ofTotal": "共 {{total}} 个"
+    },
+    "charts": {
+      "messageVolume": {
+        "title": "消息量",
+        "subtitle": "过去14天的收发消息对比",
+        "incoming": "接收",
+        "outgoing": "发送"
+      },
+      "messageStatus": {
+        "title": "消息状态",
+        "subtitle": "最近 {{count}} 条消息的分布"
+      },
+      "campaignPerformance": {
+        "title": "活动效果",
+        "subtitle": "最近活动的发送与失败对比",
+        "sent": "已发送",
+        "failed": "失败",
+        "empty": "暂无活动"
+      }
+    },
+    "activeDevices": {
+      "title": "活跃设备",
+      "subtitle": "当前已连接的会话",
+      "empty": "没有已连接的设备"
+    },
+    "recentMessages": {
+      "title": "最近消息",
+      "subtitle": "所有会话的最新动态",
+      "empty": "暂无消息"
+    },
+    "noChartData": "数据尚不足"
   },
   "sessionStatus": {
     "created": "新建",
@@ -219,6 +260,10 @@
       "phone": "手机号",
       "sessionId": "会话 ID",
       "lastActive": "最后活跃"
+    },
+    "stats": {
+      "total": "会话总数",
+      "connecting": "连接中"
     }
   },
   "webhooks": {
@@ -271,13 +316,9 @@
     }
   },
   "apiKeys": {
-    "title": "API 管理",
-    "subtitle": "管理 API 密钥、查看凭据和浏览 API 文档",
-    "tabs": {
-      "overview": "概览",
-      "keys": "API 密钥",
-      "docs": "文档"
-    },
+    "title": "API 参考文档",
+    "subtitle": "完成身份认证、探索每一个接口，并使用您喜欢的编程语言集成 OpenWA API。",
+    "manageHint": "创建、轮换和撤销用于对您的 API 请求进行身份认证的密钥。",
     "stats": {
       "totalKeys": "密钥总数",
       "activeKeys": "有效密钥",
@@ -286,16 +327,7 @@
     },
     "credentials": {
       "baseUrl": "API 基础地址",
-      "baseUrlHint": "将此地址作为所有 API 请求的基础端点。"
-    },
-    "quickLinks": {
-      "title": "快捷链接",
-      "manageKeys": "管理 API 密钥",
-      "manageKeysDesc": "查看、创建、撤销和删除您的 API 密钥",
-      "viewDocs": "API 文档",
-      "viewDocsDesc": "浏览详细的接口参考文档及示例",
-      "createKey": "新建密钥",
-      "createKeyDesc": "生成一个指定角色的新 API 密钥"
+      "baseUrlHint": "本参考文档中的所有接口路径均相对于此地址。"
     },
     "createBtn": "新建 API 密钥",
     "modalTitle": "新建 API 密钥",
@@ -345,13 +377,42 @@
     }
   },
   "apiDocs": {
+    "nav": {
+      "introduction": "简介",
+      "authentication": "身份认证",
+      "yourKeys": "您的 API 密钥",
+      "errors": "错误与频率限制",
+      "endpoints": "接口",
+      "sdks": "SDK 与开发库"
+    },
+    "intro": {
+      "title": "简介",
+      "description": "OpenWA API 让您能够以编程方式管理 WhatsApp 会话、发送消息并自动化您的工作流程。它基于 REST 架构构建——每个接口都接受 JSON 格式的请求体，返回 JSON 格式的响应，并使用标准的 HTTP 响应状态码。",
+      "quickStart": "快速开始",
+      "quickStartHint": "以下是一个获取您当前活跃会话列表的最简请求示例。"
+    },
+    "languages": {
+      "curl": "cURL",
+      "javascript": "JavaScript",
+      "python": "Python",
+      "php": "PHP",
+      "go": "Go"
+    },
     "auth": {
       "title": "身份认证",
-      "description": "所有 API 请求都需要认证。请在请求头 <code>X-API-Key</code> 中传入您的 API 密钥。您可以在「API 密钥」选项卡中管理密钥。",
-      "example": "带认证的请求示例",
+      "description": "所有 API 请求都需要进行身份认证。请在请求头 <code>X-API-Key</code> 中携带您的 API 密钥。您可以在下方生成和管理您的 API 密钥。",
       "none": "无需认证",
       "apiKey": "需要 API 密钥",
       "admin": "需要管理员权限"
+    },
+    "groups": {
+      "general": "通用",
+      "sessions": "会话",
+      "messages": "消息",
+      "contacts": "联系人",
+      "webhooks": "Webhooks",
+      "campaigns": "群发任务",
+      "settings": "设置"
     },
     "sdks": {
       "title": "SDK 与开发库",
@@ -359,6 +420,7 @@
     },
     "endpoints": {
       "title": "API 接口列表",
+      "hint": "按资源分组浏览所有可用接口。",
       "health": {
         "desc": "检查 API 服务器运行状态"
       },
@@ -390,8 +452,21 @@
       }
     },
     "requestBody": "请求体",
-    "example": "示例",
+    "example": "请求示例",
     "response": "响应",
+    "errors": {
+      "title": "错误与频率限制",
+      "description": "OpenWA 使用通用的 HTTP 响应状态码来表示请求的成功或失败。2xx 范围的状态码表示成功，4xx 范围表示请求本身存在错误，5xx 范围则表示服务器端出现了问题。",
+      "codes": {
+        "200": "Success（成功）——请求已按预期完成。",
+        "400": "Bad Request（请求错误）——请求格式有误或缺少必需参数。",
+        "401": "Unauthorized（未授权）——API 密钥缺失或无效。",
+        "403": "Forbidden（禁止访问）——该 API 密钥没有执行此操作的权限。",
+        "404": "Not Found（未找到）——请求的资源不存在。",
+        "429": "Too Many Requests（请求过多）——您已超出频率限制。",
+        "500": "Server Error（服务器错误）——OpenWA 服务器端出现了问题。"
+      }
+    },
     "rateLimit": {
       "title": "频率限制",
       "description": "API 请求有频率限制以确保公平使用。默认每个 API 密钥在 60 秒窗口内最多 100 次请求。超出限制将返回 429 Too Many Requests。如需更高配额请联系技术支持。"
@@ -483,7 +558,11 @@
     "charCount": "{{count}} / 4096 个字符",
     "livePreview": "实时预览",
     "noMessages": "暂无消息",
-    "noMessagesHint": "发送一条消息开始对话"
+    "noMessagesHint": "发送一条消息开始对话",
+    "addRecipients": "添加收件人",
+    "loadMore": "加载更多",
+    "showPreview": "显示预览",
+    "hidePreview": "隐藏预览"
   },
   "campaigns": {
     "title": "群发任务",
@@ -1053,5 +1132,53 @@
       "webhook_triggered": "Webhook 已触发",
       "webhook_failed": "Webhook 失败"
     }
+  },
+  "messageStatus": {
+    "pending": "待处理",
+    "sent": "已发送",
+    "delivered": "已送达",
+    "read": "已读",
+    "failed": "失败"
+  },
+  "roles": {
+    "title": "角色与权限",
+    "subtitle": "定义角色并分配精细权限",
+    "createRole": "创建角色",
+    "createTitle": "创建新角色",
+    "editTitle": "编辑角色",
+    "name": "角色名称",
+    "namePlaceholder": "例如：客服专员",
+    "description": "描述",
+    "descriptionPlaceholder": "可选描述",
+    "type": "类型",
+    "system": "系统",
+    "custom": "自定义",
+    "permissions": "权限",
+    "searchPlaceholder": "搜索角色...",
+    "deleteConfirm": "删除角色",
+    "deleteWarning": "确定要删除此角色吗？此操作无法撤销。",
+    "emptyTitle": "未找到角色",
+    "emptyDescription": "角色将显示在此处",
+    "toasts": {
+      "createSuccess": "角色创建成功",
+      "createError": "创建角色失败",
+      "updateSuccess": "角色更新成功",
+      "updateError": "更新角色失败",
+      "deleteSuccess": "角色删除成功",
+      "deleteError": "删除角色失败"
+    },
+    "stats": {
+      "total": "角色总数",
+      "system": "系统角色",
+      "custom": "自定义角色"
+    },
+    "noPermissions": "未分配权限",
+    "permissionCount": "{{count}} 项权限",
+    "acrossGroups": "分布在 {{count}} 个分组中",
+    "searchPermissionsPlaceholder": "搜索权限...",
+    "selectAllPermissions": "全选",
+    "clearAllPermissions": "清除全部",
+    "noPermissionsMatch": "没有匹配的权限",
+    "permissionsSummary": "已选择 {{selected}}／{{total}}"
   }
 }

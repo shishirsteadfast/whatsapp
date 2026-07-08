@@ -1,12 +1,13 @@
 import { useState, useEffect, useCallback, useRef } from 'react';
 import { Trans, useTranslation } from 'react-i18next';
-import { Plus, QrCode, RefreshCw, Trash2, Eye, Loader2, Play, Square, X, Search, Filter, Smartphone } from 'lucide-react';
+import { Plus, QrCode, RefreshCw, Trash2, Eye, Loader2, Play, Square, X, Search, Smartphone, Wifi, WifiOff } from 'lucide-react';
 import { sessionApi, type Session } from '../services/api';
 import { useDocumentTitle } from '../hooks/useDocumentTitle';
 import { useToast } from '../components/Toast';
 import { useWebSocket } from '../hooks/useWebSocket';
 import { useRole } from '../hooks/useRole';
 import { PageHeader } from '../components/PageHeader';
+import { StatCard } from '../components/dashboard/StatCard';
 
 export function Sessions() {
   const { t } = useTranslation();
@@ -129,16 +130,34 @@ export function Sessions() {
     return new Date(date).toLocaleDateString();
   };
 
+  const isActiveStatus     = (s: Session) => s.status === 'ready';
+  const isInactiveStatus   = (s: Session) => ['created', 'idle', 'disconnected'].includes(s.status);
+  const isConnectingStatus = (s: Session) => ['initializing', 'connecting', 'qr_ready'].includes(s.status);
+
   const filteredSessions = sessions.filter(s => {
     const q = searchQuery.toLowerCase();
     const matchesSearch  = s.name.toLowerCase().includes(q) || s.id.toLowerCase().includes(q);
     const matchesStatus  =
       statusFilter === 'all' ||
-      (statusFilter === 'active'     && s.status === 'ready') ||
-      (statusFilter === 'inactive'   && ['created','idle','disconnected'].includes(s.status)) ||
-      (statusFilter === 'connecting' && ['initializing','connecting','qr_ready'].includes(s.status));
+      (statusFilter === 'active'     && isActiveStatus(s)) ||
+      (statusFilter === 'inactive'   && isInactiveStatus(s)) ||
+      (statusFilter === 'connecting' && isConnectingStatus(s));
     return matchesSearch && matchesStatus;
   });
+
+  const statCards = [
+    { key: 'all',        label: t('sessions.stats.total'),      value: sessions.length,                        icon: Smartphone, accent: 'var(--color-ink)',      bg: 'var(--color-muted)' },
+    { key: 'active',     label: t('common.active'),              value: sessions.filter(isActiveStatus).length, icon: Wifi,       accent: 'var(--color-primary)', bg: 'var(--color-primary-dim)' },
+    { key: 'connecting', label: t('sessions.stats.connecting'), value: sessions.filter(isConnectingStatus).length, icon: RefreshCw, accent: '#f59e0b',           bg: 'rgba(245,158,11,0.1)' },
+    { key: 'inactive',   label: t('common.inactive'),            value: sessions.filter(isInactiveStatus).length, icon: WifiOff,   accent: '#ef4444',            bg: 'rgba(239,68,68,0.1)' },
+  ] as const;
+
+  const statusFilters = [
+    { value: 'all',        label: t('sessions.filter.all') },
+    { value: 'active',     label: t('sessions.filter.active') },
+    { value: 'inactive',   label: t('sessions.filter.inactive') },
+    { value: 'connecting', label: t('sessions.filter.connecting') },
+  ];
 
   const pillColor = (status: string) => {
     if (status === 'ready')                                      return 'bg-[var(--color-primary-dim)] text-[var(--color-primary)]';
@@ -175,8 +194,24 @@ export function Sessions() {
         )}
       />
 
+      {/* Stat cards — click one to jump straight to that filter */}
+      <div className="mb-6 grid grid-cols-4 gap-4 max-lg:grid-cols-2 max-sm:grid-cols-1">
+        {statCards.map(card => (
+          <StatCard
+            key={card.key}
+            label={card.label}
+            value={card.value}
+            icon={card.icon}
+            accent={card.accent}
+            bg={card.bg}
+            active={statusFilter === card.key}
+            onClick={() => setStatusFilter(card.key)}
+          />
+        ))}
+      </div>
+
       {/* Filters */}
-      <div className="mb-6 flex gap-3 max-sm:flex-col">
+      <div className="mb-6 flex flex-wrap items-center gap-3">
         <div className="search-bar max-w-[340px] flex-1 max-sm:max-w-none">
           <Search size={16} className="shrink-0 text-[var(--color-ink-muted)]" />
           <input
@@ -186,18 +221,20 @@ export function Sessions() {
             onChange={e => setSearchQuery(e.target.value)}
           />
         </div>
-        <div className="flex items-center gap-2 rounded-[var(--radius)] border-[1.5px] border-[var(--color-border)] bg-[var(--color-surface)] px-3 py-0.5 transition-colors focus-within:border-[var(--color-primary)]">
-          <Filter size={14} className="shrink-0 text-[var(--color-ink-muted)]" />
-          <select
-            value={statusFilter}
-            onChange={e => setStatusFilter(e.target.value)}
-            className="cursor-pointer border-none bg-transparent py-2 text-[0.875rem] text-[var(--color-ink)] outline-none w-auto"
-          >
-            <option value="all">{t('sessions.filter.all')}</option>
-            <option value="active">{t('sessions.filter.active')}</option>
-            <option value="inactive">{t('sessions.filter.inactive')}</option>
-            <option value="connecting">{t('sessions.filter.connecting')}</option>
-          </select>
+        <div className="inline-flex flex-wrap items-center gap-1 rounded-[var(--radius)] border-[1.5px] border-[var(--color-border)] bg-[var(--color-surface)] p-1">
+          {statusFilters.map(f => (
+            <button
+              key={f.value}
+              onClick={() => setStatusFilter(f.value)}
+              className={`cursor-pointer whitespace-nowrap rounded-[6px] border-none px-3 py-1.5 text-[0.8125rem] font-medium transition-all ${
+                statusFilter === f.value
+                  ? 'bg-[var(--color-primary)] text-white shadow-[0_1px_4px_rgba(37,211,102,0.3)]'
+                  : 'bg-transparent text-[var(--color-ink-secondary)] hover:bg-[var(--color-muted)] hover:text-[var(--color-ink)]'
+              }`}
+            >
+              {f.label}
+            </button>
+          ))}
         </div>
       </div>
 

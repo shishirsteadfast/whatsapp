@@ -75,7 +75,7 @@ export class MessageController {
   @RequireRole(UserRole.OPERATOR)
   async sendLocation(
     @Param('sessionId') sessionId: string,
-    @Body() dto: { chatId: string; latitude: number; longitude: number; description?: string; address?: string },
+    @Body() dto: { phoneNumber: string; latitude: number; longitude: number; description?: string; address?: string },
   ): Promise<MessageResponseDto> {
     return this.messageService.sendLocation(sessionId, dto);
   }
@@ -84,7 +84,7 @@ export class MessageController {
   @RequireRole(UserRole.OPERATOR)
   async sendContact(
     @Param('sessionId') sessionId: string,
-    @Body() dto: { chatId: string; contactName: string; contactNumber: string },
+    @Body() dto: { phoneNumber: string; contactName: string; contactNumber: string },
   ): Promise<MessageResponseDto> {
     return this.messageService.sendContact(sessionId, dto);
   }

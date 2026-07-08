@@ -54,7 +54,16 @@
     "lightMode": "ライトモード",
     "darkMode": "ダークモード",
     "viewAll": "すべて表示",
-    "copied": "コピーしました！"
+    "copy": "コピー",
+    "copied": "コピーしました！",
+    "sessionsActive": "アクティブなセッション",
+    "social": {
+      "email": "メール",
+      "whatsapp": "WhatsApp",
+      "facebook": "Facebook",
+      "youtube": "YouTube",
+      "website": "ウェブサイト"
+    }
   },
   "theme": {
     "light": "ライト",
@@ -68,15 +77,18 @@
     "webhooks": "Webhook",
     "apiKeys": "APIキー",
     "contacts": "連絡先",
-    "composer": "メッセージ作成",
     "groups": "グループ",
-    "messages": "メッセージ",
+    "messages": "メッセージログ",
     "settings": "設定",
     "messageTester": "メッセージテスト",
     "campaigns": "キャンペーン",
     "logs": "ログ",
     "systemRequirements": "サーバー要件",
-    "activityLog": "アクティビティログ"
+    "activityLog": "アクティビティログ",
+    "compose": "作成",
+    "groupAudience": "オーディエンス",
+    "groupMessaging": "メッセージング",
+    "groupAccess": "アクセス"
   },
   "errorBoundary": {
     "title": "問題が発生しました",
@@ -93,7 +105,7 @@
     "connectionError": "サーバーに接続できません。もう一度お試しください。",
     "help": "ヘルプが必要ですか？",
     "viewDocs": "ドキュメントを見る",
-    "footer": "Yudhi Armyndharis と OpenWA コミュニティが ❤️ を込めて制作",
+    "footer": "© {{year}} OpenWA · v{{version}} · 全著作権所有。",
     "version": "v{{version}} · {{date}}",
     "title": "サインイン",
     "subtitle": "ダッシュボードにアクセスするには認証情報を入力してください。",
@@ -104,7 +116,15 @@
     "signIn": "サインイン",
     "phoneRequired": "電話番号が必要です",
     "passwordRequired": "パスワードが必要です",
-    "invalidCredentials": "電話番号またはパスワードが間違っています"
+    "invalidCredentials": "電話番号またはパスワードが間違っています",
+    "heroTag": "WhatsApp ゲートウェイ",
+    "heroLine1": "あなたの",
+    "heroBrand": "WhatsApp",
+    "heroLine2": "セッションを簡単に管理。",
+    "heroDescription": "WhatsApp 連携を完全な制御のもとで自動化、監視、拡張できるセルフホスト型ゲートウェイです。",
+    "feature1": "マルチセッション WhatsApp 管理",
+    "feature2": "Webhook と API の自動化",
+    "feature3": "セルフホスト — データは常にあなたのもの"
   },
   "dashboard": {
     "title": "ダッシュボード",
@@ -113,24 +133,45 @@
       "activeSessions": "アクティブセッション",
       "messagesToday": "今日のメッセージ",
       "webhooksConfigured": "設定済みWebhook",
-      "apiCalls": "API呼び出し（24時間）"
+      "apiCalls": "API呼び出し（24時間）",
+      "contacts": "連絡先",
+      "activeCampaigns": "実行中のキャンペーン"
     },
-    "sessionsOverview": "セッション概要",
-    "showingSessions": "全{{total}}件中{{shown}}件を表示",
-    "columns": {
-      "sessionId": "セッションID",
-      "phone": "電話番号",
-      "status": "ステータス",
-      "lastActive": "最終アクティブ",
-      "actions": "操作"
-    },
-    "noSessions": "セッションが見つかりません。作成して開始してください。",
-    "view": "表示",
-    "disconnect": "切断",
     "errorPrefix": "エラー: {{message}}",
     "loadError": "データの読み込みに失敗しました",
-    "statActive": "{{count}}件アクティブ",
-    "statNoData": "まだデータがありません"
+    "statsHints": {
+      "ofTotal": "全{{total}}件中"
+    },
+    "charts": {
+      "messageVolume": {
+        "title": "メッセージ量",
+        "subtitle": "過去14日間の受信・送信メッセージ",
+        "incoming": "受信",
+        "outgoing": "送信"
+      },
+      "messageStatus": {
+        "title": "メッセージステータス",
+        "subtitle": "直近{{count}}件のメッセージの内訳"
+      },
+      "campaignPerformance": {
+        "title": "キャンペーン実績",
+        "subtitle": "直近のキャンペーンの送信済みと失敗の比較",
+        "sent": "送信済み",
+        "failed": "失敗",
+        "empty": "キャンペーンはまだありません"
+      }
+    },
+    "activeDevices": {
+      "title": "アクティブなデバイス",
+      "subtitle": "現在接続中のセッション",
+      "empty": "接続中のデバイスはありません"
+    },
+    "recentMessages": {
+      "title": "最近のメッセージ",
+      "subtitle": "全セッションの最新アクティビティ",
+      "empty": "メッセージはまだありません"
+    },
+    "noChartData": "十分なデータがまだありません"
   },
   "sessionStatus": {
     "created": "新規",
@@ -219,6 +260,10 @@
       "phone": "電話",
       "sessionId": "セッションID",
       "lastActive": "最終アクティブ"
+    },
+    "stats": {
+      "total": "セッション合計",
+      "connecting": "接続中"
     }
   },
   "webhooks": {
@@ -271,13 +316,9 @@
     }
   },
   "apiKeys": {
-    "title": "API管理",
-    "subtitle": "APIキー、認証情報、APIドキュメントを管理",
-    "tabs": {
-      "overview": "概要",
-      "keys": "APIキー",
-      "docs": "ドキュメント"
-    },
+    "title": "APIリファレンス",
+    "subtitle": "認証を行い、すべてのエンドポイントを確認し、お好みの言語でOpenWA APIを統合しましょう。",
+    "manageHint": "APIリクエストの認証に使用するキーを作成、再発行、無効化できます。",
     "stats": {
       "totalKeys": "合計キー数",
       "activeKeys": "アクティブキー",
@@ -285,17 +326,8 @@
       "rateLimit": "今日の呼び出し"
     },
     "credentials": {
-      "baseUrl": "APIベースURL",
-      "baseUrlHint": "このURLをすべてのAPIリクエストのベースエンドポイントとして使用します。"
-    },
-    "quickLinks": {
-      "title": "クイックリンク",
-      "manageKeys": "APIキー管理",
-      "manageKeysDesc": "APIキーの表示、作成、無効化、削除",
-      "viewDocs": "APIドキュメント",
-      "viewDocsDesc": "サンプル付きのエンドポイントリファレンス",
-      "createKey": "新規キー作成",
-      "createKeyDesc": "特定のロールを持つ新しいAPIキーを生成"
+      "baseUrl": "ベースURL",
+      "baseUrlHint": "このリファレンスに記載されているすべてのエンドポイントパスは、このURLからの相対パスです。"
     },
     "createBtn": "APIキーを作成",
     "modalTitle": "APIキーを作成",
@@ -345,13 +377,42 @@
     }
   },
   "apiDocs": {
+    "nav": {
+      "introduction": "はじめに",
+      "authentication": "認証",
+      "yourKeys": "APIキー",
+      "errors": "エラーとレート制限",
+      "endpoints": "エンドポイント",
+      "sdks": "SDKとライブラリ"
+    },
+    "intro": {
+      "title": "はじめに",
+      "description": "OpenWA APIを使用すると、WhatsAppセッションの管理、メッセージの送信、ワークフローの自動化をプログラムから行うことができます。このAPIはRESTに基づいて設計されており、すべてのエンドポイントはJSON形式のリクエストボディを受け取り、JSON形式のレスポンスを返し、標準的なHTTPステータスコードを使用します。",
+      "quickStart": "クイックスタート",
+      "quickStartHint": "以下は、アクティブなセッションの一覧を取得する最小限のリクエスト例です。"
+    },
+    "languages": {
+      "curl": "cURL",
+      "javascript": "JavaScript",
+      "python": "Python",
+      "php": "PHP",
+      "go": "Go"
+    },
     "auth": {
       "title": "認証",
-      "description": "すべてのAPIリクエストには認証が必要です。<code>X-API-Key</code> ヘッダーにAPIキーを含めてください。「APIキー」タブでキーを管理できます。",
-      "example": "認証ありのリクエスト例",
+      "description": "すべてのAPIリクエストには認証が必要です。<code>X-API-Key</code> リクエストヘッダーにAPIキーを含めてください。以下でAPIキーの生成・管理を行えます。",
       "none": "認証不要",
       "apiKey": "APIキーが必要",
       "admin": "管理者アクセスが必要"
+    },
+    "groups": {
+      "general": "一般",
+      "sessions": "セッション",
+      "messages": "メッセージ",
+      "contacts": "連絡先",
+      "webhooks": "Webhook",
+      "campaigns": "キャンペーン",
+      "settings": "設定"
     },
     "sdks": {
       "title": "SDKとライブラリ",
@@ -359,6 +420,7 @@
     },
     "endpoints": {
       "title": "APIエンドポイント",
+      "hint": "利用可能なすべてのエンドポイントを、リソースごとに分類して確認できます。",
       "health": {
         "desc": "APIサーバーのヘルスステータスを確認"
       },
@@ -390,8 +452,21 @@
       }
     },
     "requestBody": "リクエストボディ",
-    "example": "例",
+    "example": "リクエスト例",
     "response": "レスポンス",
+    "errors": {
+      "title": "エラーとレート制限",
+      "description": "OpenWAでは、リクエストの成功または失敗を示すために標準的なHTTPステータスコードを使用します。2xx系のコードは成功、4xx系はリクエストに誤りがあること、5xx系は当方側で問題が発生したことを意味します。",
+      "codes": {
+        "200": "Success — リクエストが正常に完了しました。",
+        "400": "Bad Request — リクエストの形式が正しくないか、必須パラメータが不足しています。",
+        "401": "Unauthorized — APIキーが指定されていないか、無効です。",
+        "403": "Forbidden — このAPIキーにはこの操作を実行する権限がありません。",
+        "404": "Not Found — リクエストされたリソースが存在しません。",
+        "429": "Too Many Requests — レート制限を超えました。",
+        "500": "Server Error — OpenWA側で問題が発生しました。"
+      }
+    },
     "rateLimit": {
       "title": "レート制限",
       "description": "公平な利用を確保するためAPIリクエストにはレート制限があります。デフォルトはAPIキー1つにつき60秒間に100リクエストです。制限を超えると429 Too Many Requestsレスポンスが返されます。より高い制限が必要な場合はサポートにお問い合わせください。"
@@ -483,7 +558,11 @@
     "charCount": "{{count}} / 4096 文字",
     "livePreview": "ライブプレビュー",
     "noMessages": "メッセージはまだありません",
-    "noMessagesHint": "メッセージを送信して会話を開始"
+    "noMessagesHint": "メッセージを送信して会話を開始",
+    "addRecipients": "宛先を追加",
+    "loadMore": "もっと読み込む",
+    "showPreview": "プレビューを表示",
+    "hidePreview": "プレビューを隠す"
   },
   "campaigns": {
     "title": "キャンペーン",
@@ -1053,5 +1132,53 @@
       "webhook_triggered": "Webhookトリガー",
       "webhook_failed": "Webhook失敗"
     }
+  },
+  "messageStatus": {
+    "pending": "保留中",
+    "sent": "送信済み",
+    "delivered": "配信済み",
+    "read": "既読",
+    "failed": "失敗"
+  },
+  "roles": {
+    "title": "ロールと権限",
+    "subtitle": "ロールを定義し、詳細な権限を割り当てます",
+    "createRole": "ロールを作成",
+    "createTitle": "新しいロールを作成",
+    "editTitle": "ロールを編集",
+    "name": "ロール名",
+    "namePlaceholder": "例：サポート担当",
+    "description": "説明",
+    "descriptionPlaceholder": "説明（任意）",
+    "type": "タイプ",
+    "system": "システム",
+    "custom": "カスタム",
+    "permissions": "権限",
+    "searchPlaceholder": "ロールを検索...",
+    "deleteConfirm": "ロールを削除",
+    "deleteWarning": "このロールを削除してもよろしいですか？この操作は元に戻せません。",
+    "emptyTitle": "ロールが見つかりません",
+    "emptyDescription": "ロールはここに表示されます",
+    "toasts": {
+      "createSuccess": "ロールを作成しました",
+      "createError": "ロールの作成に失敗しました",
+      "updateSuccess": "ロールを更新しました",
+      "updateError": "ロールの更新に失敗しました",
+      "deleteSuccess": "ロールを削除しました",
+      "deleteError": "ロールの削除に失敗しました"
+    },
+    "stats": {
+      "total": "ロール合計",
+      "system": "システムロール",
+      "custom": "カスタムロール"
+    },
+    "noPermissions": "権限が割り当てられていません",
+    "permissionCount": "{{count}} 件の権限",
+    "acrossGroups": "{{count}} グループにまたがる",
+    "searchPermissionsPlaceholder": "権限を検索...",
+    "selectAllPermissions": "すべて選択",
+    "clearAllPermissions": "すべて解除",
+    "noPermissionsMatch": "検索に一致する権限がありません",
+    "permissionsSummary": "{{total}} 件中 {{selected}} 件選択中"
   }
 }

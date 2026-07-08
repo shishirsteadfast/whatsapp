@@ -51,7 +51,7 @@ describe('MessageService', () => {
     hookManager = {
       execute: jest.fn().mockResolvedValue({
         continue: true,
-        data: { sessionId: 'sess-1', input: { chatId: '628123456789@c.us', text: 'Hello' }, type: 'text' },
+        data: { sessionId: 'sess-1', input: { phoneNumber: '628123456789@c.us', text: 'Hello' }, type: 'text' },
       }),
     };
 
@@ -72,7 +72,7 @@ describe('MessageService', () => {
   describe('sendText', () => {
     it('should send text message and return messageId + timestamp', async () => {
       const result = await service.sendText('sess-1', {
-        chatId: '628123456789@c.us',
+        phoneNumber: '628123456789@c.us',
         text: 'Hello',
       });
 
@@ -83,7 +83,7 @@ describe('MessageService', () => {
 
     it('should save outgoing message as pending before sending, then update to sent', async () => {
       await service.sendText('sess-1', {
-        chatId: '628123456789@c.us',
+        phoneNumber: '628123456789@c.us',
         text: 'Hello',
       });
 
@@ -103,7 +103,7 @@ describe('MessageService', () => {
 
     it('should execute message:sending and message:sent hooks', async () => {
       await service.sendText('sess-1', {
-        chatId: '628123456789@c.us',
+        phoneNumber: '628123456789@c.us',
         text: 'Hello',
       });
 
@@ -122,7 +122,7 @@ describe('MessageService', () => {
     it('should throw BadRequestException when plugin blocks sending', async () => {
       (hookManager.execute as jest.Mock).mockResolvedValueOnce({ continue: false, data: {} });
 
-      await expect(service.sendText('sess-1', { chatId: 'test@c.us', text: 'blocked' })).rejects.toThrow(
+      await expect(service.sendText('sess-1', { phoneNumber: 'test@c.us', text: 'blocked' })).rejects.toThrow(
         'Message sending blocked by plugin',
       );
     });
@@ -130,7 +130,7 @@ describe('MessageService', () => {
     it('should throw BadRequestException if session is not active', async () => {
       (sessionService.getEngine as jest.Mock).mockReturnValue(undefined);
 
-      await expect(service.sendText('inactive', { chatId: 'test@c.us', text: 'hello' })).rejects.toThrow(
+      await expect(service.sendText('inactive', { phoneNumber: 'test@c.us', text: 'hello' })).rejects.toThrow(
         BadRequestException,
       );
     });
@@ -141,7 +141,7 @@ describe('MessageService', () => {
   describe('sendImage', () => {
     it('should send image via URL', async () => {
       const result = await service.sendImage('sess-1', {
-        chatId: '628123456789@c.us',
+        phoneNumber: '628123456789@c.us',
         url: 'https://example.com/img.jpg',
         caption: 'My image',
       });
@@ -155,7 +155,7 @@ describe('MessageService', () => {
 
     it('should send image via base64 with mimetype', async () => {
       await service.sendImage('sess-1', {
-        chatId: '628123456789@c.us',
+        phoneNumber: '628123456789@c.us',
         base64: 'iVBORw0KGgoAAAAN...',
         mimetype: 'image/png',
       });
@@ -172,7 +172,7 @@ describe('MessageService', () => {
   describe('sendVideo', () => {
     it('should call engine.sendVideoMessage', async () => {
       await service.sendVideo('sess-1', {
-        chatId: 'test@c.us',
+        phoneNumber: 'test@c.us',
         url: 'https://example.com/video.mp4',
       });
       expect(mockEngine.sendVideoMessage).toHaveBeenCalled();
@@ -182,7 +182,7 @@ describe('MessageService', () => {
   describe('sendAudio', () => {
     it('should call engine.sendAudioMessage', async () => {
       await service.sendAudio('sess-1', {
-        chatId: 'test@c.us',
+        phoneNumber: 'test@c.us',
         url: 'https://example.com/audio.ogg',
       });
       expect(mockEngine.sendAudioMessage).toHaveBeenCalled();
@@ -192,7 +192,7 @@ describe('MessageService', () => {
   describe('sendDocument', () => {
     it('should call engine.sendDocumentMessage with filename', async () => {
       await service.sendDocument('sess-1', {
-        chatId: 'test@c.us',
+        phoneNumber: 'test@c.us',
         url: 'https://example.com/doc.pdf',
         filename: 'report.pdf',
       });
@@ -206,7 +206,7 @@ describe('MessageService', () => {
   describe('sendSticker', () => {
     it('should call engine.sendStickerMessage', async () => {
       await service.sendSticker('sess-1', {
-        chatId: 'test@c.us',
+        phoneNumber: 'test@c.us',
         url: 'https://example.com/sticker.webp',
       });
       expect(mockEngine.sendStickerMessage).toHaveBeenCalled();
@@ -218,7 +218,7 @@ describe('MessageService', () => {
   describe('sendLocation', () => {
     it('should send location with lat/lng', async () => {
       const result = await service.sendLocation('sess-1', {
-        chatId: 'test@c.us',
+        phoneNumber: 'test@c.us',
         latitude: -6.2088,
         longitude: 106.8456,
         description: 'Jakarta',
@@ -237,7 +237,7 @@ describe('MessageService', () => {
   describe('sendContact', () => {
     it('should send contact with name and number', async () => {
       const result = await service.sendContact('sess-1', {
-        chatId: 'test@c.us',
+        phoneNumber: 'test@c.us',
         contactName: 'John Doe',
         contactNumber: '+628123456789',
       });
@@ -316,7 +316,7 @@ describe('MessageService', () => {
 
   describe('buildMediaInput validation', () => {
     it('should throw when neither url nor base64 is provided', async () => {
-      await expect(service.sendImage('sess-1', { chatId: 'test@c.us' })).rejects.toThrow(
+      await expect(service.sendImage('sess-1', { phoneNumber: 'test@c.us' })).rejects.toThrow(
         'Either url or base64 must be provided',
       );
     });
@@ -324,7 +324,7 @@ describe('MessageService', () => {
     it('should throw when base64 is provided without mimetype', async () => {
       await expect(
         service.sendImage('sess-1', {
-          chatId: 'test@c.us',
+          phoneNumber: 'test@c.us',
           base64: 'data...',
         }),
       ).rejects.toThrow('mimetype is required when using base64 data');

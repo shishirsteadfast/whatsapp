@@ -23,6 +23,7 @@ const ApiKeys = lazy(() => import('./pages/ApiKeys').then(m => ({ default: m.Api
 const SettingsPage = lazy(() => import('./pages/Settings').then(m => ({ default: m.SettingsPage })));
 const UsersPage = lazy(() => import('./pages/Users').then(m => ({ default: m.UsersPage })));
 const RolesPage = lazy(() => import('./pages/Roles').then(m => ({ default: m.RolesPage })));
+const RoleForm = lazy(() => import('./pages/RoleForm').then(m => ({ default: m.RoleForm })));
 
 const TOKEN_KEY = 'openwa_token';
 
@@ -174,6 +175,8 @@ function AppContent() {
               <Route path="activity-log" element={<ActivityLog />} />
               <Route path="users" element={<UsersPage />} />
               <Route path="roles" element={<RolesPage />} />
+              <Route path="roles/new" element={<RoleForm />} />
+              <Route path="roles/:id/edit" element={<RoleForm />} />
               <Route path="composer" element={<Composer />} />
               <Route path="contacts" element={<Contacts />} />
               <Route path="groups" element={<Groups />} />

@@ -54,7 +54,16 @@
     "lightMode": "Helles Design",
     "darkMode": "Dunkles Design",
     "viewAll": "Alle anzeigen",
-    "copied": "Kopiert!"
+    "copy": "Kopieren",
+    "copied": "Kopiert!",
+    "sessionsActive": "Aktive Sitzungen",
+    "social": {
+      "email": "E-Mail",
+      "whatsapp": "WhatsApp",
+      "facebook": "Facebook",
+      "youtube": "YouTube",
+      "website": "Webseite"
+    }
   },
   "theme": {
     "light": "Hell",
@@ -68,15 +77,18 @@
     "webhooks": "Webhooks",
     "apiKeys": "API-Schlüssel",
     "contacts": "Kontakte",
-    "composer": "Editor",
     "groups": "Gruppen",
-    "messages": "Nachrichten",
+    "messages": "Nachrichtenprotokoll",
     "settings": "Einstellungen",
     "messageTester": "Testnachricht",
     "campaigns": "Kampagnen",
     "logs": "Logs",
     "systemRequirements": "Serveranforderungen",
-    "activityLog": "Aktivitätsprotokoll"
+    "activityLog": "Aktivitätsprotokoll",
+    "compose": "Verfassen",
+    "groupAudience": "Zielgruppe",
+    "groupMessaging": "Nachrichten",
+    "groupAccess": "Zugriff"
   },
   "errorBoundary": {
     "title": "Etwas ist schiefgelaufen",
@@ -93,7 +105,7 @@
     "connectionError": "Verbindung zum Server fehlgeschlagen. Bitte versuchen Sie es erneut.",
     "help": "Hilfe nötig?",
     "viewDocs": "Dokumentation anzeigen",
-    "footer": "Mit ❤️ erstellt von Yudhi Armyndharis und der OpenWA-Community",
+    "footer": "© {{year}} OpenWA · v{{version}} · Alle Rechte vorbehalten.",
     "version": "v{{version}} · {{date}}",
     "title": "Anmelden",
     "subtitle": "Geben Sie Ihre Anmeldedaten ein, um auf das Dashboard zuzugreifen.",
@@ -104,7 +116,15 @@
     "signIn": "Anmelden",
     "phoneRequired": "Telefonnummer erforderlich",
     "passwordRequired": "Passwort erforderlich",
-    "invalidCredentials": "Ungültige Telefonnummer oder Passwort"
+    "invalidCredentials": "Ungültige Telefonnummer oder Passwort",
+    "heroTag": "WhatsApp-Gateway",
+    "heroLine1": "Verwalten Sie Ihre",
+    "heroBrand": "WhatsApp",
+    "heroLine2": "Sitzungen ganz einfach.",
+    "heroDescription": "Ein selbst gehostetes Gateway zur Automatisierung, Überwachung und Skalierung Ihrer WhatsApp-Integrationen mit voller Kontrolle.",
+    "feature1": "Verwaltung mehrerer WhatsApp-Sitzungen",
+    "feature2": "Webhook- & API-Automatisierung",
+    "feature3": "Selbst gehostet — Ihre Daten bleiben Ihre"
   },
   "dashboard": {
     "title": "Dashboard",
@@ -113,24 +133,45 @@
       "activeSessions": "Aktive Sitzungen",
       "messagesToday": "Nachrichten heute",
       "webhooksConfigured": "Webhooks konfiguriert",
-      "apiCalls": "API-Aufrufe (24h)"
+      "apiCalls": "API-Aufrufe (24h)",
+      "contacts": "Kontakte",
+      "activeCampaigns": "Aktive Kampagnen"
     },
-    "sessionsOverview": "Sitzungsübersicht",
-    "showingSessions": "Zeige {{shown}} von {{total}} Sitzungen",
-    "columns": {
-      "sessionId": "Sitzungs-ID",
-      "phone": "Telefonnummer",
-      "status": "Status",
-      "lastActive": "Zuletzt aktiv",
-      "actions": "Aktionen"
-    },
-    "noSessions": "Keine Sitzungen gefunden. Erstellen Sie eine, um zu starten.",
-    "view": "Anzeigen",
-    "disconnect": "Trennen",
     "errorPrefix": "Fehler: {{message}}",
     "loadError": "Daten konnten nicht geladen werden",
-    "statActive": "{{count}} aktiv",
-    "statNoData": "Noch keine Daten"
+    "statsHints": {
+      "ofTotal": "von {{total}} insgesamt"
+    },
+    "charts": {
+      "messageVolume": {
+        "title": "Nachrichtenvolumen",
+        "subtitle": "Eingehend vs. ausgehend in den letzten 14 Tagen",
+        "incoming": "Eingehend",
+        "outgoing": "Ausgehend"
+      },
+      "messageStatus": {
+        "title": "Nachrichtenstatus",
+        "subtitle": "Aufschlüsselung der letzten {{count}} Nachrichten"
+      },
+      "campaignPerformance": {
+        "title": "Kampagnenleistung",
+        "subtitle": "Gesendet vs. fehlgeschlagen für Ihre neuesten Kampagnen",
+        "sent": "Gesendet",
+        "failed": "Fehlgeschlagen",
+        "empty": "Noch keine Kampagnen"
+      }
+    },
+    "activeDevices": {
+      "title": "Aktive Geräte",
+      "subtitle": "Aktuell verbundene Sitzungen",
+      "empty": "Keine Geräte verbunden"
+    },
+    "recentMessages": {
+      "title": "Neueste Nachrichten",
+      "subtitle": "Neueste Aktivität über alle Sitzungen",
+      "empty": "Noch keine Nachrichten"
+    },
+    "noChartData": "Noch nicht genügend Daten"
   },
   "sessionStatus": {
     "created": "Neu",
@@ -219,6 +260,10 @@
       "phone": "Telefon",
       "sessionId": "Sitzungs-ID",
       "lastActive": "Zuletzt aktiv"
+    },
+    "stats": {
+      "total": "Sitzungen gesamt",
+      "connecting": "Verbindung wird hergestellt"
     }
   },
   "webhooks": {
@@ -271,13 +316,9 @@
     }
   },
   "apiKeys": {
-    "title": "API-Verwaltung",
-    "subtitle": "Verwalten Sie API-Schlüssel, Anmeldedaten und API-Dokumentation",
-    "tabs": {
-      "overview": "Übersicht",
-      "keys": "API-Schlüssel",
-      "docs": "Dokumentation"
-    },
+    "title": "API-Referenz",
+    "subtitle": "Authentifizieren Sie sich, entdecken Sie alle Endpoints und integrieren Sie die OpenWA-API in der Sprache Ihrer Wahl.",
+    "manageHint": "Erstellen, erneuern und widerrufen Sie die Schlüssel, mit denen Sie Ihre API-Anfragen authentifizieren.",
     "stats": {
       "totalKeys": "Schlüssel gesamt",
       "activeKeys": "Aktive Schlüssel",
@@ -285,17 +326,8 @@
       "rateLimit": "Aufrufe heute"
     },
     "credentials": {
-      "baseUrl": "API-Basis-URL",
-      "baseUrlHint": "Verwenden Sie diese URL als Basis-Endpoint für alle API-Anfragen."
-    },
-    "quickLinks": {
-      "title": "Schnellzugriff",
-      "manageKeys": "API-Schlüssel verwalten",
-      "manageKeysDesc": "API-Schlüssel anzeigen, erstellen, widerrufen und löschen",
-      "viewDocs": "API-Dokumentation",
-      "viewDocsDesc": "Endpoint-Referenz mit Beispielen durchstöbern",
-      "createKey": "Neuen Schlüssel erstellen",
-      "createKeyDesc": "Einen neuen API-Schlüssel mit bestimmter Rolle generieren"
+      "baseUrl": "Basis-URL",
+      "baseUrlHint": "Alle Endpoint-Pfade in dieser Referenz sind relativ zu dieser URL."
     },
     "createBtn": "API-Schlüssel erstellen",
     "modalTitle": "API-Schlüssel erstellen",
@@ -345,13 +377,42 @@
     }
   },
   "apiDocs": {
+    "nav": {
+      "introduction": "Einführung",
+      "authentication": "Authentifizierung",
+      "yourKeys": "Ihre API-Schlüssel",
+      "errors": "Fehler & Ratenbegrenzungen",
+      "endpoints": "Endpoints",
+      "sdks": "SDKs & Bibliotheken"
+    },
+    "intro": {
+      "title": "Einführung",
+      "description": "Die OpenWA-API ermöglicht es Ihnen, WhatsApp-Sitzungen programmgesteuert zu verwalten, Nachrichten zu senden und Ihre Arbeitsabläufe zu automatisieren. Sie ist nach REST-Prinzipien aufgebaut — jeder Endpoint akzeptiert JSON-Anfragekörper, liefert JSON-Antworten zurück und verwendet Standard-HTTP-Statuscodes.",
+      "quickStart": "Schnellstart",
+      "quickStartHint": "Hier ist eine minimale Anfrage, um Ihre aktiven Sitzungen aufzulisten."
+    },
+    "languages": {
+      "curl": "cURL",
+      "javascript": "JavaScript",
+      "python": "Python",
+      "php": "PHP",
+      "go": "Go"
+    },
     "auth": {
       "title": "Authentifizierung",
-      "description": "Alle API-Anfragen erfordern eine Authentifizierung. Fügen Sie Ihren API-Schlüssel im <code>X-API-Key</code>-Header hinzu. Sie können Ihre Schlüssel im Tab API-Schlüssel verwalten.",
-      "example": "Beispielanfrage mit Authentifizierung",
+      "description": "Alle API-Anfragen erfordern eine Authentifizierung. Fügen Sie Ihren API-Schlüssel im <code>X-API-Key</code>-Anfrage-Header hinzu. Sie können Ihre API-Schlüssel unten generieren und verwalten.",
       "none": "Keine Authentifizierung erforderlich",
       "apiKey": "API-Schlüssel erforderlich",
       "admin": "Admin-Zugriff erforderlich"
+    },
+    "groups": {
+      "general": "Allgemein",
+      "sessions": "Sitzungen",
+      "messages": "Nachrichten",
+      "contacts": "Kontakte",
+      "webhooks": "Webhooks",
+      "campaigns": "Kampagnen",
+      "settings": "Einstellungen"
     },
     "sdks": {
       "title": "SDKs & Bibliotheken",
@@ -359,6 +420,7 @@
     },
     "endpoints": {
       "title": "API-Endpoints",
+      "hint": "Durchsuchen Sie alle verfügbaren Endpoints, gruppiert nach Ressource.",
       "health": {
         "desc": "Server-Health-Status prüfen"
       },
@@ -390,8 +452,21 @@
       }
     },
     "requestBody": "Anfragekörper",
-    "example": "Beispiel",
+    "example": "Beispielanfrage",
     "response": "Antwort",
+    "errors": {
+      "title": "Fehler & Ratenbegrenzungen",
+      "description": "OpenWA verwendet herkömmliche HTTP-Statuscodes, um Erfolg oder Fehlschlag einer Anfrage anzuzeigen. Codes im Bereich 2xx bedeuten Erfolg, der Bereich 4xx bedeutet, dass die Anfrage einen Fehler enthält, und der Bereich 5xx bedeutet, dass auf unserer Seite etwas schiefgelaufen ist.",
+      "codes": {
+        "200": "Success — Die Anfrage wurde wie erwartet ausgeführt.",
+        "400": "Bad Request — Die Anfrage war fehlerhaft oder es fehlten erforderliche Parameter.",
+        "401": "Unauthorized — Der API-Schlüssel fehlt oder ist ungültig.",
+        "403": "Forbidden — Der API-Schlüssel verfügt nicht über die Berechtigung für diese Aktion.",
+        "404": "Not Found — Die angeforderte Ressource existiert nicht.",
+        "429": "Too Many Requests — Sie haben das Ratenlimit überschritten.",
+        "500": "Server Error — Auf Seiten von OpenWA ist etwas schiefgelaufen."
+      }
+    },
     "rateLimit": {
       "title": "Ratenbegrenzung",
       "description": "API-Anfragen werden zur Gewährleistung einer fairen Nutzung ratenbegrenzt. Das Standardlimit beträgt 100 Anfragen pro 60-Sekunden-Fenster pro API-Schlüssel. Bei Überschreitung erhalten Sie eine 429 Too Many Requests-Antwort. Kontaktieren Sie den Support, wenn Sie ein höheres Limit benötigen."
@@ -483,7 +558,11 @@
     "charCount": "{{count}} / 4096 Zeichen",
     "livePreview": "Live-Vorschau",
     "noMessages": "Noch keine Nachrichten",
-    "noMessagesHint": "Senden Sie eine Nachricht, um die Unterhaltung zu starten"
+    "noMessagesHint": "Senden Sie eine Nachricht, um die Unterhaltung zu starten",
+    "addRecipients": "Empfänger hinzufügen",
+    "loadMore": "Mehr laden",
+    "showPreview": "Vorschau anzeigen",
+    "hidePreview": "Vorschau ausblenden"
   },
   "campaigns": {
     "title": "Kampagnen",
@@ -1053,5 +1132,53 @@
       "webhook_triggered": "Webhook ausgelöst",
       "webhook_failed": "Webhook fehlgeschlagen"
     }
+  },
+  "messageStatus": {
+    "pending": "Ausstehend",
+    "sent": "Gesendet",
+    "delivered": "Zugestellt",
+    "read": "Gelesen",
+    "failed": "Fehlgeschlagen"
+  },
+  "roles": {
+    "title": "Rollen & Berechtigungen",
+    "subtitle": "Rollen definieren und granulare Berechtigungen zuweisen",
+    "createRole": "Rolle erstellen",
+    "createTitle": "Neue Rolle erstellen",
+    "editTitle": "Rolle bearbeiten",
+    "name": "Rollenname",
+    "namePlaceholder": "z. B. Support-Mitarbeiter",
+    "description": "Beschreibung",
+    "descriptionPlaceholder": "Optionale Beschreibung",
+    "type": "Typ",
+    "system": "System",
+    "custom": "Benutzerdefiniert",
+    "permissions": "Berechtigungen",
+    "searchPlaceholder": "Rollen durchsuchen...",
+    "deleteConfirm": "Rolle löschen",
+    "deleteWarning": "Möchten Sie diese Rolle wirklich löschen? Diese Aktion kann nicht rückgängig gemacht werden.",
+    "emptyTitle": "Keine Rollen gefunden",
+    "emptyDescription": "Rollen werden hier angezeigt",
+    "toasts": {
+      "createSuccess": "Rolle erfolgreich erstellt",
+      "createError": "Rolle konnte nicht erstellt werden",
+      "updateSuccess": "Rolle erfolgreich aktualisiert",
+      "updateError": "Rolle konnte nicht aktualisiert werden",
+      "deleteSuccess": "Rolle erfolgreich gelöscht",
+      "deleteError": "Rolle konnte nicht gelöscht werden"
+    },
+    "stats": {
+      "total": "Rollen gesamt",
+      "system": "Systemrollen",
+      "custom": "Benutzerdefinierte Rollen"
+    },
+    "noPermissions": "Keine Berechtigungen zugewiesen",
+    "permissionCount": "{{count}} Berechtigungen",
+    "acrossGroups": "in {{count}} Gruppen",
+    "searchPermissionsPlaceholder": "Berechtigungen durchsuchen...",
+    "selectAllPermissions": "Alle auswählen",
+    "clearAllPermissions": "Alle entfernen",
+    "noPermissionsMatch": "Keine Berechtigungen entsprechen Ihrer Suche",
+    "permissionsSummary": "{{selected}} von {{total}} ausgewählt"
   }
 }

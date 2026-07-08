@@ -54,7 +54,16 @@
     "lightMode": "מצב בהיר",
     "darkMode": "מצב כהה",
     "viewAll": "הצג הכל",
-    "copied": "הועתק!"
+    "copy": "העתקה",
+    "copied": "הועתק!",
+    "sessionsActive": "הפעלות פעילות",
+    "social": {
+      "email": "אימייל",
+      "whatsapp": "WhatsApp",
+      "facebook": "Facebook",
+      "youtube": "YouTube",
+      "website": "אתר אינטרנט"
+    }
   },
   "theme": {
     "light": "בהיר",
@@ -68,11 +77,15 @@
     "webhooks": "Webhooks",
     "apiKeys": "מפתחות API",
     "contacts": "אנשי קשר",
-    "composer": "קומפוזר",
     "campaigns": "קמפיינים",
     "logs": "לוגים",
     "systemRequirements": "דרישות השרת",
-    "activityLog": "יומן פעילות"
+    "activityLog": "יומן פעילות",
+    "compose": "כתיבה",
+    "messages": "יומן הודעות",
+    "groupAudience": "קהל",
+    "groupMessaging": "מסרים",
+    "groupAccess": "גישה"
   },
   "errorBoundary": {
     "title": "משהו השתבש",
@@ -89,7 +102,7 @@
     "connectionError": "לא ניתן להתחבר לשרת. יש לנסות שוב.",
     "help": "צריך עזרה?",
     "viewDocs": "לצפייה בתיעוד",
-    "footer": "נבנה באהבה על ידי Yudhi Armyndharis וקהילת OpenWA",
+    "footer": "© {{year}} OpenWA · גרסה {{version}} · כל הזכויות שמורות.",
     "version": "v{{version}} · {{date}}",
     "title": "כניסה למערכת",
     "subtitle": "יש להזין פרטי התחברות כדי לגשת לדאשבורד.",
@@ -100,7 +113,15 @@
     "signIn": "כניסה",
     "phoneRequired": "חובה להזין מספר טלפון",
     "passwordRequired": "חובה להזין סיסמה",
-    "invalidCredentials": "מספר טלפון או סיסמה שגויים"
+    "invalidCredentials": "מספר טלפון או סיסמה שגויים",
+    "heroTag": "שער WhatsApp",
+    "heroLine1": "נהלו את",
+    "heroBrand": "WhatsApp",
+    "heroLine2": "השיחות שלכם בקלות.",
+    "heroDescription": "שער בפריסה עצמית לאוטומציה, ניטור והרחבה של אינטגרציות ה-WhatsApp שלכם, עם שליטה מלאה.",
+    "feature1": "ניהול מרובה חיבורי WhatsApp",
+    "feature2": "אוטומציה של Webhook ו-API",
+    "feature3": "בפריסה עצמית — הנתונים שלכם נשארים שלכם"
   },
   "dashboard": {
     "title": "דאשבורד",
@@ -109,24 +130,45 @@
       "activeSessions": "Sessions פעילים",
       "messagesToday": "הודעות היום",
       "webhooksConfigured": "Webhooks מוגדרים",
-      "apiCalls": "קריאות API (24 שעות)"
+      "apiCalls": "קריאות API (24 שעות)",
+      "contacts": "אנשי קשר",
+      "activeCampaigns": "קמפיינים פעילים"
     },
-    "sessionsOverview": "סקירת Sessions",
-    "showingSessions": "מוצגים {{shown}} מתוך {{total}} Sessions",
-    "columns": {
-      "sessionId": "מזהה Session",
-      "phone": "מספר טלפון",
-      "status": "סטטוס",
-      "lastActive": "פעילות אחרונה",
-      "actions": "פעולות"
-    },
-    "noSessions": "לא נמצאו Sessions. יש ליצור אחד כדי להתחיל.",
-    "view": "צפייה",
-    "disconnect": "ניתוק",
     "errorPrefix": "שגיאה: {{message}}",
     "loadError": "טעינת הנתונים נכשלה",
-    "statActive": "{{count}} פעילים",
-    "statNoData": "אין נתונים"
+    "statsHints": {
+      "ofTotal": "מתוך {{total}} סה״כ"
+    },
+    "charts": {
+      "messageVolume": {
+        "title": "נפח הודעות",
+        "subtitle": "נכנסות מול יוצאות ב-14 הימים האחרונים",
+        "incoming": "נכנסות",
+        "outgoing": "יוצאות"
+      },
+      "messageStatus": {
+        "title": "סטטוס הודעות",
+        "subtitle": "פילוח {{count}} ההודעות האחרונות"
+      },
+      "campaignPerformance": {
+        "title": "ביצועי קמפיינים",
+        "subtitle": "נשלחו מול נכשלו בקמפיינים האחרונים שלך",
+        "sent": "נשלחו",
+        "failed": "נכשלו",
+        "empty": "אין עדיין קמפיינים"
+      }
+    },
+    "activeDevices": {
+      "title": "מכשירים פעילים",
+      "subtitle": "התקנים מחוברים כעת",
+      "empty": "אין מכשירים מחוברים"
+    },
+    "recentMessages": {
+      "title": "הודעות אחרונות",
+      "subtitle": "הפעילות האחרונה בכל ההתקנים",
+      "empty": "אין עדיין הודעות"
+    },
+    "noChartData": "עדיין אין מספיק נתונים"
   },
   "sessionStatus": {
     "created": "חדש",
@@ -215,6 +257,10 @@
       "phone": "טלפון",
       "sessionId": "מזהה Session",
       "lastActive": "פעילות אחרונה"
+    },
+    "stats": {
+      "total": "סה״כ הפעלות",
+      "connecting": "מתחבר"
     }
   },
   "webhooks": {
@@ -267,13 +313,9 @@
     }
   },
   "apiKeys": {
-    "title": "ניהול API",
-    "subtitle": "ניהול מפתחות API, צפייה בפרטי התחברות ועיון בתיעוד API",
-    "tabs": {
-      "overview": "סקירה",
-      "keys": "מפתחות API",
-      "docs": "תיעוד"
-    },
+    "title": "תיעוד API",
+    "subtitle": "בצעו אימות, עיינו בכל נקודות הקצה ושלבו את ה-API של OpenWA בשפת התכנות המועדפת עליכם.",
+    "manageHint": "יש ליצור, להחליף ולבטל את המפתחות המשמשים לאימות בקשות ה-API שלכם.",
     "stats": {
       "totalKeys": "סה\"כ מפתחות",
       "activeKeys": "מפתחות פעילים",
@@ -282,16 +324,7 @@
     },
     "credentials": {
       "baseUrl": "כתובת בסיס API",
-      "baseUrlHint": "השתמש בכתובת זו כבסיס לכל בקשות ה-API."
-    },
-    "quickLinks": {
-      "title": "קישורים מהירים",
-      "manageKeys": "ניהול מפתחות API",
-      "manageKeysDesc": "צפייה, יצירה, ביטול ומחיקה של מפתחות API",
-      "viewDocs": "תיעוד API",
-      "viewDocsDesc": "עיון במדריך נקודות הקצה עם דוגמאות",
-      "createKey": "יצירת מפתח חדש",
-      "createKeyDesc": "יצירת מפתח API חדש עם תפקיד ספציפי"
+      "baseUrlHint": "כל נתיבי נקודות הקצה בתיעוד זה הם יחסיים לכתובת זו."
     },
     "createBtn": "יצירת מפתח API",
     "modalTitle": "יצירת מפתח API",
@@ -341,13 +374,42 @@
     }
   },
   "apiDocs": {
+    "nav": {
+      "introduction": "מבוא",
+      "authentication": "אימות",
+      "yourKeys": "מפתחות ה-API שלך",
+      "errors": "שגיאות והגבלת קצב",
+      "endpoints": "נקודות קצה",
+      "sdks": "ערכות פיתוח וספריות"
+    },
+    "intro": {
+      "title": "מבוא",
+      "description": "ה-API של OpenWA מאפשר לכם לנהל Sessions של WhatsApp, לשלוח הודעות ולהפוך את תהליכי העבודה שלכם לאוטומטיים – הכול בצורה פרוגרמטית. ה-API מבוסס על ארכיטקטורת REST: כל נקודת קצה מקבלת גוף בקשה בפורמט JSON, מחזירה תגובה בפורמט JSON, ומשתמשת בקודי תגובת HTTP סטנדרטיים.",
+      "quickStart": "התחלה מהירה",
+      "quickStartHint": "לפניכם בקשה מינימלית לקבלת רשימת ה-Sessions הפעילים שלכם."
+    },
+    "languages": {
+      "curl": "cURL",
+      "javascript": "JavaScript",
+      "python": "Python",
+      "php": "PHP",
+      "go": "Go"
+    },
     "auth": {
       "title": "אימות",
-      "description": "כל בקשות ה-API דורשות אימות. יש להוסיף את מפתח ה-API בכותרת <code>X-API-Key</code>. ניתן לנהל מפתחות API בלשונית מפתחות API.",
-      "example": "דוגמה לבקשה עם אימות",
+      "description": "כל בקשות ה-API דורשות אימות. הכניסו את מפתח ה-API שלכם בכותרת הבקשה <code>X-API-Key</code>. ניתן ליצור ולנהל את מפתחות ה-API שלכם בהמשך העמוד.",
       "none": "לא נדרש אימות",
       "apiKey": "נדרש מפתח API",
       "admin": "נדרשת גישת מנהל"
+    },
+    "groups": {
+      "general": "כללי",
+      "sessions": "Sessions",
+      "messages": "הודעות",
+      "contacts": "אנשי קשר",
+      "webhooks": "Webhooks",
+      "campaigns": "קמפיינים",
+      "settings": "הגדרות"
     },
     "sdks": {
       "title": "ערכות פיתוח (SDKs)",
@@ -355,6 +417,7 @@
     },
     "endpoints": {
       "title": "נקודות קצה API",
+      "hint": "עיינו בכל נקודות הקצה הזמינות, מקובצות לפי משאב.",
       "health": {
         "desc": "בדיקת תקינות השרת"
       },
@@ -386,8 +449,21 @@
       }
     },
     "requestBody": "גוף הבקשה",
-    "example": "דוגמה",
+    "example": "דוגמת בקשה",
     "response": "תגובה",
+    "errors": {
+      "title": "שגיאות והגבלת קצב",
+      "description": "OpenWA משתמש בקודי תגובת HTTP סטנדרטיים כדי לציין הצלחה או כישלון של בקשה. קודים בטווח ה-2xx מציינים הצלחה, קודים בטווח ה-4xx מציינים שהבקשה כללה שגיאה, וקודים בטווח ה-5xx מציינים שהתרחשה תקלה בצד השרת שלנו.",
+      "codes": {
+        "200": "Success — הבקשה בוצעה בהצלחה, כצפוי.",
+        "400": "Bad Request — הבקשה שגויה או חסרים בה פרמטרים נדרשים.",
+        "401": "Unauthorized — מפתח ה-API חסר או שגוי.",
+        "403": "Forbidden — למפתח ה-API אין הרשאה לביצוע פעולה זו.",
+        "404": "Not Found — המשאב המבוקש אינו קיים.",
+        "429": "Too Many Requests — חרגתם ממגבלת הקצב.",
+        "500": "Server Error — אירעה תקלה בצד השרת של OpenWA."
+      }
+    },
     "rateLimit": {
       "title": "הגבלת קצב",
       "description": "בקשות API מוגבלות בקצב כדי להבטיח שימוש הוגן. המגבלה ברירת המחדל היא 100 בקשות בחלון של 60 שניות לכל מפתח API. חריגה ממגבלה זו תגרור תגובת 429 Too Many Requests. צור קשר עם התמיכה אם יש צורך במגבלה גבוהה יותר."
@@ -627,7 +703,11 @@
     "charCount": "{{count}} / 4096 תווים",
     "livePreview": "תצוגה מקדימה",
     "noMessages": "אין הודעות עדיין",
-    "noMessagesHint": "שלח הודעה כדי להתחיל את השיחה"
+    "noMessagesHint": "שלח הודעה כדי להתחיל את השיחה",
+    "addRecipients": "הוסף נמענים",
+    "loadMore": "טען עוד",
+    "showPreview": "הצג תצוגה מקדימה",
+    "hidePreview": "הסתר תצוגה מקדימה"
   },
   "contacts": {
     "title": "אנשי קשר",
@@ -929,5 +1009,53 @@
       "webhook_triggered": "הפעלת Webhook",
       "webhook_failed": "כשל ב-Webhook"
     }
+  },
+  "messageStatus": {
+    "pending": "ממתין",
+    "sent": "נשלח",
+    "delivered": "נמסר",
+    "read": "נקרא",
+    "failed": "נכשל"
+  },
+  "roles": {
+    "title": "תפקידים והרשאות",
+    "subtitle": "הגדירו תפקידים והקצו הרשאות מפורטות",
+    "createRole": "צור תפקיד",
+    "createTitle": "יצירת תפקיד חדש",
+    "editTitle": "עריכת תפקיד",
+    "name": "שם התפקיד",
+    "namePlaceholder": "לדוגמה: נציג תמיכה",
+    "description": "תיאור",
+    "descriptionPlaceholder": "תיאור אופציונלי",
+    "type": "סוג",
+    "system": "מערכת",
+    "custom": "מותאם אישית",
+    "permissions": "הרשאות",
+    "searchPlaceholder": "חיפוש תפקידים...",
+    "deleteConfirm": "מחיקת תפקיד",
+    "deleteWarning": "האם אתה בטוח שברצונך למחוק תפקיד זה? לא ניתן לבטל פעולה זו.",
+    "emptyTitle": "לא נמצאו תפקידים",
+    "emptyDescription": "תפקידים יופיעו כאן",
+    "toasts": {
+      "createSuccess": "התפקיד נוצר בהצלחה",
+      "createError": "יצירת התפקיד נכשלה",
+      "updateSuccess": "התפקיד עודכן בהצלחה",
+      "updateError": "עדכון התפקיד נכשל",
+      "deleteSuccess": "התפקיד נמחק בהצלחה",
+      "deleteError": "מחיקת התפקיד נכשלה"
+    },
+    "stats": {
+      "total": "סה״כ תפקידים",
+      "system": "תפקידי מערכת",
+      "custom": "תפקידים מותאמים"
+    },
+    "noPermissions": "לא הוקצו הרשאות",
+    "permissionCount": "{{count}} הרשאות",
+    "acrossGroups": "בפריסה על פני {{count}} קבוצות",
+    "searchPermissionsPlaceholder": "חיפוש הרשאות...",
+    "selectAllPermissions": "בחר הכול",
+    "clearAllPermissions": "נקה הכול",
+    "noPermissionsMatch": "לא נמצאו הרשאות התואמות לחיפוש",
+    "permissionsSummary": "{{selected}} מתוך {{total}} נבחרו"
   }
 }
