@@ -9,6 +9,8 @@ import {
   locationApi,
   authApi,
   systemSettingsApi,
+  systemCheckApi,
+  messageHealthApi,
   campaignApi,
   apiKeysApi,
   type Webhook,
@@ -18,6 +20,7 @@ import {
   type CampaignPayload,
   type CampaignUpdatePayload,
   type CreateApiKeyPayload,
+  type AuditLogFilters,
 } from '../services/api';
 
 // ── Query Keys ────────────────────────────────────────────────────────
@@ -29,6 +32,8 @@ export const queryKeys = {
   webhooks: ['webhooks'] as const,
   logs: (params: { severity?: string; page: number; limit: number }) =>
     ['logs', params] as const,
+  activityLog: (filters: AuditLogFilters, page: number, limit: number) =>
+    ['activity-log', filters, page, limit] as const,
   contacts: ['contacts'] as const,
   contactGroups: ['groups'] as const,
   contactGroup: (id: string) => ['groups', id] as const,
@@ -159,6 +164,21 @@ export function useLogsQuery(params: { severity?: string; page: number; limit: n
         severity: params.severity,
         limit: params.limit,
         offset: (params.page - 1) * params.limit,
+      }),
+    staleTime: 15_000,
+  });
+}
+
+// ── Activity Log Queries ─────────────────────────────────────────────
+
+export function useActivityLogQuery(filters: AuditLogFilters, page: number, limit: number) {
+  return useQuery({
+    queryKey: queryKeys.activityLog(filters, page, limit),
+    queryFn: () =>
+      auditApi.list({
+        ...filters,
+        limit,
+        offset: (page - 1) * limit,
       }),
     staleTime: 15_000,
   });
@@ -558,6 +578,40 @@ export function useUpdateSystemSettingsMutation() {
     }>) => systemSettingsApi.update(data),
     onSuccess: () => {
       void queryClient.invalidateQueries({ queryKey: ['system-settings'] });
+    },
+  });
+}
+
+// ── System Check ──────────────────────────────────────────────────────
+
+export function useSystemCheckQuery(enabled = true) {
+  return useQuery({
+    queryKey: ['system-check'],
+    queryFn: systemCheckApi.get,
+    enabled,
+    refetchOnWindowFocus: false,
+    retry: false,
+  });
+}
+
+// ── Message Health ────────────────────────────────────────────────────
+
+export function useMessageHealthQuery(enabled = true) {
+  return useQuery({
+    queryKey: ['message-health'],
+    queryFn: messageHealthApi.get,
+    enabled,
+    refetchOnWindowFocus: false,
+    retry: false,
+  });
+}
+
+export function useTestSendMutation() {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: (sessionId: string) => messageHealthApi.testSend(sessionId),
+    onSuccess: () => {
+      void queryClient.invalidateQueries({ queryKey: ['message-health'] });
     },
   });
 }

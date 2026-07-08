@@ -2,9 +2,7 @@ import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Download, Search, Filter, Loader2, FileText, AlertTriangle, Info, XCircle } from 'lucide-react';
 import type { AuditLog } from '../services/api';
-import { useDocumentTitle } from '../hooks/useDocumentTitle';
 import { useLogsQuery } from '../hooks/queries';
-import { PageHeader } from '../components/PageHeader';
 
 const severityConfig: Record<string, { label: string; pillClass: string; Icon: typeof Info }> = {
   info:  { label: 'Info',    pillClass: 'bg-blue-50 text-blue-600 dark:bg-blue-500/15 dark:text-blue-400',    Icon: Info },
@@ -12,9 +10,8 @@ const severityConfig: Record<string, { label: string; pillClass: string; Icon: t
   error: { label: 'Error',   pillClass: 'bg-red-50 text-red-500 dark:bg-red-500/15 dark:text-red-400',        Icon: XCircle },
 };
 
-export function Logs() {
+export function AuditLogPanel() {
   const { t } = useTranslation();
-  useDocumentTitle(t('logs.title'));
 
   const [searchQuery,    setSearchQuery]    = useState('');
   const [severityFilter, setSeverityFilter] = useState('all');
@@ -36,25 +33,14 @@ export function Logs() {
 
   if (isLoading && logs.length === 0) {
     return (
-      <div className="flex min-h-[50vh] items-center justify-center">
+      <div className="flex min-h-[30vh] items-center justify-center">
         <Loader2 className="animate-spin text-[var(--color-primary)]" size={28} />
       </div>
     );
   }
 
   return (
-    <div className="w-full p-7 max-sm:p-4">
-      <PageHeader
-        title={t('logs.title')}
-        subtitle={t('logs.subtitle')}
-        actions={
-          <button className="btn-secondary">
-            <Download size={15} />
-            {t('logs.exportCsv')}
-          </button>
-        }
-      />
-
+    <div>
       {/* Filters */}
       <div className="mb-6 flex gap-3 max-sm:flex-col">
         <div className="search-bar max-w-[360px] flex-1 max-sm:max-w-none">
@@ -79,6 +65,10 @@ export function Logs() {
             <option value="error">{t('logs.severity.error')}</option>
           </select>
         </div>
+        <button className="btn-secondary shrink-0">
+          <Download size={15} />
+          {t('logs.exportCsv')}
+        </button>
       </div>
 
       {/* Table */}

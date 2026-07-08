@@ -74,7 +74,9 @@
     "settings": "Pengaturan",
     "messageTester": "Penguji Pesan",
     "campaigns": "Kampanye",
-    "logs": "Log"
+    "logs": "Log",
+    "systemRequirements": "Persyaratan Server",
+    "activityLog": "Log Aktivitas"
   },
   "errorBoundary": {
     "title": "Ada yang salah",
@@ -888,7 +890,10 @@
       "profile": "Profil",
       "password": "Kata Sandi",
       "language": "Bahasa",
-      "system": "Sistem"
+      "system": "Sistem",
+      "healthCheck": "Periksa Kesehatan",
+      "logs": "Log",
+      "systemRequirements": "Persyaratan Server"
     },
     "language": {
       "title": "Bahasa",
@@ -949,6 +954,104 @@
         "updateSuccess": "Pengaturan sistem diperbarui",
         "updateError": "Gagal memperbarui pengaturan sistem"
       }
+    }
+  },
+  "systemCheck": {
+    "modal": {
+      "title": "Konfigurasi server memerlukan perhatian",
+      "subtitle": "{{count}} masalah konfigurasi dapat memengaruhi keandalan.",
+      "dismiss": "Tutup untuk sekarang",
+      "viewDetails": "Lihat Detail"
+    },
+    "panel": {
+      "title": "Persyaratan Server",
+      "subtitle": "Daftar periksa langsung untuk item konfigurasi yang diperlukan agar OpenWA berjalan dengan andal.",
+      "refresh": "Periksa Ulang",
+      "allPassed": "Semua pemeriksaan yang diperlukan berhasil",
+      "issuesFound": "{{count}} pemeriksaan perlu diperhatikan",
+      "howToFix": "Cara memperbaiki"
+    },
+    "items": {
+      "jwtSecret": {
+        "label": "Rahasia JWT dikonfigurasi dengan aman",
+        "fix": "Atur JWT_SECRET yang kuat dan acak (minimal 32 karakter) di file .env Anda, lalu mulai ulang server. Jangan pernah menggunakan nilai placeholder default di lingkungan produksi."
+      },
+      "database": {
+        "label": "Database dapat diakses",
+        "fix": "Pastikan file database SQLite dan foldernya (DATABASE_NAME) ada dan dapat ditulis oleh proses yang menjalankan OpenWA."
+      },
+      "sessionStorage": {
+        "label": "Penyimpanan sesi WhatsApp dapat ditulis",
+        "fix": "Pastikan SESSION_DATA_PATH mengarah ke folder yang ada dan dapat ditulis, sehingga sesi WhatsApp dapat disimpan."
+      },
+      "fileStorage": {
+        "label": "Penyimpanan file dikonfigurasi dan dapat dijangkau",
+        "fix": "Untuk penyimpanan lokal, pastikan STORAGE_LOCAL_PATH dapat ditulis. Untuk penyimpanan S3/MinIO, atur S3_ENDPOINT, S3_ACCESS_KEY, S3_SECRET_KEY, dan S3_BUCKET dengan benar."
+      },
+      "redis": {
+        "label": "Redis dapat dijangkau",
+        "fix": "Periksa apakah REDIS_HOST/REDIS_PORT mengarah ke instance Redis yang berjalan, dan REDIS_PASSWORD (jika ada) sudah benar. Anda juga dapat mengatur REDIS_BUILTIN=true agar OpenWA memulainya secara otomatis melalui Docker."
+      },
+      "queueRedis": {
+        "label": "Konfigurasi antrean konsisten",
+        "fix": "QUEUE_ENABLED=true memerlukan REDIS_ENABLED=true. Aktifkan Redis atau nonaktifkan antrean."
+      },
+      "dockerSocket": {
+        "label": "Docker dapat diakses untuk layanan bawaan",
+        "fix": "REDIS_BUILTIN/MINIO_BUILTIN memerlukan akses ke socket Docker. Pasang /var/run/docker.sock ke dalam container, instal Docker di host, atau nonaktifkan opsi bawaan ini dan jalankan Redis/MinIO sendiri."
+      },
+      "diskSpace": {
+        "label": "Ruang disk yang tersedia cukup",
+        "fix": "Bebaskan ruang disk pada volume yang menyimpan data OpenWA (database, sesi, media). Disarankan setidaknya 500MB ruang kosong."
+      },
+      "cors": {
+        "label": "Origin CORS dikonfigurasi untuk produksi",
+        "fix": "Atur CORS_ORIGINS ke daftar origin dashboard/API yang diizinkan, dipisahkan dengan koma, sebelum menjalankan di lingkungan produksi."
+      }
+    }
+  },
+  "messageHealth": {
+    "title": "Kesehatan Pengiriman Pesan",
+    "subtitle": "Memeriksa apakah sesi WhatsApp Anda benar-benar dapat mengirim pesan saat ini.",
+    "refresh": "Periksa Ulang",
+    "noSessions": "Tidak ada sesi WhatsApp yang ditemukan. Buat satu di Sesi untuk memulai.",
+    "noPhone": "Tidak ada nomor telepon",
+    "testSend": "Kirim Pesan Uji",
+    "testSendDisabledHint": "Hanya tersedia saat sesi terhubung sepenuhnya",
+    "connectivity": {
+      "connected": "Terhubung",
+      "degraded": "Menurun",
+      "unreachable": "Tidak Dapat Dijangkau",
+      "not_connected": "Tidak Terhubung"
+    },
+    "toasts": {
+      "testSendSuccess": "Pesan uji berhasil dikirim",
+      "testSendError": "Gagal mengirim pesan uji"
+    }
+  },
+  "activityLog": {
+    "title": "Log Aktivitas",
+    "subtitle": "Riwayat lengkap yang dapat disaring untuk semua yang terjadi di OpenWA.",
+    "searchPlaceholder": "Cari aktivitas...",
+    "filters": {
+      "allActions": "Semua Aksi",
+      "allSessions": "Semua Sesi",
+      "clear": "Hapus Saringan"
+    },
+    "actions": {
+      "user_login": "Login Pengguna",
+      "user_login_failed": "Login Gagal",
+      "session_created": "Sesi Dibuat",
+      "session_started": "Sesi Dimulai",
+      "session_stopped": "Sesi Dihentikan",
+      "session_deleted": "Sesi Dihapus",
+      "session_qr_generated": "Kode QR Dibuat",
+      "session_connected": "Sesi Terhubung",
+      "session_disconnected": "Sesi Terputus",
+      "webhook_created": "Webhook Dibuat",
+      "webhook_deleted": "Webhook Dihapus",
+      "webhook_triggered": "Webhook Terpicu",
+      "webhook_failed": "Webhook Gagal"
     }
   }
 }

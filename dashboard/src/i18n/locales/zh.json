@@ -74,7 +74,9 @@
     "settings": "设置",
     "messageTester": "消息测试",
     "campaigns": "群发任务",
-    "logs": "审计日志"
+    "logs": "审计日志",
+    "systemRequirements": "服务器环境要求",
+    "activityLog": "活动日志"
   },
   "errorBoundary": {
     "title": "页面出错了",
@@ -888,7 +890,10 @@
       "profile": "个人资料",
       "password": "密码",
       "language": "语言",
-      "system": "系统设置"
+      "system": "系统设置",
+      "healthCheck": "健康检查",
+      "logs": "审计日志",
+      "systemRequirements": "服务器环境要求"
     },
     "language": {
       "title": "语言",
@@ -949,6 +954,104 @@
         "updateSuccess": "系统设置已更新",
         "updateError": "更新系统设置失败"
       }
+    }
+  },
+  "systemCheck": {
+    "modal": {
+      "title": "服务器配置需要处理",
+      "subtitle": "{{count}} 项配置问题可能影响系统稳定性。",
+      "dismiss": "暂时忽略",
+      "viewDetails": "查看详情"
+    },
+    "panel": {
+      "title": "服务器环境要求",
+      "subtitle": "实时检查运行 OpenWA 所需的各项配置。",
+      "refresh": "重新检测",
+      "allPassed": "所有必需项均已通过检测",
+      "issuesFound": "{{count}} 项检测需要处理",
+      "howToFix": "如何解决"
+    },
+    "items": {
+      "jwtSecret": {
+        "label": "JWT 密钥已安全配置",
+        "fix": "请在 .env 文件中设置一个强随机的 JWT_SECRET（至少 32 个字符），然后重启服务器。生产环境中切勿使用默认占位符值。"
+      },
+      "database": {
+        "label": "数据库可正常访问",
+        "fix": "请确保 SQLite 数据库文件及其所在文件夹（DATABASE_NAME）存在，且运行 OpenWA 的进程对其具有写入权限。"
+      },
+      "sessionStorage": {
+        "label": "WhatsApp 会话存储目录可写",
+        "fix": "请确保 SESSION_DATA_PATH 指向一个存在且可写的文件夹，以便保存 WhatsApp 会话数据。"
+      },
+      "fileStorage": {
+        "label": "文件存储已配置且可访问",
+        "fix": "使用本地存储时，请确保 STORAGE_LOCAL_PATH 可写。使用 S3/MinIO 存储时，请正确设置 S3_ENDPOINT、S3_ACCESS_KEY、S3_SECRET_KEY 和 S3_BUCKET。"
+      },
+      "redis": {
+        "label": "Redis 可正常连接",
+        "fix": "请检查 REDIS_HOST/REDIS_PORT 是否指向正在运行的 Redis 实例，以及 REDIS_PASSWORD（如有）是否正确。您也可以设置 REDIS_BUILTIN=true，让 OpenWA 通过 Docker 自动启动一个 Redis 实例。"
+      },
+      "queueRedis": {
+        "label": "队列配置一致",
+        "fix": "启用 QUEUE_ENABLED=true 时必须同时启用 REDIS_ENABLED=true。请启用 Redis，或禁用队列功能。"
+      },
+      "dockerSocket": {
+        "label": "内置服务可正常访问 Docker",
+        "fix": "REDIS_BUILTIN/MINIO_BUILTIN 需要访问 Docker socket。请将 /var/run/docker.sock 挂载到容器中、在主机上安装 Docker，或禁用这些内置选项并自行运行 Redis/MinIO。"
+      },
+      "diskSpace": {
+        "label": "磁盘空间充足",
+        "fix": "请清理存储 OpenWA 数据（数据库、会话、媒体文件）所在磁盘卷的空间。建议至少保留 500MB 的可用空间。"
+      },
+      "cors": {
+        "label": "已为生产环境配置 CORS 来源",
+        "fix": "在生产环境运行前，请将 CORS_ORIGINS 设置为以逗号分隔的允许访问的控制台/API 来源列表。"
+      }
+    }
+  },
+  "messageHealth": {
+    "title": "消息发送健康状况",
+    "subtitle": "检查您的 WhatsApp 会话当前是否能够正常发送消息。",
+    "refresh": "重新检测",
+    "noSessions": "未找到 WhatsApp 会话。请前往会话页面创建一个以开始使用。",
+    "noPhone": "无手机号",
+    "testSend": "发送测试消息",
+    "testSendDisabledHint": "仅在会话完全连接后可用",
+    "connectivity": {
+      "connected": "已连接",
+      "degraded": "连接不稳定",
+      "unreachable": "无法连接",
+      "not_connected": "未连接"
+    },
+    "toasts": {
+      "testSendSuccess": "测试消息发送成功",
+      "testSendError": "测试消息发送失败"
+    }
+  },
+  "activityLog": {
+    "title": "活动日志",
+    "subtitle": "完整、可筛选的 OpenWA 系统活动记录。",
+    "searchPlaceholder": "搜索活动记录...",
+    "filters": {
+      "allActions": "全部操作",
+      "allSessions": "全部会话",
+      "clear": "清除筛选"
+    },
+    "actions": {
+      "user_login": "用户登录",
+      "user_login_failed": "登录失败",
+      "session_created": "会话已创建",
+      "session_started": "会话已启动",
+      "session_stopped": "会话已停止",
+      "session_deleted": "会话已删除",
+      "session_qr_generated": "二维码已生成",
+      "session_connected": "会话已连接",
+      "session_disconnected": "会话已断开",
+      "webhook_created": "Webhook 已创建",
+      "webhook_deleted": "Webhook 已删除",
+      "webhook_triggered": "Webhook 已触发",
+      "webhook_failed": "Webhook 失败"
     }
   }
 }

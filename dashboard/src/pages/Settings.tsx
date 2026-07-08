@@ -1,19 +1,27 @@
 import { useState, useEffect, useRef } from 'react';
 import { useTranslation } from 'react-i18next';
+import { useSearchParams } from 'react-router-dom';
 import {
-  User, Key, Settings, Globe, Check, Loader2, Save, Upload, X, Camera,
+  User, Key, Settings, Globe, Check, Loader2, Save, Upload, X, Camera, HeartPulse, FileText, ShieldCheck,
 } from 'lucide-react';
 import { useDocumentTitle } from '../hooks/useDocumentTitle';
 import { useToast } from '../components/Toast';
 import { PageHeader } from '../components/PageHeader';
+import { useRole } from '../hooks/useRole';
 import {
   useProfileQuery,
   useUpdateProfileMutation,
   useChangePasswordMutation,
   useSystemSettingsQuery,
   useUpdateSystemSettingsMutation,
+  useMessageHealthQuery,
+  useTestSendMutation,
+  useSystemCheckQuery,
 } from '../hooks/queries';
 import { uploadApi } from '../services/api';
+import { MessageHealthPanel } from '../components/MessageHealth';
+import { AuditLogPanel } from '../components/AuditLogPanel';
+import { SystemCheckPanel } from '../components/SystemCheck';
 
 // ─── Form Primitives ─────────────────────────────────────────────────────────
 
@@ -505,20 +513,84 @@ function SystemTab() {
   );
 }
 
+// ─── Tab: Health Check ────────────────────────────────────────────────────────
+
+function HealthCheckTab() {
+  const { t } = useTranslation();
+  const toast = useToast();
+  const { data: health, isLoading, isFetching, refetch } = useMessageHealthQuery();
+  const testSend = useTestSendMutation();
+  const [testSendingId, setTestSendingId] = useState<string | null>(null);
+
+  const handleTestSend = async (sessionId: string) => {
+    setTestSendingId(sessionId);
+    try {
+      await testSend.mutateAsync(sessionId);
+      toast.success(t('messageHealth.toasts.testSendSuccess'));
+    } catch (err) {
+      toast.error(t('messageHealth.toasts.testSendError'), err instanceof Error ? err.message : '');
+    } finally {
+      setTestSendingId(null);
+    }
+  };
+
+  return (
+    <div className="max-w-[640px]">
+      <MessageHealthPanel
+        sessions={health?.sessions ?? []}
+        isLoading={isLoading}
+        isFetching={isFetching}
+        onRefresh={() => void refetch()}
+        onTestSend={handleTestSend}
+        testSendingId={testSendingId}
+      />
+    </div>
+  );
+}
+
+// ─── Tab: System Requirements ─────────────────────────────────────────────────
+
+function SystemRequirementsTab() {
+  const { data: systemCheck, isLoading, isFetching, refetch } = useSystemCheckQuery();
+
+  return (
+    <div className="max-w-[640px]">
+      <SystemCheckPanel
+        checks={systemCheck?.checks ?? []}
+        isLoading={isLoading}
+        isFetching={isFetching}
+        onRefresh={() => void refetch()}
+      />
+    </div>
+  );
+}
+
 // ─── Main Settings Page ──────────────────────────────────────────────────────
 
 const TABS = [
-  { key: 'profile', icon: User },
-  { key: 'password', icon: Key },
-  { key: 'language', icon: Globe },
-  { key: 'system', icon: Settings },
+  { key: 'profile', icon: User, adminOnly: false },
+  { key: 'password', icon: Key, adminOnly: false },
+  { key: 'language', icon: Globe, adminOnly: false },
+  { key: 'system', icon: Settings, adminOnly: false },
+  { key: 'healthCheck', icon: HeartPulse, adminOnly: false },
+  { key: 'logs', icon: FileText, adminOnly: false },
+  { key: 'systemRequirements', icon: ShieldCheck, adminOnly: true },
 ] as const;
+
+type SettingsTabKey = (typeof TABS)[number]['key'];
 
 export function SettingsPage() {
   const { t } = useTranslation();
+  const { isAdmin } = useRole();
   useDocumentTitle(t('settings.title'));
 
-  const [activeTab, setActiveTab] = useState<'profile' | 'password' | 'language' | 'system'>('profile');
+  const [searchParams] = useSearchParams();
+  const tabFromUrl = searchParams.get('tab') as SettingsTabKey | null;
+  const [activeTab, setActiveTab] = useState<SettingsTabKey>(
+    tabFromUrl && TABS.some(tab => tab.key === tabFromUrl) ? tabFromUrl : 'profile',
+  );
+
+  const visibleTabs = TABS.filter(tab => !tab.adminOnly || isAdmin);
 
   return (
     <div className="w-full p-7 max-sm:p-4">
@@ -531,7 +603,7 @@ export function SettingsPage() {
         {/* Tab sidebar */}
         <div className="w-[200px] shrink-0 max-sm:w-full">
           <nav className="flex flex-col gap-1 max-sm:flex-row max-sm:overflow-x-auto">
-            {TABS.map(({ key, icon: Icon }) => (
+            {visibleTabs.map(({ key, icon: Icon }) => (
               <button
                 key={key}
                 onClick={() => setActiveTab(key)}
@@ -555,6 +627,9 @@ export function SettingsPage() {
             {activeTab === 'password' && <PasswordTab />}
             {activeTab === 'language' && <LanguageTab />}
             {activeTab === 'system' && <SystemTab />}
+            {activeTab === 'healthCheck' && <HealthCheckTab />}
+            {activeTab === 'systemRequirements' && isAdmin && <SystemRequirementsTab />}
+            {activeTab === 'logs' && <AuditLogPanel />}
           </div>
         </div>
       </div>

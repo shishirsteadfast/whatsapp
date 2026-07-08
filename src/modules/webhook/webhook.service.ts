@@ -11,6 +11,8 @@ import { createLogger } from '../../common/services/logger.service';
 import { QUEUE_NAMES } from '../queue/queue-names';
 import { generateIdempotencyKey, generateDeliveryId } from './utils/idempotency.util';
 import { HookManager } from '../../core/hooks';
+import { AuditService } from '../audit/audit.service';
+import { AuditAction } from '../audit/entities/audit-log.entity';
 
 export interface WebhookPayload {
   event: string;
@@ -42,6 +44,7 @@ export class WebhookService {
     private readonly webhookRepository: Repository<Webhook>,
     private readonly configService: ConfigService,
     private readonly hookManager: HookManager,
+    private readonly auditService: AuditService,
     @Optional()
     @InjectQueue(QUEUE_NAMES.WEBHOOK)
     private readonly webhookQueue?: Queue<WebhookJobData>,
@@ -278,6 +281,11 @@ export class WebhookService {
             { sessionId, event, webhookId: webhook.id, success: true },
             { sessionId, source: 'WebhookService' },
           );
+
+          await this.auditService.logInfo(AuditAction.WEBHOOK_TRIGGERED, {
+            sessionId,
+            metadata: { webhookId: webhook.id, event, deliveryId },
+          });
         } catch (error) {
           // Execute hook on error
           await this.hookManager.execute(
@@ -289,6 +297,12 @@ export class WebhookService {
           this.logger.error(`Failed to deliver webhook ${webhook.id}`, String(error), {
             webhookId: webhook.id,
             action: 'webhook_delivery_failed',
+          });
+
+          await this.auditService.logError(AuditAction.WEBHOOK_FAILED, {
+            sessionId,
+            errorMessage: error instanceof Error ? error.message : String(error),
+            metadata: { webhookId: webhook.id, event, deliveryId },
           });
         }
       }

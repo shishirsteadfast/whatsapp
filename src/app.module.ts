@@ -31,6 +31,8 @@ import { GroupsModule } from './modules/groups/groups.module';
 import { LocationsModule } from './modules/locations/locations.module';
 import { UploadModule } from './modules/upload/upload.module';
 import { CampaignModule } from './modules/campaign/campaign.module';
+import { SystemCheckModule } from './modules/system-check/system-check.module';
+import { MessageHealthModule } from './modules/message-health/message-health.module';
 
 @Module({
   imports: [
@@ -106,6 +108,8 @@ import { CampaignModule } from './modules/campaign/campaign.module';
     StatusModule,
     CatalogModule,
     CampaignModule.register(process.env.REDIS_ENABLED === 'true'),
+    SystemCheckModule,
+    MessageHealthModule,
   ],
 })
 export class AppModule {}

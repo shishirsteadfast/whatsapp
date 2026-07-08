@@ -16,6 +16,8 @@ import { createLogger } from '../../common/services/logger.service';
 import { EventsGateway } from '../events/events.gateway';
 import { WebhookService } from '../webhook/webhook.service';
 import { HookManager } from '../../core/hooks';
+import { AuditService } from '../audit/audit.service';
+import { AuditAction } from '../audit/entities/audit-log.entity';
 
 interface ReconnectState {
   attempts: number;
@@ -43,6 +45,7 @@ export class SessionService implements OnModuleDestroy, OnModuleInit {
     private readonly eventsGateway: EventsGateway,
     private readonly webhookService: WebhookService,
     private readonly hookManager: HookManager,
+    private readonly auditService: AuditService,
   ) {}
 
   /**
@@ -132,11 +135,11 @@ export class SessionService implements OnModuleDestroy, OnModuleInit {
 
     // Sync database status with actual engine state
     const sessionsToUpdate: Session[] = [];
-    
+
     for (const session of sessions) {
       const engine = this.engines.get(session.id);
       const engineStatus = engine?.getStatus();
-      
+
       // If session shows as ready but engine doesn't exist or isn't ready, mark as disconnected
       if (session.status === SessionStatus.READY) {
         if (!engine || engineStatus !== EngineStatus.READY) {
@@ -308,6 +311,12 @@ export class SessionService implements OnModuleDestroy, OnModuleInit {
           connectedAt: new Date(),
           lastActiveAt: new Date(),
         });
+
+        void this.auditService.logInfo(AuditAction.SESSION_CONNECTED, {
+          sessionId: id,
+          sessionName: session.name,
+          metadata: { phone, pushName },
+        });
       },
       onMessage: (message): void => {
         this.logger.debug(`Message received from ${message.from}`, {
@@ -334,9 +343,9 @@ export class SessionService implements OnModuleDestroy, OnModuleInit {
             }
 
             // Dispatch to webhooks with potentially modified message
-            void this.webhookService.dispatch(id, 'message.received', finalMessage as Record<string, unknown>);
+            void this.webhookService.dispatch(id, 'message.received', finalMessage);
             // Emit real-time event to WebSocket clients
-            this.eventsGateway.emitMessage(id, finalMessage as Record<string, unknown>);
+            this.eventsGateway.emitMessage(id, finalMessage);
           });
       },
       onDisconnected: (reason: string): void => {
@@ -357,6 +366,12 @@ export class SessionService implements OnModuleDestroy, OnModuleInit {
         );
 
         void this.updateStatus(id, SessionStatus.DISCONNECTED);
+
+        void this.auditService.logWarn(AuditAction.SESSION_DISCONNECTED, {
+          sessionId: id,
+          sessionName: session.name,
+          errorMessage: reason,
+        });
 
         // Attempt to reconnect
         this.scheduleReconnect(id, session);

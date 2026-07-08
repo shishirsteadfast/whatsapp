@@ -1,11 +1,11 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Repository, Between, LessThan } from 'typeorm';
+import { Repository, Between, LessThan, LessThanOrEqual, MoreThanOrEqual, FindOptionsWhere, ILike } from 'typeorm';
 import { AuditLog, AuditAction, AuditSeverity } from './entities/audit-log.entity';
 import { User } from '../auth/entities/user.entity';
 
 interface AuditContext {
-  user?: User;
+  user?: Pick<User, 'id' | 'name'>;
   sessionId?: string;
   sessionName?: string;
   ipAddress?: string;
@@ -24,6 +24,7 @@ export interface AuditQueryOptions {
   severity?: AuditSeverity;
   startDate?: Date;
   endDate?: Date;
+  search?: string;
   limit?: number;
   offset?: number;
 }
@@ -35,7 +36,11 @@ export class AuditService {
     private readonly auditRepository: Repository<AuditLog>,
   ) {}
 
-  async log(action: AuditAction, context: AuditContext = {}, severity: AuditSeverity = AuditSeverity.INFO): Promise<AuditLog> {
+  async log(
+    action: AuditAction,
+    context: AuditContext = {},
+    severity: AuditSeverity = AuditSeverity.INFO,
+  ): Promise<AuditLog> {
     const auditLog = this.auditRepository.create({
       action,
       severity,
@@ -67,13 +72,24 @@ export class AuditService {
   }
 
   async findAll(options: AuditQueryOptions = {}): Promise<{ data: AuditLog[]; total: number }> {
-    const where: Record<string, unknown> = {};
-    if (options.action) where.action = options.action;
-    if (options.userId) where.userId = options.userId;
-    if (options.sessionId) where.sessionId = options.sessionId;
-    if (options.severity) where.severity = options.severity;
+    const baseWhere: FindOptionsWhere<AuditLog> = {};
+    if (options.action) baseWhere.action = options.action;
+    if (options.userId) baseWhere.userId = options.userId;
+    if (options.sessionId) baseWhere.sessionId = options.sessionId;
+    if (options.severity) baseWhere.severity = options.severity;
     if (options.startDate && options.endDate) {
-      where.createdAt = Between(options.startDate, options.endDate);
+      baseWhere.createdAt = Between(options.startDate, options.endDate);
+    } else if (options.startDate) {
+      baseWhere.createdAt = MoreThanOrEqual(options.startDate);
+    } else if (options.endDate) {
+      baseWhere.createdAt = LessThanOrEqual(options.endDate);
+    }
+
+    let where: FindOptionsWhere<AuditLog> | FindOptionsWhere<AuditLog>[] = baseWhere;
+    if (options.search) {
+      const term = ILike(`%${options.search}%`);
+      const searchableFields: (keyof AuditLog)[] = ['action', 'userName', 'sessionName', 'errorMessage', 'path'];
+      where = searchableFields.map(field => ({ ...baseWhere, [field]: term }));
     }
 
     const [data, total] = await this.auditRepository.findAndCount({

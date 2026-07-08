@@ -7,6 +7,8 @@ import { QUEUE_NAMES } from '../queue-names';
 import { WebhookJobData } from '../../webhook/webhook.service';
 import { Webhook } from '../../webhook/entities/webhook.entity';
 import { HookManager } from '../../../core/hooks';
+import { AuditService } from '../../audit/audit.service';
+import { AuditAction } from '../../audit/entities/audit-log.entity';
 
 export interface WebhookJobResult {
   statusCode: number;
@@ -23,6 +25,7 @@ export class WebhookProcessor extends WorkerHost {
     @InjectRepository(Webhook)
     private readonly webhookRepository: Repository<Webhook>,
     private readonly hookManager: HookManager,
+    private readonly auditService: AuditService,
   ) {
     super();
   }
@@ -93,6 +96,12 @@ export class WebhookProcessor extends WorkerHost {
         action: 'webhook_delivered',
       });
 
+      await this.auditService.logInfo(AuditAction.WEBHOOK_TRIGGERED, {
+        sessionId,
+        statusCode: response.status,
+        metadata: { webhookId, event, deliveryId: payload.deliveryId, responseTime },
+      });
+
       return {
         statusCode: response.status,
         success: true,
@@ -129,6 +138,12 @@ export class WebhookProcessor extends WorkerHost {
           },
           { sessionId, source: 'WebhookProcessor' },
         );
+
+        await this.auditService.logError(AuditAction.WEBHOOK_FAILED, {
+          sessionId,
+          errorMessage,
+          metadata: { webhookId, event, deliveryId: payload.deliveryId, attempt: job.attemptsMade + 1 },
+        });
       }
 
       // Re-throw to trigger BullMQ retry

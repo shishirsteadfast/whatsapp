@@ -74,7 +74,9 @@
     "settings": "ترتیبات",
     "messageTester": "پیغام ٹیسٹر",
     "campaigns": "مہمات",
-    "logs": "لاگز"
+    "logs": "لاگز",
+    "systemRequirements": "سرور کی ضروریات",
+    "activityLog": "سرگرمی لاگ"
   },
   "errorBoundary": {
     "title": "کچھ غلط ہو گیا",
@@ -889,7 +891,10 @@
       "profile": "پروفائل",
       "password": "پاس ورڈ",
       "language": "زبان",
-      "system": "سسٹم"
+      "system": "سسٹم",
+      "healthCheck": "صحت کی جانچ",
+      "logs": "لاگز",
+      "systemRequirements": "سرور کی ضروریات"
     },
     "language": {
       "title": "زبان",
@@ -950,6 +955,104 @@
         "updateSuccess": "سسٹم کی ترتیبات اپ ڈیٹ ہو گئیں",
         "updateError": "سسٹم کی ترتیبات اپ ڈیٹ کرنے میں ناکام"
       }
+    }
+  },
+  "systemCheck": {
+    "modal": {
+      "title": "سرور کنفیگریشن پر توجہ درکار ہے",
+      "subtitle": "{{count}} کنفیگریشن مسئلہ/مسائل استحکام کو متاثر کر سکتے ہیں۔",
+      "dismiss": "ابھی نظر انداز کریں",
+      "viewDetails": "تفصیلات دیکھیں"
+    },
+    "panel": {
+      "title": "سرور کی ضروریات",
+      "subtitle": "OpenWA کو مستحکم طریقے سے چلانے کے لیے درکار کنفیگریشن آئٹمز کی لائیو چیک لسٹ۔",
+      "refresh": "دوبارہ چیک کریں",
+      "allPassed": "تمام مطلوبہ چیکس کامیاب ہوئیں",
+      "issuesFound": "{{count}} چیک(س) پر توجہ درکار ہے",
+      "howToFix": "کیسے ٹھیک کریں"
+    },
+    "items": {
+      "jwtSecret": {
+        "label": "JWT_SECRET محفوظ طریقے سے سیٹ ہے",
+        "fix": "اپنی .env فائل میں ایک مضبوط، رینڈم JWT_SECRET (کم از کم 32 حروف) سیٹ کریں، پھر سرور دوبارہ شروع کریں۔ پروڈکشن میں کبھی ڈیفالٹ پلیس ہولڈر ویلیو استعمال نہ کریں۔"
+      },
+      "database": {
+        "label": "ڈیٹابیس قابل رسائی ہے",
+        "fix": "یقینی بنائیں کہ SQLite ڈیٹابیس فائل اور اس کا فولڈر (DATABASE_NAME) موجود ہیں اور OpenWA چلانے والے پراسیس کے لیے قابل تحریر ہیں۔"
+      },
+      "sessionStorage": {
+        "label": "واٹس ایپ سیشن سٹوریج قابل تحریر ہے",
+        "fix": "یقینی بنائیں کہ SESSION_DATA_PATH ایک ایسے فولڈر کی طرف اشارہ کرتا ہے جو موجود اور قابل تحریر ہو، تاکہ واٹس ایپ سیشنز محفوظ ہو سکیں۔"
+      },
+      "fileStorage": {
+        "label": "فائل سٹوریج کنفیگر اور قابل رسائی ہے",
+        "fix": "لوکل سٹوریج کے لیے، یقینی بنائیں کہ STORAGE_LOCAL_PATH قابل تحریر ہے۔ S3/MinIO سٹوریج کے لیے، S3_ENDPOINT، S3_ACCESS_KEY، S3_SECRET_KEY اور S3_BUCKET درست طور پر سیٹ کریں۔"
+      },
+      "redis": {
+        "label": "Redis قابل رسائی ہے",
+        "fix": "چیک کریں کہ REDIS_HOST/REDIS_PORT ایک چلتے ہوئے Redis انسٹنس کی طرف اشارہ کرتے ہیں، اور REDIS_PASSWORD (اگر کوئی ہے) درست ہے۔ آپ REDIS_BUILTIN=true بھی سیٹ کر سکتے ہیں تاکہ OpenWA خودکار طور پر Docker کے ذریعے ایک شروع کر دے۔"
+      },
+      "queueRedis": {
+        "label": "قطار (Queue) کی کنفیگریشن مطابقت رکھتی ہے",
+        "fix": "QUEUE_ENABLED=true کے لیے REDIS_ENABLED=true ضروری ہے۔ Redis کو فعال کریں یا قطار کو غیر فعال کریں۔"
+      },
+      "dockerSocket": {
+        "label": "بلٹ-ان سروسز کے لیے Docker قابل رسائی ہے",
+        "fix": "REDIS_BUILTIN/MINIO_BUILTIN کو Docker socket تک رسائی درکار ہے۔ /var/run/docker.sock کو کنٹینر میں ماؤنٹ کریں، ہوسٹ پر Docker انسٹال کریں، یا ان بلٹ-ان آپشنز کو غیر فعال کریں اور خود Redis/MinIO چلائیں۔"
+      },
+      "diskSpace": {
+        "label": "کافی ڈسک اسپیس دستیاب ہے",
+        "fix": "OpenWA کا ڈیٹا (ڈیٹابیس، سیشنز، میڈیا) رکھنے والے والیوم پر ڈسک اسپیس خالی کریں۔ کم از کم 500MB خالی جگہ تجویز کی جاتی ہے۔"
+      },
+      "cors": {
+        "label": "پروڈکشن کے لیے CORS اوریجنز کنفیگر ہیں",
+        "fix": "پروڈکشن میں چلانے سے پہلے CORS_ORIGINS کو اجازت یافتہ ڈیش بورڈ/API اوریجنز کی کاما سے جدا شدہ فہرست پر سیٹ کریں۔"
+      }
+    }
+  },
+  "messageHealth": {
+    "title": "پیغام بھیجنے کی صحت",
+    "subtitle": "چیک کرتا ہے کہ آیا آپ کے WhatsApp سیشنز ابھی پیغامات بھیج سکتے ہیں۔",
+    "refresh": "دوبارہ چیک کریں",
+    "noSessions": "کوئی WhatsApp سیشن نہیں ملا۔ شروع کرنے کے لیے سیشنز میں ایک بنائیں۔",
+    "noPhone": "کوئی فون نمبر نہیں",
+    "testSend": "ٹیسٹ پیغام بھیجیں",
+    "testSendDisabledHint": "صرف اس وقت دستیاب ہے جب سیشن مکمل طور پر منسلک ہو",
+    "connectivity": {
+      "connected": "منسلک",
+      "degraded": "کمزور",
+      "unreachable": "ناقابل رسائی",
+      "not_connected": "منسلک نہیں"
+    },
+    "toasts": {
+      "testSendSuccess": "ٹیسٹ پیغام کامیابی سے بھیج دیا گیا",
+      "testSendError": "ٹیسٹ پیغام بھیجنے میں ناکام"
+    }
+  },
+  "activityLog": {
+    "title": "سرگرمی لاگ",
+    "subtitle": "OpenWA میں ہونے والی ہر سرگرمی کا مکمل اور فلٹر کے قابل ریکارڈ۔",
+    "searchPlaceholder": "سرگرمی تلاش کریں...",
+    "filters": {
+      "allActions": "تمام کارروائیاں",
+      "allSessions": "تمام سیشنز",
+      "clear": "فلٹر صاف کریں"
+    },
+    "actions": {
+      "user_login": "صارف لاگ ان",
+      "user_login_failed": "لاگ ان ناکام",
+      "session_created": "سیشن بن گیا",
+      "session_started": "سیشن شروع ہوا",
+      "session_stopped": "سیشن روکا گیا",
+      "session_deleted": "سیشن حذف ہو گیا",
+      "session_qr_generated": "QR کوڈ بن گیا",
+      "session_connected": "سیشن منسلک ہوا",
+      "session_disconnected": "سیشن منقطع ہو گیا",
+      "webhook_created": "ویب ہک بن گیا",
+      "webhook_deleted": "ویب ہک حذف ہو گیا",
+      "webhook_triggered": "ویب ہک متحرک ہوا",
+      "webhook_failed": "ویب ہک ناکام"
     }
   }
 }

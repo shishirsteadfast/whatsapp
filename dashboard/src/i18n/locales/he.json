@@ -70,7 +70,9 @@
     "contacts": "אנשי קשר",
     "composer": "קומפוזר",
     "campaigns": "קמפיינים",
-    "logs": "לוגים"
+    "logs": "לוגים",
+    "systemRequirements": "דרישות השרת",
+    "activityLog": "יומן פעילות"
   },
   "errorBoundary": {
     "title": "משהו השתבש",
@@ -764,7 +766,10 @@
       "profile": "פרופיל",
       "password": "סיסמה",
       "language": "שפה",
-      "system": "הגדרות מערכת"
+      "system": "הגדרות מערכת",
+      "healthCheck": "בדיקת תקינות",
+      "logs": "לוגים",
+      "systemRequirements": "דרישות השרת"
     },
     "language": {
       "title": "שפה",
@@ -825,6 +830,104 @@
         "updateSuccess": "הגדרות המערכת עודכנו",
         "updateError": "עדכון הגדרות המערכת נכשל"
       }
+    }
+  },
+  "systemCheck": {
+    "modal": {
+      "title": "הגדרות השרת דורשות תשומת לב",
+      "subtitle": "{{count}} בעיות תצורה עלולות להשפיע על היציבות.",
+      "dismiss": "התעלם לעכשיו",
+      "viewDetails": "הצג פרטים"
+    },
+    "panel": {
+      "title": "דרישות השרת",
+      "subtitle": "רשימת בדיקה חיה של פריטי תצורה הנדרשים להפעלה אמינה של OpenWA.",
+      "refresh": "בדוק מחדש",
+      "allPassed": "כל הבדיקות הנדרשות עברו בהצלחה",
+      "issuesFound": "{{count}} בדיקות דורשות תשומת לב",
+      "howToFix": "כיצד לתקן"
+    },
+    "items": {
+      "jwtSecret": {
+        "label": "מפתח הסוד של JWT מוגדר בצורה מאובטחת",
+        "fix": "הגדירו JWT_SECRET חזק ואקראי (לפחות 32 תווים) בקובץ ה-.env שלכם, ולאחר מכן הפעילו את השרת מחדש. לעולם אל תשתמשו בערך הבררת מחדל בסביבת ייצור."
+      },
+      "database": {
+        "label": "מסד הנתונים נגיש",
+        "fix": "ודאו שקובץ מסד הנתונים SQLite והתיקייה שלו (DATABASE_NAME) קיימים וניתנים לכתיבה על ידי התהליך המפעיל את OpenWA."
+      },
+      "sessionStorage": {
+        "label": "אחסון הסשן של WhatsApp ניתן לכתיבה",
+        "fix": "ודאו ש-SESSION_DATA_PATH מפנה לתיקייה קיימת וניתנת לכתיבה, כדי שניתן יהיה לשמור את סשני ה-WhatsApp."
+      },
+      "fileStorage": {
+        "label": "אחסון הקבצים מוגדר וניתן לגישה",
+        "fix": "לאחסון מקומי, ודאו ש-STORAGE_LOCAL_PATH ניתן לכתיבה. לאחסון S3/MinIO, הגדירו כנדרש את S3_ENDPOINT, S3_ACCESS_KEY, S3_SECRET_KEY ו-S3_BUCKET."
+      },
+      "redis": {
+        "label": "Redis נגיש",
+        "fix": "בדקו ש-REDIS_HOST/REDIS_PORT מפנים למופע Redis פעיל, וש-REDIS_PASSWORD (אם קיים) נכון. ניתן גם להגדיר REDIS_BUILTIN=true כדי לאפשר ל-OpenWA להפעיל מופע כזה אוטומטית באמצעות Docker."
+      },
+      "queueRedis": {
+        "label": "תצורת התור עקבית",
+        "fix": "QUEUE_ENABLED=true מחייב את REDIS_ENABLED=true. יש להפעיל את Redis או להשבית את התור."
+      },
+      "dockerSocket": {
+        "label": "Docker נגיש עבור שירותים מובנים",
+        "fix": "REDIS_BUILTIN/MINIO_BUILTIN דורשים גישה ל-socket של Docker. הצמידו (mount) את /var/run/docker.sock לתוך הקונטיינר, התקינו Docker במארח, או השביתו את אפשרויות המובנה הללו והפעילו את Redis/MinIO בעצמכם."
+      },
+      "diskSpace": {
+        "label": "קיים מספיק שטח אחסון בדיסק",
+        "fix": "פנו שטח אחסון בכרך (volume) שבו מאוחסנים נתוני OpenWA (מסד נתונים, סשנים, מדיה). מומלץ שיהיו לפחות 500MB פנויים."
+      },
+      "cors": {
+        "label": "מקורות CORS מוגדרים לסביבת ייצור",
+        "fix": "הגדירו את CORS_ORIGINS לרשימה מופרדת בפסיקים של מקורות דשבורד/API מורשים, לפני ההפעלה בסביבת ייצור."
+      }
+    }
+  },
+  "messageHealth": {
+    "title": "תקינות שליחת הודעות",
+    "subtitle": "בודק אם ה-Sessions של WhatsApp שלך מסוגלים לשלוח הודעות כרגע.",
+    "refresh": "בדוק מחדש",
+    "noSessions": "לא נמצאו Sessions של WhatsApp. יש ליצור אחד ב-Sessions כדי להתחיל.",
+    "noPhone": "אין מספר טלפון",
+    "testSend": "שלח הודעת בדיקה",
+    "testSendDisabledHint": "זמין רק כאשר ה-Session מחובר במלואו",
+    "connectivity": {
+      "connected": "מחובר",
+      "degraded": "פגום",
+      "unreachable": "לא נגיש",
+      "not_connected": "לא מחובר"
+    },
+    "toasts": {
+      "testSendSuccess": "הודעת הבדיקה נשלחה בהצלחה",
+      "testSendError": "שליחת הודעת הבדיקה נכשלה"
+    }
+  },
+  "activityLog": {
+    "title": "יומן פעילות",
+    "subtitle": "היסטוריה מלאה וניתנת לסינון של כל מה שקורה ב-OpenWA.",
+    "searchPlaceholder": "חיפוש פעילות...",
+    "filters": {
+      "allActions": "כל הפעולות",
+      "allSessions": "כל ה-Sessions",
+      "clear": "איפוס סינון"
+    },
+    "actions": {
+      "user_login": "כניסת משתמש",
+      "user_login_failed": "כניסה נכשלה",
+      "session_created": "יצירת Session",
+      "session_started": "הפעלת Session",
+      "session_stopped": "עצירת Session",
+      "session_deleted": "מחיקת Session",
+      "session_qr_generated": "יצירת קוד QR",
+      "session_connected": "התחברות Session",
+      "session_disconnected": "ניתוק Session",
+      "webhook_created": "יצירת Webhook",
+      "webhook_deleted": "מחיקת Webhook",
+      "webhook_triggered": "הפעלת Webhook",
+      "webhook_failed": "כשל ב-Webhook"
     }
   }
 }
